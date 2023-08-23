@@ -74,7 +74,7 @@ return {
   config = true
 }, {
   "williamboman/mason-lspconfig.nvim",
-  dependencies = { "mason.nvim", "treesitter-terraform-doc.nvim" },
+  dependencies = { "mason.nvim" },
   config = function()
     local mason_lspconfig = require("mason-lspconfig")
 
@@ -83,7 +83,7 @@ return {
     mason_lspconfig.setup({
       ensure_installed = {
         "bashls", "eslint", "gopls", "jsonls", "marksman", "pylsp",
-        "rust_analyzer", "lua_ls", "terraformls", "tflint",
+        "rust_analyzer", "lua_ls", "tflint",
         "tsserver", "yamlls"
       }
     })
@@ -111,10 +111,6 @@ return {
               on_attach = function(client, bufnr)
                 require("shared/lsp")(client, bufnr)
                 require("illuminate").on_attach(client)
-
-                if server_name == "terraformls" then
-                  require("treesitter-terraform-doc").setup()
-                end
               end
             })
           end
