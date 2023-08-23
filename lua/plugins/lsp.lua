@@ -82,7 +82,7 @@ return {
     -- https://github.com/williamboman/mason-lspconfig.nvim/pull/148
     mason_lspconfig.setup({
       ensure_installed = {
-        "bashls", "eslint", "gopls", "jsonls", "marksman", "pylsp",
+        "bashls", "eslint", "jsonls", "marksman",
         "rust_analyzer", "lua_ls", "tflint",
         "tsserver", "yamlls"
       }
@@ -90,9 +90,9 @@ return {
 
     mason_lspconfig.setup_handlers({
       function(server_name)
-        -- Skip gopls and rust_analyzer as we manually configure them.
+        -- Skip rust_analyzer as we manually configure them.
         -- Otherwise the following `setup()` would override our config.
-        if server_name ~= "gopls" and server_name ~= "rust_analyzer" then
+        if server_name ~= "rust_analyzer" then
           -- Unfortunately had to if/else so I could configure 'settings' for yamlls.
           if server_name == "yamlls" then
             require("lspconfig")[server_name].setup({

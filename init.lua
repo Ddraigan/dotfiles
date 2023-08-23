@@ -47,7 +47,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -60,22 +60,24 @@ require('lazy').setup({
     config = function(_, opts)
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-      require("rust-tools").setup({server = {
-        capabilities = capabilities,
-        settings = {
-          ["rust-analyzer"] = {
-            cargo = {
-              allFeatures = true,
+      require("rust-tools").setup({
+        server = {
+          capabilities = capabilities,
+          settings = {
+            ["rust-analyzer"] = {
+              cargo = {
+                allFeatures = true,
+              },
             },
           },
         },
-      },
         tools = {
           reload_workspace_from_cargo_toml = true,
           runnables = {
             use_telescope = true,
           },
-        },})
+        },
+      })
     end,
   },
   {
@@ -95,7 +97,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',          opts = {} },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -109,13 +111,14 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
+        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
+          { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
         vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
         vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
       end,
     },
   },
-  
+
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
@@ -129,19 +132,20 @@ require('lazy').setup({
     end,
   },
 
-  {'Mofiqul/dracula.nvim',
-     config = function()
+  {
+    'Mofiqul/dracula.nvim',
+    config = function()
       local dracula = require("dracula")
       dracula.setup({
         -- customize dracula color palette
         -- show the '~' characters after the end of buffers
-        show_end_of_buffer = true, -- default false
+        show_end_of_buffer = true,    -- default false
         -- use transparent background
-        transparent_bg = true, -- default false
+        transparent_bg = true,        -- default false
         -- set custom lualine background color
         lualine_bg_color = "#44475a", -- default nil
         -- set italic comment
-        italic_comment = true, -- default false
+        italic_comment = true,        -- default false
         -- overrides the default highlights with table see `:h synIDattr`
         overrides = {},
         -- You can use overrides as table like this
@@ -177,10 +181,10 @@ require('lazy').setup({
   },
 
   --{
-    -- Add indentation guides even on blank lines
- --   'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
+  -- Add indentation guides even on blank lines
+  --   'lukas-reineke/indent-blankline.nvim',
+  -- Enable `lukas-reineke/indent-blankline.nvim`
+  -- See `:help indent_blankline.txt`
   --  opts = {
   --    char = '┊',
   --    show_trailing_blankline_indent = false,
@@ -188,7 +192,7 @@ require('lazy').setup({
   --},
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',         opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -214,7 +218,7 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
     config = function()
-    require("nvim-treesitter.install").prefer_git=true
+      require("nvim-treesitter.install").prefer_git = true
     end
   },
 
@@ -333,7 +337,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'lua', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -455,8 +459,9 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  -- rust_analyzer = {},
   -- tsserver = {},
+
+  rust_analyzer = {},
 
   lua_ls = {
     Lua = {
@@ -540,4 +545,3 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-
