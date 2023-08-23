@@ -29,7 +29,6 @@ lazy.setup("plugins", {
     -- use the 'dev' property individually instead
     -- patterns = { "ibhagwan" },
   },
-  install = { colorscheme = { "dracula" } },
   checker = { enabled = false },
       performance = {
         cache = {
