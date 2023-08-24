@@ -6,10 +6,10 @@ return {
 	config = function ()
 		require('lualine').setup {
 			options = {
-				icons_enabled = true,
+				icons_enabled = false,
 				theme = 'auto',
-				component_separators = { left = '', right = ''},
-				section_separators = { left = '', right = ''},
+				component_separators = '|',
+				section_separators = '',
 				disabled_filetypes = {
 					statusline = {},
 					winbar = {},
