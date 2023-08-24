@@ -21,7 +21,10 @@ return {
 		},
 		config = true,
 	},
+	-- Toml support
 	"Saecki/crates.nvim",
+
+	-- Vim command hints
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
