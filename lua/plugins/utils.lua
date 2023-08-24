@@ -4,6 +4,9 @@ return {
 		"numToStr/Comment.nvim",
 		config = true,
 	},
+
+	-- Detect tabstop and shiftwidth automatically
+	"tpope/vim-sleuth",
 	"tpope/vim-surround",
 	{
 		"ahmedkhalf/project.nvim",
@@ -23,6 +26,9 @@ return {
 	},
 	-- Toml support
 	"Saecki/crates.nvim",
+
+	-- Additional Lua configuration
+	"folke/neodev.nvim",
 
 	-- Vim command hints
 	{
