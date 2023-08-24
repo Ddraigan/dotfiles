@@ -10,7 +10,7 @@
 --    build = ":TSUpdate",
 --    config = function()
 --        require("nvim-treesitter.configs").setup({
---	ensure_installed = { "lua", "rust", "javascript", "typescript" },
+--	ensure_installed = { "lua", "rust", "javascript", "typescript", "tsx", "vim", "vimdoc" },
 --	sync_install = false,
 --	auto_install = true,
 --            highlight = {
