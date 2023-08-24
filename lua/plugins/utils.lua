@@ -21,4 +21,5 @@ return {
 		},
 		config = true,
 	},
+	"Saecki/crates.nvim",
 }
