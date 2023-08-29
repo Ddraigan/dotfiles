@@ -26,7 +26,16 @@ M.general = {
 
 	-- Better save and quit
 	["<leader>w"] = { "<cmd> w!<CR>", "Save" },
-	["<leader>qq"] = { "<cmd> confirm qa<CR>", "Quit" },
+	["<leader>qa"] = { "<cmd> confirm qa<CR>", "Quit All" },
+	["<leader>q"] = { "<cmd> q<CR>", "Quit" },
+
+	-- Trouble Plugin
+	["<leader>xx"] = { "<cmd>TroubleToggle<CR>", "Open Trouble" },
+	["<leader>xw"] = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "Workspace Diagnostics" },
+	["<leader>xd"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
+	["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
+	["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", "Logistics" },
+	["gR"] = { "<cmd>TroubleToggle lsp_references<cr>", "LSP References" },
     }
 }
 
