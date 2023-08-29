@@ -24,8 +24,9 @@ M.general = {
 	["<C-j>"] = { "<cmd> TmuxNavigateDown<CR>", "window down" },
 	["<C-k>"] = { "<cmd> TmuxNavigateUp<CR>", "window up" },
 
-	-- Trouble Telescope Remaps
-	--	[<"c-t">] = { "<cmd> Trouble. },
+	-- Better save and quit
+	["<leader>w"] = { "<cmd> w!<CR>", "Save" },
+	["<leader>qq"] = { "<cmd> confirm qa<CR>", "Quit" },
     }
 }
 

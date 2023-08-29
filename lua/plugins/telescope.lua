@@ -14,7 +14,7 @@ return {
 		nnoremap("<leader>fb", "<cmd>Telescope buffers<CR>")
 		nnoremap("<leader>fh", "<cmd>Telescope help_tags<CR>")
 		-- Open with trouble, doesn't work yet
-		nnoremap("<C-t>", "<cmd>Trouble open_with_trouble<CR>")
+		nnoremap("<leader>ft", "<cmd>Trouble open_with_trouble<CR>")
 	end,
 	opts = {
 		defaults = {
