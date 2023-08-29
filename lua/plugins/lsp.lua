@@ -42,7 +42,7 @@ return {
 
 			vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
 			vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-			vim.keymap.set("n", "gr", require("telescope.builtin").lsp_referencs, opts)
+		--	vim.keymap.set("n", "gr", require("telescope.builtin").lsp_referencs, opts)
 		end)
 
 		-- (Optional) Configure lua language server for neovim
