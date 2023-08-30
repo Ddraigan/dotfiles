@@ -5,7 +5,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"sharkdp/fd",
 		"wesleimp/telescope-windowizer.nvim",
-		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", config = function() require("telescope").load_extension("fzf") end, },
 	},
 	cmd = "Telescope",
 	keys =
@@ -44,7 +44,6 @@ return {
 			file_ignore_patterns = { "node_modules", "git" },
 		},
 		extensions = {
-			fzf = {},
 			windowizer = {
 				find_cmd = "fd" -- find command. Available options [ find | fd | rg ] (defaults to "fd")
 			},
