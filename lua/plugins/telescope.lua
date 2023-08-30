@@ -19,6 +19,14 @@ return {
 	end,
 	opts = {
 		defaults = {
+			mappings = {
+				n = {
+					["<c-t>"] = function() require("trouble.providers.telescope").open_with_trouble() end,
+				},
+				i = {
+					["<c-t>"] = function() require("trouble.providers.telescope").open_with_trouble() end,
+				},
+			},
 			vimgrep_arguments = {
 				"rg",
 				"--color=never",
@@ -37,11 +45,7 @@ return {
 				height = 0.80,
 				preview_cutoff = 50,
 			},
-			mappings = {
-				n = {
-					["<leader>ft"] = function() require("trouble.providers.telescope").open_with_trouble() end,
-				}
-			},
+
 			file_ignore_patterns = { "node_modules", "git" },
 		},
 	},
