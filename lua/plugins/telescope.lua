@@ -21,7 +21,7 @@ return {
 		defaults = {
 			mappings = {
 				n = {
-					["<c-t>"] = function() require("trouble.providers.telescope").open_with_trouble() end,
+					["<c-t>"] = function() require("trouble.providers.telescope.open_with_trouble") end,
 				}
 			},
 			vimgrep_arguments = {
