@@ -5,7 +5,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"sharkdp/fd",
 		"wesleimp/telescope-windowizer.nvim",
-		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", config = function() require("telescope").load_extension("fzf") end, },
+	--	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", config = function() require("telescope").load_extension("fzf") end, },
 	},
 	cmd = "Telescope",
 	keys =
@@ -19,8 +19,21 @@ return {
 	opts = {
 		defaults = {
 			mappings = {
+				i = {
+					["<c-t>"] = function(...)
+						return require("trouble.providers.telescope").open_with_trouble(...)
+					end,
+					["<a-t>"] = function(...)
+						return require("trouble.providers.telescope").open_selected_with_trouble(...)
+					end,
+				},
 				n = {
-					["<c-t>"] = function() require("trouble.providers.telescope.open_with_trouble") end,
+					["<c-t>"] = function(...)
+						return require("trouble.providers.telescope").open_with_trouble(...)
+					end,
+					["<a-t>"] = function(...)
+						return require("trouble.providers.telescope").open_selected_with_trouble(...)
+					end,
 				}
 			},
 			vimgrep_arguments = {
