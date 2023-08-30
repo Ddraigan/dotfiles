@@ -4,6 +4,7 @@ return {
 		"nvim-lua/popup.nvim",
 		"nvim-lua/plenary.nvim",
 		"sharkdp/fd",
+		"wesleimp/telescope-windowizer.nvim",
 	},
 	cmd = "Telescope",
 	init = function()
@@ -44,6 +45,11 @@ return {
 			},
 
 			file_ignore_patterns = { "node_modules", "git" },
+		},
+		extensions = {
+			windowizer = {
+				find_cmd = "fd" -- find command. Available options [ find | fd | rg ] (defaults to "fd")
+			},
 		},
 	},
 }
