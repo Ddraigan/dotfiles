@@ -5,19 +5,17 @@ return {
 		"nvim-lua/plenary.nvim",
 		"sharkdp/fd",
 		"wesleimp/telescope-windowizer.nvim",
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},
 	cmd = "Telescope",
-	init = function()
-		local nnoremap = require("keymap").nnoremap
-
-		nnoremap("<leader>fp", "<cmd>Telescope projects<CR>")
-		nnoremap("<leader>ff", "<cmd>Telescope find_files<CR>")
-		nnoremap("<leader>fg", "<cmd>Telescope live_grep<CR>")
-		nnoremap("<leader>fb", "<cmd>Telescope buffers<CR>")
-		nnoremap("<leader>fh", "<cmd>Telescope help_tags<CR>")
-		-- Open with trouble, doesn't work yet
-		-- nnoremap("<leader>ft", "<cmd>Trouble open_with_trouble<CR>")
-	end,
+	keys =
+	{
+		{'<leader>fp', "<cmd>Telescope projects<cr>", desc = "Find Projects"},
+		{'<leader>ff', "<cmd>Telescope find_files<cr>", desc = "Find Files"},
+		{'<leader>fg', "<cmd>Telescope live_grep<cr>", desc = "Live grep"},
+		{'<leader>fb', "<cmd>Telescope buffers<cr>", desc = "Find Buffers"},
+		{'<leader>fh', "<cmd>Telescope help_tags<cr>", desc = "Help Tags"},
+	},
 	opts = {
 		defaults = {
 			mappings = {
@@ -47,6 +45,7 @@ return {
 			file_ignore_patterns = { "node_modules", "git" },
 		},
 		extensions = {
+			fzf = {},
 			windowizer = {
 				find_cmd = "fd" -- find command. Available options [ find | fd | rg ] (defaults to "fd")
 			},
