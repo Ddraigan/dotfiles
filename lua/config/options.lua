@@ -1,3 +1,6 @@
+-- Stop Lag
+vim.g.nofsync = true
+
 vim.diagnostic.config({
   virtual_text = false,
 })

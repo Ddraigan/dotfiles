@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"nvim-lua/popup.nvim",
 		"nvim-lua/plenary.nvim",
+		"sharkdp/fd",
 	},
 	cmd = "Telescope",
 	init = function()
@@ -14,7 +15,7 @@ return {
 		nnoremap("<leader>fb", "<cmd>Telescope buffers<CR>")
 		nnoremap("<leader>fh", "<cmd>Telescope help_tags<CR>")
 		-- Open with trouble, doesn't work yet
-		nnoremap("<leader>ft", "<cmd>Trouble open_with_trouble<CR>")
+		-- nnoremap("<leader>ft", "<cmd>Trouble open_with_trouble<CR>")
 	end,
 	opts = {
 		defaults = {
@@ -35,6 +36,11 @@ return {
 				width = 0.87,
 				height = 0.80,
 				preview_cutoff = 50,
+			},
+			mappings = {
+				n = {
+					["<leader>ft"] = function() require("trouble.providers.telescope").open_with_trouble() end,
+				}
 			},
 			file_ignore_patterns = { "node_modules", "git" },
 		},

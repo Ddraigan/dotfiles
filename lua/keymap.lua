@@ -27,7 +27,7 @@ M.general = {
 	-- Better save and quit
 	["<leader>w"] = { "<cmd> w!<CR>", "Save" },
 	["<leader>qa"] = { "<cmd> confirm qa<CR>", "Quit All" },
-	["<leader>q"] = { "<cmd> q<CR>", "Quit" },
+	["<leader>qq"] = { "<cmd> q<CR>", "Quit" },
 
 	-- Trouble Plugin
 	["<leader>xx"] = { "<cmd>TroubleToggle<CR>", "Open Trouble" },
