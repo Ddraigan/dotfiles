@@ -1,7 +1,9 @@
 return {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = { "TroubleToggle", "Trouble" },
     opts = {
+	use_diagnostic_signs = true,
 	action_keys = { -- key mappings for actions in the trouble list
 	-- map to {} to remove a mapping, for example:
 	-- close = {},
