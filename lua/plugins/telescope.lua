@@ -22,10 +22,7 @@ return {
 			mappings = {
 				n = {
 					["<c-t>"] = function() require("trouble.providers.telescope").open_with_trouble() end,
-				},
-				i = {
-					["<c-t>"] = function() require("trouble.providers.telescope").open_with_trouble() end,
-				},
+				}
 			},
 			vimgrep_arguments = {
 				"rg",
