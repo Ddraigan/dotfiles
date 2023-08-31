@@ -53,6 +53,12 @@ return {
 				windowizer = {
 					find_cmd = "fd" -- find command. Available options [ find | fd | rg ] (defaults to "fd")
 				},
+				fzf = {
+					fuzzy = true,
+					override_generic_sorter = true,
+					override_file_sorter = true,
+					case_mode = "smart_case",
+				},
 			},
 		}
 		require("telescope").setup(opts)
