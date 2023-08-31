@@ -8,6 +8,10 @@ return {
 	-- Detect tabstop and shiftwidth automatically
 	"tpope/vim-sleuth",
 	"tpope/vim-surround",
+
+	-- Icons, everything uses this one :)
+	"nvim-tree/nvim-web-devicons",
+
 	{
 		"ahmedkhalf/project.nvim",
 		name = "project_nvim",
@@ -17,6 +21,8 @@ return {
 			show_hidden = false,
 		},
 	},
+
+	-- Git Diff and signs
 	{
 		"lewis6991/gitsigns.nvim",
 		dependencies = {
@@ -26,6 +32,10 @@ return {
 	},
 	-- Toml support
 	"Saecki/crates.nvim",
+
+	-- Git Support
+	'tpope/vim-fugitive',
+	'tpope/vim-rhubarb',
 
 	-- Additional Lua configuration
 	"folke/neodev.nvim",
