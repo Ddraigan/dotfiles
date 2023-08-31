@@ -7,6 +7,7 @@ return {
 		},
 	},
 	opts = {
+		background_colour = "#000000",
 		timeout = 10000,
 		stages = "fade_in_slide_out",
 		max_height = function()
