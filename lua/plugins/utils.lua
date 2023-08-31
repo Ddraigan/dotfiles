@@ -30,6 +30,7 @@ return {
 		},
 		config = true,
 	},
+
 	-- Toml support
 	"Saecki/crates.nvim",
 
