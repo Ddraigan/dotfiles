@@ -7,9 +7,6 @@ return {
 	-- Detect tabstop and shiftwidth automatically
 	"tpope/vim-sleuth",
 
-	-- Easy surrounding bois changing, adding, deleting. e.g; '' to "" with cs'"
-	"tpope/vim-surround",
-
 	-- Icons, everything uses this one :)
 	"nvim-tree/nvim-web-devicons",
 
