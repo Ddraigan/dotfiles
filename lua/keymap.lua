@@ -4,8 +4,8 @@ local M = {}
 local function bind(op, outer_opts)
     outer_opts = outer_opts or { noremap = true }
     return function(lhs, rhs, opts)
-        opts = vim.tbl_extend("force", outer_opts, opts or {})
-        vim.keymap.set(op, lhs, rhs, opts)
+	opts = vim.tbl_extend("force", outer_opts, opts or {})
+	vim.keymap.set(op, lhs, rhs, opts)
     end
 end
 
@@ -29,13 +29,20 @@ M.general = {
 	["<leader>qa"] = { "<cmd> confirm qa<CR>", "Quit All" },
 	["<leader>qq"] = { "<cmd> q<CR>", "Quit" },
 
+	-- Telescope Plugin
+	['<leader>fp'] = {"<cmd>Telescope projects<cr>", "Find Projects"},
+	['<leader>ff'] = {"<cmd>Telescope find_files<cr>", "Find Files"},
+	['<leader>fg'] = {"<cmd>Telescope live_grep<cr>", "Live grep"},
+	['<leader>fb'] = {"<cmd>Telescope buffers<cr>", "Find Buffers"},
+	['<leader>fh'] = {"<cmd>Telescope help_tags<cr>", "Help Tags"},
+
 	-- Trouble Plugin
 	["<leader>xx"] = { "<cmd>TroubleToggle<CR>", "Open Trouble" },
 	["<leader>xw"] = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "Workspace Diagnostics" },
 	["<leader>xd"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
 	["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
 	["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", "Logistics" },
-	["gR"] = { "<cmd>TroubleToggle lsp_references<cr>", "LSP References" },
+	["gR"] = { "<cmd>TroubleToggle lsp_references<cr>", "LSP References with Trouble" },
     }
 }
 

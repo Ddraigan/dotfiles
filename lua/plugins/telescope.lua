@@ -8,14 +8,6 @@ return {
 	--	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", config = function() require("telescope").load_extension("fzf") end, },
 	},
 	cmd = "Telescope",
-	keys =
-	{
-		{'<leader>fp', "<cmd>Telescope projects<cr>", desc = "Find Projects"},
-		{'<leader>ff', "<cmd>Telescope find_files<cr>", desc = "Find Files"},
-		{'<leader>fg', "<cmd>Telescope live_grep<cr>", desc = "Live grep"},
-		{'<leader>fb', "<cmd>Telescope buffers<cr>", desc = "Find Buffers"},
-		{'<leader>fh', "<cmd>Telescope help_tags<cr>", desc = "Help Tags"},
-	},
 	opts = {
 		defaults = {
 			mappings = {
@@ -54,7 +46,7 @@ return {
 				height = 0.80,
 				preview_cutoff = 50,
 			},
-			file_ignore_patterns = { "node_modules", "git" },
+			file_ignore_patterns = { "node_modules", ".git" },
 		},
 		extensions = {
 			windowizer = {
