@@ -22,21 +22,8 @@ return {
 		},
 	},
 
-	-- Git Diff and signs
-	{
-		"lewis6991/gitsigns.nvim",
-		dependencies = {
-			{ "sindrets/diffview.nvim", cmd = "DiffviewOpen" },
-		},
-		config = true,
-	},
-
 	-- Toml support
 	"Saecki/crates.nvim",
-
-	-- Git Support
-	'tpope/vim-fugitive',
-	'tpope/vim-rhubarb',
 
 	-- Additional Lua configuration
 	"folke/neodev.nvim",
