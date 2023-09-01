@@ -1,7 +1,7 @@
 return {
 	-- Git from command line support
-	'tpope/vim-fugitive',
-	'tpope/vim-rhubarb',
+	{ 'tpope/vim-fugitive', event = "VeryLazy" },
+	{ 'tpope/vim-rhubarb', event = "VeryLazy" },
 
 	-- Git Diff and signs
 	{
