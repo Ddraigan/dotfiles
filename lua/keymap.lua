@@ -37,11 +37,11 @@ M.general = {
 	['<leader>fh'] = {"<cmd>Telescope help_tags<cr>", "Help Tags"},
 
 	-- Trouble Plugin
-	["<leader>xx"] = { "<cmd>TroubleToggle<CR>", "Open Trouble" },
-	["<leader>xw"] = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "Workspace Diagnostics" },
-	["<leader>xd"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
-	["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
-	["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", "Logistics" },
+	["<leader>tx"] = { "<cmd>TroubleToggle<CR>", "Open Trouble" },
+	["<leader>tw"] = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "Workspace Diagnostics" },
+	["<leader>td"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
+	["<leader>tq"] = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
+	["<leader>tl"] = { "<cmd>TroubleToggle loclist<cr>", "Logistics" },
 	["gR"] = { "<cmd>TroubleToggle lsp_references<cr>", "LSP References with Trouble" },
     }
 }
