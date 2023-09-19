@@ -40,13 +40,4 @@ return {
 			vim.g.gruvbox_termcolos = 16
 		    end,
 		},
-		{
-		    "norcalli/nvim-colorizer.lua",
-		    opts = {
-			css = { css = true },
-			"javascript",
-			"typescript",
-			"html",
-		    },
-		},
 	    }
