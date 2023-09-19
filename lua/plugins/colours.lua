@@ -40,7 +40,6 @@ return {
 			vim.g.gruvbox_termcolos = 16
 		    end,
 		},
-		"sainnhe/sonokai",
 		{
 		    "norcalli/nvim-colorizer.lua",
 		    opts = {

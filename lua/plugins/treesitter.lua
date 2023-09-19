@@ -1,4 +1,4 @@
-return {
+local M = {
 	"nvim-treesitter/nvim-treesitter",
 	dependencies = {
 		{
@@ -9,7 +9,9 @@ return {
 	},
 	event = { "BufReadPost", "BufNewFile" },
 	build = ":TSUpdate",
-	config = function()
+}
+
+M.config = function()
 	require("nvim-treesitter.configs").setup({
 	    ensure_installed = { "lua", "rust", "javascript", "typescript", "tsx", "vim", "vimdoc", "regex", "bash", "markdown_inline" },
 	    sync_install = false,
@@ -27,5 +29,6 @@ return {
 		},
 	    },
 	})
-    end,
-}
+end
+
+return M
