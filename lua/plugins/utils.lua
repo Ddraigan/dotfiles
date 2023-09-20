@@ -1,7 +1,6 @@
 return {
 	{
 		"numToStr/Comment.nvim",
-		event = "VeryLazy",
 		config = true,
 	},
 	-- Detect tabstop and shiftwidth automatically
@@ -27,7 +26,7 @@ return {
 	{
 		"Saecki/crates.nvim",
 		event = "VeryLazy",
-	}, 
+	},
 	-- emmet
 	{
 		"mattn/emmet-vim",

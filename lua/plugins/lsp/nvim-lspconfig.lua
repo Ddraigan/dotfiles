@@ -6,6 +6,7 @@ return {
 		{ "hrsh7th/nvim-cmp" },
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "litao91/lsp_lines" },
+		{ "ray-x/lsp_signature.nvim" },
 	},
 	config = function()
 		local lspconfig = require("lspconfig")
@@ -40,10 +41,6 @@ return {
 			})
 		end
 
-		-- tsserver
-		lspconfig.tsserver.setup({
-			capabilities = capabilities,
-		})
 		-- rust_analyzer
 		lspconfig.rust_analyzer.setup({
 			capabilities = capabilities,
@@ -51,10 +48,6 @@ return {
 			settings = {
 				["rust-analyzer"] = {},
 			},
-		})
-		-- html
-		lspconfig.html.setup({
-			capabilities = capabilities,
 		})
 		-- configure emmet language server
 		lspconfig.emmet_ls.setup({
@@ -71,10 +64,6 @@ return {
 					},
 				},
 			},
-		})
-		-- CSS LS
-		lspconfig.cssls.setup({
-			capabilities = capabilities,
 		})
 		-- Tailwind
 		-- Support for tailwind auto completion
