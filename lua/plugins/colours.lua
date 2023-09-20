@@ -1,5 +1,4 @@
 return {
-    {
 	'Mofiqul/dracula.nvim',
 	lazy = false,
 	config = function()
@@ -30,5 +29,4 @@ return {
 
 			vim.cmd.colorscheme 'dracula'
 		    end,
-		},
 	    }
