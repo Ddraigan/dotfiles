@@ -7,6 +7,7 @@ return {
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "litao91/lsp_lines" },
 		{ "ray-x/lsp_signature.nvim" },
+		{ "simrat39/rust-tools.nvim" },
 	},
 	config = function()
 		local lspconfig = require("lspconfig")
@@ -26,7 +27,7 @@ return {
 			vim.keymap.set("n", "<space>df", vim.diagnostic.goto_next, { noremap = true, desc = "Go To Next Diagnostic", silent = true, buffer = bufnr })
 		end
 
-		local servers = { "lua_ls", "pyright", "html", "tsserver", "rust_analyzer" }
+		local servers = { "lua_ls", "html", "tsserver" }
 		for _, lsp in pairs(servers) do
 			lspconfig[lsp].setup({
 				capabilities = capabilities,
@@ -44,6 +45,7 @@ return {
 		-- configure emmet language server
 		lspconfig.emmet_ls.setup({
 			capabilities = capabilities,
+			on_attach = on_attach(),
 			filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
 		})
 		-- Tailwind
@@ -51,6 +53,7 @@ return {
 		-- install the tailwind server : "sudo npm install -g @tailwindcss/language-server"
 		lspconfig.tailwindcss.setup({
 			capabilities = capabilities,
+			on_attach = on_attach(),
 		})
 	end
 }

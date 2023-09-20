@@ -70,7 +70,7 @@ return {
 				{ name = "buffer" },
 				{ name = "path" },
 			}, {
-				{ name = "neorg" },
+				{ name = "crates" },
 			}),
 
 			formatting = {

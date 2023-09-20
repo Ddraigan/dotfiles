@@ -25,7 +25,8 @@ return {
 	-- Toml support
 	{
 		"Saecki/crates.nvim",
-		event = "VeryLazy",
+		dependencies = { "simrat39/rust-tools.nvim", "nvim-lua/plenary.nvim" },
+		event = { "BufRead Cargo.toml" },
 	},
 	-- emmet
 	{
