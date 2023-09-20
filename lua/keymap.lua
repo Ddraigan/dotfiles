@@ -29,15 +29,19 @@ M.general = {
 	["<leader>qa"] = { "<cmd> confirm qa<CR>", "Quit All" },
 	["<leader>qq"] = { "<cmd> q<CR>", "Quit" },
 
+	-- Lsp 
+	["<leader>la"] = { vim.lsp.buf.code_action, "LSP code action" },
+
 	-- Telescope Plugin
 	['<leader>fp'] = {"<cmd>Telescope projects<cr>", "Find Projects"},
 	['<leader>ff'] = {"<cmd>Telescope find_files<cr>", "Find Files"},
 	['<leader>fg'] = {"<cmd>Telescope live_grep<cr>", "Live grep"},
 	['<leader>fb'] = {"<cmd>Telescope buffers<cr>", "Find Buffers"},
 	['<leader>fh'] = {"<cmd>Telescope help_tags<cr>", "Help Tags"},
+	['<leader>sd'] = {"<cmd>Telescope diagnostics<cr>", "Open Diagnostics"},
 
 	-- Trouble Plugin
-	["<leader>tx"] = { "<cmd>TroubleToggle<CR>", "Open Trouble" },
+	["<leader>tt"] = { "<cmd>TroubleToggle<CR>", "Open Trouble" },
 	["<leader>tw"] = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "Workspace Diagnostics" },
 	["<leader>td"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
 	["<leader>tq"] = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },

@@ -1,5 +1,6 @@
-return {
+local M = {
 	'stevearc/dressing.nvim',
 	event = "BufReadPre",
-	opts = {}
 }
+
+return M

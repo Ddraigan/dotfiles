@@ -1,5 +1,4 @@
 return {
-    {
 	'Mofiqul/dracula.nvim',
 	lazy = false,
 	config = function()
@@ -30,23 +29,4 @@ return {
 
 			vim.cmd.colorscheme 'dracula'
 		    end,
-		},
-		{
-		    "gruvbox-community/gruvbox",
-		    init = function()
-			vim.g.gruvbox_sign_column = "none"
-			vim.g.gruvbox_color_column = "none"
-			vim.g.gruvbox_italic = 1
-			vim.g.gruvbox_termcolos = 16
-		    end,
-		},
-		{
-		    "norcalli/nvim-colorizer.lua",
-		    opts = {
-			css = { css = true },
-			"javascript",
-			"typescript",
-			"html",
-		    },
-		},
 	    }

@@ -1,6 +1,6 @@
 return {
 	"yamatsum/nvim-cursorline",
-	event = { "BufReadPost", "BufNewFile" },
+	event = "VeryLazy",
 	config = function ()
 		require('nvim-cursorline').setup {
 			cursorline = {
