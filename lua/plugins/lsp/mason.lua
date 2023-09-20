@@ -21,10 +21,11 @@ return {
 		-- mason-lspconfig
 		mason_lspconfig.setup({
 			ensure_installed = {
-				"lua_ls",
-				"cssls",
-				"rust_analyzer",
-				"jsonls",
+				"lua_ls", -- Lua LSP
+				"cssls", -- CSS LSP
+	 			"jsonls", -- JSON LSP
+	 			"rust_analyzer", -- Rust LSP
+				"codelldb" -- Rust Debug
 			},
 			-- auto installation
 			automatic_installation = true,
