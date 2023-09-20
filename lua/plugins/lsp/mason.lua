@@ -22,8 +22,8 @@ return {
 		mason_lspconfig.setup({
 			ensure_installed = {
 				"lua_ls", -- Lua LSP
-				"cssls", -- CSS LSP
-	 			"jsonls", -- JSON LSP
+				"css-lsp", -- CSS LSP
+	 			"json-lsp", -- JSON LSP
 	 			"rust_analyzer", -- Rust LSP
 				"codelldb" -- Rust Debug
 			},

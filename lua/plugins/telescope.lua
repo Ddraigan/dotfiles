@@ -8,7 +8,7 @@ return {
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},
 	cmd = "Telescope",
-	config = function ()
+	config = function()
 		local opts = {
 			defaults = {
 				mappings = {
