@@ -27,7 +27,7 @@ return {
 			vim.keymap.set("n", "<space>df", vim.diagnostic.goto_next, { noremap = true, desc = "Go To Next Diagnostic", silent = true, buffer = bufnr })
 		end
 
-		local servers = { "lua_ls", "html", "tsserver" }
+		local servers = { "lua_ls", "html", "tsserver", "astro", "eslint" }
 		for _, lsp in pairs(servers) do
 			lspconfig[lsp].setup({
 				capabilities = capabilities,
