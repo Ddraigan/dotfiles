@@ -39,7 +39,6 @@ return {
 	-- emmet
 	{
 		"mattn/emmet-vim",
-		event = "VeryLazy",
 	},
 	-- Additional Lua configuration
 	{
