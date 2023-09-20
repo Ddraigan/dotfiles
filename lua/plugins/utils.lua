@@ -28,7 +28,6 @@ return {
 		dependencies = { "simrat39/rust-tools.nvim", "nvim-lua/plenary.nvim" },
 		event = { "BufRead Cargo.toml" },
 		config = function ()
-			local null_ls = require("null-ls")
 			require("Saecki/crates.nvim").setup({
 				null_ls = {
 					enabled = true,
