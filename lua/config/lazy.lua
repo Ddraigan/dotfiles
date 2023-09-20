@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ { import = "plugins" }, { import = "plugins.lsp" } }, {
 	defaults = { lazy = true },
+	checker = { enabled = true, notify = false },
 	performance = {
 		cache = {
 			enabled = true,
