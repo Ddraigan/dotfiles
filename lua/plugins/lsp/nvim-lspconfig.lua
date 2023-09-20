@@ -13,14 +13,14 @@ return {
 		local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-		local on_attach = function(bufnr)
+		local on_attach = function(client, bufnr)
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { noremap = true, desc = "Go To Declaration", silent = true, buffer = bufnr })
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { noremap = true, desc = "Go To Definition", silent = true, buffer = bufnr })
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, desc = "Hover", silent = true, buffer = bufnr })
 			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { noremap = true, desc = "Go To Implementation", silent = true, buffer = bufnr })
 			vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, { noremap = true, desc = "Rename", silent = true, buffer = bufnr })
 			vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, desc = "Go To References", silent = true, buffer = bufnr })
-			vim.keymap.set("n", "<space>f", function()
+			vim.keymap.set("n", "<space>ft", function()
 				vim.lsp.buf.format({ async = true })
 			end, { noremap = true, desc = "Format", silent = true, buffer = bufnr })
 			vim.keymap.set("n", "<space>df", vim.diagnostic.goto_next, { noremap = true, desc = "Go To Next Diagnostic", silent = true, buffer = bufnr })
