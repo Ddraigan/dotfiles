@@ -14,7 +14,6 @@ return {
 			sources = {
 				formatting.prettier,
 				formatting.stylua,
-				formatting.black,
 			},
 			on_attach = function(client, bufnr)
 				if client.supports_method("textDocument/formatting") then
