@@ -2,6 +2,14 @@ return {
 	{
 		"numToStr/Comment.nvim",
 		config = true,
+		keys = {
+			{ "gcc", mode = "n", desc = "Comment toggle current line" },
+			--	{ "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
+			{ "gc",  mode = "x", desc = "Comment toggle linewise (visual)" },
+			{ "gbc", mode = "n", desc = "Comment toggle current block" },
+			--	{ "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
+			{ "gb",  mode = "x", desc = "Comment toggle blockwise (visual)" },
+		},
 	},
 	-- Detect tabstop and shiftwidth automatically
 	{
@@ -27,7 +35,7 @@ return {
 		"Saecki/crates.nvim",
 		dependencies = { "simrat39/rust-tools.nvim", "nvim-lua/plenary.nvim" },
 		event = { "BufRead Cargo.toml" },
-		config = function ()
+		config = function()
 			require("Saecki/crates.nvim").setup({
 				null_ls = {
 					enabled = true,
