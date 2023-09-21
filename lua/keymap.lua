@@ -19,15 +19,15 @@ M.inoremap = bind("i")
 M.general = {
 	n = {
 		-- Tmux Remaps
-		["<C-h>"] = { "<cmd> TmuxNavigateLeft<CR>", "window left" },
-		["<C-l>"] = { "<cmd> TmuxNavigateRight<CR>", "window right" },
-		["<C-j>"] = { "<cmd> TmuxNavigateDown<CR>", "window down" },
-		["<C-k>"] = { "<cmd> TmuxNavigateUp<CR>", "window up" },
+		["<C-h>"] = { "<cmd> TmuxNavigateLeft <CR>", "window left" },
+		["<C-l>"] = { "<cmd> TmuxNavigateRight <CR>", "window right" },
+		["<C-j>"] = { "<cmd> TmuxNavigateDown <CR>", "window down" },
+		["<C-k>"] = { "<cmd> TmuxNavigateUp <CR>", "window up" },
 
 		-- Better save and quit
-		["<leader>w"] = { "<cmd> w!<CR>", "Save" },
-		["<leader>qa"] = { "<cmd> confirm qa<CR>", "Quit All" },
-		["<leader>qq"] = { "<cmd> q<CR>", "Quit" },
+		["<leader>w"] = { "<cmd> w! <CR>", "Save" },
+		["<leader>qa"] = { "<cmd> confirm qa <CR>", "Quit All" },
+		["<leader>qq"] = { "<cmd> q <CR>", "Quit" },
 
 		-- Telescope Plugin
 		['<leader>fp'] = { "<cmd> Telescope projects <CR>", "[Telescope]: Find Projects" },
@@ -39,12 +39,12 @@ M.general = {
 		["<leader>fr"] = { "<cmd> Telescope lsp_references <CR>", "[Telescope/LSP]: References" },
 
 		-- Trouble Plugin
-		["<leader>tt"] = { "<cmd>TroubleToggle<CR>", "[Trouble]: Toggle Menu" },
-		["<leader>tw"] = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "[Trouble]: Workspace Diagnostics" },
-		["<leader>td"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "[Trouble]: Document Diagnostics" },
-		["<leader>tq"] = { "<cmd>TroubleToggle quickfix<cr>", "[Trouble]: Quickfix" },
-		["<leader>tl"] = { "<cmd>TroubleToggle loclist<cr>", "[Trouble]: Logistics" },
-		["<leader>tr"] = { "<cmd>TroubleToggle lsp_references<cr>", "[Trouble/LSP]: References" },
+		["<leader>tt"] = { "<cmd> TroubleToggle <CR>", "[Trouble]: Toggle Menu" },
+		["<leader>tw"] = { "<cmd> TroubleToggle workspace_diagnostics <CR>", "[Trouble]: Workspace Diagnostics" },
+		["<leader>td"] = { "<cmd> TroubleToggle document_diagnostics <CR>", "[Trouble]: Document Diagnostics" },
+		["<leader>tq"] = { "<cmd> TroubleToggle quickfix <CR>", "[Trouble]: Quickfix" },
+		["<leader>tl"] = { "<cmd> TroubleToggle loclist <CR>", "[Trouble]: Logistics" },
+		["<leader>tr"] = { "<cmd> TroubleToggle lsp_references <CR>", "[Trouble/LSP]: References" },
 
 		-- Harpoon Plugin
 		["<leader>ha"] = { "<cmd> lua require('harpoon.mark').add_file() <CR>", "[Harpoon]: Add File" },
