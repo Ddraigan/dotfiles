@@ -38,6 +38,9 @@ M.general = {
 		['<leader>sd'] = { "<cmd> Telescope diagnostics <CR>", "[Telescope]: Open Diagnostics" },
 		["<leader>fr"] = { "<cmd> Telescope lsp_references <CR>", "[Telescope/LSP]: References" },
 
+		-- Noice Plugin
+		["<leader>fn"] = { "<cmd> NoiceTelescope <CR>", "[Telescope/Noice]: Notifcations" },
+
 		-- Trouble Plugin
 		["<leader>tt"] = { "<cmd> TroubleToggle <CR>", "[Trouble]: Toggle Menu" },
 		["<leader>tw"] = { "<cmd> TroubleToggle workspace_diagnostics <CR>", "[Trouble]: Workspace Diagnostics" },
