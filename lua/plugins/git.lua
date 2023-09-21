@@ -1,7 +1,7 @@
 return {
 	-- Git from command line support
 	{ 'tpope/vim-fugitive', cmd = "Git" }, -- :Git to use git in nvim
-	{ 'tpope/vim-rhubarb', event = "VeryLazy" },
+	--  { 'tpope/vim-rhubarb', event = "VeryLazy" },
 
 	-- Git Diff and signs
 	{
