@@ -48,7 +48,7 @@ return {
 					height = 0.80,
 					preview_cutoff = 50,
 				},
-				file_ignore_patterns = { "node_modules", ".git" },
+				file_ignore_patterns = { "node_modules", ".git", "/target" },
 			},
 			extensions = {
 				windowizer = {
