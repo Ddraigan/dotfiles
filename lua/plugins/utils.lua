@@ -34,15 +34,15 @@ return {
 	{
 		"Saecki/crates.nvim",
 		dependencies = { "simrat39/rust-tools.nvim", "nvim-lua/plenary.nvim" },
-		event = { "BufRead Cargo.toml" },
-		config = function()
+		ft = { "toml" },
+		--[[ config = function()
 			require("Saecki/crates.nvim").setup({
 				null_ls = {
 					enabled = true,
 					name = "crates",
 				}
 			})
-		end
+		end ]]
 	},
 	-- emmet
 	{
@@ -62,5 +62,7 @@ return {
 			vim.o.timeoutlen = 500
 		end,
 		opts = {}
-	}
+	},
+	"NoahTheDuke/vim-just",
+	"IndianBoy42/tree-sitter-just",
 }

@@ -7,7 +7,7 @@ return {
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "litao91/lsp_lines" },
 		{ "ray-x/lsp_signature.nvim" },
-		{ "simrat39/rust-tools.nvim" },
+		--	{ "simrat39/rust-tools.nvim" },
 	},
 	config = function()
 		local lspconfig = require("lspconfig")

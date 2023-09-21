@@ -30,13 +30,13 @@ M.general = {
 		["<leader>qq"] = { "<cmd> q<CR>", "Quit" },
 
 		-- Telescope Plugin
-		['<leader>fp'] = { "<cmd>Telescope projects<cr>", "[Telescope]: Find Projects" },
-		['<leader>ff'] = { "<cmd>Telescope find_files<cr>", "[Telescope]: Find Files" },
-		['<leader>fg'] = { "<cmd>Telescope live_grep<cr>", "[Telescope]: Live grep" },
-		['<leader>fb'] = { "<cmd>Telescope buffers<cr>", "[Telescope]: Find Buffers" },
-		['<leader>fh'] = { "<cmd>Telescope help_tags<cr>", "[Telescope]: Help Tags" },
-		['<leader>sd'] = { "<cmd>Telescope diagnostics<cr>", "[Telescope]: Open Diagnostics" },
-		["<leader>fr"] = { "<cmd>Telescope lsp_references<cr>", "[Telescope/LSP]: References" },
+		['<leader>fp'] = { "<cmd> Telescope projects <CR>", "[Telescope]: Find Projects" },
+		['<leader>ff'] = { "<cmd> Telescope find_files <CR>", "[Telescope]: Find Files" },
+		['<leader>fg'] = { "<cmd> Telescope live_grep <CR>", "[Telescope]: Live grep" },
+		['<leader>fb'] = { "<cmd> Telescope buffers <CR>", "[Telescope]: Find Buffers" },
+		['<leader>fh'] = { "<cmd> Telescope help_tags <CR>", "[Telescope]: Help Tags" },
+		['<leader>sd'] = { "<cmd> Telescope diagnostics <CR>", "[Telescope]: Open Diagnostics" },
+		["<leader>fr"] = { "<cmd> Telescope lsp_references <CR>", "[Telescope/LSP]: References" },
 
 		-- Trouble Plugin
 		["<leader>tt"] = { "<cmd>TroubleToggle<CR>", "[Trouble]: Toggle Menu" },
