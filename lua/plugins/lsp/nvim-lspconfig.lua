@@ -24,12 +24,12 @@ return {
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover", bufnr))
 			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go To Implementation", bufnr))
 			vim.keymap.set("n", "gi", vim.lsp.buf.code_action, opts("Code Action", bufnr))
-			vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts("Rename", bufnr))
+			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename", bufnr))
 			vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Go To References", bufnr))
-			vim.keymap.set("n", "<space>df", vim.diagnostic.goto_next, opts("Go To Next Diagnostic", bufnr))
+			vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, opts("Go To Next Diagnostic", bufnr))
 			--[[ vim.keymap.set("n", "<space>fM", function()
-				vim.lsp.buf.format({ async = true })
-			end, opts("Format", bufnr)) ]]
+					vim.lsp.buf.format({ async = true })
+				end, opts("Format", bufnr)) ]]
 		end
 
 		local servers = { "lua_ls", "html", "tsserver", "astro", "eslint" }

@@ -36,6 +36,7 @@ M.general = {
 		['<leader>fb'] = { "<cmd>Telescope buffers<cr>", "[Telescope]: Find Buffers" },
 		['<leader>fh'] = { "<cmd>Telescope help_tags<cr>", "[Telescope]: Help Tags" },
 		['<leader>sd'] = { "<cmd>Telescope diagnostics<cr>", "[Telescope]: Open Diagnostics" },
+		["<leader>fr"] = { "<cmd>Telescope lsp_references<cr>", "[Telescope/LSP]: References" },
 
 		-- Trouble Plugin
 		["<leader>tt"] = { "<cmd>TroubleToggle<CR>", "[Trouble]: Toggle Menu" },
@@ -43,7 +44,7 @@ M.general = {
 		["<leader>td"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "[Trouble]: Document Diagnostics" },
 		["<leader>tq"] = { "<cmd>TroubleToggle quickfix<cr>", "[Trouble]: Quickfix" },
 		["<leader>tl"] = { "<cmd>TroubleToggle loclist<cr>", "[Trouble]: Logistics" },
-		["gR"] = { "<cmd>TroubleToggle lsp_references<cr>", "[Trouble/LSP]: References" },
+		["<leader>tr"] = { "<cmd>TroubleToggle lsp_references<cr>", "[Trouble/LSP]: References" },
 
 		-- Harpoon Plugin
 		["<leader>ha"] = { "<cmd> lua require('harpoon.mark').add_file() <CR>", "[Harpoon]: Add File" },
