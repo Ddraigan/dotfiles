@@ -14,23 +14,22 @@ return {
 		local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+		local function opts(desc, bufnr)
+			return { desc = "[LSP]: " .. desc, buffer = bufnr, noremap = true, silent = true }
+		end
+
 		local on_attach = function(client, bufnr)
-			vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
-				{ noremap = true, desc = "Go To Declaration", silent = true, buffer = bufnr })
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition,
-				{ noremap = true, desc = "Go To Definition", silent = true, buffer = bufnr })
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, desc = "Hover", silent = true, buffer = bufnr })
-			vim.keymap.set("n", "gi", vim.lsp.buf.implementation,
-				{ noremap = true, desc = "Go To Implementation", silent = true, buffer = bufnr })
-			vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename,
-				{ noremap = true, desc = "Rename", silent = true, buffer = bufnr })
-			vim.keymap.set("n", "gr", vim.lsp.buf.references,
-				{ noremap = true, desc = "Go To References", silent = true, buffer = bufnr })
-			vim.keymap.set("n", "<space>fM", function()
+			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go To Declaration", bufnr))
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go To Definition", bufnr))
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover", bufnr))
+			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go To Implementation", bufnr))
+			vim.keymap.set("n", "gi", vim.lsp.buf.code_action, opts("Code Action", bufnr))
+			vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts("Rename", bufnr))
+			vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Go To References", bufnr))
+			vim.keymap.set("n", "<space>df", vim.diagnostic.goto_next, opts("Go To Next Diagnostic", bufnr))
+			--[[ vim.keymap.set("n", "<space>fM", function()
 				vim.lsp.buf.format({ async = true })
-			end, { noremap = true, desc = "Format", silent = true, buffer = bufnr })
-			vim.keymap.set("n", "<space>df", vim.diagnostic.goto_next,
-				{ noremap = true, desc = "Go To Next Diagnostic", silent = true, buffer = bufnr })
+			end, opts("Format", bufnr)) ]]
 		end
 
 		local servers = { "lua_ls", "html", "tsserver", "astro", "eslint" }

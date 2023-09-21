@@ -29,32 +29,28 @@ M.general = {
 		["<leader>qa"] = { "<cmd> confirm qa<CR>", "Quit All" },
 		["<leader>qq"] = { "<cmd> q<CR>", "Quit" },
 
-		-- Lsp
-		["<leader>la"] = { vim.lsp.buf.code_action, "LSP code action" },
-		["<leader>lr"] = { vim.lsp.buf.rename, "LSP rename" },
-
 		-- Telescope Plugin
-		['<leader>fp'] = { "<cmd>Telescope projects<cr>", "Find Projects" },
-		['<leader>ff'] = { "<cmd>Telescope find_files<cr>", "Find Files" },
-		['<leader>fg'] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
-		['<leader>fb'] = { "<cmd>Telescope buffers<cr>", "Find Buffers" },
-		['<leader>fh'] = { "<cmd>Telescope help_tags<cr>", "Help Tags" },
-		['<leader>sd'] = { "<cmd>Telescope diagnostics<cr>", "Open Diagnostics" },
+		['<leader>fp'] = { "<cmd>Telescope projects<cr>", "[Telescope]: Find Projects" },
+		['<leader>ff'] = { "<cmd>Telescope find_files<cr>", "[Telescope]: Find Files" },
+		['<leader>fg'] = { "<cmd>Telescope live_grep<cr>", "[Telescope]: Live grep" },
+		['<leader>fb'] = { "<cmd>Telescope buffers<cr>", "[Telescope]: Find Buffers" },
+		['<leader>fh'] = { "<cmd>Telescope help_tags<cr>", "[Telescope]: Help Tags" },
+		['<leader>sd'] = { "<cmd>Telescope diagnostics<cr>", "[Telescope]: Open Diagnostics" },
 
 		-- Trouble Plugin
-		["<leader>tt"] = { "<cmd>TroubleToggle<CR>", "Open Trouble" },
-		["<leader>tw"] = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "Workspace Diagnostics" },
-		["<leader>td"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
-		["<leader>tq"] = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
-		["<leader>tl"] = { "<cmd>TroubleToggle loclist<cr>", "Logistics" },
-		["gR"] = { "<cmd>TroubleToggle lsp_references<cr>", "LSP References with Trouble" },
+		["<leader>tt"] = { "<cmd>TroubleToggle<CR>", "[Trouble]: Toggle Menu" },
+		["<leader>tw"] = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "[Trouble]: Workspace Diagnostics" },
+		["<leader>td"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "[Trouble]: Document Diagnostics" },
+		["<leader>tq"] = { "<cmd>TroubleToggle quickfix<cr>", "[Trouble]: Quickfix" },
+		["<leader>tl"] = { "<cmd>TroubleToggle loclist<cr>", "[Trouble]: Logistics" },
+		["gR"] = { "<cmd>TroubleToggle lsp_references<cr>", "[Trouble/LSP]: References" },
 
 		-- Harpoon Plugin
-		["<leader>ha"] = { "<cmd> lua require('harpoon.mark').add_file() <CR>", "Harpoon file" },
-		["<leader>hh"] = { "<cmd> lua require('harpoon.ui').toggle_quick_menu() <CR>", "Toggle Harpon quick menu" },
+		["<leader>ha"] = { "<cmd> lua require('harpoon.mark').add_file() <CR>", "[Harpoon]: Add File" },
+		["<leader>hh"] = { "<cmd> lua require('harpoon.ui').toggle_quick_menu() <CR>", "[Harpoon]: Toggle Menu" },
 
 		-- Nvim-Tree Plugin
-		["<leader>-"] = { "<cmd> NvimTreeToggle <CR>", "Toggle Nvim-Tree" },
+		["<leader>-"] = { "<cmd> NvimTreeToggle <CR>", "[Nvim-Tree]: Toggle Tree" },
 	}
 }
 
