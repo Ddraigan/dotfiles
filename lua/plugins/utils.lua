@@ -63,6 +63,6 @@ return {
 		end,
 		opts = {}
 	},
-	"NoahTheDuke/vim-just",
-	"IndianBoy42/tree-sitter-just",
+	{ "NoahTheDuke/vim-just",         ft = "conf" },
+	{ "IndianBoy42/tree-sitter-just", ft = "conf" },
 }
