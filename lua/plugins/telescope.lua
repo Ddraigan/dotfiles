@@ -28,7 +28,7 @@ return {
 						["<a-t>"] = function(...)
 							return require("trouble.providers.telescope").open_selected_with_trouble(...)
 						end,
-					}
+					},
 				},
 				vimgrep_arguments = {
 					"rg",
@@ -53,11 +53,11 @@ return {
 			pickers = {
 				lsp_references = {
 					path_display = "truncate",
-				}
+				},
 			},
 			extensions = {
 				windowizer = {
-					find_cmd = "fd" -- find command. Available options [ find | fd | rg ] (defaults to "fd")
+					find_cmd = "fd", -- find command. Available options [ find | fd | rg ] (defaults to "fd")
 				},
 				fzf = {
 					fuzzy = true,
@@ -70,6 +70,6 @@ return {
 		require("telescope").setup(opts)
 		require("telescope").load_extension("windowizer")
 		require("telescope").load_extension("fzf")
-		require("telescope").load_extension('harpoon')
+		require("telescope").load_extension("harpoon")
 	end,
 }
