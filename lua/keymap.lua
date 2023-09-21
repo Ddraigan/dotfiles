@@ -31,6 +31,7 @@ M.general = {
 
 		-- Lsp
 		["<leader>la"] = { vim.lsp.buf.code_action, "LSP code action" },
+		["<leader>lr"] = { vim.lsp.buf.rename, "LSP rename" },
 
 		-- Telescope Plugin
 		['<leader>fp'] = { "<cmd>Telescope projects<cr>", "Find Projects" },
@@ -51,6 +52,9 @@ M.general = {
 		-- Harpoon Plugin
 		["<leader>ha"] = { "<cmd> lua require('harpoon.mark').add_file() <CR>", "Harpoon file" },
 		["<leader>hh"] = { "<cmd> lua require('harpoon.ui').toggle_quick_menu() <CR>", "Toggle Harpon quick menu" },
+
+		-- Nvim-Tree Plugin
+		["<leader>-"] = { "<cmd> NvimTreeToggle <CR>", "Toggle Nvim-Tree" },
 	}
 }
 
