@@ -52,7 +52,7 @@ return {
 			},
 			pickers = {
 				lsp_references = {
-					path_display = "truncate",
+					path_display = { "truncate" },
 				},
 			},
 			extensions = {
