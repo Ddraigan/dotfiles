@@ -3,7 +3,11 @@ return {
 	event = "BufReadPre",
 	keys = {
 		{
-			"<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Dismiss all Notifications",
+			"<leader>nd",
+			function()
+				require("notify").dismiss({ silent = true, pending = true })
+			end,
+			desc = "Dismiss all Notifications",
 		},
 	},
 	opts = {
