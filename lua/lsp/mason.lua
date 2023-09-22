@@ -2,12 +2,12 @@ return {
 	"williamboman/mason.nvim",
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		-- "WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	config = function()
 		local mason = require("mason")
 		local mason_lspconfig = require("mason-lspconfig")
-		local mason_tool_installer = require("mason-tool-installer")
+		-- local mason_tool_installer = require("mason-tool-installer")
 		mason.setup({
 			ui = {
 				icons = {
@@ -23,15 +23,15 @@ return {
 			ensure_installed = {
 				"lua_ls", -- Lua LSP
 				"css-lsp", -- CSS LSP
-	 			"json-lsp", -- JSON LSP
-	 			"rust_analyzer", -- Rust LSP
+				"json-lsp", -- JSON LSP
+				"rust_analyzer", -- Rust LSP
 				"codelldb" -- Rust Debug
 			},
 			-- auto installation
-			automatic_installation = true,
+			automatic_installation = false,
 		})
 
-		-- mason-tool-installer
+		--[[ -- mason-tool-installer
 		mason_tool_installer.setup({
 			ensure_installed = {
 				-- you can turn off/on auto_update per tool
@@ -56,6 +56,6 @@ return {
 			run_on_start = true,
 			start_delay = 3000, -- 3 second delay
 			debounce_hours = 5, -- at least 5 hours between attempts to install/update
-		})
+		}) ]]
 	end,
 }

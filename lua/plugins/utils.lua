@@ -16,6 +16,14 @@ return {
 		"tpope/vim-sleuth",
 		event = "VeryLazy",
 	},
+	{
+		{
+			"wuelnerdotexe/vim-astro",
+			config = function()
+				vim.cmd([[let g:astro_typescript = 'enable']])
+			end,
+		},
+	},
 	-- Icons, everything uses this one :)
 	{
 		"nvim-tree/nvim-web-devicons",
