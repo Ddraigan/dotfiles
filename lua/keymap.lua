@@ -52,6 +52,8 @@ M.general = {
 		-- Harpoon Plugin
 		["<leader>ha"] = { "<cmd> lua require('harpoon.mark').add_file() <CR>", "[Harpoon]: Add File" },
 		["<leader>hh"] = { "<cmd> lua require('harpoon.ui').toggle_quick_menu() <CR>", "[Harpoon]: Toggle Menu" },
+		["<leader>hn"] = { "<cmd> lua require('harpoon.ui').nav_next() <CR>", "[Harpoon]: Nav Next" },
+		["<leader>hp"] = { "<cmd> lua require('harpoon.ui').nav_prev() <CR>", "[Harpoon]: Nav Prev" },
 
 		-- Nvim-Tree Plugin
 		["<leader>-"] = { "<cmd> NvimTreeToggle <CR>", "[Nvim-Tree]: Toggle Tree" },
