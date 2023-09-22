@@ -8,6 +8,7 @@ return {
 		{ "litao91/lsp_lines" },
 		{ "ray-x/lsp_signature.nvim" },
 		--	{ "simrat39/rust-tools.nvim" },
+		{ "folke/neodev.nvim" },
 	},
 	config = function()
 		local lspconfig = require("lspconfig")

@@ -14,7 +14,7 @@ return {
 	-- Detect tabstop and shiftwidth automatically
 	{
 		"tpope/vim-sleuth",
-		event = "VeryLazy",
+		event = "BufReadPre",
 	},
 	{
 		{
@@ -59,7 +59,6 @@ return {
 	-- Additional Lua configuration
 	{
 		"folke/neodev.nvim",
-		event = "VeryLazy",
 	},
 	-- Vim command hints
 	{
