@@ -17,7 +17,7 @@ require("lazy").setup({ { import = "plugins" }, { import = "lsp" } }, {
 	checker = { enabled = true, notify = false },
 	performance = {
 		cache = {
-			enabled = false,
+			enabled = true,
 		},
 		rtp = {
 			disabled_plugins = {
