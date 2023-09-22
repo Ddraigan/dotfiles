@@ -5,10 +5,10 @@ return {
 		keys = {
 			{ "gcc", mode = "n", desc = "Comment toggle current line" },
 			--	{ "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
-			{ "gc",  mode = "x", desc = "Comment toggle linewise (visual)" },
+			{ "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
 			{ "gbc", mode = "n", desc = "Comment toggle current block" },
 			--	{ "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-			{ "gb",  mode = "x", desc = "Comment toggle blockwise (visual)" },
+			{ "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
 		},
 	},
 	-- Detect tabstop and shiftwidth automatically
@@ -28,7 +28,7 @@ return {
 	{
 		"nvim-tree/nvim-web-devicons",
 	},
-	{
+	--[[ {
 		"ahmedkhalf/project.nvim",
 		name = "project_nvim",
 		event = "VeryLazy",
@@ -37,7 +37,7 @@ return {
 			detection_methods = { "lsp", "pattern" },
 			show_hidden = false,
 		},
-	},
+	}, ]]
 	-- Toml support
 	{
 		"Saecki/crates.nvim",
@@ -69,8 +69,8 @@ return {
 			vim.o.timeout = true
 			vim.o.timeoutlen = 500
 		end,
-		opts = {}
+		opts = {},
 	},
-	{ "NoahTheDuke/vim-just",         ft = "just" },
+	{ "NoahTheDuke/vim-just", ft = "just" },
 	{ "IndianBoy42/tree-sitter-just", ft = "just" },
 }
