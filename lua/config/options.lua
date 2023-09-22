@@ -5,10 +5,6 @@ vim.g.nofsync = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.diagnostic.config({
-  virtual_text = false,
-})
-
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -31,6 +27,6 @@ vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
 
-vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = "unnamedplus"
 
 vim.o.termguicolors = true
