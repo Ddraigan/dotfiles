@@ -73,4 +73,5 @@ return {
 	},
 	{ "NoahTheDuke/vim-just", ft = "just" },
 	{ "IndianBoy42/tree-sitter-just", ft = "just" },
+	{ "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
 }
