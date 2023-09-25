@@ -3,26 +3,18 @@ return {
 		"numToStr/Comment.nvim",
 		config = true,
 		keys = {
-			{ "gcc", mode = "n", desc = "Comment toggle current line" },
+			{ "gcc", mode = "n", desc = "[Comment]: Toggle Current Line" },
 			--	{ "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
-			{ "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
-			{ "gbc", mode = "n", desc = "Comment toggle current block" },
+			{ "gc", mode = "x", desc = "[Comment]: Toggle Linewise (Visual)" },
+			{ "gbc", mode = "n", desc = "[Comment]: Toggle Current Block" },
 			--	{ "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-			{ "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
+			{ "gb", mode = "x", desc = "[Comment]: Toggle Blockwise (Visual)" },
 		},
 	},
 	-- Detect tabstop and shiftwidth automatically
 	{
 		"tpope/vim-sleuth",
 		event = "BufReadPre",
-	},
-	{
-		{
-			"wuelnerdotexe/vim-astro",
-			config = function()
-				vim.cmd([[let g:astro_typescript = 'enable']])
-			end,
-		},
 	},
 	-- Icons, everything uses this one :)
 	{
@@ -38,24 +30,6 @@ return {
 			show_hidden = false,
 		},
 	}, ]]
-	-- Toml support
-	{
-		"Saecki/crates.nvim",
-		dependencies = { "simrat39/rust-tools.nvim", "nvim-lua/plenary.nvim" },
-		ft = { "toml" },
-		--[[ config = function()
-			require("Saecki/crates.nvim").setup({
-				null_ls = {
-					enabled = true,
-					name = "crates",
-				}
-			})
-		end ]]
-	},
-	-- emmet
-	{
-		"mattn/emmet-vim",
-	},
 	-- Additional Lua configuration
 	{
 		"folke/neodev.nvim",
@@ -70,7 +44,5 @@ return {
 		end,
 		opts = {},
 	},
-	{ "NoahTheDuke/vim-just", ft = "just" },
-	{ "IndianBoy42/tree-sitter-just", ft = "just" },
 	{ "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
 }
