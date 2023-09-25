@@ -27,6 +27,7 @@ return {
 				"rust_analyzer", -- Rust LSP
 				"codelldb", -- Rust Debug
 				"astro-ls", --Astro LSP
+				"tsserver", --Typescript LSP
 			},
 			-- auto installation
 			automatic_installation = true,
@@ -47,7 +48,7 @@ return {
 				{ "css-lsp" },
 				{ "json-lsp" },
 				{ "prettier" },
-				{ "typescript-language-server" },
+				-- { "typescript-language-server" },
 				{ "eslint_d" },
 				{ "eslint-lsp" },
 				{ "codelldb" },

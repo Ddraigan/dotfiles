@@ -28,12 +28,13 @@ return {
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename", bufnr))
 			vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Go To References", bufnr))
 			vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, opts("Go To Next Diagnostic", bufnr))
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code Actions", bufnr))
 			--[[ vim.keymap.set("n", "<space>fM", function()
 					vim.lsp.buf.format({ async = true })
 				end, opts("Format", bufnr)) ]]
 		end
 
-		local servers = { "lua_ls", "html", "tsserver", "astro", "eslint" }
+		local servers = { "lua_ls", "html", "astro", "eslint" }
 		for _, lsp in pairs(servers) do
 			lspconfig[lsp].setup({
 				capabilities = capabilities,

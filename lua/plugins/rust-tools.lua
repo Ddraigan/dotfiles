@@ -47,11 +47,19 @@ return {
 				server = {
 					on_attach = function(_, bufnr)
 						-- Hover actions
-						vim.keymap.set("n", "<C-k>", rt.hover_actions.hover_actions,
-							{ buffer = bufnr, desc = "Hover Actions" })
+						vim.keymap.set(
+							"n",
+							"<C-k>",
+							rt.hover_actions.hover_actions,
+							{ buffer = bufnr, desc = "[Rust]: Hover Actions" }
+						)
 						-- Code action groups
-						vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group,
-							{ buffer = bufnr, desc = "Code Action Groups" })
+						vim.keymap.set(
+							"n",
+							"<Leader>cr",
+							rt.code_action_group.code_action_group,
+							{ buffer = bufnr, desc = "[Rust]: Code Action Groups" }
+						)
 					end,
 					settings = {
 						["rust-analyzer"] = {
@@ -68,7 +76,7 @@ return {
 					},
 				},
 			})
-		end
+		end,
 	},
 	{
 		"nvim-neotest/neotest",
