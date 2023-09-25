@@ -3,7 +3,7 @@ return {
 	{
 		"Saecki/crates.nvim",
 		dependencies = { "simrat39/rust-tools.nvim", "nvim-lua/plenary.nvim" },
-		ft = { "toml" },
+		ft = "toml",
 		--[[ config = function()
 			require("Saecki/crates.nvim").setup({
 				null_ls = {
@@ -19,6 +19,7 @@ return {
 	},
 	{
 		"wuelnerdotexe/vim-astro",
+		ft = "astro",
 		config = function()
 			vim.cmd([[let g:astro_typescript = 'enable']])
 		end,

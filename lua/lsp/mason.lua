@@ -26,15 +26,17 @@ return {
 				"json-lsp", -- JSON LSP
 				"rust_analyzer", -- Rust LSP
 				"codelldb", -- Rust Debug
+				"astro-ls", --Astro LSP
 			},
 			-- auto installation
-			automatic_installation = false,
+			automatic_installation = true,
 		})
 
 		-- mason-tool-installer
 		mason_tool_installer.setup({
 			ensure_installed = {
 				-- you can turn off/on auto_update per tool
+				{ "astro-language-server" },
 				{ "bash-language-server" },
 				{ "lua-language-server" },
 				{ "vim-language-server" },
