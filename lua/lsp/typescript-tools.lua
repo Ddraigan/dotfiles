@@ -5,7 +5,6 @@ return {
 	opts = {},
 	config = function()
 		require("typescript-tools").setup({
-			on_attach = function() end,
 			handlers = {},
 			settings = {
 				-- spawn additional tsserver instance to calculate diagnostics on it
