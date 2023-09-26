@@ -34,7 +34,7 @@ return {
 				end, opts("Format", bufnr)) ]]
 		end
 
-		local servers = { "html", "astro", "eslint", "cssls" }
+		local servers = { "html", "astro", "eslint", "cssls", "marksman" }
 		for _, lsp in pairs(servers) do
 			lspconfig[lsp].setup({
 				capabilities = capabilities,
