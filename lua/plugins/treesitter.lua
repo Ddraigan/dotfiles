@@ -11,7 +11,19 @@ return {
 	build = ":TSUpdate",
 	config = function()
 		require("nvim-treesitter.configs").setup({
-			ensure_installed = { "lua", "rust", "javascript", "typescript", "tsx", "vim", "vimdoc", "regex", "bash", "markdown_inline" },
+			ensure_installed = {
+				"lua",
+				"rust",
+				"javascript",
+				"typescript",
+				"tsx",
+				"vim",
+				"vimdoc",
+				"regex",
+				"bash",
+				"markdown_inline",
+				"astro",
+			},
 			sync_install = false,
 			auto_install = true,
 			highlight = {
@@ -27,5 +39,5 @@ return {
 				},
 			},
 		})
-	end
+	end,
 }

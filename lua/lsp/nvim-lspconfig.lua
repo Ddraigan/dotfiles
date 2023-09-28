@@ -34,7 +34,7 @@ return {
 				end, opts("Format", bufnr)) ]]
 		end
 
-		local servers = { "html", "astro", "eslint", "cssls", "marksman" }
+		local servers = { "html", "eslint", "cssls", "marksman" }
 		for _, lsp in pairs(servers) do
 			lspconfig[lsp].setup({
 				capabilities = capabilities,
@@ -45,6 +45,15 @@ return {
 		require("typescript-tools").setup({
 			capabilities = capabilities,
 			on_attach = on_attach(),
+		})
+
+		lspconfig.astro.setup({
+			--[[ init_options = {
+				typescript = {
+					-- needs to be installed in ~ by using `pnpm i typescript`. NOTE: do not use -g flag!
+					serverPath = os.getenv("HOME") .. "/.npm-packages/lib/node_modules/typescript/lib/typescript.js",
+				},
+			}, ]]
 		})
 
 		lspconfig.lua_ls.setup({
