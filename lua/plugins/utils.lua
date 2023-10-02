@@ -30,7 +30,7 @@ return {
 	-- Icons, everything uses this one :)
 	{
 		"nvim-tree/nvim-web-devicons",
-		config = function()
+		opts = function()
 			require("nvim-web-devicons").setup({
 				override_by_extension = {
 					astro = {
