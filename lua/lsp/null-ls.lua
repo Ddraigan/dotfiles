@@ -14,6 +14,7 @@ return {
 			sources = {
 				formatting.prettier,
 				formatting.stylua,
+				formatting.rustfmt,
 			},
 			on_attach = function(client, bufnr)
 				if client.supports_method("textDocument/formatting") then
@@ -38,7 +39,7 @@ return {
 						vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
 					end, { buffer = bufnr, desc = "[lSP]: Format" })
 				end
-			end
+			end,
 		})
-	end
+	end,
 }
