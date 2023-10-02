@@ -42,16 +42,6 @@ return {
 			})
 		end,
 	},
-	--[[ {
-		"ahmedkhalf/project.nvim",
-		name = "project_nvim",
-		event = "VeryLazy",
-		opts = {
-			manual_mode = false,
-			detection_methods = { "lsp", "pattern" },
-			show_hidden = false,
-		},
-	}, ]]
 	-- Additional Lua configuration
 	{
 		"folke/neodev.nvim",
