@@ -1,3 +1,3 @@
 - TODO
   - [X] fix harpoon
-  - [ ] add lsp-lines toggle of vtext in lsp-lines.toggle map
+  - [X] add lsp-lines toggle of vtext in lsp-lines.toggle map
