@@ -7,6 +7,7 @@ return {
 			config = true,
 		},
 	},
+	cmd = { "Treesitter" },
 	event = { "BufReadPost", "BufNewFile" },
 	build = ":TSUpdate",
 	config = function()
