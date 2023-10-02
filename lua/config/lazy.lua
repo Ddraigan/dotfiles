@@ -26,10 +26,10 @@ require("lazy").setup({ { import = "plugins" }, { import = "lsp" } }, {
 		},
 		rtp = {
 			disabled_plugins = {
-				-- "netrw",
-				-- "netrwPlugin",
-				-- "netrwSettings",
-				-- "netrwFileHandlers",
+				"netrw",
+				"netrwPlugin",
+				"netrwSettings",
+				"netrwFileHandlers",
 				"gzip",
 				"zip",
 				"zipPlugin",

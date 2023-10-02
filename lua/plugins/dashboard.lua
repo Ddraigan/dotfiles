@@ -26,6 +26,15 @@ return {
 				},
 				center = {
 					{
+						icon = "  ",
+						icon_hl = "Title",
+						desc = "Last Session                                ",
+						desc_hl = "String",
+						action = "lua require('persistence').load()",
+						key = "n",
+						key_hl = "Number",
+					},
+					{
 						icon = "󰈞  ",
 						icon_hl = "Title",
 						desc = "Find File           ",
@@ -39,7 +48,7 @@ return {
 						icon_hl = "Title",
 						desc = "Recently opened files                   ",
 						desc_hl = "String",
-						action = "Leaderf mru --popup",
+						action = "Telescope oldfiles",
 						key = "r",
 						key_hl = "Number",
 					},
@@ -59,15 +68,6 @@ return {
 						desc_hl = "String",
 						action = "tabnew $MYVIMRC | tcd %:p:h",
 						key = "c",
-						key_hl = "Number",
-					},
-					{
-						icon = "  ",
-						icon_hl = "Title",
-						desc = "New file                                ",
-						desc_hl = "String",
-						action = "enew",
-						key = "n",
 						key_hl = "Number",
 					},
 					{
