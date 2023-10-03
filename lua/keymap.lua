@@ -35,7 +35,7 @@ M.general = {
 		["<leader>fg"] = { "<cmd> Telescope live_grep <CR>", "[Telescope]: Live grep" },
 		["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "[Telescope]: Find Buffers" },
 		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "[Telescope]: Help Tags" },
-		["<leader>sd"] = { "<cmd> Telescope diagnostics <CR>", "[Telescope]: Open Diagnostics" },
+		["<leader>fd"] = { "<cmd> Telescope diagnostics <CR>", "[Telescope]: Open Diagnostics" },
 		["<leader>fr"] = { "<cmd> Telescope lsp_references <CR>", "[Telescope/LSP]: References" },
 
 		-- Noice Plugin
