@@ -12,7 +12,9 @@ return {
 		null_ls.setup({
 			debug = false,
 			sources = {
-				formatting.prettier,
+				formatting.prettier.with({
+					extra_filetypes = { "astro" },
+				}),
 				formatting.stylua,
 				formatting.rustfmt,
 			},
@@ -37,7 +39,7 @@ return {
 				if client.supports_method("textDocument/rangeFormatting") then
 					vim.keymap.set("x", "<Leader>fm", function()
 						vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-					end, { buffer = bufnr, desc = "[lSP]: Format" })
+					end, { buffer = bufnr, desc = "[LSP]: Format" })
 				end
 			end,
 		})
