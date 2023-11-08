@@ -1,4 +1,4 @@
 return {
 	"AndrewRadev/tagalong.vim",
-	event = "VeryLazy",
+	event = "BufReadPre",
 }
