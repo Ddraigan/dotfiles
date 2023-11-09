@@ -6,7 +6,6 @@ return {
 		{ "hrsh7th/nvim-cmp" },
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "litao91/lsp_lines" },
-		{ "ray-x/lsp_signature.nvim" },
 		{ "folke/neodev.nvim" },
 	},
 	config = function()

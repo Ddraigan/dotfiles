@@ -11,11 +11,11 @@ return {
 		{
 			"L3MON4D3/LuaSnip",
 			dependencies = { "rafamadriz/friendly-snippets" },
-		}
+		},
 	},
 	config = function()
 		local cmp = require("cmp")
-		local cmp_select = {behavior = cmp.SelectBehavior.Select}
+		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 		vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 		local kind_icons = {
@@ -97,5 +97,5 @@ return {
 				{ name = "cmdline" },
 			}),
 		})
-	end
+	end,
 }
