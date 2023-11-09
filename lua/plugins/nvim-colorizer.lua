@@ -1,17 +1,18 @@
 return {
-	"norcalli/nvim-colorizer.lua",
+	"NvChad/nvim-colorizer.lua",
 	event = { "BufRead", "BufWinEnter", "BufNewFile" },
 	config = function(_)
 		local color = require("colorizer")
 
 		color.setup({
-			--	"html",
-			--	"javascript",
-			--	"typescript",
-			--	"css",
-			--	"yaml",
-			"*",
-			css = { css = true },
+			filetypes = {
+				"*", -- Highlight all files, but customize some others.
+				css = { css = true },
+			},
+			user_default_options = {
+				css = true,
+				tailwind = true,
+			},
 		})
 
 		vim.defer_fn(function()

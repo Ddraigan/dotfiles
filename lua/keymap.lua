@@ -59,6 +59,10 @@ M.general = {
 		-- Nvim-Tree Plugin
 		["<leader>-"] = { "<cmd> NvimTreeToggle <CR>", "[Nvim-Tree]: Toggle Tree" },
 	},
+
+	x = {
+		["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Dont copy replaced text", opts = { silent = true } },
+	},
 }
 
 return M
