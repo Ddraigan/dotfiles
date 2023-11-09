@@ -23,7 +23,7 @@ return {
 	},
 	config = function(_, opts)
 		local mason_tool_installer = require("mason-tool-installer")
-		mason_tool_installer.setup({ opts })
+		mason_tool_installer.setup(opts)
 		mason_tool_installer.run_on_start()
 	end,
 }
