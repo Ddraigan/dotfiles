@@ -3,12 +3,10 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		{ "williamboman/mason.nvim", config = true },
-		-- { "WhoIsSethDaniel/mason-tool-installer.nvim", config = true },
 		{ "hrsh7th/nvim-cmp" },
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "litao91/lsp_lines" },
 		{ "ray-x/lsp_signature.nvim" },
-		--	{ "simrat39/rust-tools.nvim" },
 		{ "folke/neodev.nvim" },
 	},
 	config = function()
@@ -90,6 +88,7 @@ return {
 				return true
 			end,
 		})
+
 		-- configure emmet language server
 		lspconfig.emmet_ls.setup({
 			capabilities = capabilities,
