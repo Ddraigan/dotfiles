@@ -11,6 +11,7 @@ return {
 	},
 	config = function()
 		local lspconfig = require("lspconfig")
+		local mason_lspconfig = require("mason-lspconfig")
 		local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -33,20 +34,22 @@ return {
 				end, opts("Format", bufnr)) ]]
 		end
 
-		local servers = { "html", "eslint", "cssls", "marksman" }
+		local servers = mason_lspconfig.get_installed_servers()
 		for _, lsp in pairs(servers) do
 			lspconfig[lsp].setup({
 				capabilities = capabilities,
-				on_attach = on_attach(),
+				on_attach = on_attach,
 			})
 		end
 
 		require("typescript-tools").setup({
 			capabilities = capabilities,
-			on_attach = on_attach(),
+			on_attach = on_attach,
 		})
 
 		lspconfig.astro.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
 			--[[ init_options = {
 				typescript = {
 					-- needs to be installed in ~ by using `pnpm i typescript`. NOTE: do not use -g flag!
@@ -56,6 +59,8 @@ return {
 		})
 
 		lspconfig.lua_ls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
 			on_init = function(client)
 				local path = client.workspace_folders[1].name
 				if not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc") then
@@ -92,7 +97,7 @@ return {
 		-- configure emmet language server
 		lspconfig.emmet_ls.setup({
 			capabilities = capabilities,
-			on_attach = on_attach(),
+			on_attach = on_attach,
 			filetypes = {
 				"html",
 				"typescriptreact",
@@ -110,7 +115,7 @@ return {
 		-- install the tailwind server : "sudo npm install -g @tailwindcss/language-server"
 		lspconfig.tailwindcss.setup({
 			capabilities = capabilities,
-			on_attach = on_attach(),
+			on_attach = on_attach,
 		})
 	end,
 }
