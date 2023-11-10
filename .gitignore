@@ -1,9 +1,12 @@
-astro/
-dot/
-go/
-lazygit/
-neofetch/
-yarn/
-gitui
-procps
+# Ignore Everything
+/*
+
+# Not These Directories
+!nvim/
+!tmux/
+
+# But Ignore These Directories
 tmux/plugins
+
+# Not These Files
+!.gitignore
