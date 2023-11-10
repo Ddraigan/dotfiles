@@ -15,12 +15,12 @@ return {
 			custom_fname.super.init(self, options)
 			self.status_colors = {
 				saved = highlight.create_component_highlight_group(
-					{ bg = default_status_colors.saved },
+					{ fg = default_status_colors.saved },
 					"filename_status_saved",
 					self.options
 				),
 				modified = highlight.create_component_highlight_group(
-					{ bg = default_status_colors.modified },
+					{ fg = default_status_colors.modified },
 					"filename_status_modified",
 					self.options
 				),
