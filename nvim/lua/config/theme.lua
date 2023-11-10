@@ -1,5 +1,6 @@
 local M = {}
 
+---@class Palette
 M.colours = {
 	bg = "#282A36",
 	fg = "#F8F8F2",
