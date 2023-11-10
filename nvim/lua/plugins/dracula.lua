@@ -11,7 +11,7 @@ return {
 			show_end_of_buffer = true, -- default false
 			-- use transparent background
 			transparent_bg = true, -- default false
-			lualine_bg_color = colours.bg, -- default nil
+			lualine_bg_color = nil, -- default nil
 			-- set italic comment
 			italic_comment = true, -- default false
 			-- overrides the default highlights with table see `:h synIDattr`
