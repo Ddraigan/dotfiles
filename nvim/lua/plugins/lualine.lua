@@ -4,14 +4,14 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		opt = true,
 	},
-	event = "VeryLazy",
+	event = "BufWinEnter",
 	config = function()
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
 				theme = "dracula-nvim",
-				component_separators = "|",
-				section_separators = "",
+				component_separators = { left = "", right = "" },
+				section_separators = { left = "", right = "" },
 				disabled_filetypes = {
 					statusline = {},
 					winbar = {},
@@ -35,11 +35,15 @@ return {
 						cond = require("lazy.status").has_updates,
 						color = { fg = "#ff9e64" },
 					},
-					"encoding",
-					"fileformat",
-					"filetype",
 				},
-				lualine_z = { "location" },
+				lualine_y = {
+					"encoding",
+					"filetype",
+					"fileformat",
+				},
+				lualine_z = {
+					"location",
+				},
 			},
 			inactive_sections = {
 				lualine_a = {},
