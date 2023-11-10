@@ -6,6 +6,7 @@ return {
 	},
 	event = "BufWinEnter",
 	config = function()
+		local custom_theme = require("config.theme").lualine()
 		local custom_fname = require("lualine.components.filename"):extend()
 		local highlight = require("lualine.highlight")
 		local colours = require("config.theme").colours
@@ -41,7 +42,7 @@ return {
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
-				theme = "dracula-nvim",
+				theme = custom_theme,
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 				disabled_filetypes = {
