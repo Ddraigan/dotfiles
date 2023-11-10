@@ -12,6 +12,7 @@ return {
 			user_default_options = {
 				css = true,
 				tailwind = true,
+				names = false,
 			},
 		})
 
