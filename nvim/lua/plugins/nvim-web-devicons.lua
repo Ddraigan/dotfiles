@@ -1,17 +1,17 @@
-local M = {
+return {
 	"nvim-tree/nvim-web-devicons",
-}
-
-M.config = function()
-	require("nvim-web-devicons").setup({
+	opts = {
 		override_by_filename = {
 			[".gitignore"] = {
 				icon = "",
 				color = "#f1502f",
 				name = "Gitignore",
 			},
+			astro = {
+				icon = "",
+				color = "#EF8547",
+				name = "astro",
+			},
 		},
-	})
-end
-
-return M
+	},
+}

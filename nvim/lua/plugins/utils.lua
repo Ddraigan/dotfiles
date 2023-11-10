@@ -34,21 +34,6 @@ return {
 		"tpope/vim-sleuth",
 		event = "BufReadPre",
 	},
-	-- Icons, everything uses this one :)
-	{
-		"nvim-tree/nvim-web-devicons",
-		opts = function()
-			require("nvim-web-devicons").setup({
-				override_by_extension = {
-					astro = {
-						icon = "",
-						color = "#EF8547",
-						name = "astro",
-					},
-				},
-			})
-		end,
-	},
 	-- Additional Lua configuration
 	{
 		"folke/neodev.nvim",
