@@ -1,4 +1,8 @@
-nvim-lazy
-lazy.nvim
-.git
-.github
+astro/
+dot/
+go/
+lazygit/
+neofetch/
+yarn/
+gitui
+procps
