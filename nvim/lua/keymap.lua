@@ -36,7 +36,8 @@ M.general = {
 		["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "[Telescope]: Find Buffers" },
 		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "[Telescope]: Help Tags" },
 		["<leader>fd"] = { "<cmd> Telescope diagnostics <CR>", "[Telescope]: Open Diagnostics" },
-		["<leader>fr"] = { "<cmd> Telescope lsp_references <CR>", "[Telescope/LSP]: References" },
+		["gr"] = { "<cmd> Telescope lsp_references <CR>", "[Telescope/LSP]: References" },
+		["gd"] = { "<cmd> Telescope lsp_definitions <CR>", "[Telescope/LSP] Go To Definition" },
 
 		-- Noice Plugin
 		["<leader>fn"] = { "<cmd> NoiceTelescope <CR>", "[Telescope/Noice]: Notifcations" },

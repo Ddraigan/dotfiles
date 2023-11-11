@@ -20,12 +20,12 @@ return {
 
 		local on_attach = function(client, bufnr)
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go To Declaration", bufnr))
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go To Definition", bufnr))
+			-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go To Definition", bufnr))
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover", bufnr))
 			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go To Implementation", bufnr))
 			vim.keymap.set("n", "ga", vim.lsp.buf.code_action, opts("Code Action", bufnr))
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename", bufnr))
-			vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Go To References", bufnr))
+			-- vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Go To References", bufnr))
 			vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, opts("Go To Next Diagnostic", bufnr))
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code Actions", bufnr))
 			--[[ vim.keymap.set("n", "<space>fM", function()
@@ -42,6 +42,11 @@ return {
 		end
 
 		require("typescript-tools").setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		require("rust-tools").setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
