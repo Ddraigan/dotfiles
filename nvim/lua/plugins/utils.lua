@@ -48,5 +48,4 @@ return {
 		end,
 		opts = {},
 	},
-	{ "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
 }
