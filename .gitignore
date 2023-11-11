@@ -4,6 +4,7 @@
 # Not These Directories
 !nvim/
 !tmux/
+!alacritty/
 
 # But Ignore These Directories
 tmux/plugins

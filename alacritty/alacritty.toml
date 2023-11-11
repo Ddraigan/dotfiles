@@ -1,0 +1,6 @@
+  [shell]
+  program = "wsl"
+
+  [window]
+  decorations = "None"
+
