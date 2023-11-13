@@ -12,7 +12,6 @@ return {
 			{ "css-lsp" },
 			{ "json-lsp" },
 			{ "prettier" },
-			{ "typescript-language-server" },
 			{ "eslint_d" },
 			{ "eslint-lsp" },
 			{ "codelldb" },

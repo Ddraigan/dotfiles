@@ -33,8 +33,15 @@ return {
 				end, opts("Format", bufnr)) ]]
 		end
 
-		local servers = mason_lspconfig.get_installed_servers()
-		for _, lsp in pairs(servers) do
+		local installed_servers = mason_lspconfig.get_installed_servers()
+		local unconfigured_servers = {}
+		for _, server in ipairs(installed_servers) do
+			if not string.find(server, "tsserver") then
+				table.insert(unconfigured_servers, server)
+			end
+		end
+
+		for _, lsp in pairs(unconfigured_servers) do
 			lspconfig[lsp].setup({
 				capabilities = capabilities,
 				on_attach = on_attach,
