@@ -30,10 +30,10 @@ return {
 			})
 		end
 
-		require("typescript-tools").setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
+		-- require("typescript-tools").setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- })
 
 		lspconfig.astro.setup({
 			capabilities = capabilities,
