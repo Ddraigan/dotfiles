@@ -55,7 +55,11 @@ M.general = {
 		["<leader>hh"] = { "<cmd> lua require('harpoon.ui').toggle_quick_menu() <CR>", "[Harpoon]: Toggle Menu" },
 		["<leader>hn"] = { "<cmd> lua require('harpoon.ui').nav_next() <CR>", "[Harpoon]: Nav Next" },
 		["<leader>hp"] = { "<cmd> lua require('harpoon.ui').nav_prev() <CR>", "[Harpoon]: Nav Prev" },
-		["<leader>hr"] = { "<cmd> lua require('harpoon.ui').rm_file() <CR>", "[Harpoon]: Remove File" },
+
+		-- Vim Split
+		["<leader>sh"] = { "<cmd> split <CR>", "[Vim]: Split Horizontal" },
+		["<leader>sv"] = { "<cmd> vsplit <CR>", "[Vim]: Split Vertical" },
+		["<leader>sc"] = { "<C-w>c", "[Vim]: Split Close" },
 
 		-- Nvim-Tree Plugin
 		["<leader>-"] = { "<cmd> NvimTreeToggle <CR>", "[Nvim-Tree]: Toggle Tree" },
