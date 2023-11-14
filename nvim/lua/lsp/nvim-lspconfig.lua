@@ -11,7 +11,7 @@ return {
 	config = function()
 		local lspconfig = require("lspconfig")
 		local mason_lspconfig = require("mason-lspconfig")
-		local on_attach = require("config.utils").on_attach
+		local on_attach = require("config.utils").on_attach()
 		local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		capabilities.textDocument.completion.completionItem.snippetSupport = true
 
