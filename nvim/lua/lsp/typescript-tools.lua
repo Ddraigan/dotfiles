@@ -4,7 +4,7 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 	opts = {},
 	config = function()
-		local on_attach = require("config.utils").on_attach()
+		local on_attach = require("config.utils").on_attach
 		local tstools = require("typescript-tools")
 
 		tstools.setup({

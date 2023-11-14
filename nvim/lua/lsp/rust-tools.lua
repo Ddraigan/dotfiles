@@ -2,29 +2,24 @@ return {
 	{
 		"simrat39/rust-tools.nvim",
 		ft = { "rust" },
-		dependencies = "neovim/nvim-lspconfig",
+		dependencies = { "neovim/nvim-lspconfig", "mfussenegger/nvim-dap" },
 		config = function()
 			local rt = require("rust-tools")
-			local on_attach = require("config.utils").on_attach()
+			local on_attach = require("config.utils").on_attach
+			local capabilities = require("config.utils").capabilities()
 
 			rt.setup({
 				server = {
+					capabilities = capabilities,
 					on_attach = function(client, bufnr)
+						on_attach(client, bufnr)
 						-- Hover actions
 						vim.keymap.set(
 							"n",
-							"<C-k>",
+							"K",
 							rt.hover_actions.hover_actions,
 							{ buffer = bufnr, desc = "[Rust]: Hover Actions" }
 						)
-						-- Code action groups
-						-- vim.keymap.set(
-						-- 	"n",
-						-- 	"<Leader>cr",
-						-- 	rt.code_action_group.code_action_group,
-						-- 	{ buffer = bufnr, desc = "[Rust]: Code Action Groups" }
-						-- )
-						on_attach()
 					end,
 					settings = {
 						["rust-analyzer"] = {
@@ -43,6 +38,7 @@ return {
 			})
 		end,
 	},
+
 	{
 		"nvim-neotest/neotest",
 		optional = true,

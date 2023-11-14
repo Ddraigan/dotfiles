@@ -17,7 +17,6 @@ return {
 				}),
 				formatting.stylua,
 				formatting.rustfmt,
-				formatting.gofmt,
 			},
 			on_attach = function(client, bufnr)
 				if client.supports_method("textDocument/formatting") then

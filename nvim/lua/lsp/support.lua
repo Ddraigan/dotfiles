@@ -4,16 +4,15 @@ return {
 		"Saecki/crates.nvim",
 		dependencies = { "simrat39/rust-tools.nvim", "nvim-lua/plenary.nvim" },
 		ft = "toml",
-		--[[ config = function()
-			require("Saecki/crates.nvim").setup({
+		config = function()
+			require("crates").setup({
 				null_ls = {
 					enabled = true,
 					name = "crates",
-				}
+				},
 			})
-		end ]]
+		end,
 	},
-	-- emmet
 	{
 		"mattn/emmet-vim",
 	},
@@ -24,6 +23,7 @@ return {
 			vim.cmd([[let g:astro_typescript = 'enable']])
 		end,
 	},
+	{ "mfussenegger/nvim-dap" },
 	{ "NoahTheDuke/vim-just", ft = "just" },
 	{ "IndianBoy42/tree-sitter-just", ft = "just" },
 }
