@@ -23,7 +23,9 @@ return {
 			vim.cmd([[let g:astro_typescript = 'enable']])
 		end,
 	},
-	{ "mfussenegger/nvim-dap" },
+	{
+		"mfussenegger/nvim-dap",
+	},
 	{ "NoahTheDuke/vim-just", ft = "just" },
 	{ "IndianBoy42/tree-sitter-just", ft = "just" },
 }

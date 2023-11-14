@@ -56,6 +56,17 @@ M.general = {
 		["<leader>hn"] = { "<cmd> lua require('harpoon.ui').nav_next() <CR>", "[Harpoon]: Nav Next" },
 		["<leader>hp"] = { "<cmd> lua require('harpoon.ui').nav_prev() <CR>", "[Harpoon]: Nav Prev" },
 
+		-- Dap Plugin
+		["<leader>db"] = { "<cmd> DapToggleBreakpoint <CR>", "[DAP]: Toggle Breakpoint" },
+		["<leader>dv"] = {
+			function()
+				local widgets = require("dap.ui.widgets")
+				local sidebar = widgets.sidebar(widgets.scopes)
+				sidebar.open()
+			end,
+			"[DAP]: Open Debugger Sidebar",
+		},
+
 		-- Vim Split
 		["<leader>sh"] = { "<cmd> split <CR>", "[Vim]: Split Horizontal" },
 		["<leader>sv"] = { "<cmd> vsplit <CR>", "[Vim]: Split Vertical" },
