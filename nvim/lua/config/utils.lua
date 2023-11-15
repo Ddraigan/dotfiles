@@ -21,14 +21,13 @@ end
 
 M.on_attach = function(client, bufnr)
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go To Declaration", bufnr))
-	-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go To Definition", bufnr))
+	vim.keymap.set("n", "gd", "<cmd> Telescope lsp_definitions <CR>", opts("Go To Definition", bufnr))
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover", bufnr))
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go To Implementation", bufnr))
-	vim.keymap.set("n", "ga", vim.lsp.buf.code_action, opts("Code Action", bufnr))
-	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename", bufnr))
-	-- vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Go To References", bufnr))
+	vim.keymap.set("n", "gr", "<cmd> Telescope lsp_references <CR>", opts("Go To References", bufnr))
 	vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, opts("Go To Next Diagnostic", bufnr))
-	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code Actions", bufnr))
+	vim.keymap.set("n", "<leader>lr", ":IncRename", opts("Rename", bufnr))
+	vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts("Code Actions", bufnr))
 	--[[ vim.keymap.set("n", "<space>fM", function()
 					vim.lsp.buf.format({ async = true })
 				end, opts("Format", bufnr)) ]]

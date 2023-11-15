@@ -32,12 +32,12 @@ M.general = {
 		-- Telescope Plugin
 		["<leader>fp"] = { "<cmd> Telescope projects <CR>", "[Telescope]: Find Projects" },
 		["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "[Telescope]: Find Files" },
-		["<leader>fg"] = { "<cmd> Telescope live_grep <CR>", "[Telescope]: Live grep" },
+		["<leader>fs"] = { "<cmd> Telescope live_grep <CR>", "[Telescope]: Find String" },
 		["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "[Telescope]: Find Buffers" },
 		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "[Telescope]: Help Tags" },
 		["<leader>fd"] = { "<cmd> Telescope diagnostics <CR>", "[Telescope]: Open Diagnostics" },
-		["gr"] = { "<cmd> Telescope lsp_references <CR>", "[Telescope/LSP]: References" },
-		["gd"] = { "<cmd> Telescope lsp_definitions <CR>", "[Telescope/LSP] Go To Definition" },
+		-- ["gr"] = { "<cmd> Telescope lsp_references <CR>", "[Telescope/LSP]: References" },
+		-- ["gd"] = { "<cmd> Telescope lsp_definitions <CR>", "[Telescope/LSP] Go To Definition" },
 
 		-- Noice Plugin
 		["<leader>fn"] = { "<cmd> NoiceTelescope <CR>", "[Telescope/Noice]: Notifcations" },
