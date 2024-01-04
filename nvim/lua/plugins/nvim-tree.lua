@@ -12,6 +12,7 @@ return {
 			hijack_cursor = true,
 			hijack_unnamed_buffer_when_opening = false,
 			sync_root_with_cwd = true,
+			filters = { dotfiles = false },
 		})
 	end,
 }
