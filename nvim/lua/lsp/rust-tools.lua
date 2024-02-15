@@ -41,7 +41,15 @@ return {
 					end,
 					settings = {
 						["rust-analyzer"] = {
+							check = {
+								-- allTargets = false,
+								-- targets = { "aarch64-unknown-none" },
+							},
+							checkOnSave = {
+								allTargets = false,
+							},
 							cargo = {
+								-- target = "aarch64-unknown-none",
 								allFeatures = true,
 							},
 						},
