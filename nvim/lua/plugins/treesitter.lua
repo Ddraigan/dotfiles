@@ -6,6 +6,7 @@ return {
 			name = "treesitter-context",
 			config = true,
 		},
+		{ "nvim-treesitter/nvim-treesitter-textobjects" },
 	},
 	cmd = { "Treesitter" },
 	event = { "BufReadPost", "BufNewFile" },
@@ -24,6 +25,19 @@ return {
 				"bash",
 				"markdown_inline",
 				"astro",
+			},
+			textobjects = {
+				select = {
+					enable = true,
+					lookahead = true,
+					keymaps = {
+						-- You can use the capture groups defined in textobjects.scm
+						["af"] = "@function.outer",
+						["if"] = "@function.inner",
+						["ac"] = "@class.outer",
+						["ic"] = "@class.inner",
+					},
+				},
 			},
 			sync_install = false,
 			auto_install = true,
