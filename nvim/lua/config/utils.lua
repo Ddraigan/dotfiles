@@ -29,9 +29,18 @@ M.on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, opts("Go To Next Diagnostic", bufnr))
 	vim.keymap.set("n", "<leader>lr", ":IncRename ", opts("Rename", bufnr))
 	vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts("Code Actions", bufnr))
-	--[[ vim.keymap.set("n", "<space>fM", function()
-					vim.lsp.buf.format({ async = true })
-				end, opts("Format", bufnr)) ]]
+
+	-- if client.server_capabilities.inlayHintProvider then
+	-- 	vim.g.inlay_hints_visible = true
+	-- 	vim.lsp.inlay_hint.enable(bufnr, true)
+	-- end
+
+	if client.server_capabilities.inlayHintProvider then
+		vim.keymap.set("n", "<leader>lh", function()
+			local current_setting = vim.lsp.inlay_hint.is_enabled(bufnr)
+			vim.lsp.inlay_hint.enable(bufnr, not current_setting)
+		end, opts("Toggle Inlay Hints"))
+	end
 end
 
 M.capabilities = function()
