@@ -54,7 +54,11 @@ return {
 								version = "LuaJIT",
 							},
 							diagnostics = {
-								globals = { "vim" },
+								globals = { "use", "vim", "require", "merge" },
+							},
+							hint = {
+								enable = true,
+								setType = true,
 							},
 							-- Make the server aware of Neovim runtime files
 							workspace = {
