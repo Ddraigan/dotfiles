@@ -2,8 +2,9 @@ return {
 	-- Toml support
 	{
 		"Saecki/crates.nvim",
-		dependencies = { "simrat39/rust-tools.nvim", "nvim-lua/plenary.nvim" },
-		ft = "toml",
+		event = { "BufRead Cargo.toml" },
+		dependencies = { "nvim-lua/plenary.nvim" },
+		-- ft = "toml",
 		config = function()
 			require("crates").setup({
 				null_ls = {

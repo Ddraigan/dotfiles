@@ -38,6 +38,12 @@ return {
 							rt.hover_actions.hover_actions,
 							{ buffer = bufnr, desc = "[Rust]: Hover Actions" }
 						)
+						-- vim.keymap.set(
+						-- 	"n",
+						-- 	"<leader>la",
+						-- 	rt.code_action_group.code_action_group, -- supports rust-analyzer's grouping
+						-- 	{ buffer = bufnr, desc = "[Rust]: Code Actions" }
+						-- )
 					end,
 					settings = {
 						["rust-analyzer"] = {
@@ -75,18 +81,5 @@ return {
 				},
 			})
 		end,
-	},
-
-	{
-		"nvim-neotest/neotest",
-		optional = true,
-		dependencies = {
-			"rouge8/neotest-rust",
-		},
-		opts = {
-			adapters = {
-				["neotest-rust"] = {},
-			},
-		},
 	},
 }

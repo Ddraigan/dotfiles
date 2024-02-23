@@ -34,10 +34,6 @@ return {
 		"tpope/vim-sleuth",
 		event = "BufReadPre",
 	},
-	-- Additional Lua configuration
-	{
-		"folke/neodev.nvim",
-	},
 	-- Vim command hints
 	{
 		"folke/which-key.nvim",

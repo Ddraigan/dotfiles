@@ -67,6 +67,9 @@ M.general = {
 			"[DAP]: Open Debugger Sidebar",
 		},
 
+		-- Neo Test
+		["<leader>nt"] = { "<cmd> lua require('neotest').run.run() <CR>", "[NeoTest]: Run Nearest Test" },
+
 		-- Vim Split
 		["<leader>sh"] = { "<cmd> split <CR>", "[Vim]: Split Horizontal" },
 		["<leader>sv"] = { "<cmd> vsplit <CR>", "[Vim]: Split Vertical" },
