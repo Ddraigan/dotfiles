@@ -9,6 +9,26 @@ local function bind(op, outer_opts)
 	end
 end
 
+-- Telescope Window for Harpoon2
+local function toggle_telescope(harpoon_files)
+	local conf = require("telescope.config").values
+	local file_paths = {}
+	for _, item in ipairs(harpoon_files.items) do
+		table.insert(file_paths, item.value)
+	end
+
+	require("telescope.pickers")
+		.new({}, {
+			prompt_title = "Harpoon",
+			finder = require("telescope.finders").new_table({
+				results = file_paths,
+			}),
+			previewer = conf.file_previewer({}),
+			sorter = conf.generic_sorter({}),
+		})
+		:find()
+end
+
 M.nmap = bind("n", { noremap = false })
 M.nnoremap = bind("n")
 M.vnoremap = bind("v")
@@ -48,13 +68,26 @@ M.general = {
 		["<leader>td"] = { "<cmd> TroubleToggle document_diagnostics <CR>", "[Trouble]: Document Diagnostics" },
 		["<leader>tq"] = { "<cmd> TroubleToggle quickfix <CR>", "[Trouble]: Quickfix" },
 		["<leader>tl"] = { "<cmd> TroubleToggle loclist <CR>", "[Trouble]: Logistics" },
-		["<leader>tr"] = { "<cmd> TroubleToggle lsp_references <CR>", "[Trouble/LSP]: References" },
+		["<leader>tr"] = { "<cmd> TroubleToggle lsp_references <CR>", "[Trouble]: References" },
 
 		-- Harpoon Plugin
-		["<leader>ha"] = { "<cmd> lua require('harpoon.mark').add_file() <CR>", "[Harpoon]: Add File" },
-		["<leader>hh"] = { "<cmd> lua require('harpoon.ui').toggle_quick_menu() <CR>", "[Harpoon]: Toggle Menu" },
-		["<leader>hn"] = { "<cmd> lua require('harpoon.ui').nav_next() <CR>", "[Harpoon]: Nav Next" },
-		["<leader>hp"] = { "<cmd> lua require('harpoon.ui').nav_prev() <CR>", "[Harpoon]: Nav Prev" },
+		-- ["<leader>ha"] = { "<cmd> lua require('harpoon.mark').add_file() <CR>", "[Harpoon]: Add File" },
+		-- ["<leader>hh"] = { "<cmd> lua require('harpoon.ui').toggle_quick_menu() <CR>", "[Harpoon]: Toggle Menu" },
+		-- ["<leader>hn"] = { "<cmd> lua require('harpoon.ui').nav_next() <CR>", "[Harpoon]: Nav Next" },
+		-- ["<leader>hp"] = { "<cmd> lua require('harpoon.ui').nav_prev() <CR>", "[Harpoon]: Nav Prev" },
+
+		-- Harpoon2 Plugin
+		["<leader>ha"] = { "<cmd> lua require('harpoon'):list():append() <CR>", "[Harpoon]: Add File" },
+		["<leader>ht"] = {
+			"<cmd> toggle_telescope(require('harpoon'):list()) <CR>",
+			"[Harpoon]: Toggle Telescope Menu",
+		},
+		["<leader>hh"] = {
+			"<cmd> lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list()) <CR>",
+			"[Harpoon]: Toggle Menu",
+		},
+		["<leader>hn"] = { "<cmd> lua require('harpoon'):list():next() <CR>", "[Harpoon]: Nav Next" },
+		["<leader>hp"] = { "<cmd> lua require('harpoon'):list():prev() <CR>", "[Harpoon]: Nav Prev" },
 
 		-- Dap Plugin
 		["<leader>db"] = { "<cmd> DapToggleBreakpoint <CR>", "[DAP]: Toggle Breakpoint" },
@@ -67,7 +100,7 @@ M.general = {
 			"[DAP]: Open Debugger Sidebar",
 		},
 
-		-- Neo Test
+		-- Neotest Plugin
 		["<leader>nt"] = { "<cmd> lua require('neotest').run.run() <CR>", "[NeoTest]: Run Nearest Test" },
 
 		-- Vim Split
