@@ -19,6 +19,8 @@ local function opts(desc, bufnr)
 	return { desc = "[LSP]: " .. desc, buffer = bufnr, noremap = true, silent = true }
 end
 
+M.augroupFormat = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
+
 M.on_attach = function(client, bufnr)
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go To Declaration", bufnr))
 	vim.keymap.set("n", "gd", "<cmd> Telescope lsp_definitions <CR>", opts("Go To Definition", bufnr))
@@ -34,6 +36,28 @@ M.on_attach = function(client, bufnr)
 	-- 	vim.g.inlay_hints_visible = true
 	-- 	vim.lsp.inlay_hint.enable(bufnr, true)
 	-- end
+
+	if client.supports_method("textDocument/formatting") then
+		vim.keymap.set("n", "<Leader>fm", function()
+			vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+		end, { buffer = bufnr, desc = "[LSP]: Format" })
+
+		vim.api.nvim_clear_autocmds({ group = augroupFormat, buffer = bufnr })
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			group = augroupFormat,
+			buffer = bufnr,
+			callback = function()
+				vim.lsp.buf.format({ async = false })
+			end,
+			desc = "[LSP]: Format On Save",
+		})
+	end
+
+	if client.supports_method("textDocument/rangeFormatting") then
+		vim.keymap.set("x", "<Leader>fm", function()
+			vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+		end, { buffer = bufnr, desc = "[LSP]: Range Format" })
+	end
 
 	if client.server_capabilities.inlayHintProvider then
 		vim.keymap.set("n", "<leader>lh", function()
