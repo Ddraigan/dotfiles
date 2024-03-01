@@ -11,9 +11,8 @@ vim.g.nofsync = true
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
-vim.diagnostic.config({
-	virtual_text = false, -- Disable virtual_text since it's redundant due to lsp_lines
-})
+-- Disable virtual_text since it's redundant due to lsp_lines
+vim.diagnostic.config({ virtual_text = false })
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
