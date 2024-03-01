@@ -44,6 +44,7 @@ return {
 				sign = { enabled = false },
 				virtual_text = { enabled = true, text = "󰌵" },
 				autocmd = { enabled = true },
+				action_kinds = { "quickfix", "refactor.rewrite" },
 			})
 		end,
 	},
