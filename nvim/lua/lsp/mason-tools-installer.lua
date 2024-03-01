@@ -13,7 +13,7 @@ return {
 			{ "rust_analyzer" },
 			{ "css-lsp" },
 			{ "json-lsp" },
-			{ "prettier" },
+			{ "prettierd" },
 			{ "eslint_d" },
 			{ "eslint-lsp" },
 			{ "codelldb" },
