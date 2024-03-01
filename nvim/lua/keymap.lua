@@ -9,25 +9,25 @@ local function bind(op, outer_opts)
 	end
 end
 
--- -- Telescope Window for Harpoon2
--- local function toggle_telescope(harpoon_files)
--- 	local conf = require("telescope.config").values
--- 	local file_paths = {}
--- 	for _, item in ipairs(harpoon_files.items) do
--- 		table.insert(file_paths, item.value)
--- 	end
---
--- 	require("telescope.pickers")
--- 		.new({}, {
--- 			prompt_title = "Harpoon",
--- 			finder = require("telescope.finders").new_table({
--- 				results = file_paths,
--- 			}),
--- 			previewer = conf.file_previewer({}),
--- 			sorter = conf.generic_sorter({}),
--- 		})
--- 		:find()
--- end
+-- Telescope Window for Harpoon2
+M.toggle_telescope = function(harpoon_files)
+	local conf = require("telescope.config").values
+	local file_paths = {}
+	for _, item in ipairs(harpoon_files.items) do
+		table.insert(file_paths, item.value)
+	end
+
+	require("telescope.pickers")
+		.new({}, {
+			prompt_title = "Harpoon",
+			finder = require("telescope.finders").new_table({
+				results = file_paths,
+			}),
+			previewer = conf.file_previewer({}),
+			sorter = conf.generic_sorter({}),
+		})
+		:find()
+end
 
 M.nmap = bind("n", { noremap = false })
 M.nnoremap = bind("n")
@@ -96,7 +96,7 @@ M.general = {
 		-- Harpoon2 Plugin
 		["<leader>ha"] = { "<cmd> lua require('harpoon'):list():append() <CR>", "[Harpoon]: Add File" },
 		["<leader>ht"] = {
-			"<cmd> toggle_telescope(require('harpoon'):list()) <CR>",
+			"<cmd> lua require('keymap').toggle_telescope(require('harpoon'):list()) <CR>",
 			"[Harpoon]: Toggle Telescope Menu",
 		},
 		["<leader>hh"] = {
