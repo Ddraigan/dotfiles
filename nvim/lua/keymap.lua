@@ -9,25 +9,25 @@ local function bind(op, outer_opts)
 	end
 end
 
--- Telescope Window for Harpoon2
-local function toggle_telescope(harpoon_files)
-	local conf = require("telescope.config").values
-	local file_paths = {}
-	for _, item in ipairs(harpoon_files.items) do
-		table.insert(file_paths, item.value)
-	end
-
-	require("telescope.pickers")
-		.new({}, {
-			prompt_title = "Harpoon",
-			finder = require("telescope.finders").new_table({
-				results = file_paths,
-			}),
-			previewer = conf.file_previewer({}),
-			sorter = conf.generic_sorter({}),
-		})
-		:find()
-end
+-- -- Telescope Window for Harpoon2
+-- local function toggle_telescope(harpoon_files)
+-- 	local conf = require("telescope.config").values
+-- 	local file_paths = {}
+-- 	for _, item in ipairs(harpoon_files.items) do
+-- 		table.insert(file_paths, item.value)
+-- 	end
+--
+-- 	require("telescope.pickers")
+-- 		.new({}, {
+-- 			prompt_title = "Harpoon",
+-- 			finder = require("telescope.finders").new_table({
+-- 				results = file_paths,
+-- 			}),
+-- 			previewer = conf.file_previewer({}),
+-- 			sorter = conf.generic_sorter({}),
+-- 		})
+-- 		:find()
+-- end
 
 M.nmap = bind("n", { noremap = false })
 M.nnoremap = bind("n")
@@ -38,6 +38,23 @@ M.inoremap = bind("i")
 
 M.general = {
 	n = {
+		-- Lsp_Lines
+		["<leader>ll"] = {
+			function()
+				require("lsp_lines").toggle()
+				if vim.diagnostic.config().virtual_text then
+					vim.diagnostic.config({
+						virtual_text = false,
+					})
+				else
+					vim.diagnostic.config({
+						virtual_text = true,
+					})
+				end
+			end,
+			"Toggle LSP Lines",
+		},
+
 		-- Tmux Remaps
 		["<C-h>"] = { "<cmd> TmuxNavigateLeft <CR>", "window left" },
 		["<C-l>"] = { "<cmd> TmuxNavigateRight <CR>", "window right" },
