@@ -37,3 +37,5 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 
 vim.o.clipboard = "unnamedplus"
+
+vim.fn.sign_define("LightBulbSign", { text = "󰌵", texthl = "", linehl = "", numhl = "" })
