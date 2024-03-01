@@ -29,11 +29,23 @@ return {
 			{ "gb", mode = "x", desc = "[Comment]: Toggle Blockwise (Visual)" },
 		},
 	},
+
 	-- Detect tabstop and shiftwidth automatically
 	{
 		"tpope/vim-sleuth",
 		event = "BufReadPre",
 	},
+
+	{
+		"kosayoda/nvim-lightbulb",
+		event = "BufReadPre",
+		config = function()
+			require("nvim-lightbulb").setup({
+				autocmd = { enabled = true },
+			})
+		end,
+	},
+
 	-- Vim command hints
 	{
 		"folke/which-key.nvim",

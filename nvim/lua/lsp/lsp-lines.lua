@@ -1,6 +1,6 @@
 return {
-	"litao91/lsp_lines",
+	"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 	config = function()
-		require("lsp_lines").setup()
+		require("lsp_lines.nvim").setup()
 	end,
 }

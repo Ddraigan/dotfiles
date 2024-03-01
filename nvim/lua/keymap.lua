@@ -41,7 +41,7 @@ M.general = {
 		-- Lsp_Lines
 		["<leader>ll"] = {
 			function()
-				require("lsp_lines").toggle()
+				require("lsp_lines.nvim").toggle()
 				if vim.diagnostic.config().virtual_text then
 					vim.diagnostic.config({
 						virtual_text = false,
