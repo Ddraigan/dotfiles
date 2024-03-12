@@ -21,17 +21,11 @@ return {
 			--   NvimTreeIndentMarker = { link = "NonText" }, -- link to NonText highlight
 			--   Nothing = {} -- clear highlight of Nothing
 			-- },
-			--[[ overrides = function(colors)
+			overrides = function(colors)
 				return {
-					NonText = { fg = colors.white },
+					DiagnosticHint = { fg = colors.green },
 				}
-			end, ]]
-			-- Or you can also use it like a function to get color from theme
-			-- overrides = function (colors)
-			--   return {
-			--     NonText = { fg = colors.white }, -- set NonText fg to white of theme
-			--   }
-			-- end,
+			end,
 		})
 
 		vim.cmd.colorscheme("dracula")

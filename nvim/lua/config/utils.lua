@@ -19,7 +19,7 @@ local function opts(desc, bufnr)
 	return { desc = "[LSP]: " .. desc, buffer = bufnr, noremap = true, silent = true }
 end
 
-M.augroupFormat = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
+local augroupFormat = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
 
 M.on_attach = function(client, bufnr)
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go To Declaration", bufnr))

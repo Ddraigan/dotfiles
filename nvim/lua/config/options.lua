@@ -11,10 +11,15 @@ vim.g.nofsync = true
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
--- Disable virtual_text since it's redundant due to lsp_lines
-vim.diagnostic.config({ virtual_text = false })
+vim.diagnostic.config({
+	virtual_text = {
+		prefix = "●",
+	},
+	severity_sort = true,
+})
 
 vim.opt.nu = true
+-- Relative line numbers
 vim.opt.relativenumber = true
 
 vim.opt.tabstop = 4
@@ -38,4 +43,16 @@ vim.opt.scrolloff = 8
 
 vim.o.clipboard = "unnamedplus"
 
-vim.fn.sign_define("LightBulbSign", { text = "󰌵", texthl = "", linehl = "", numhl = "" })
+local signs = require("config.theme").icons.diagnostics
+local firstToUpper = function(str)
+	return (str:gsub("^%l", string.upper))
+end
+
+for type, icon in pairs(signs) do
+	-- if not string.find(type, "other") then
+	local hl = "DiagnosticSign" .. firstToUpper(type)
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	-- end
+end
+
+vim.fn.sign_define("LightBulbSign", { text = signs.hint, texthl = "", linehl = "", numhl = "" })

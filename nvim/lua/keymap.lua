@@ -86,6 +86,7 @@ M.general = {
 		["<leader>tq"] = { "<cmd> TroubleToggle quickfix <CR>", "[Trouble]: Quickfix" },
 		["<leader>tl"] = { "<cmd> TroubleToggle loclist <CR>", "[Trouble]: Logistics" },
 		["<leader>tr"] = { "<cmd> TroubleToggle lsp_references <CR>", "[Trouble]: References" },
+		["<leader>to"] = { "<cmd> TodoTrouble <CR>", "[Trouble]: Todo List" },
 
 		-- Harpoon Plugin
 		-- ["<leader>ha"] = { "<cmd> lua require('harpoon.mark').add_file() <CR>", "[Harpoon]: Add File" },
@@ -130,6 +131,7 @@ M.general = {
 	},
 
 	x = {
+		-- Pasting does not ovride your clipboard
 		["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Dont copy replaced text", opts = { silent = true } },
 	},
 }
