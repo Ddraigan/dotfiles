@@ -23,7 +23,7 @@ return {
 			-- },
 			overrides = function(colors)
 				return {
-					DiagnosticHint = { fg = colors.green },
+					DiagnosticHint = { fg = colors.cyan },
 				}
 			end,
 		})

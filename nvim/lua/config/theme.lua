@@ -37,27 +37,28 @@ M.colours = {
 M.soft = {
 	bg = "#292A35", --
 	fg = "#F6F6F5",
-	selection = "#7C7F8A",
-	comment = "#70747f",
-	orange = "#FDC38E",
+	transparent_bg = nil,
 	-- ANSI
 	black = "#1C1C1C", -- ANSI 0
-	red = "#DD6E6B",
-	green = "#87E58E",
-	yellow = "#E8EDA2",
-	purple = "#BAA0E8", -- used as ANSI 4 (blue)
-	pink = "#E48CC1",
 	cyan = "#A7DFEF",
+	green = "#87E58E",
+	orange = "#FDC38E",
+	pink = "#E48CC1",
+	purple = "#BAA0E8", -- used as ANSI 4 (blue)
 	white = "#F6F6F5", -- ANSI 7, 'selection' used for ANSI 8
+	red = "#DD6E6B",
+	yellow = "#E8EDA2",
 	-- indexes 9-15
-	bright_red = "#E1837F",
-	bright_green = "#97EDA2",
-	bright_yellow = "#F6F6B6",
 	bright_blue = "#D0B5F3",
-	bright_magenta = "#E7A1D7",
 	bright_cyan = "#BCF4F5",
+	bright_green = "#97EDA2",
+	bright_magenta = "#E7A1D7",
+	bright_red = "#E1837F",
 	bright_white = "#FFFFFF", -- index 15
+	bright_yellow = "#F6F6B6",
 
+	comment = "#70747f",
+	selection = "#7C7F8A",
 	menu = "#21222C",
 	visual = "#3E4452",
 	gutter_fg = "#4B5263",
@@ -78,46 +79,34 @@ M.icons = {
 M.lualine = function()
 	local colours = M.colours
 
-	local normal = {
-		a = { fg = colours.black, bg = colours.purple, gui = "bold" },
-		b = { fg = colours.purple, bg = colours.transparent_bg },
-		c = { fg = colours.white, bg = colours.transparent_bg },
-	}
-
-	local command = {
-		a = { fg = colours.black, bg = colours.cyan, gui = "bold" },
-		b = { fg = colours.cyan, bg = colours.bg },
-	}
-
-	local visual = {
-		a = { fg = colours.black, bg = colours.pink, gui = "bold" },
-		b = { fg = colours.pink, bg = colours.bg },
-	}
-
-	local inactive = {
-		a = { fg = colours.white, bg = colours.visual, gui = "bold" },
-		b = { fg = colours.black, bg = colours.white },
-	}
-
-	local replace = {
-		a = { fg = colours.black, bg = colours.yellow, gui = "bold" },
-		b = { fg = colours.yellow, bg = colours.bg },
-		c = { fg = colours.white, bg = colours.bg },
-	}
-
-	local insert = {
-		a = { fg = colours.black, bg = colours.green, gui = "bold" },
-		b = { fg = colours.green, bg = colours.bg },
-		c = { fg = colours.white, bg = colours.bg },
-	}
-
 	return {
-		normal = normal,
-		command = command,
-		visual = visual,
-		inactive = inactive,
-		replace = replace,
-		insert = insert,
+		normal = {
+			a = { fg = colours.black, bg = colours.purple, gui = "bold" },
+			b = { fg = colours.purple, bg = colours.transparent_bg },
+			c = { fg = colours.white, bg = colours.transparent_bg },
+		},
+		command = {
+			a = { fg = colours.black, bg = colours.cyan, gui = "bold" },
+			b = { fg = colours.cyan, bg = colours.bg },
+		},
+		visual = {
+			a = { fg = colours.black, bg = colours.pink, gui = "bold" },
+			b = { fg = colours.pink, bg = colours.bg },
+		},
+		inactive = {
+			a = { fg = colours.white, bg = colours.visual, gui = "bold" },
+			b = { fg = colours.black, bg = colours.white },
+		},
+		replace = {
+			a = { fg = colours.black, bg = colours.yellow, gui = "bold" },
+			b = { fg = colours.yellow, bg = colours.bg },
+			c = { fg = colours.white, bg = colours.bg },
+		},
+		insert = {
+			a = { fg = colours.black, bg = colours.green, gui = "bold" },
+			b = { fg = colours.green, bg = colours.bg },
+			c = { fg = colours.white, bg = colours.bg },
+		},
 	}
 end
 
