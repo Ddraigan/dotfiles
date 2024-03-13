@@ -13,6 +13,14 @@ return {
 		require("ibl").setup({
 			scope = { enabled = true },
 			-- indent = { highlight = "BrightGreen" },
+			indent = {
+				char = "┊",
+				tab_char = "┊",
+				smart_indent_cap = true,
+			},
+			whitespace = {
+				remove_blankline_trail = true,
+			},
 		})
 	end,
 }
