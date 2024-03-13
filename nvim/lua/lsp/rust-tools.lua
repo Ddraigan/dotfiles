@@ -76,7 +76,7 @@ return {
 						]])
 					end,
 					inlay_hints = {
-						auto = true,
+						auto = false,
 					},
 				},
 				dap = {
