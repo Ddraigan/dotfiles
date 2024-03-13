@@ -96,6 +96,11 @@ M.icons = {
 		Folder = " ",
 		Color = " ",
 	},
+	mason = {
+		package_installed = "✓",
+		package_pending = "➜",
+		package_uninstalled = "✗",
+	},
 }
 
 M.lualine = function()

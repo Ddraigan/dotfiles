@@ -5,13 +5,12 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
-	opts = {
-		ui = {
-			icons = {
-				package_installed = "✓",
-				package_pending = "➜",
-				package_uninstalled = "✗",
+	opts = function()
+		local icons = require("config.theme").icons.mason
+		return {
+			ui = {
+				icons = icons,
 			},
-		},
-	},
+		}
+	end,
 }

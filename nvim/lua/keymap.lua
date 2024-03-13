@@ -67,7 +67,7 @@ M.general = {
 		["<leader>qq"] = { "<cmd> q <CR>", "Quit" },
 
 		-- Telescope Plugin
-		["<leader>fp"] = { "<cmd> Telescope projects <CR>", "[Telescope]: Find Projects" },
+		-- ["<leader>fp"] = { "<cmd> Telescope projects <CR>", "[Telescope]: Find Projects" },
 		["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "[Telescope]: Find Files" },
 		["<leader>fs"] = { "<cmd> Telescope live_grep <CR>", "[Telescope]: Find String" },
 		["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "[Telescope]: Find Buffers" },

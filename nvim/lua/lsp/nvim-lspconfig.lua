@@ -29,20 +29,20 @@ return {
 			})
 		end
 
-		lspconfig.astro.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			--[[ init_options = {
-				typescript = {
-					-- needs to be installed in ~ by using `pnpm i typescript`. NOTE: do not use -g flag!
-					serverPath = os.getenv("HOME") .. "/.npm-packages/lib/node_modules/typescript/lib/typescript.js",
-				},
-			}, ]]
-		})
+		-- lspconfig.astro.setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- 	--[[ init_options = {
+		-- 		typescript = {
+		-- 			-- needs to be installed in ~ by using `pnpm i typescript`. NOTE: do not use -g flag!
+		-- 			serverPath = os.getenv("HOME") .. "/.npm-packages/lib/node_modules/typescript/lib/typescript.js",
+		-- 		},
+		-- 	}, ]]
+		-- })
 
 		lspconfig.lua_ls.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
+			-- capabilities = capabilities,
+			-- on_attach = on_attach,
 			on_init = function(client)
 				local path = client.workspace_folders[1].name
 				if not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc") then
@@ -85,8 +85,8 @@ return {
 
 		-- configure emmet language server
 		lspconfig.emmet_ls.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
+			-- capabilities = capabilities,
+			-- on_attach = on_attach,
 			filetypes = {
 				"html",
 				"typescriptreact",
@@ -99,12 +99,13 @@ return {
 				"astro",
 			},
 		})
+
 		-- Tailwind
 		-- Support for tailwind auto completion
 		-- install the tailwind server : "sudo npm install -g @tailwindcss/language-server"
-		lspconfig.tailwindcss.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
+		-- lspconfig.tailwindcss.setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- })
 	end,
 }
