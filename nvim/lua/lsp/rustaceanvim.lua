@@ -6,11 +6,12 @@ return {
 		"mfussenegger/nvim-dap",
 	},
 	ft = { "rust" },
-	config = function()
-		vim.g.rustaceanvim = function()
-			local on_attach = require("config.utils").on_attach
-			local capabilities = require("config.utils").capabilities()
-			return {
+	opts = function(_, opts)
+		local on_attach = require("config.utils").on_attach
+		local capabilities = require("config.utils").capabilities()
+
+		return vim.tbl_extend("force", opts, {
+			{
 				capabilities = capabilities,
 				server = {
 					on_attach = function(client, bufnr)
@@ -44,7 +45,16 @@ return {
 						-- ["rust-analyzer"] = {},
 					},
 				},
-			}
-		end
+				tools = {
+					inlay_hints = {
+						auto = true,
+						show_parameter_hints = true,
+						parameter_hints_prefix = "  <-- ",
+						only_current_line = false,
+						other_hints_prefix = "  --> ",
+					},
+				},
+			},
+		})
 	end,
 }
