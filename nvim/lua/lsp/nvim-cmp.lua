@@ -7,69 +7,15 @@ return {
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
+		"hrsh7th/cmp-nvim-lsp-signature-help",
 		"saadparwaiz1/cmp_luasnip",
-		{
-			-- snippet plugin
-			"L3MON4D3/LuaSnip",
-			dependencies = "rafamadriz/friendly-snippets",
-			opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-			config = function(_, opts)
-				require("luasnip").config.set_config(opts)
-
-				-- vscode format
-				require("luasnip.loaders.from_vscode").lazy_load()
-				require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.g.vscode_snippets_path or "" })
-
-				-- snipmate format
-				require("luasnip.loaders.from_snipmate").load()
-				require("luasnip.loaders.from_snipmate").lazy_load({ paths = vim.g.snipmate_snippets_path or "" })
-
-				-- lua format
-				require("luasnip.loaders.from_lua").load()
-				require("luasnip.loaders.from_lua").lazy_load({ paths = vim.g.lua_snippets_path or "" })
-
-				vim.api.nvim_create_autocmd("InsertLeave", {
-					callback = function()
-						if
-							require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-							and not require("luasnip").session.jump_active
-						then
-							require("luasnip").unlink_current()
-						end
-					end,
-				})
-			end,
-		},
+		"L3MON4D3/LuaSnip",
 	},
 	config = function()
 		local cmp = require("cmp")
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 		vim.opt.completeopt = { "menu", "menuone", "noselect" }
-
-		local kind_icons = {
-			-- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#basic-customisations
-			Text = " ",
-			Method = "󰆧",
-			Function = "ƒ ",
-			Constructor = " ",
-			Field = "󰜢 ",
-			Variable = " ",
-			Constant = " ",
-			Class = " ",
-			Interface = "󰜰 ",
-			Struct = " ",
-			Enum = "了 ",
-			EnumMember = " ",
-			Module = "",
-			Property = " ",
-			Unit = " ",
-			Value = "󰎠 ",
-			Keyword = "󰌆 ",
-			Snippet = " ",
-			File = " ",
-			Folder = " ",
-			Color = " ",
-		}
+		local kind_icons = require("config.theme").icons.cmp
 
 		cmp.setup({
 			snippet = {
@@ -125,7 +71,6 @@ return {
 			}),
 			formatting = {
 				expandable_indicator = true,
-				fields = kind_icons,
 				format = function(entry, vim_item)
 					-- Kind icons
 					vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind

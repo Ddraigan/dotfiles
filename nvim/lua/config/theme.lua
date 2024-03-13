@@ -67,12 +67,34 @@ M.soft = {
 
 M.icons = {
 	diagnostics = {
-		-- icons / text used for a diagnostic
 		error = "",
 		warn = "",
 		hint = "󰌵",
 		info = "",
 		other = "",
+	},
+	cmp = {
+		Text = " ",
+		Method = "󰆧",
+		Function = "ƒ ",
+		Constructor = " ",
+		Field = "󰜢 ",
+		Variable = " ",
+		Constant = " ",
+		Class = " ",
+		Interface = "󰜰 ",
+		Struct = " ",
+		Enum = "了 ",
+		EnumMember = " ",
+		Module = "",
+		Property = " ",
+		Unit = " ",
+		Value = "󰎠 ",
+		Keyword = "󰌆 ",
+		Snippet = " ",
+		File = " ",
+		Folder = " ",
+		Color = " ",
 	},
 }
 

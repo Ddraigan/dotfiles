@@ -130,6 +130,40 @@ M.general = {
 		["<leader>-"] = { "<cmd> NvimTreeToggle <CR>", "[Nvim-Tree]: Toggle Tree" },
 	},
 
+	i = {
+
+		-- LuaSnip Plugn
+		["<C-k>"] = {
+			function()
+				local ls = require("luasnip")
+				if ls.expand_or_jumpable() then
+					ls.expand_or_jump()
+				end
+			end,
+			"[LuaSnip]: Expand or Jump",
+		},
+
+		["<C-j>"] = {
+			function()
+				local ls = require("luasnip")
+				if ls.jumpable(-1) then
+					ls.jump(-1)
+				end
+			end,
+			"[LuaSnip]: Jump",
+		},
+
+		["<C-l>"] = {
+			function()
+				local ls = require("luasnip")
+				if ls.choice_active() then
+					ls.change_choice(1)
+				end
+			end,
+			"[LuaSnip]: Change Choice",
+		},
+	},
+
 	x = {
 		-- Pasting does not ovride your clipboard
 		["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Dont copy replaced text", opts = { silent = true } },
