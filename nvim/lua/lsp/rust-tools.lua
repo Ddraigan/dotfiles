@@ -75,6 +75,9 @@ return {
 						augroup END
 						]])
 					end,
+					inlay_hints = {
+						auto = true,
+					},
 				},
 				dap = {
 					adapter = adapter,
