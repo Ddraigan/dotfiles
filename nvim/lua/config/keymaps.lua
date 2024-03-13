@@ -3,45 +3,8 @@ vim.keymap.set("n", "<leader>-", vim.cmd.Ex)
 
 local M = {}
 
--- Telescope Window for Harpoon2
-M.toggle_telescope = function(harpoon_files)
-	local conf = require("telescope.config").values
-	local file_paths = {}
-	for _, item in ipairs(harpoon_files.items) do
-		table.insert(file_paths, item.value)
-	end
-
-	require("telescope.pickers")
-		.new({}, {
-			prompt_title = "Harpoon",
-			finder = require("telescope.finders").new_table({
-				results = file_paths,
-			}),
-			previewer = conf.file_previewer({}),
-			sorter = conf.generic_sorter({}),
-		})
-		:find()
-end
-
 M.general = {
 	n = {
-		-- Lsp_Lines
-		["<leader>ll"] = {
-			function()
-				require("lsp_lines").toggle()
-				if vim.diagnostic.config().virtual_text then
-					vim.diagnostic.config({
-						virtual_text = false,
-					})
-				else
-					vim.diagnostic.config({
-						virtual_text = true,
-					})
-				end
-			end,
-			"Toggle LSP Lines",
-		},
-
 		-- Tmux Remaps
 		["<C-h>"] = { "<cmd> TmuxNavigateLeft <CR>", "window left" },
 		["<C-l>"] = { "<cmd> TmuxNavigateRight <CR>", "window right" },
@@ -54,14 +17,11 @@ M.general = {
 		["<leader>qq"] = { "<cmd> q <CR>", "Quit" },
 
 		-- Telescope Plugin
-		-- ["<leader>fp"] = { "<cmd> Telescope projects <CR>", "[Telescope]: Find Projects" },
 		["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "[Telescope]: Find Files" },
 		["<leader>fs"] = { "<cmd> Telescope live_grep <CR>", "[Telescope]: Find String" },
 		["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "[Telescope]: Find Buffers" },
 		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "[Telescope]: Help Tags" },
 		["<leader>fd"] = { "<cmd> Telescope diagnostics <CR>", "[Telescope]: Open Diagnostics" },
-		-- ["gr"] = { "<cmd> Telescope lsp_references <CR>", "[Telescope/LSP]: References" },
-		-- ["gd"] = { "<cmd> Telescope lsp_definitions <CR>", "[Telescope/LSP] Go To Definition" },
 
 		-- Noice Plugin
 		["<leader>fn"] = { "<cmd> NoiceTelescope <CR>", "[Telescope/Noice]: Notifcations" },
@@ -75,18 +35,8 @@ M.general = {
 		["<leader>tr"] = { "<cmd> TroubleToggle lsp_references <CR>", "[Trouble]: References" },
 		["<leader>to"] = { "<cmd> TodoTrouble <CR>", "[Trouble]: Todo List" },
 
-		-- Harpoon Plugin
-		-- ["<leader>ha"] = { "<cmd> lua require('harpoon.mark').add_file() <CR>", "[Harpoon]: Add File" },
-		-- ["<leader>hh"] = { "<cmd> lua require('harpoon.ui').toggle_quick_menu() <CR>", "[Harpoon]: Toggle Menu" },
-		-- ["<leader>hn"] = { "<cmd> lua require('harpoon.ui').nav_next() <CR>", "[Harpoon]: Nav Next" },
-		-- ["<leader>hp"] = { "<cmd> lua require('harpoon.ui').nav_prev() <CR>", "[Harpoon]: Nav Prev" },
-
 		-- Harpoon2 Plugin
 		["<leader>ha"] = { "<cmd> lua require('harpoon'):list():append() <CR>", "[Harpoon]: Add File" },
-		["<leader>ht"] = {
-			"<cmd> lua require('keymap').toggle_telescope(require('harpoon'):list()) <CR>",
-			"[Harpoon]: Toggle Telescope Menu",
-		},
 		["<leader>hh"] = {
 			"<cmd> lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list()) <CR>",
 			"[Harpoon]: Toggle Menu",
@@ -115,10 +65,25 @@ M.general = {
 
 		-- Nvim-Tree Plugin
 		["<leader>-"] = { "<cmd> NvimTreeToggle <CR>", "[Nvim-Tree]: Toggle Tree" },
+
+		-- Lsp_Lines
+		["<leader>ll"] = {
+			function()
+				require("lsp_lines").toggle()
+				if vim.diagnostic.config().virtual_text then
+					vim.diagnostic.config({
+						virtual_text = false,
+					})
+				else
+					vim.diagnostic.config({
+						virtual_text = true,
+					})
+				end
+			end,
+			"Toggle LSP Lines",
+		},
 	},
-
 	i = {
-
 		-- LuaSnip Plugn
 		["<C-k>"] = {
 			function()
@@ -150,22 +115,24 @@ M.general = {
 			"[LuaSnip]: Change Choice",
 		},
 	},
-
 	x = {
 		-- Pasting does not ovride your clipboard
 		["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Dont copy replaced text", opts = { silent = true } },
 	},
 }
 
--- local mappings = require("keymap").general
-for mode, values in pairs(M.general) do
-	for keybind, mapping_info in pairs(values) do
-		local opts = {
-			desc = mapping_info[2],
-		}
-		vim.keymap.set(mode, keybind, mapping_info[1], opts)
+M.setmaps = function(maps)
+	for mode, values in pairs(maps) do
+		for keybind, mapping_info in pairs(values) do
+			local opts = {
+				desc = mapping_info[2],
+			}
+			vim.keymap.set(mode, keybind, mapping_info[1], opts)
+		end
 	end
 end
+
+M.setmaps(M.general)
 
 -- -- Creates simpler lua mapping syntax
 -- local function bind(op, outer_opts)
