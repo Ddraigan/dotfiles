@@ -145,12 +145,11 @@ local function opts(desc, buf)
 	return { desc = "[LSP]: " .. desc, buffer = buf, noremap = true, silent = true }
 end
 
-local augroupFormat = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
-
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
+		local augroupFormat = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
 		-- Enable completion triggered by <c-x><c-o>
 		vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
