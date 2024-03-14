@@ -1,11 +1,12 @@
 -- Stop Lag
 vim.g.nofsync = true
 
---[[ vim.filetype.add({
+vim.filetype.add({
 	extension = {
 		astro = "astro",
+		mdx = "markdown.mdx",
 	},
-}) ]]
+})
 
 -- disable netrw at the very start of your init.lua
 -- vim.g.loaded_netrw = 1

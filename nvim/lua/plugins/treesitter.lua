@@ -12,6 +12,8 @@ return {
 	event = { "BufReadPost", "BufNewFile" },
 	build = ":TSUpdate",
 	config = function()
+		-- the mdx filetype will use the markdown parser and queries.
+		vim.treesitter.language.register("markdown", "mdx")
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
 				"lua",
