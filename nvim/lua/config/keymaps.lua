@@ -150,7 +150,6 @@ local augroupFormat = vim.api.nvim_create_augroup("LspFormatting", { clear = fal
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(args)
 		-- Enable completion triggered by <c-x><c-o>
 		vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
