@@ -7,7 +7,6 @@ return {
 	},
 	ft = { "rust" },
 	opts = function(_)
-		local on_attach = require("config.utils").on_attach
 		local capabilities = require("config.utils").capabilities()
 
 		local ok, mason_registry = pcall(require, "mason-registry")
@@ -32,16 +31,14 @@ return {
 			capabilities = capabilities,
 			server = {
 				cmd = function()
-					local mason_registry = require("mason-registry")
-					local package = mason_registry.get_package("rust-analyzer")
-					local install_dir = package:get_install_path()
+					local ra_package = mason_registry.get_package("rust-analyzer")
+					local install_dir = ra_package:get_install_path()
 					-- find out where the binary is in the install dir, and append it to the install dir
 					local ra_bin = install_dir .. "/" .. "rust-analyzer.exe" -- this may need tweaking
-					return { ra_bin }                         -- you can add additional args like `'--logfile', '/path/to/logfile'` to the list
+					return { ra_bin } -- you can add additional args like `'--logfile', '/path/to/logfile'` to the list
 				end,
 				auto_attach = true,
-				on_attach = function(client, bufnr)
-					on_attach(client, bufnr)
+				on_attach = function(_, bufnr)
 					vim.keymap.set(
 						"n",
 						"K",

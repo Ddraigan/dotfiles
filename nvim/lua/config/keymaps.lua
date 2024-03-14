@@ -141,6 +141,70 @@ end
 
 M.setmaps(M.general)
 
+local function opts(desc, buf)
+	return { desc = "[LSP]: " .. desc, buffer = buf, noremap = true, silent = true }
+end
+
+local augroupFormat = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
+
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	callback = function(args)
+		-- Enable completion triggered by <c-x><c-o>
+		vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		-- Buffer local mappings.
+		-- See `:help vim.lsp.*` for documentation on any of the below functions
+		local buffer = args.buf
+
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go To Declaration", buffer))
+		vim.keymap.set("n", "gd", "<cmd> Telescope lsp_definitions <CR>", opts("Go To Definition", buffer))
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover Documentation", buffer))
+		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts("Signature Documentation", buffer))
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go To Implementation", buffer))
+		vim.keymap.set("n", "gr", "<cmd> Telescope lsp_references <CR>", opts("Go To References", buffer))
+		vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, opts("Go To Next Diagnostic", buffer))
+		vim.keymap.set("n", "<leader>lr", ":IncRename ", opts("Rename", buffer))
+		vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts("Code Actions", buffer))
+		-- vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts("", bufnr))
+		-- vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts("", bufnr))
+		-- vim.keymap.set("n", "<space>wl", function()
+		-- 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+		-- end, opts("", bufnr))
+
+		if client.supports_method("textDocument/formatting") then
+			vim.keymap.set("n", "<Leader>lf", function()
+				vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+			end, { buffer = buffer, desc = "[LSP]: Format" })
+
+			vim.api.nvim_clear_autocmds({ group = augroupFormat, buffer = buffer })
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = augroupFormat,
+				buffer = buffer,
+				callback = function()
+					vim.lsp.buf.format({ async = false })
+				end,
+				desc = "[LSP]: Format On Save",
+			})
+		end
+
+		if client.supports_method("textDocument/rangeFormatting") then
+			vim.keymap.set("x", "<Leader>lf", function()
+				vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+			end, { buffer = buffer, desc = "[LSP]: Range Format" })
+		end
+
+		if client.server_capabilities.inlayHintProvider then
+			vim.keymap.set("n", "<leader>lh", function()
+				local current_setting = vim.lsp.inlay_hint.is_enabled(buffer)
+				vim.lsp.inlay_hint.enable(buffer, not current_setting)
+			end, opts("Toggle Inlay Hints"))
+		end
+	end,
+})
+
 -- -- Creates simpler lua mapping syntax
 -- local function bind(op, outer_opts)
 -- 	outer_opts = outer_opts or { noremap = true }

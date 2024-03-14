@@ -4,11 +4,9 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 	opts = {},
 	config = function()
-		local on_attach = require("config.utils").on_attach
 		local tstools = require("typescript-tools")
 
 		tstools.setup({
-			on_attach = on_attach,
 			handlers = {},
 			settings = {
 				-- spawn additional tsserver instance to calculate diagnostics on it
