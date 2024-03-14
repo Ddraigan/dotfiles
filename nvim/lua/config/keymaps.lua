@@ -46,14 +46,21 @@ M.general = {
 
 		-- Dap Plugin
 		["<leader>db"] = { "<cmd> DapToggleBreakpoint <CR>", "[DAP]: Toggle Breakpoint" },
-		["<leader>dv"] = {
-			function()
-				local widgets = require("dap.ui.widgets")
-				local sidebar = widgets.sidebar(widgets.scopes)
-				sidebar.open()
-			end,
-			"[DAP]: Open Debugger Sidebar",
-		},
+		["<leader>dc"] = { "<cmd> DapContinue <CR>", "[DAP]: Continue" },
+		["<leader>do"] = { "<cmd> DapStepOver <CR>", "[DAP]: Step Over" },
+		["<leader>dO"] = { "<cmd> DapStepOut <CR>", "[DAP]: Step Out" },
+		["<leader>di"] = { "<cmd> DapStepInto <CR>", "[DAP]: Step Into" },
+		["<leader>dt"] = { "<cmd> DapTerminate <CR>", "[DAP]: Terminate" },
+		["<leader>dv"] = { "<cmd> lua require('dapui').toggle() <CR>", "[DAP]: Toggle Ui" },
+		-- ["<leader>dv"] = {
+		-- 	function()
+		-- 		local widgets = require("dap.ui.widgets")
+		-- 		local sidebar = widgets.sidebar(widgets.scopes)
+		-- 		sidebar.open()
+		-- 	end,
+		-- 	"[DAP]: Open Debugger Sidebar",
+		-- },
+		-- Dap UI
 
 		-- Neotest Plugin
 		["<leader>nt"] = { "<cmd> lua require('neotest').run.run() <CR>", "[NeoTest]: Run Nearest Test" },

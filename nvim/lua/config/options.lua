@@ -55,4 +55,5 @@ for type, icon in pairs(signs) do
 	-- end
 end
 
-vim.fn.sign_define("LightBulbSign", { text = signs.hint, texthl = "", linehl = "", numhl = "" })
+-- Only needed for Lightbulb Plugin
+-- vim.fn.sign_define("LightBulbSign", { text = signs.hint, texthl = "", linehl = "", numhl = "" })
