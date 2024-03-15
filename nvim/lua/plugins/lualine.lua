@@ -61,7 +61,15 @@ return {
 			sections = {
 				lualine_a = { "mode" },
 				lualine_b = { { "branch" }, "diff", "diagnostics" },
-				lualine_c = { custom_fname },
+				lualine_c = {
+					custom_fname,
+					{
+						"harpoon2",
+						icon = "⇁",
+						indicators = { "a", "s", "q", "w" },
+						active_indicators = { "A", "S", "Q", "W" },
+					},
+				},
 				lualine_x = {
 					{
 						require("lazy.status").updates,

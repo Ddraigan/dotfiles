@@ -98,6 +98,27 @@ return {
 			},
 		}
 
+		local colours = require("config.theme").colours
+		local TelescopeColor = {
+			TelescopeMatching = { fg = colours.cyan },
+			TelescopeSelection = { fg = colours.cyan, bg = colours.selection, bold = true },
+
+			TelescopePromptPrefix = { bg = colours.transparent_bg },
+			TelescopePromptNormal = { bg = colours.transparent_bg },
+			TelescopeResultsNormal = { bg = colours.transparent_bg },
+			TelescopePreviewNormal = { bg = colours.transparent_bg },
+			TelescopePromptBorder = { bg = colours.transparent_bg, fg = colours.comment },
+			TelescopeResultsBorder = { bg = colours.transparent_bg, fg = colours.comment },
+			TelescopePreviewBorder = { bg = colours.transparent_bg, fg = colours.comment },
+			TelescopePromptTitle = { bg = colours.transparent_bg, fg = colours.comment },
+			TelescopeResultsTitle = { fg = colours.cyan },
+			TelescopePreviewTitle = { bg = colours.transparent_bg, fg = colours.cyan },
+		}
+
+		for hl, col in pairs(TelescopeColor) do
+			vim.api.nvim_set_hl(0, hl, col)
+		end
+
 		require("telescope").setup(opts)
 		require("telescope").load_extension("windowizer")
 		require("telescope").load_extension("fzf")
