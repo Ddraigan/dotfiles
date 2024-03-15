@@ -1,15 +1,17 @@
 vim.g.mapleader = " " -- Set <space> as leader key
-vim.keymap.set("n", "<leader>-", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>-", vim.cmd.Ex)
 
-vim.api.nvim_create_autocmd('BufWinEnter', {
-    group = vim.api.nvim_create_augroup("UiTree", { clear = false }),
-    callback = function ()
-        local api = require("nvim-tree.api")
-        if api.tree.is_visible() then
-            api.tree.close()
-        end
-    end
-})
+-- vim.api.nvim_create_autocmd('BufEnter', {
+--     group = vim.api.nvim_create_augroup("UiTree", { clear = false }),
+--     callback = function ()
+--         local api = require("nvim-tree.api")
+--         if api.tree.is_visible() then
+--             vim.defer_fn(function ()
+--                 api.tree.close()
+--             end, 0)
+--         end
+--     end
+-- })
 
 local M = {}
 
