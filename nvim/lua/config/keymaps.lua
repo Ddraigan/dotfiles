@@ -1,6 +1,16 @@
 vim.g.mapleader = " " -- Set <space> as leader key
 vim.keymap.set("n", "<leader>-", vim.cmd.Ex)
 
+vim.api.nvim_create_autocmd('BufWinEnter', {
+    group = vim.api.nvim_create_augroup("UiTree", { clear = false }),
+    callback = function ()
+        local api = require("nvim-tree.api")
+        if api.tree.is_visible() then
+            api.tree.close()
+        end
+    end
+})
+
 local M = {}
 
 M.general = {

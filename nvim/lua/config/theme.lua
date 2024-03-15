@@ -5,6 +5,7 @@ M.colours = {
     non_trans_bg = "#282A36",
     fg = "#F8F8F2",
     bg = nil,
+    transparent_bg = nil,
 
     black = "#191A21",
     cyan = "#8BE9FD",
@@ -45,7 +46,7 @@ M.soft = {
     orange = "#FDC38E",
     pink = "#E48CC1",
     purple = "#BAA0E8", -- used as ANSI 4 (blue)
-    white = "#F6F6F5", -- ANSI 7, 'selection' used for ANSI 8
+    white = "#F6F6F5",  -- ANSI 7, 'selection' used for ANSI 8
     red = "#DD6E6B",
     yellow = "#E8EDA2",
     -- indexes 9-15
