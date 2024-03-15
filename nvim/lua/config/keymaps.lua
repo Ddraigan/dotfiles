@@ -54,10 +54,12 @@ M.general = {
 
 		-- Harpoon2 Plugin
 		["<leader>ha"] = { "<cmd> lua require('harpoon'):list():append() <CR>", "[Harpoon]: Add File" },
+		["<leader>hr"] = { "<cmd> lua require('harpoon'):list():remove() <CR>", "[Harpoon]: Remove File" },
 		["<leader>hh"] = {
 			"<cmd> lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list()) <CR>",
 			"[Harpoon]: Toggle Menu",
 		},
+		["<leader>hc"] = { "<cmd> lua require('harpoon'):list():clear() <CR>", "[Harpoon]: Clear List" },
 		["<leader>hn"] = { "<cmd> lua require('harpoon'):list():next() <CR>", "[Harpoon]: Nav Next" },
 		["<leader>hp"] = { "<cmd> lua require('harpoon'):list():prev() <CR>", "[Harpoon]: Nav Prev" },
 
@@ -165,10 +167,11 @@ end
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("LspBinds", { clear = false }),
 	callback = function(args)
 		local augroupFormat = vim.api.nvim_create_augroup("LspFormatting", { clear = false })
 		-- Enable completion triggered by <c-x><c-o>
-		vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+		-- vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local buffer = args.buf

@@ -4,7 +4,12 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim" },
 	config = function()
 		local harpoon = require("harpoon")
-		harpoon:setup()
+
+		harpoon:setup({
+			settings = {
+				save_on_toggle = true,
+			},
+		})
 
 		-- local conf = require("telescope.config").values
 		-- local function toggle_telescope(harpoon_files)
@@ -25,7 +30,7 @@ return {
 		-- 		:find()
 		-- end
 		--
-		-- vim.keymap.set("n", "<leader>hh", function()
+		-- vim.keymap.set("n", "<leader>ht", function()
 		-- 	toggle_telescope(harpoon:list())
 		-- end, { desc = "Open harpoon window" })
 	end,
