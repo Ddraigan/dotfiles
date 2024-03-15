@@ -2,24 +2,18 @@
 vim.g.nofsync = true
 
 vim.filetype.add({
-	extension = {
-		astro = "astro",
-		mdx = "markdown.mdx",
-	},
+    extension = {
+        astro = "astro",
+        mdx = "markdown.mdx",
+    },
 })
 
 -- disable netrw at the very start of your init.lua
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
-vim.diagnostic.config({
-	virtual_text = {
-		prefix = "●",
-	},
-	severity_sort = true,
-})
-
 vim.opt.nu = true
+
 -- Relative line numbers
 vim.opt.relativenumber = true
 
@@ -44,16 +38,25 @@ vim.opt.scrolloff = 8
 
 vim.o.clipboard = "unnamedplus"
 
+-- Diagnostics
+vim.diagnostic.config({
+    virtual_text = {
+        prefix = "●",
+    },
+    severity_sort = true,
+})
+
 local signs = require("config.theme").icons.diagnostics
-local firstToUpper = function(str)
-	return (str:gsub("^%l", string.upper))
+
+local firstToUpper = function (str)
+    return (str:gsub("^%l", string.upper))
 end
 
 for type, icon in pairs(signs) do
-	-- if not string.find(type, "other") then
-	local hl = "DiagnosticSign" .. firstToUpper(type)
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-	-- end
+    -- if not string.find(type, "other") then
+    local hl = "DiagnosticSign" .. firstToUpper(type)
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    -- end
 end
 
 -- Only needed for Lightbulb Plugin

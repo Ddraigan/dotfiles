@@ -42,20 +42,16 @@ return {
             on_init = function (client)
                 local path = client.workspace_folders[1].name
                 if not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc") then
-                    client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
+                    return
+                end
+
+                client.config.settings = vim.tbl_deep_extend("force",
+                    client.config.settings, {
                         Lua = {
                             runtime = {
                                 -- Tell the language server which version of Lua you're using
                                 -- (most likely LuaJIT in the case of Neovim)
                                 version = "LuaJIT",
-                            },
-                            diagnostics = {
-                                globals = { "use", "vim", "require", "merge" },
-                            },
-                            hint = {
-                                enable = true,
-                                setType = true,
-                                arrayIndex = "Enable"
                             },
                             -- Make the server aware of Neovim runtime files
                             workspace = {
@@ -68,20 +64,33 @@ return {
                                 -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
                                 -- library = vim.api.nvim_get_runtime_file("", true)
                             },
-                            format = {
-                                enable = true,
-                            },
-                            completion = {
-                                callSnipet = "Replace",
-                            },
                         },
                     })
 
-                    client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-                end
-
-                return true
+                client.notify("workspace/didChangeConfiguration",
+                    { settings = client.config.settings })
             end,
+            settings = {
+                diagnostics = {
+                    globals = { "use", "vim", "require", "merge" },
+                    disable = { 'missing-fields' },
+                },
+                hint = {
+                    enable = true,
+                    arrayIndex = "Disable", -- "Enable", "Auto", "Disable"
+                    await = true,
+                    paramName = "Disable",  -- "All", "Literal", "Disable"
+                    paramType = false,
+                    semicolon = "Disable",  -- "All", "SameLine", "Disable"
+                    setType = true,
+                },
+                format = {
+                    enable = true,
+                },
+                completion = {
+                    callSnipet = "Replace",
+                },
+            },
         })
 
         -- configure emmet language server
