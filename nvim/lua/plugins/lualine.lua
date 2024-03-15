@@ -65,7 +65,7 @@ return {
 					custom_fname,
 					{
 						"harpoon2",
-						-- icon = "⇀",
+						icon = "",
 						indicators = { "1", "2", "3", "4", "5" },
 						active_indicators = { "[1]", "[2]", "[3]", "[4]", "[5]" },
 					},
