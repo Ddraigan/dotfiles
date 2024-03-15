@@ -5,6 +5,7 @@ return {
 			-- you can turn off/on auto_update per tool
 			{ "astro-language-server" },
 			{ "lua-language-server" },
+            { "yaml-language-server"},
 			-- { "hls" },
 			-- { "fourmolu" },
 			{ "stylua" },
