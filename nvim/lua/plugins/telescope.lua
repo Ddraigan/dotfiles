@@ -100,7 +100,7 @@ return {
 
 		local colours = require("config.theme").colours
 		local TelescopeColor = {
-			TelescopeMatching = { fg = colours.cyan },
+			TelescopeMatching = { fg = colours.pink },
 			TelescopeSelection = { fg = colours.cyan, bg = colours.selection, bold = true },
 
 			TelescopePromptPrefix = { bg = colours.transparent_bg },

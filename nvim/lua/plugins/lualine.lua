@@ -65,9 +65,9 @@ return {
 					custom_fname,
 					{
 						"harpoon2",
-						icon = "⇁",
-						indicators = { "a", "s", "q", "w" },
-						active_indicators = { "A", "S", "Q", "W" },
+						-- icon = "⇀",
+						indicators = { "1", "2", "3", "4", "5" },
+						active_indicators = { "[1]", "[2]", "[3]", "[4]", "[5]" },
 					},
 				},
 				lualine_x = {
