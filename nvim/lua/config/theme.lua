@@ -2,10 +2,10 @@ local M = {}
 
 ---@class Palette
 M.colours = {
-    non_trans_bg = "#282A36",
-    fg = "#F8F8F2",
     bg = nil,
+    fg = "#F8F8F2",
     transparent_bg = nil,
+    non_trans_bg = "#282A36",
 
     black = "#191A21",
     cyan = "#8BE9FD",

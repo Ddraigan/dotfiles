@@ -93,8 +93,15 @@ M.general = {
         ["<leader>sc"] = { "<C-w>c", "[Vim]: Split Close" },
 
         -- Nvim-Tree Plugin
-        ["<leader>-"] = { "<cmd> NvimTreeToggle <CR>", "[Nvim-Tree]: Toggle Tree" },
+        -- ["<leader>-"] = { "<cmd> NvimTreeToggle <CR>", "[Nvim-Tree]: Toggle Tree" },
 
+        -- Oil Plugin
+        ["<leader>-"] = {
+            function ()
+                require("oil").toggle_float()
+            end,
+            "Toggle Oil",
+        },
         -- Lsp_Lines
         ["<leader>ll"] = {
             function ()
