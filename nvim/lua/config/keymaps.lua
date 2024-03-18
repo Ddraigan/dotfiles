@@ -179,9 +179,6 @@ end
 
 M.setmaps(M.general)
 
-local function opts(desc, buf)
-    return { desc = "[LSP]: " .. desc, buffer = buf, noremap = true, silent = true }
-end
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -195,6 +192,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         local buffer = args.buf
+
+        local function opts(desc, buf)
+            return { desc = "[LSP]: " .. desc, buffer = buf, noremap = true, silent = true }
+        end
 
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
             opts("Go To Declaration", buffer))
@@ -245,6 +246,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 vim.lsp.inlay_hint.enable(buffer, not vim.lsp.inlay_hint.is_enabled())
             end, opts("Toggle Inlay Hints"))
         end
+    end,
+})
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+    desc = 'Highlight when yanking (copying) text',
+    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+    callback = function ()
+        vim.highlight.on_yank()
     end,
 })
 
