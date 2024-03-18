@@ -2,10 +2,10 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-        { "williamboman/mason.nvim", config = true },
+        { "williamboman/mason.nvim",                     config = true },
         { "hrsh7th/nvim-cmp" },
         { "hrsh7th/cmp-nvim-lsp" },
-        { "litao91/lsp_lines" },
+        { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
         { "folke/neodev.nvim" },
     },
     config = function ()

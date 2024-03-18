@@ -83,15 +83,6 @@ M.general = {
         ["<leader>di"] = { "<cmd> DapStepInto <CR>", "[DAP]: Step Into" },
         ["<leader>dt"] = { "<cmd> DapTerminate <CR>", "[DAP]: Terminate" },
         ["<leader>dv"] = { "<cmd> lua require('dapui').toggle() <CR>", "[DAP]: Toggle Ui" },
-        -- ["<leader>dv"] = {
-        -- 	function()
-        -- 		local widgets = require("dap.ui.widgets")
-        -- 		local sidebar = widgets.sidebar(widgets.scopes)
-        -- 		sidebar.open()
-        -- 	end,
-        -- 	"[DAP]: Open Debugger Sidebar",
-        -- },
-        -- Dap UI
 
         -- Neotest Plugin
         ["<leader>nt"] = { "<cmd> lua require('neotest').run.run() <CR>", "[NeoTest]: Run Nearest Test" },
@@ -108,15 +99,10 @@ M.general = {
         ["<leader>ll"] = {
             function ()
                 require("lsp_lines").toggle()
-                if vim.diagnostic.config().virtual_text then
-                    vim.diagnostic.config({
-                        virtual_text = false,
-                    })
-                else
-                    vim.diagnostic.config({
-                        virtual_text = true,
-                    })
-                end
+                ---@diagnostic disable-next-line: undefined-field
+                local vl = vim.diagnostic.config().virtual_lines
+                local vt = vim.diagnostic.config().virtual_text
+                vim.diagnostic.config({ virtual_lines = vl, virtual_text = not vt })
             end,
             "Toggle LSP Lines",
         },
@@ -183,9 +169,9 @@ M.setmaps(M.general)
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("LspBinds", { clear = false }),
+    group = vim.api.nvim_create_augroup("dd-lsp-attach", { clear = false }),
     callback = function (args)
-        local augroupFormat = vim.api.nvim_create_augroup("LspFormatting",
+        local augroupFormat = vim.api.nvim_create_augroup("dd-formatting",
             { clear = false })
         -- Enable completion triggered by <c-x><c-o>
         -- vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
@@ -246,12 +232,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 vim.lsp.inlay_hint.enable(buffer, not vim.lsp.inlay_hint.is_enabled())
             end, opts("Toggle Inlay Hints"))
         end
+
+        -- The following two autocommands are used to highlight references of the
+        -- word under your cursor when your cursor rests there for a little while.
+        --
+        -- When you move your cursor, the highlights will be cleared (the second autocommand).
+        if client and client.server_capabilities.documentHighlightProvider then
+            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+                buffer = buffer,
+                callback = vim.lsp.buf.document_highlight,
+            })
+
+            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+                buffer = buffer,
+                callback = vim.lsp.buf.clear_references,
+            })
+        end
     end,
 })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yanking (copying) text',
-    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+    group = vim.api.nvim_create_augroup('dd-highlight-yank', { clear = true }),
     callback = function ()
         vim.highlight.on_yank()
     end,
