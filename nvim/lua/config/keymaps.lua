@@ -66,7 +66,7 @@ M.general = {
 
         -- Harpoon2 Plugin
         ["<leader>ha"] = { "<cmd> lua require('harpoon'):list():append() <CR>", "[Harpoon]: Add File" },
-        ["<leader>hr"] = { "<cmd> lua require('harpoon'):list():remove() <CR>", "[Harpoon]: Remove File" },
+        ["<leader>hd"] = { "<cmd> lua require('harpoon'):list():remove() <CR>", "[Harpoon]: Remove File" },
         ["<leader>hh"] = {
             "<cmd> lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list()) <CR>",
             "[Harpoon]: Toggle Menu",
