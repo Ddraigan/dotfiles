@@ -47,7 +47,7 @@ vim.o.clipboard = "unnamedplus"
 -- Diagnostics
 vim.diagnostic.config({
     virtual_text = {
-        prefix = "●",
+        prefix = require("config.theme").icons.diagnostics.prefix,
     },
     severity_sort = true,
 })

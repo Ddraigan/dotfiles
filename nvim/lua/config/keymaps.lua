@@ -104,7 +104,7 @@ M.general = {
                 else
                     vim.diagnostic.config({
                         virtual_text = {
-                            prefix = "●",
+                            prefix = require("config.theme").icons.diagnostics.prefix,
                         },
                     })
                 end

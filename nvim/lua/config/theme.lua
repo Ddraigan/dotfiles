@@ -73,6 +73,7 @@ M.icons = {
         hint = "󰌵",
         info = "",
         other = "",
+        prefix = "●",
     },
     cmp = {
         Text = " ",
