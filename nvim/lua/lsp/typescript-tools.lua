@@ -28,8 +28,15 @@ return {
                 -- memory limit in megabytes or "auto"(basically no limit)
                 tsserver_max_memory = "auto",
                 -- described below
-                tsserver_format_options = {},
-                tsserver_file_preferences = {},
+                tsserver_format_options = {
+                    allowIncompleteCompletions = false,
+                    allowRenameOfImportPath = false,
+                },
+                tsserver_file_preferences = {
+                    includeInlayParameterNameHints = "all",
+                    includeCompletionsForModuleExports = true,
+                    quotePreference = "auto",
+                },
                 -- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
                 complete_function_calls = false,
             },
