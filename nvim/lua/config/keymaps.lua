@@ -99,10 +99,15 @@ M.general = {
         ["<leader>ll"] = {
             function ()
                 require("lsp_lines").toggle()
-                ---@diagnostic disable-next-line: undefined-field
-                local vl = vim.diagnostic.config().virtual_lines
-                local vt = vim.diagnostic.config().virtual_text
-                vim.diagnostic.config({ virtual_lines = vl, virtual_text = not vt })
+                if vim.diagnostic.config().virtual_text then
+                    vim.diagnostic.config({ virtual_text = false, })
+                else
+                    vim.diagnostic.config({
+                        virtual_text = {
+                            prefix = "●",
+                        },
+                    })
+                end
             end,
             "Toggle LSP Lines",
         },
