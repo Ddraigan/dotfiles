@@ -23,7 +23,9 @@ return {
             -- },
             overrides = function (colors)
                 return {
-                    DiagnosticHint = { fg = colors.cyan },
+                    DiagnosticHint = { fg = colours.cyan },
+                    FloatBorder = { bg = colours.bg, fg = colours.cyan },
+                    NormalFloat = { bg = colours.bg },
                 }
             end,
         })
