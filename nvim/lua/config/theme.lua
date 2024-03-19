@@ -4,8 +4,6 @@ local M = {}
 M.colours = {
     bg = nil,
     fg = "#F8F8F2",
-    transparent_bg = nil,
-    non_trans_bg = "#282A36",
 
     black = "#191A21",
     cyan = "#8BE9FD",
@@ -110,8 +108,8 @@ M.lualine = function ()
     return {
         normal = {
             a = { fg = colours.black, bg = colours.purple, gui = "bold" },
-            b = { fg = colours.purple, bg = colours.transparent_bg },
-            c = { fg = colours.white, bg = colours.transparent_bg },
+            b = { fg = colours.purple, bg = colours.bg },
+            c = { fg = colours.white, bg = colours.bg },
         },
         command = {
             a = { fg = colours.black, bg = colours.cyan, gui = "bold" },
