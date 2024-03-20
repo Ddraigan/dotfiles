@@ -234,12 +234,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     --
     -- When you move your cursor, the highlights will be cleared (the second autocommand).
     if client and client.server_capabilities.documentHighlightProvider then
-      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
         buffer = buffer,
         callback = vim.lsp.buf.document_highlight,
       })
 
-      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+      vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
         buffer = buffer,
         callback = vim.lsp.buf.clear_references,
       })
@@ -247,18 +247,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('dd-yank', { clear = true }),
+vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "Highlight when yanking (copying) text",
+  group = vim.api.nvim_create_augroup("dd-yank", { clear = true }),
   callback = function ()
     vim.highlight.on_yank()
   end,
 })
 
--- Disable continuing comment on new line
 vim.api.nvim_create_autocmd("BufEnter", {
-  desc = "Disable New Line Comment",
-  group = vim.api.nvim_create_augroup('dd-comment', { clear = true }),
+  desc = "Disable New Line Continuing Comment",
+  group = vim.api.nvim_create_augroup("dd-comment", { clear = true }),
   callback = function ()
     vim.opt.formatoptions:remove { "c", "r", "o" }
   end,
