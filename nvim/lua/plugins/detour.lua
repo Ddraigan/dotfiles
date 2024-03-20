@@ -25,7 +25,6 @@ return {
 
       vim.cmd.startinsert() -- Go into insert mode
 
-
       vim.api.nvim_create_autocmd({ "TermClose" }, {
         buffer = vim.api.nvim_get_current_buf(),
         callback = function ()
