@@ -5,12 +5,15 @@ return {
     vim.keymap.set("n", "<c-w><enter>", ":Detour<cr>")
     vim.keymap.set("n", "<c-w>.", ":DetourCurrentWindow<cr>")
     vim.keymap.set("n", "<leader>sd", function ()
+      local current_dir = vim.fn.expand("%:p:h")
+      local current_buffer_name = vim.api.nvim_buf_get_name(0)
       local ok = require("detour").Detour() -- Open a detour popup
       if not ok then
         return
       end
 
-      local current_buffer_name = vim.api.nvim_buf_get_name(0)
+      -- Set this window's current working directory to current file's directory.
+      vim.cmd.lcd(current_dir)
 
       vim.cmd.terminal("diff-tool " .. current_buffer_name) -- Open terminal buffer
       vim.bo.bufhidden = "delete"                           -- Close the terminal when window closes
