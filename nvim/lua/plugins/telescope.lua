@@ -6,34 +6,11 @@ return {
     "sharkdp/fd",
     "wesleimp/telescope-windowizer.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    -- "ThePrimeagen/harpoon",
   },
   cmd = "Telescope",
   config = function ()
     local opts = {
       defaults = {
-        mappings = {
-          i = {
-            ["<c-t>"] = { function (...)
-              return require("trouble.providers.telescope")
-                  .open_with_trouble(...)
-            end, "Open Results With Trouble" },
-            ["<a-t>"] = { function (...)
-              return require("trouble.providers.telescope")
-                  .open_selected_with_trouble(...)
-            end, "Open Selected With Trouble" },
-          },
-          n = {
-            ["<c-t>"] = { function (...)
-              return require("trouble.providers.telescope")
-                  .open_with_trouble(...)
-            end, "Open Results With Trouble" },
-            ["<a-t>"] = { function (...)
-              return require("trouble.providers.telescope")
-                  .open_selected_with_trouble(...)
-            end, "Open Selected With Trouble" },
-          },
-        },
         vimgrep_arguments = {
           "rg",
           "--color=never",

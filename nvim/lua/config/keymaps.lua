@@ -37,10 +37,6 @@ M.general = {
     ["<leader>fs"] = { "<cmd> Telescope live_grep <CR>", "[Telescope]: Find String" },
     ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "[Telescope]: Find Buffers" },
     ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "[Telescope]: Help Tags" },
-    ["<leader>fd"] = { "<cmd> Telescope diagnostics <CR>", "[Telescope]: Open Diagnostics" },
-
-    -- Noice Plugin
-    ["<leader>fn"] = { "<cmd> NoiceTelescope <CR>", "[Telescope/Noice]: Notifcations" },
 
     -- Trouble Plugin
     ["<leader>tt"] = { "<cmd> TroubleToggle <CR>", "[Trouble]: Toggle Menu" },
@@ -50,6 +46,9 @@ M.general = {
     ["<leader>tl"] = { "<cmd> TroubleToggle loclist <CR>", "[Trouble]: Logistics" },
     ["<leader>tr"] = { "<cmd> TroubleToggle lsp_references <CR>", "[Trouble]: References" },
     ["<leader>to"] = { "<cmd> TodoTrouble <CR>", "[Trouble]: Todo List" },
+
+    -- Noice Plugin
+    ["<leader>fn"] = { "<cmd> NoiceTelescope <CR>", "[Telescope/Noice]: Notifcations" },
 
     -- Harpoon2 Plugin
     ["<leader>ha"] = { "<cmd> lua require('harpoon'):list():append() <CR>", "[Harpoon]: Add File" },
@@ -117,7 +116,6 @@ M.general = {
       end,
       "[LuaSnip]: Expand or Jump",
     },
-
     ["<C-j>"] = {
       function ()
         local ls = require("luasnip")
@@ -127,7 +125,6 @@ M.general = {
       end,
       "[LuaSnip]: Jump",
     },
-
     ["<C-l>"] = {
       function ()
         local ls = require("luasnip")
