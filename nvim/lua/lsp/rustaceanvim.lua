@@ -92,7 +92,7 @@ return {
 
     local has_mason, mason_registry = pcall(require, "mason-registry")
 
-    if has_mason then
+    if vim.fn.has("win32") and has_mason then
       -- Find RustAnalyzer binary path in mason registry
       local get_bin = function()
         local ra_package = mason_registry.get_package("rust-analyzer")
@@ -104,9 +104,7 @@ return {
       end
 
       -- Set the RustAnalyzer binary to the mason one
-      if vim.fn.has("win32") then
-        vim.g.rustaceanvim = vim.tbl_deep_extend("force", opts, { server = { cmd = get_bin() } })
-      end
+      vim.g.rustaceanvim = vim.tbl_deep_extend("force", opts, { server = { cmd = get_bin() } })
     end
   end,
 }
