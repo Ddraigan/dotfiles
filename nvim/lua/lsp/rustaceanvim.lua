@@ -99,7 +99,7 @@ return {
         local install_dir = ra_package:get_install_path()
         -- find out where the binary is in the install dir, and append it to the install dir
         local ra_bin = install_dir .. "/" .. "rust-analyzer"
-        print(ra_bin)
+        -- print(ra_bin)
         return { ra_bin } -- you can add additional args like `'--logfile', '/path/to/logfile'` to the list
       end
 
