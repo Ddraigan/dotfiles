@@ -17,7 +17,7 @@ return {
       local extension_path = codelldb:get_install_path() .. "/extension/"
       local codelldb_path = extension_path .. "adapter/codelldb"
       local liblldb_path = ""
-      if vim.fn.has("win32") then
+      if vim.fn.has("win32") == 1 then
         liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
       elseif vim.fn.has("mac") == 1 then
         liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
@@ -92,19 +92,27 @@ return {
 
     local has_mason, mason_registry = pcall(require, "mason-registry")
 
-    if vim.fn.has("win32") and has_mason then
-      -- Find RustAnalyzer binary path in mason registry
+    if has_mason then
       local get_bin = function()
+        -- Find RustAnalyzer binary path in mason registry
         local ra_package = mason_registry.get_package("rust-analyzer")
         local install_dir = ra_package:get_install_path()
-        -- find out where the binary is in the install dir, and append it to the install dir
-        local ra_bin = install_dir .. "/" .. "rust-analyzer"
-        -- print(ra_bin)
-        return { ra_bin } -- you can add additional args like `'--logfile', '/path/to/logfile'` to the list
+        local ra_bin
+
+        -- Binary is different depending on OS
+        if vim.fn.has("win32") == 1 then
+          ra_bin = install_dir .. "/" .. "rust-analyzer"
+        else
+          ra_bin = install_dir .. "/" .. "rust-analyzer-x86_64-unknown-linux-gnu"
+        end
+
+        -- you can add additional args like `'--logfile', '/path/to/logfile'` to the list
+        return { ra_bin }
       end
 
       -- Set the RustAnalyzer binary to the mason one
       vim.g.rustaceanvim = vim.tbl_deep_extend("force", opts, { server = { cmd = get_bin() } })
+      -- end
     end
   end,
 }
