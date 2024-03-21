@@ -161,11 +161,14 @@ end
 
 M.setmaps(M.general)
 
+local augroup = vim.api.nvim_create_augroup
+local autocommand = vim.api.nvim_create_autocmd
+
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("dd-lsp-attach", { clear = false }),
+autocommand("LspAttach", {
+  group = augroup("dd-lsp-attach", { clear = false }),
   callback = function (args)
     local augroupFormat = vim.api.nvim_create_augroup("dd-formatting",
       { clear = false })
@@ -247,17 +250,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-vim.api.nvim_create_autocmd("TextYankPost", {
+autocommand("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
-  group = vim.api.nvim_create_augroup("dd-yank", { clear = true }),
+  group = augroup("dd-yank", { clear = true }),
   callback = function ()
     vim.highlight.on_yank()
   end,
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
+autocommand("BufEnter", {
   desc = "Disable New Line Continuing Comment",
-  group = vim.api.nvim_create_augroup("dd-comment", { clear = true }),
+  group = augroup("dd-comment", { clear = true }),
   callback = function ()
     vim.opt.formatoptions:remove { "c", "r", "o" }
   end,
