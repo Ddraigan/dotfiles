@@ -26,6 +26,7 @@ return {
       end
       adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path)
     end
+
     return {
       capabilities = function()
         require("config.utils").capabilities()
