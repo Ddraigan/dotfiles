@@ -6,23 +6,31 @@ return {
     "mfussenegger/nvim-dap",
   },
   ft = { "rust" },
-
   opts = function()
     local has_mason, mason_registry = pcall(require, "mason-registry")
     local adapter ---@type any
+    local rust_analyzer_binary ---@type table
+
     -- Figure out where to get adapter from and which one to use
     if has_mason then
-      -- rust tools configuration for debugging support
+      -- Dap Binarys
       local codelldb = mason_registry.get_package("codelldb")
       local extension_path = codelldb:get_install_path() .. "/extension/"
       local codelldb_path = extension_path .. "adapter/codelldb"
       local liblldb_path = ""
+
+      -- Find RustAnalyzer binary path in mason registry
+      local ra_package = mason_registry.get_package("rust-analyzer")
+      local install_dir = ra_package:get_install_path()
+
       if vim.fn.has("win32") == 1 then
         liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
+        rust_analyzer_binary = { install_dir .. "/" .. "rust-analyzer" }
       elseif vim.fn.has("mac") == 1 then
         liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
       else
         liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+        rust_analyzer_binary = { install_dir .. "/" .. "rust-analyzer-x86_64-unknown-linux-gnu" }
       end
       adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path)
     end
@@ -33,6 +41,7 @@ return {
       end,
       ---@type RustaceanLspClientOpts
       server = {
+        cmd = rust_analyzer_binary,
         auto_attach = true,
         on_attach = function(_, bufnr)
           vim.keymap.set(
@@ -85,34 +94,8 @@ return {
       },
     }
   end,
-
   config = function(_, opts)
     -- Set Options
     vim.g.rustaceanvim = vim.tbl_deep_extend("force", {}, opts or {})
-
-    local has_mason, mason_registry = pcall(require, "mason-registry")
-
-    if has_mason then
-      local get_bin = function()
-        -- Find RustAnalyzer binary path in mason registry
-        local ra_package = mason_registry.get_package("rust-analyzer")
-        local install_dir = ra_package:get_install_path()
-        local ra_bin
-
-        -- Binary is different depending on OS
-        if vim.fn.has("win32") == 1 then
-          ra_bin = install_dir .. "/" .. "rust-analyzer"
-        else
-          ra_bin = install_dir .. "/" .. "rust-analyzer-x86_64-unknown-linux-gnu"
-        end
-
-        -- you can add additional args like `'--logfile', '/path/to/logfile'` to the list
-        return { ra_bin }
-      end
-
-      -- Set the RustAnalyzer binary to the mason one
-      vim.g.rustaceanvim = vim.tbl_deep_extend("force", opts, { server = { cmd = get_bin() } })
-      -- end
-    end
   end,
 }
