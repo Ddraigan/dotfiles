@@ -85,7 +85,7 @@ return {
           setType = true,
         },
         format = {
-          enable = true,
+          enable = false,
         },
         completion = {
           callSnipet = "Replace",

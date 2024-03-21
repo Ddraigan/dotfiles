@@ -93,7 +93,7 @@ M.general = {
       function ()
         require("lsp_lines").toggle()
         if vim.diagnostic.config().virtual_text then
-          vim.diagnostic.config({ virtual_text = false, })
+          vim.diagnostic.config({ virtual_text = false })
         else
           vim.diagnostic.config({
             virtual_text = {
@@ -145,7 +145,8 @@ M.general = {
 for i = 1, 5, 1 do
   M.general.n[string.format("<leader>%s", i)] = {
     string.format("<cmd> lua require('harpoon'):list():select(%s) <CR>", i),
-    string.format("[Harpoon]: Go To Buffer %s", i) }
+    string.format("[Harpoon]: Go To Buffer %s", i),
+  }
 end
 
 M.setmaps = function (maps)
@@ -164,14 +165,12 @@ M.setmaps(M.general)
 local augroup = vim.api.nvim_create_augroup
 local autocommand = vim.api.nvim_create_autocmd
 
-
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 autocommand("LspAttach", {
   group = augroup("dd-lsp-attach", { clear = false }),
   callback = function (args)
-    local augroupFormat = vim.api.nvim_create_augroup("dd-formatting",
-      { clear = false })
+    -- local augroupFormat = augroup("dd-formatting", { clear = false })
     -- Enable completion triggered by <c-x><c-o>
     -- vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
@@ -182,49 +181,46 @@ autocommand("LspAttach", {
       return { desc = "[LSP]: " .. desc, buffer = buf, noremap = true, silent = true }
     end
 
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
-      opts("Go To Declaration", buffer))
-    vim.keymap.set("n", "gd", "<cmd> Telescope lsp_definitions <CR>",
-      opts("Go To Definition", buffer))
-    vim.keymap.set("n", "K", vim.lsp.buf.hover,
-      opts("Hover Documentation", buffer))
-    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help,
-      opts("Signature Documentation", buffer))
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation,
-      opts("Go To Implementation", buffer))
-    vim.keymap.set("n", "gr", "<cmd> Telescope lsp_references <CR>",
-      opts("Go To References", buffer))
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go To Declaration", buffer))
+    vim.keymap.set("n", "gd", "<cmd> Telescope lsp_definitions <CR>", opts("Go To Definition", buffer))
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover Documentation", buffer))
+    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts("Signature Documentation", buffer))
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go To Implementation", buffer))
+    vim.keymap.set("n", "gr", "<cmd> Telescope lsp_references <CR>", opts("Go To References", buffer))
     vim.keymap.set("n", "<leader>lr", ":IncRename ", opts("Rename", buffer))
-    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,
-      opts("Code Actions", buffer))
+    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts("Code Actions", buffer))
+    vim.keymap.set("n", "<Leader>lf", function ()
+      require("conform").format({ buffer, lsp_fallback = true })
+    end, { desc = "[LSP/Conform]: Format" })
     -- vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts("", bufnr))
     -- vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts("", bufnr))
     -- vim.keymap.set("n", "<space>wl", function()
     -- 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     -- end, opts("", bufnr))
 
-    if client.supports_method("textDocument/formatting") then
-      vim.keymap.set("n", "<Leader>lf", function ()
-        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-      end, { buffer = buffer, desc = "[LSP]: Format" })
+    -- if client.supports_method("textDocument/formatting") then
+    --   vim.keymap.set("n", "<Leader>lf", function ()
+    --     vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+    --   end, { buffer = buffer, desc = "[LSP]: Format" })
+    --
+    --   vim.api.nvim_clear_autocmds({ group = augroupFormat, buffer = buffer })
+    --   vim.api.nvim_create_autocmd("BufWritePre", {
+    --     group = augroupFormat,
+    --     buffer = buffer,
+    --     callback = function ()
+    --       vim.lsp.buf.format({ async = false })
+    --     end,
+    --     desc = "[LSP]: Format On Save",
+    --   })
+    -- end
+    --
+    -- if client.supports_method("textDocument/rangeFormatting") then
+    --   vim.keymap.set("x", "<Leader>lf", function ()
+    --     vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+    --   end, { buffer = buffer, desc = "[LSP]: Range Format" })
+    -- end
 
-      vim.api.nvim_clear_autocmds({ group = augroupFormat, buffer = buffer })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroupFormat,
-        buffer = buffer,
-        callback = function ()
-          vim.lsp.buf.format({ async = false })
-        end,
-        desc = "[LSP]: Format On Save",
-      })
-    end
-
-    if client.supports_method("textDocument/rangeFormatting") then
-      vim.keymap.set("x", "<Leader>lf", function ()
-        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-      end, { buffer = buffer, desc = "[LSP]: Range Format" })
-    end
-
+    ---@diagnostic disable-next-line: need-check-nil
     if client.server_capabilities.inlayHintProvider then
       vim.keymap.set("n", "<leader>lh", function ()
         -- local current_setting = vim.lsp.inlay_hint.is_enabled(buffer)
@@ -262,7 +258,7 @@ autocommand("BufEnter", {
   desc = "Disable New Line Continuing Comment",
   group = augroup("dd-comment", { clear = true }),
   callback = function ()
-    vim.opt.formatoptions:remove { "c", "r", "o" }
+    vim.opt.formatoptions:remove({ "c", "r", "o" })
   end,
 })
 
