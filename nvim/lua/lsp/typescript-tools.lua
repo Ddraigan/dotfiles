@@ -1,14 +1,14 @@
 return {
   "pmizio/typescript-tools.nvim",
-  ft = { "typescript", "typescriptreact" },
+  ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   opts = {},
-  config = function ()
+  config = function()
     local tst = require("typescript-tools")
 
     tst.setup({
       handlers = {},
-      on_attach = function (client)
+      on_attach = function(client)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
       end,
