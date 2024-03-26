@@ -47,7 +47,7 @@ M.general = {
     ["<leader>tr"] = { "<cmd> TroubleToggle lsp_references <CR>", "[Trouble]: References" },
     ["<leader>to"] = { "<cmd> TodoTrouble <CR>", "[Trouble]: Todo List" },
     ["<leader>tn"] = {
-      "<cmd> require('trouble').next({skip_groups = true, jump = true}) <CR>",
+      "<cmd> lua require('trouble').next({skip_groups = true, jump = true}) <CR>",
       "[Trouble]: Next Diagnostic",
     },
 
