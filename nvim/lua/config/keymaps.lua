@@ -50,6 +50,10 @@ M.general = {
       "<cmd> lua require('trouble').next({skip_groups = true, jump = true}) <CR>",
       "[Trouble]: Next Diagnostic",
     },
+    ["<leader>tp"] = {
+      "<cmd> lua require('trouble').previous({skip_groups = true, jump = true}) <CR>",
+      "[Trouble]: Next Diagnostic",
+    },
 
     -- Noice Plugin
     ["<leader>fn"] = { "<cmd> NoiceTelescope <CR>", "[Telescope/Noice]: Notifcations" },
