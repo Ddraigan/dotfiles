@@ -46,6 +46,10 @@ M.general = {
     ["<leader>tl"] = { "<cmd> TroubleToggle loclist <CR>", "[Trouble]: Logistics" },
     ["<leader>tr"] = { "<cmd> TroubleToggle lsp_references <CR>", "[Trouble]: References" },
     ["<leader>to"] = { "<cmd> TodoTrouble <CR>", "[Trouble]: Todo List" },
+    ["<leader>tn"] = {
+      "<cmd> require('trouble').next({skip_groups = true, jump = true}) <CR>",
+      "[Trouble]: Next Diagnostic",
+    },
 
     -- Noice Plugin
     ["<leader>fn"] = { "<cmd> NoiceTelescope <CR>", "[Telescope/Noice]: Notifcations" },
@@ -83,14 +87,14 @@ M.general = {
 
     -- Oil Plugin
     ["<leader>-"] = {
-      function ()
+      function()
         require("oil").toggle_float()
       end,
       "Toggle Oil",
     },
     -- Lsp_Lines
     ["<leader>ll"] = {
-      function ()
+      function()
         require("lsp_lines").toggle()
         if vim.diagnostic.config().virtual_text then
           vim.diagnostic.config({ virtual_text = false })
@@ -108,7 +112,7 @@ M.general = {
   i = {
     -- LuaSnip Plugn
     ["<C-k>"] = {
-      function ()
+      function()
         local ls = require("luasnip")
         if ls.expand_or_jumpable() then
           ls.expand_or_jump()
@@ -117,7 +121,7 @@ M.general = {
       "[LuaSnip]: Expand or Jump",
     },
     ["<C-j>"] = {
-      function ()
+      function()
         local ls = require("luasnip")
         if ls.jumpable(-1) then
           ls.jump(-1)
@@ -126,7 +130,7 @@ M.general = {
       "[LuaSnip]: Jump",
     },
     ["<C-l>"] = {
-      function ()
+      function()
         local ls = require("luasnip")
         if ls.choice_active() then
           ls.change_choice(1)
@@ -149,7 +153,7 @@ for i = 1, 5, 1 do
   }
 end
 
-M.setmaps = function (maps)
+M.setmaps = function(maps)
   for mode, values in pairs(maps) do
     for keybind, mapping_info in pairs(values) do
       local opts = {
@@ -169,7 +173,7 @@ local autocommand = vim.api.nvim_create_autocmd
 -- after the language server attaches to the current buffer
 autocommand("LspAttach", {
   group = augroup("dd-lsp-attach", { clear = false }),
-  callback = function (args)
+  callback = function(args)
     -- local augroupFormat = augroup("dd-formatting", { clear = false })
     -- Enable completion triggered by <c-x><c-o>
     -- vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
@@ -189,7 +193,7 @@ autocommand("LspAttach", {
     vim.keymap.set("n", "gr", "<cmd> Telescope lsp_references <CR>", opts("Go To References", buffer))
     vim.keymap.set("n", "<leader>lr", ":IncRename ", opts("Rename", buffer))
     vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts("Code Actions", buffer))
-    vim.keymap.set("n", "<Leader>lf", function ()
+    vim.keymap.set("n", "<Leader>lf", function()
       require("conform").format({ buffer, lsp_fallback = true })
     end, { desc = "[LSP/Conform]: Format" })
     -- vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts("", bufnr))
@@ -222,7 +226,7 @@ autocommand("LspAttach", {
 
     ---@diagnostic disable-next-line: need-check-nil
     if client.server_capabilities.inlayHintProvider then
-      vim.keymap.set("n", "<leader>lh", function ()
+      vim.keymap.set("n", "<leader>lh", function()
         -- local current_setting = vim.lsp.inlay_hint.is_enabled(buffer)
         vim.lsp.inlay_hint.enable(buffer, not vim.lsp.inlay_hint.is_enabled())
       end, opts("Toggle Inlay Hints"))
@@ -249,7 +253,7 @@ autocommand("LspAttach", {
 autocommand("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
   group = augroup("dd-yank", { clear = true }),
-  callback = function ()
+  callback = function()
     vim.highlight.on_yank()
   end,
 })
@@ -257,7 +261,7 @@ autocommand("TextYankPost", {
 autocommand("BufEnter", {
   desc = "Disable New Line Continuing Comment",
   group = augroup("dd-comment", { clear = true }),
-  callback = function ()
+  callback = function()
     vim.opt.formatoptions:remove({ "c", "r", "o" })
   end,
 })
