@@ -8,7 +8,7 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   cmd = "Telescope",
-  config = function ()
+  config = function()
     local opts = {
       defaults = {
         vimgrep_arguments = {
@@ -31,11 +31,10 @@ return {
         },
         file_ignore_patterns = { "node_modules" },
         preview = {
-          mime_hook = function (filepath, bufnr, opts)
-            local is_image = function (filepath)
+          mime_hook = function(filepath, bufnr, opts)
+            local is_image = function(filepath)
               local image_extensions = { "png", "jpg" } -- Supported image formats
-              local split_path = vim.split(filepath:lower(), ".",
-                { plain = true })
+              local split_path = vim.split(filepath:lower(), ".", { plain = true })
               local extension = split_path[#split_path]
               return vim.tbl_contains(image_extensions, extension)
             end
@@ -47,17 +46,11 @@ return {
                 end
               end
               vim.fn.jobstart({
-                  "catimg",
-                  filepath, -- Terminal image viewer command
-                },
-                { on_stdout = send_output, stdout_buffered = true, pty = true })
+                "catimg",
+                filepath, -- Terminal image viewer command
+              }, { on_stdout = send_output, stdout_buffered = true, pty = true })
             else
-              require("telescope.previewers.utils")
-                  .set_preview_message(
-                    bufnr,
-                    opts.winid,
-                    "Binary cannot be previewed"
-                  )
+              require("telescope.previewers.utils").set_preview_message(bufnr, opts.winid, "Binary cannot be previewed")
             end
           end,
         },
@@ -71,14 +64,20 @@ return {
         windowizer = {
           find_cmd = "fd", -- find command. Available options [ find | fd | rg ] (defaults to "fd")
         },
-        extensions = {
-          fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-            case_mode = "smart_case",
-          },
-        },
+        extensions = function()
+          if vim.fn.has("win32") == 1 then
+            return {}
+          else
+            return {
+              fzf = {
+                fuzzy = true,
+                override_generic_sorter = true,
+                override_file_sorter = true,
+                case_mode = "smart_case",
+              },
+            }
+          end
+        end,
       },
     }
 
@@ -105,7 +104,9 @@ return {
 
     require("telescope").setup(opts)
     require("telescope").load_extension("windowizer")
-    pcall(require("telescope").load_extension("fzf"))
+    if not vim.fn.has("win32") == 1 then
+      require("telescope").load_extension("fzf")
+    end
 
     -- require("telescope").load_extension("harpoon")
   end,
