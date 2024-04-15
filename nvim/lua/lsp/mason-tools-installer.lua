@@ -13,6 +13,7 @@ return {
       { "css-lsp" },
       { "json-lsp" },
       { "prettierd" },
+      { "clangd" },
       -- { "eslint_d" },
       -- { "eslint-lsp" },
       { "codelldb" },
