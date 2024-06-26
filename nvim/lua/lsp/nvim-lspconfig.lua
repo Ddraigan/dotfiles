@@ -6,7 +6,7 @@ return {
     { "hrsh7th/nvim-cmp" },
     { "hrsh7th/cmp-nvim-lsp" },
     { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
-    { "folke/neodev.nvim" },
+    -- { "folke/neodev.nvim" },
   },
   config = function ()
     local lspconfig = require("lspconfig")

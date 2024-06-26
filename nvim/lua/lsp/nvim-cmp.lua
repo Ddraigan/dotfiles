@@ -69,6 +69,7 @@ return {
         { name = "crates" },
         { name = "buffer" },
         { name = "path" },
+        { name = "lazydev", group_index = 0 }
       }),
       formatting = {
         expandable_indicator = true,

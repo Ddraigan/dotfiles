@@ -238,7 +238,7 @@ autocommand("LspAttach", {
     if client.server_capabilities.inlayHintProvider then
       vim.keymap.set("n", "<leader>lh", function()
         -- local current_setting = vim.lsp.inlay_hint.is_enabled(buffer)
-        vim.lsp.inlay_hint.enable(buffer, not vim.lsp.inlay_hint.is_enabled())
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
       end, opts("Toggle Inlay Hints"))
     end
 
@@ -257,6 +257,13 @@ autocommand("LspAttach", {
         callback = vim.lsp.buf.clear_references,
       })
     end
+
+    -- autocommand("BufWritePre", {
+    --   pattern = "*",
+    --   callback = function()
+    --     require("conform").format({ bufnr = args.buf })
+    --   end,
+    -- })
   end,
 })
 
