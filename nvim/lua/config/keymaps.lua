@@ -86,6 +86,9 @@ M.general = {
     ["<leader>sv"] = { "<cmd> vsplit <CR>", "[Vim]: Split Vertical" },
     ["<leader>sc"] = { "<C-w>c", "[Vim]: Split Close" },
 
+    -- Structural Search and Replace Plugin
+    ["<leader>sr"] = { "<cmd> lua require('ssr').open() <CR>", "[SSR]: Structural Search and Replace" },
+
     -- Nvim-Tree Plugin
     -- ["<leader>-"] = { "<cmd> NvimTreeToggle <CR>", "[Nvim-Tree]: Toggle Tree" },
 
@@ -146,6 +149,9 @@ M.general = {
   x = {
     -- Pasting does not ovride your clipboard
     ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Don't Copy Replaced Text", opts = { silent = true } },
+
+    -- Structural Search and Replace Plugin
+    ["<leader>sr"] = { "<cmd> lua require('ssr').open() <CR>", "[SSR]: Structural Search and Replace" },
   },
 }
 
