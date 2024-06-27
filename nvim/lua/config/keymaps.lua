@@ -37,18 +37,15 @@ M.general = {
     ["<leader>fs"] = { "<cmd> Telescope live_grep <CR>", "[Telescope]: Find String" },
     ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "[Telescope]: Find Buffers" },
     ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "[Telescope]: Help Tags" },
+    ["<leader>fo"] = { "<cmd> TodoTelescope <CR>", "[Telescope/Todo]: Todo List" },
 
     -- Trouble Plugin
     -- ["<leader>tt"] = { "<cmd> TroubleToggle <CR>", "[Trouble]: Toggle Menu" },
     ["<leader>tw"] = { "<cmd> Trouble diagnostics toggle preview_float <CR>", "[Trouble]: Workspace Diagnostics" },
-    ["<leader>td"] = {
-      "<cmd> Trouble diagnostics_buffer toggle <CR>",
-      "[Trouble]: Document Diagnostics",
-    },
-    ["<leader>tq"] = { "<cmd> TroubleToggle quickfix <CR>", "[Trouble]: Quickfix" },
-    ["<leader>tl"] = { "<cmd> TroubleToggle loclist <CR>", "[Trouble]: Logistics" },
-    ["<leader>tr"] = { "<cmd> TroubleToggle lsp_references <CR>", "[Trouble]: References" },
-    ["<leader>to"] = { "<cmd> TodoTrouble <CR>", "[Trouble]: Todo List" },
+    ["<leader>td"] = { "<cmd> Trouble diagnostics_buffer toggle <CR>", "[Trouble]: Document Diagnostics" },
+    ["<leader>tl"] = { "<cmd> Trouble lsp toggle win.position=right <CR>", "[Trouble]: Lsp Ref/Def/Impl" },
+    ["<leader>ts"] = { "<cmd> Trouble symbols toggle focus=false <CR>", "[Trouble]: Symbols" },
+    ["<leader>to"] = { "<cmd> Trouble todo toggle win.position=right <CR>", "[Trouble/Todo]: Todo List" },
     ["<leader>tn"] = {
       function()
         if require("trouble").is_open() then

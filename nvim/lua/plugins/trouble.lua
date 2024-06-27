@@ -27,7 +27,7 @@ return {
       -- when a buffer is not yet loaded, the preview window will be created
       -- in a scratch buffer with only syntax highlighting enabled.
       -- Set to false, if you want the preview to always be a real loaded buffer.
-      scratch = true,
+      scratch = false,
     },
     -- Throttle/Debounce settings. Should usually not be changed.
     ---@type table<string, number|{ms:number, debounce?:boolean}>
@@ -53,11 +53,11 @@ return {
       ["<c-s>"] = "jump_split",
       ["<c-v>"] = "jump_vsplit",
       -- go down to next item (accepts count)
-      j = "next",
+      -- j = "next",
       ["}"] = "next",
       ["]]"] = "next",
       -- go up to prev item (accepts count)
-      k = "prev",
+      -- k = "prev",
       ["{"] = "prev",
       ["[["] = "prev",
       dd = "delete",
