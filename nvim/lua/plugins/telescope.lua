@@ -15,10 +15,6 @@ return {
           i = { ["<c-t>"] = require("trouble.sources.telescope").open },
           n = { ["<c-t>"] = require("trouble.sources.telescope").open },
         },
-        get_selection_window = function()
-          require("edgy").goto_main()
-          return 0
-        end,
         vimgrep_arguments = {
           "rg",
           "--color=never",
