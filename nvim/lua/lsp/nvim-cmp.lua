@@ -12,7 +12,7 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "L3MON4D3/LuaSnip",
   },
-  config = function ()
+  config = function()
     local cmp = require("cmp")
     -- local cmp_select = { behavior = cmp.SelectBehavior.Select }
     vim.opt.completeopt = { "menu", "menuone", "noselect" }
@@ -20,7 +20,7 @@ return {
 
     cmp.setup({
       snippet = {
-        expand = function (args)
+        expand = function(args)
           require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
         end,
       },
@@ -34,14 +34,11 @@ return {
         ["<S-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        ["<Tab>"] = cmp.mapping(function (fallback)
+        ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
           elseif require("luasnip").expand_or_jumpable() then
-            vim.fn.feedkeys(
-              vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true),
-              ""
-            )
+            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
           else
             fallback()
           end
@@ -49,7 +46,7 @@ return {
           "i",
           "s",
         }),
-        ["<S-Tab>"] = cmp.mapping(function (fallback)
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif require("luasnip").jumpable(-1) then
@@ -69,11 +66,11 @@ return {
         { name = "crates" },
         { name = "buffer" },
         { name = "path" },
-        { name = "lazydev", group_index = 0 }
+        { name = "lazydev", group_index = 0 },
       }),
       formatting = {
         expandable_indicator = true,
-        format = function (entry, vim_item)
+        format = function(entry, vim_item)
           -- Kind icons
           vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
           -- Source
@@ -100,7 +97,7 @@ return {
       }),
     })
 
-    local compare = require "cmp.config.compare"
+    local compare = require("cmp.config.compare")
     cmp.setup.filetype({ "rust" }, {
       sorting = {
         priority_weight = 2,

@@ -11,6 +11,10 @@ return {
   config = function()
     local opts = {
       defaults = {
+        mappings = {
+          i = { ["<c-t>"] = require("trouble.sources.telescope").open },
+          n = { ["<c-t>"] = require("trouble.sources.telescope").open },
+        },
         vimgrep_arguments = {
           "rg",
           "--color=never",

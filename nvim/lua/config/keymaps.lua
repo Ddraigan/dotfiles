@@ -39,27 +39,48 @@ M.general = {
     ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "[Telescope]: Help Tags" },
 
     -- Trouble Plugin
-    ["<leader>tt"] = { "<cmd> TroubleToggle <CR>", "[Trouble]: Toggle Menu" },
-    ["<leader>tw"] = { "<cmd> TroubleToggle workspace_diagnostics <CR>", "[Trouble]: Workspace Diagnostics" },
-    ["<leader>td"] = { "<cmd> TroubleToggle document_diagnostics <CR>", "[Trouble]: Document Diagnostics" },
+    -- ["<leader>tt"] = { "<cmd> TroubleToggle <CR>", "[Trouble]: Toggle Menu" },
+    ["<leader>tw"] = { "<cmd> Trouble diagnostics toggle preview_float <CR>", "[Trouble]: Workspace Diagnostics" },
+    ["<leader>td"] = {
+      "<cmd> Trouble diagnostics_buffer toggle <CR>",
+      "[Trouble]: Document Diagnostics",
+    },
     ["<leader>tq"] = { "<cmd> TroubleToggle quickfix <CR>", "[Trouble]: Quickfix" },
     ["<leader>tl"] = { "<cmd> TroubleToggle loclist <CR>", "[Trouble]: Logistics" },
     ["<leader>tr"] = { "<cmd> TroubleToggle lsp_references <CR>", "[Trouble]: References" },
     ["<leader>to"] = { "<cmd> TodoTrouble <CR>", "[Trouble]: Todo List" },
     ["<leader>tn"] = {
-      "<cmd> lua require('trouble').next({skip_groups = true, jump = true}) <CR>",
+      function()
+        if require("trouble").is_open() then
+          require("trouble").next({ skip_groups = true, jump = true })
+        else
+          local ok, err = pcall(vim.cmd.cnext)
+          if not ok then
+            vim.notify(err, vim.log.levels.ERROR)
+          end
+        end
+      end,
       "[Trouble]: Next Diagnostic",
     },
     ["<leader>tp"] = {
-      "<cmd> lua require('trouble').previous({skip_groups = true, jump = true}) <CR>",
-      "[Trouble]: Next Diagnostic",
+      function()
+        if require("trouble").is_open() then
+          require("trouble").prev({ skip_groups = true, jump = true })
+        else
+          local ok, err = pcall(vim.cmd.cprev)
+          if not ok then
+            vim.notify(err, vim.log.levels.ERROR)
+          end
+        end
+      end,
+      "[Trouble]: Previous Diagnostic",
     },
 
     -- Noice Plugin
     ["<leader>fn"] = { "<cmd> NoiceTelescope <CR>", "[Telescope/Noice]: Notifcations" },
 
     -- Harpoon2 Plugin
-    ["<leader>ha"] = { "<cmd> lua require('harpoon'):list():append() <CR>", "[Harpoon]: Add File" },
+    ["<leader>ha"] = { "<cmd> lua require('harpoon'):list():add() <CR>", "[Harpoon]: Add File" },
     ["<leader>hd"] = { "<cmd> lua require('harpoon'):list():remove() <CR>", "[Harpoon]: Remove File" },
     ["<leader>hh"] = {
       "<cmd> lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list()) <CR>",
@@ -178,18 +199,18 @@ M.setmaps(M.general)
 
 local augroup = vim.api.nvim_create_augroup
 local autocommand = vim.api.nvim_create_autocmd
+local usercommand = vim.api.nvim_create_user_command
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 autocommand("LspAttach", {
   group = augroup("dd-lsp-attach", { clear = false }),
   callback = function(args)
-    -- local augroupFormat = augroup("dd-formatting", { clear = false })
-    -- Enable completion triggered by <c-x><c-o>
-    -- vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     local buffer = args.buf
+
+    -- Enable completion triggered by <c-x><c-o>
+    -- vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
     local function opts(desc, buf)
       return { desc = "[LSP]: " .. desc, buffer = buf, noremap = true, silent = true }
@@ -212,34 +233,13 @@ autocommand("LspAttach", {
     -- 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     -- end, opts("", bufnr))
 
-    -- if client.supports_method("textDocument/formatting") then
-    --   vim.keymap.set("n", "<Leader>lf", function ()
-    --     vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-    --   end, { buffer = buffer, desc = "[LSP]: Format" })
-    --
-    --   vim.api.nvim_clear_autocmds({ group = augroupFormat, buffer = buffer })
-    --   vim.api.nvim_create_autocmd("BufWritePre", {
-    --     group = augroupFormat,
-    --     buffer = buffer,
-    --     callback = function ()
-    --       vim.lsp.buf.format({ async = false })
-    --     end,
-    --     desc = "[LSP]: Format On Save",
-    --   })
-    -- end
-    --
-    -- if client.supports_method("textDocument/rangeFormatting") then
-    --   vim.keymap.set("x", "<Leader>lf", function ()
-    --     vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-    --   end, { buffer = buffer, desc = "[LSP]: Range Format" })
-    -- end
-
-    ---@diagnostic disable-next-line: need-check-nil
-    if client.server_capabilities.inlayHintProvider then
+    if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
       vim.keymap.set("n", "<leader>lh", function()
         -- local current_setting = vim.lsp.inlay_hint.is_enabled(buffer)
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
       end, opts("Toggle Inlay Hints"))
+
+      vim.lsp.inlay_hint.enable()
     end
 
     -- The following two autocommands are used to highlight references of the
@@ -247,24 +247,57 @@ autocommand("LspAttach", {
     --
     -- When you move your cursor, the highlights will be cleared (the second autocommand).
     if client and client.server_capabilities.documentHighlightProvider then
-      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+      autocommand({ "CursorHold", "CursorHoldI" }, {
         buffer = buffer,
         callback = vim.lsp.buf.document_highlight,
       })
 
-      vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+      autocommand({ "CursorMoved", "CursorMovedI" }, {
         buffer = buffer,
         callback = vim.lsp.buf.clear_references,
       })
     end
 
-    -- autocommand("BufWritePre", {
-    --   pattern = "*",
-    --   callback = function()
-    --     require("conform").format({ bufnr = args.buf })
-    --   end,
-    -- })
+    -- Format on save
+    autocommand("BufWritePre", {
+      pattern = "*",
+      group = augroup("dd-formatting", { clear = false }),
+      callback = function()
+        if vim.g.disable_autoformat or vim.b[buffer].disable_autoformat then
+          return
+        end
+
+        local disable_filetypes = { c = true, cpp = true }
+
+        local format_opts = {
+          async = true,
+          timeout_ms = 500,
+          lsp_fallback = not disable_filetypes[vim.bo[buffer].filetype],
+        }
+
+        require("conform").format(format_opts)
+      end,
+    })
   end,
+})
+
+usercommand("FormatDisable", function(args)
+  if args.bang then
+    -- FormatDisable! will disable formatting just for this buffer
+    vim.b.disable_autoformat = true
+  else
+    vim.g.disable_autoformat = true
+  end
+end, {
+  desc = "Disable autoformat-on-save",
+  bang = true,
+})
+
+usercommand("FormatEnable", function()
+  vim.b.disable_autoformat = false
+  vim.g.disable_autoformat = false
+end, {
+  desc = "Re-enable autoformat-on-save",
 })
 
 autocommand("TextYankPost", {
