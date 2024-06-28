@@ -4,7 +4,7 @@ return {
   keys = {
     {
       "<leader>nd",
-      function ()
+      function()
         require("notify").dismiss({ silent = true, pending = true })
       end,
       desc = "Dismiss all Notifications",
@@ -13,11 +13,12 @@ return {
   opts = {
     background_colour = "#000000",
     timeout = 10000,
-    stages = "fade_in_slide_out",
-    max_height = function ()
+    stages = "static",
+    render = "compact",
+    max_height = function()
       return math.floor(vim.o.lines * 0.75)
     end,
-    max_width = function ()
+    max_width = function()
       return math.floor(vim.o.columns * 0.75)
     end,
   },
