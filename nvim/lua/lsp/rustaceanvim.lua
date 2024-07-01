@@ -58,15 +58,21 @@ return {
           -- )
           vim.keymap.set(
             "n",
-            "<leader>le",
+            "<leader>lre",
             "<cmd> RustLsp explainError <CR>",
             { buffer = bufnr, desc = "[Rust]: Explain Errors" }
           )
           vim.keymap.set(
             "n",
-            "<leader>lj",
+            "<leader>lrj",
             "<cmd> RustLsp joinLines <CR>",
             { buffer = bufnr, desc = "[Rust]: Join Lines" }
+          )
+          vim.keymap.set(
+            "n",
+            "<leader>lrd>",
+            "<cmd> RustLsp renderDiagnostic",
+            { buffer = bufnr, desc = "[Rust]: Render Diagnostic as if cargo build" }
           )
         end,
         settings = {

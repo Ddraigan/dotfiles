@@ -1,6 +1,4 @@
-local M = {
-	'stevearc/dressing.nvim',
-	event = "BufReadPre",
+return {
+  "stevearc/dressing.nvim",
+  event = "BufReadPre",
 }
-
-return M

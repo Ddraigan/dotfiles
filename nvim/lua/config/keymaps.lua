@@ -313,6 +313,14 @@ autocommand("BufEnter", {
   end,
 })
 
+-- autocommand("BufRead", {
+--   group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
+--   pattern = "Cargo.toml",
+--   callback = function()
+--     cmp.setup.buffer({ sources = { { name = "crates" } } })
+--   end,
+-- })
+
 -- -- Creates simpler lua mapping syntax
 -- local function bind(op, outer_opts)
 -- 	outer_opts = outer_opts or { noremap = true }
