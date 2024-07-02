@@ -9,6 +9,7 @@ return {
   },
   cmd = "Telescope",
   config = function()
+    local actions = require("telescope.actions")
     local opts = {
       defaults = {
         mappings = {
@@ -60,6 +61,13 @@ return {
         },
       },
       pickers = {
+        buffers = {
+          mappings = {
+            i = {
+              ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
+            },
+          },
+        },
         lsp_references = {
           path_display = { "truncate" },
         },
