@@ -41,13 +41,13 @@ return {
             key = "d",
           },
           {
-            desc = " quit",
+            desc = " Quit",
             group = "DiagnosticError",
             action = "q",
             key = "q",
           },
         },
-        -- footer = {},
+        footer = {},
       },
     })
     -- 	require("dashboard").setup({
