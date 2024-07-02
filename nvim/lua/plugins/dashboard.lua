@@ -3,11 +3,6 @@ return {
   dependencies = { { "nvim-tree/nvim-web-devicons" } },
   event = "VimEnter",
   config = function()
-    CONFIG_HOME = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config"
-    local find_config_opts = {
-      cwd = vim.env.CONFIG_HOME,
-      results_title = "Config",
-    }
     require("dashboard").setup({
       theme = "hyper",
       config = {
@@ -24,25 +19,35 @@ return {
             action = "Telescope find_files",
             key = "f",
           },
-          {
-            desc = " Apps",
-            group = "DiagnosticHint",
-            action = "Telescope app",
-            key = "a",
-          },
+          -- {
+          --   desc = " Apps",
+          --   group = "DiagnosticHint",
+          --   action = "Telescope app",
+          --   key = "a",
+          -- },
           {
             desc = "Last Session",
-            group = "DiagnosticHint",
+            group = "DiagnosticWarn",
             action = 'lua require("persistence").load()',
             key = "n",
           },
           {
             desc = " dotfiles",
             group = "Number",
-            action = ":e $MYVIMRC | tcd %:p:h",
+            -- action = "e $MYVIMRC | tcd %:p:h",
+            action = function()
+              vim.cmd("Telescope find_files cwd=" .. vim.fn.stdpath("config"))
+            end,
             key = "d",
           },
+          {
+            desc = " quit",
+            group = "DiagnosticError",
+            action = "q",
+            key = "q",
+          },
         },
+        -- footer = {},
       },
     })
     -- 	require("dashboard").setup({
