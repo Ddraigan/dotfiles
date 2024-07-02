@@ -133,7 +133,43 @@ M.general = {
       end,
       "Toggle LSP Lines",
     },
+
+    -- Detour Plugin
+    ["<leader>sdn"] = { "<cmd> Detour <CR>", "[Detour]: New Detour" },
+    ["<leader>sdt"] = {
+      function()
+        local current_dir = vim.fn.expand("%:p:h")
+        local current_buffer_name = vim.api.nvim_buf_get_name(0)
+        local ok = require("detour").Detour() -- Open a detour popup
+        if not ok then
+          return
+        end
+
+        -- Set this window's current working directory to current file's directory.
+        vim.cmd.lcd(current_dir)
+
+        vim.cmd.terminal("diff-tool " .. current_buffer_name) -- Open terminal buffer
+        vim.bo.bufhidden = "delete" -- Close the terminal when window closes
+
+        -- It's common for people to have `<Esc>` mapped to `<C-\><C-n>` for terminals.
+        -- This can get in the way when interacting with TUIs.
+        -- This maps the escape key back to itself (for this buffer) to fix this problem.
+        vim.keymap.set("t", "<Esc>", "<Esc>", { buffer = true })
+
+        vim.cmd.startinsert() -- Go into insert mode
+
+        vim.api.nvim_create_autocmd({ "TermClose" }, {
+          buffer = vim.api.nvim_get_current_buf(),
+          callback = function()
+            -- This automated keypress skips the "[Process exited 0]" message
+            vim.api.nvim_feedkeys("i", "n", false)
+          end,
+        })
+      end,
+      "[Detour]: With Diff-Tool",
+    },
   },
+
   i = {
     -- LuaSnip Plugn
     ["<C-k>"] = {
@@ -165,11 +201,11 @@ M.general = {
     },
   },
   x = {
-    -- Pasting does not ovride your clipboard
+    -- Pasting does not overide your clipboard
     ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Don't Copy Replaced Text", opts = { silent = true } },
 
     -- Structural Search and Replace Plugin
-    ["<leader>sr"] = { "<cmd> lua require('ssr').open() <CR>", "[SSR]: Structural Search and Replace" },
+    ["<leader>ls"] = { "<cmd> lua require('ssr').open() <CR>", "[SSR]: Structural Search and Replace" },
   },
 }
 
