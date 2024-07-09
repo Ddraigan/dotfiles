@@ -41,7 +41,8 @@ return {
       color_overrides = {},
       custom_highlights = function()
         return {
-          ["@keyword.function"] = { fg = colours.blue },
+          ["@type.builtin"] = { fg = colours.sky },
+          ["@keyword.function"] = { fg = colours.red },
           ["@keyword.return"] = { fg = colours.red },
           ["@property"] = { fg = colours.mauve },
           Keyword = { fg = colours.red },
