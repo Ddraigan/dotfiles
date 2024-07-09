@@ -27,13 +27,13 @@ return {
         comments = { "italic" }, -- Change the style of comments
         conditionals = { "italic" },
         loops = {},
-        functions = {},
-        keywords = {},
+        functions = { "bold" },
+        keywords = { "bold" },
         strings = {},
         variables = {},
         numbers = {},
         booleans = {},
-        properties = {},
+        properties = { "italic" },
         types = {},
         operators = {},
         -- miscs = {}, -- Uncomment to turn off hard-coded styles
@@ -42,6 +42,7 @@ return {
       custom_highlights = function()
         return {
           ["@keyword.function"] = { fg = colours.blue },
+          ["@keyword.return"] = { fg = colours.red },
           ["@property"] = { fg = colours.mauve },
           Keyword = { fg = colours.red },
           String = { fg = colours.yellow },
