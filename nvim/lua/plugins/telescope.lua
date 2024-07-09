@@ -93,27 +93,27 @@ return {
       },
     }
 
-    local colours = require("config.theme").colours
-    local TelescopeColor = {
-      TelescopeMatching = { fg = colours.pink },
-      TelescopeSelection = { fg = colours.cyan, bg = colours.selection, bold = true },
+    -- local colours = require("config.theme").colours
+    -- local TelescopeColor = {
+    --   TelescopeMatching = { fg = colours.pink },
+    --   TelescopeSelection = { fg = colours.cyan, bg = colours.selection, bold = true },
+    --
+    --   TelescopePromptPrefix = { bg = colours.bg },
+    --   TelescopePromptNormal = { bg = colours.bg },
+    --   TelescopeResultsNormal = { bg = colours.bg },
+    --   TelescopePreviewNormal = { bg = colours.bg },
+    --   TelescopePromptBorder = { bg = colours.bg, fg = colours.comment },
+    --   TelescopeResultsBorder = { bg = colours.bg, fg = colours.comment },
+    --   TelescopePreviewBorder = { bg = colours.bg, fg = colours.comment },
+    --   TelescopePromptTitle = { bg = colours.bg, fg = colours.comment },
+    --   TelescopeResultsTitle = { fg = colours.cyan },
+    --   TelescopePreviewTitle = { bg = colours.bg, fg = colours.cyan },
+    -- }
 
-      TelescopePromptPrefix = { bg = colours.bg },
-      TelescopePromptNormal = { bg = colours.bg },
-      TelescopeResultsNormal = { bg = colours.bg },
-      TelescopePreviewNormal = { bg = colours.bg },
-      TelescopePromptBorder = { bg = colours.bg, fg = colours.comment },
-      TelescopeResultsBorder = { bg = colours.bg, fg = colours.comment },
-      TelescopePreviewBorder = { bg = colours.bg, fg = colours.comment },
-      TelescopePromptTitle = { bg = colours.bg, fg = colours.comment },
-      TelescopeResultsTitle = { fg = colours.cyan },
-      TelescopePreviewTitle = { bg = colours.bg, fg = colours.cyan },
-    }
-
-    for hl, col in pairs(TelescopeColor) do
-      vim.api.nvim_set_hl(0, hl, col)
-    end
-
+    -- for hl, col in pairs(TelescopeColor) do
+    --   vim.api.nvim_set_hl(0, hl, col)
+    -- end
+    --
     require("telescope").setup(opts)
     require("telescope").load_extension("windowizer")
     if not vim.fn.has("win32") == 1 then

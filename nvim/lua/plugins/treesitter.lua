@@ -11,7 +11,7 @@ return {
   cmd = { "Treesitter" },
   event = { "BufReadPost", "BufNewFile" },
   build = ":TSUpdate",
-  config = function ()
+  config = function()
     -- the mdx filetype will use the markdown parser and queries.
     vim.treesitter.language.register("markdown", "mdx")
     require("nvim-treesitter.configs").setup({
@@ -33,6 +33,7 @@ return {
       ignore_install = {},
       highlight = {
         enable = true,
+        additional_vim_regex_highlighting = false,
       },
       indent = {
         enable = true,
@@ -60,7 +61,7 @@ return {
         },
         selection_modes = {
           ["@parameter.outer"] = "v", -- charwise
-          ["@function.outer"] = "V",  -- linewise
+          ["@function.outer"] = "V", -- linewise
           ["@class.outer"] = "<c-v>", -- blockwise
         },
         swap = {
