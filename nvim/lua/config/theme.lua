@@ -2,6 +2,36 @@ local M = {}
 
 ---@class Palette
 M.colours = {
+  rosewater = "#f5e0dc",
+  flamingo = "#f2cdcd",
+  pink = "#f5c2e7",
+  mauve = "#cba6f7",
+  red = "#f38ba8",
+  maroon = "#eba0ac",
+  peach = "#fab387",
+  yellow = "#f9e2af",
+  green = "#a6e3a1",
+  teal = "#94e2d5",
+  sky = "#89dceb",
+  sapphire = "#74c7ec",
+  blue = "#89b4fa",
+  lavender = "#b4befe",
+  text = "#cdd6f4",
+  subtext1 = "#bac2de",
+  subtext0 = "#a6adc8",
+  overlay2 = "#9399b2",
+  overlay1 = "#7f849c",
+  overlay0 = "#6c7086",
+  surface2 = "#585b70",
+  surface1 = "#45475a",
+  surface0 = "#313244",
+  base = "#1e1e2e",
+  mantle = "#181825",
+  crust = "#11111b",
+}
+
+---@class Palette
+M.dracula_colours = {
   bg = nil,
   fg = "#F8F8F2",
 
@@ -33,18 +63,18 @@ M.colours = {
 
 -- Can name to colours to switch pallete
 ---@type Palette
-M.soft = {
-  bg = "#292A35",   --
+M.dracula_soft = {
+  bg = "#292A35", --
   fg = "#F6F6F5",
   transparent_bg = nil,
   -- ANSI
-  black = "#1C1C1C",   -- ANSI 0
+  black = "#1C1C1C", -- ANSI 0
   cyan = "#A7DFEF",
   green = "#87E58E",
   orange = "#FDC38E",
   pink = "#E48CC1",
-  purple = "#BAA0E8",   -- used as ANSI 4 (blue)
-  white = "#F6F6F5",    -- ANSI 7, 'selection' used for ANSI 8
+  purple = "#BAA0E8", -- used as ANSI 4 (blue)
+  white = "#F6F6F5", -- ANSI 7, 'selection' used for ANSI 8
   red = "#DD6E6B",
   yellow = "#E8EDA2",
   -- indexes 9-15
@@ -53,7 +83,7 @@ M.soft = {
   bright_green = "#97EDA2",
   bright_magenta = "#E7A1D7",
   bright_red = "#E1837F",
-  bright_white = "#FFFFFF",   -- index 15
+  bright_white = "#FFFFFF", -- index 15
   bright_yellow = "#F6F6B6",
 
   comment = "#70747f",
@@ -104,7 +134,7 @@ M.icons = {
 }
 
 local colours = M.colours
-M.lualine = function ()
+M.lualine = function()
   return {
     normal = {
       a = { fg = colours.black, bg = colours.purple, gui = "bold" },

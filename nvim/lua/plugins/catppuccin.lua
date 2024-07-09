@@ -4,6 +4,8 @@ return {
   lazy = false,
   priority = 1000,
   config = function()
+    local colours = require("config.theme").colours
+
     require("catppuccin").setup({
       flavour = "mocha", -- latte, frappe, macchiato, mocha
       background = { -- :h background
@@ -37,7 +39,16 @@ return {
         -- miscs = {}, -- Uncomment to turn off hard-coded styles
       },
       color_overrides = {},
-      custom_highlights = {},
+      custom_highlights = function()
+        return {
+          ["@keyword.function"] = { fg = colours.blue },
+          ["@property"] = { fg = colours.mauve },
+          Keyword = { fg = colours.red },
+          String = { fg = colours.yellow },
+          Type = { fg = colours.sky },
+          Function = { fg = colours.green },
+        }
+      end,
       default_integrations = true,
       integrations = {
         cmp = true,
