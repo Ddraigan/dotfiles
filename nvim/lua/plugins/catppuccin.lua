@@ -59,6 +59,7 @@ return {
         dashboard = true,
         gitsigns = true,
         harpoon = true,
+        lsp_trouble = true,
         mason = true,
         mini = {
           enabled = true,
