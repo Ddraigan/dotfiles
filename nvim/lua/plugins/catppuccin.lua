@@ -49,6 +49,7 @@ return {
           String = { fg = colours.yellow },
           Type = { fg = colours.sky },
           Function = { fg = colours.green },
+          Operator = { fg = colours.red },
         }
       end,
       default_integrations = true,
