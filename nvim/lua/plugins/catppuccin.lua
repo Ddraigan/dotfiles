@@ -52,6 +52,7 @@ return {
           Type = { fg = colours.sky },
           Function = { fg = dracula_colours.bright_green },
           Operator = { fg = colours.red },
+          Hint = { fg = colours.blue },
         }
       end,
       default_integrations = true,
