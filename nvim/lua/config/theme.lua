@@ -1,5 +1,6 @@
 local M = {}
 
+-- Catppuccin Mocha
 ---@class Palette
 M.colours = {
   rosewater = "#f5e0dc",

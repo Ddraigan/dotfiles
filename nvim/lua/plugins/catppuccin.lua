@@ -5,6 +5,7 @@ return {
   priority = 1000,
   config = function()
     local colours = require("config.theme").colours
+    local dracula_colours = require("config.theme").dracula_soft
 
     require("catppuccin").setup({
       flavour = "mocha", -- latte, frappe, macchiato, mocha
@@ -45,10 +46,11 @@ return {
           ["@keyword.function"] = { fg = colours.red },
           ["@keyword.return"] = { fg = colours.red },
           ["@property"] = { fg = colours.mauve },
+          ["@function.builtin"] = { fg = colours.green },
           Keyword = { fg = colours.red },
           String = { fg = colours.yellow },
           Type = { fg = colours.sky },
-          Function = { fg = colours.green },
+          Function = { fg = dracula_colours.bright_green },
           Operator = { fg = colours.red },
         }
       end,
