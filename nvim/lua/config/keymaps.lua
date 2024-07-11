@@ -292,25 +292,25 @@ autocommand("LspAttach", {
     end
 
     -- Format on save
-    autocommand("BufWritePre", {
-      pattern = "*",
-      group = augroup("dd-formatting", { clear = false }),
-      callback = function()
-        if vim.g.disable_autoformat or vim.b[buffer].disable_autoformat then
-          return
-        end
-
-        local disable_filetypes = { c = true, cpp = true }
-
-        local format_opts = {
-          async = true,
-          timeout_ms = 500,
-          lsp_fallback = not disable_filetypes[vim.bo[buffer].filetype],
-        }
-
-        require("conform").format(format_opts)
-      end,
-    })
+    -- autocommand("BufWritePre", {
+    --   pattern = "*",
+    --   group = augroup("dd-formatting", { clear = false }),
+    --   callback = function()
+    --     if vim.g.disable_autoformat or vim.b[buffer].disable_autoformat then
+    --       return
+    --     end
+    --
+    --     local disable_filetypes = { c = true, cpp = true }
+    --
+    --     local format_opts = {
+    --       async = true,
+    --       timeout_ms = 500,
+    --       lsp_fallback = not disable_filetypes[vim.bo[buffer].filetype],
+    --     }
+    --
+    --     require("conform").format(format_opts)
+    --   end,
+    -- })
   end,
 })
 
