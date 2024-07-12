@@ -6,11 +6,10 @@ return {
   },
   event = "BufWinEnter",
   config = function()
-    local custom_theme = require("config.theme").lualine()
     local custom_fname = require("lualine.components.filename"):extend()
     local highlight = require("lualine.highlight")
     local colours = require("config.theme").colours
-    local default_status_colors = { saved = colours.green, modified = colours.cyan }
+    local default_status_colors = { saved = colours.green, modified = colours.sapphire }
 
     function custom_fname:init(options)
       custom_fname.super.init(self, options)
@@ -60,7 +59,11 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = { { "branch" }, "diff", "diagnostics" },
+        lualine_b = {
+          { "branch" },
+          { "diff" },
+          "diagnostics",
+        },
         lualine_c = {
           custom_fname,
           {
@@ -74,7 +77,7 @@ return {
           {
             require("lazy.status").updates,
             cond = require("lazy.status").has_updates,
-            color = { fg = "#ff9e64" },
+            color = { fg = colours.peach },
           },
         },
         lualine_y = {
