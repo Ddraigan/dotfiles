@@ -52,17 +52,18 @@ return {
           enable = true,
           lookahead = true,
           keymaps = {
-            ["af"] = { query = "@function.outer", desc = "Select outer part of a Function" },
-            ["if"] = { query = "@function.inner", desc = "Select inner part of a Function" },
-            ["ac"] = { query = "@class.outer", desc = "Select inner part of a Class" },
-            ["ic"] = { query = "@class.inner", desc = "Select inner part of a Class" },
+            ["af"] = { query = "@function.outer", desc = "Outer Function" },
+            ["if"] = { query = "@function.inner", desc = "Inner Function" },
+            ["ac"] = { query = "@class.outer", desc = "Outer Class" },
+            ["ic"] = { query = "@class.inner", desc = "Inner Class" },
             ["as"] = { query = "@scope", query_group = "locals", desc = "Select language Scope" },
           },
-        },
-        selection_modes = {
-          ["@parameter.outer"] = "v", -- charwise
-          ["@function.outer"] = "V", -- linewise
-          ["@class.outer"] = "<c-v>", -- blockwise
+          selection_modes = {
+            ["@parameter.outer"] = "v", -- charwise
+            ["@function.outer"] = "V", -- linewise
+            ["@class.outer"] = "<c-v>", -- blockwise
+          },
+          include_surrounding_whitespace = true,
         },
         swap = {
           enable = true,
