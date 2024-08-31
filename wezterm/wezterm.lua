@@ -15,5 +15,6 @@ config.window_background_image_hsb = {
 	saturation = 1.0,
 	brightness = 0.03,
 }
+config.font = wezterm.font("Hack Nerd Font")
 
 return config
