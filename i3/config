@@ -188,3 +188,6 @@ bindsym $mod+p mode "resize"
 bar {
         status_command i3status
 }
+
+# Display Wallpaper
+exec_always feh --bg-fill /home/leon/Pictures/background.jpg
