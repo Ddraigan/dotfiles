@@ -13,7 +13,7 @@ config.window_background_image = "/home/leon/Pictures/leavesbg.jpg"
 config.window_background_image_hsb = {
 	hue = 1.0,
 	saturation = 1.0,
-	brightness = 0.2,
+	brightness = 0.25,
 }
 config.font = wezterm.font("Hack Nerd Font")
 
