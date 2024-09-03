@@ -4,6 +4,7 @@ return {
     ensure_installed = {
       -- you can turn off/on auto_update per tool
       { "astro-language-server" },
+      { "rnix-lsp" },
       { "lua-language-server" },
       { "yaml-language-server" },
       { "stylua" },
