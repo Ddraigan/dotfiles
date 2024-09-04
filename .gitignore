@@ -6,6 +6,7 @@
 !tmux/
 !alacritty/
 !hypr/
+!nixos/
 
 # But Ignore These Directories
 tmux/plugins
