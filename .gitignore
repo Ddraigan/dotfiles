@@ -5,6 +5,7 @@
 !nvim/
 !tmux/
 !alacritty/
+!hypr/
 
 # But Ignore These Directories
 tmux/plugins
