@@ -25,7 +25,8 @@
     git
     firefox
     rustup
-    wezterm
+    #wezterm
+    hyprland
     tmux
 
     # # It is sometimes useful to fine-tune packages, for example, by applying

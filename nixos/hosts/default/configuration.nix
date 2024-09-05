@@ -57,7 +57,7 @@
   users.users.leon = {
     isNormalUser = true;
     description = "Leon Jones";
-    extraGroups = [ "networkmanager" "wheel" "sound" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "sound" "video" "input" ];
     packages = with pkgs; [];
   };
 
@@ -78,8 +78,11 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
      kitty
-     rofi-wayland
      wezterm
+     rofi-wayland
+     xorg.xorgproto
+     libGL
+     nodejs_22
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -115,14 +118,21 @@
   programs.hyprland.enable = true;
   # programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
-  # sound.enable = true;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
+  # hardware.enableAllFirmware = true;
+
+  #sound.enable = true;
+  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  nixpkgs.config.pulseaudio = true;
+  #hardware.pulseaudio = {
+  #  enable = true;
+  #};
+  #security.rtkit.enable = true;
+  #services.pipewire = {
+  #  enable = true;
+  #  alsa.enable = true;
+  #  pulse.enable = true;
+  #};
 
   nix.settings.experimental-features = [ "flakes" "nix-command" ];
 
