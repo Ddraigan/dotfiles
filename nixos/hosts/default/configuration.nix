@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
     ];
@@ -58,15 +59,15 @@
     isNormalUser = true;
     description = "Leon Jones";
     extraGroups = [ "networkmanager" "wheel" "sound" "video" "input" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   home-manager = {
     # Also pass inputs to home-manager modules
     extraSpecialArgs = { inherit inputs; };
     users = {
-    "leon" = import ./home.nix;
-   };
+      "leon" = import ./home.nix;
+    };
   };
 
   # Allow unfree packages
@@ -75,14 +76,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-     kitty
-     wezterm
-     rofi-wayland
-     xorg.xorgproto
-     libGL
-     nodejs_22
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
+    kitty
+    wezterm
+    rofi-wayland
+    xorg.xorgproto
+    libGL
+    nodejs_22
+    llvmPackages_12.clangUseLLVM
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -117,6 +119,8 @@
   programs.zsh.enable = true;
   programs.hyprland.enable = true;
   # programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+
+  fonts.fontDir.enable = true;
 
   # hardware.enableAllFirmware = true;
 
