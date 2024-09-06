@@ -12,6 +12,8 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
+
+    wezterm.url = "github:wez/wezterm?dir=nix";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:

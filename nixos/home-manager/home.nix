@@ -32,9 +32,15 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-  programs.git.enable = true;
-  programs.neovim.enable = true;
+  programs = {
+    wezterm = {
+      enable = true;
+      package = inputs.wezterm.packages.${pkgs.system}.default;
+    };
+    home-manager.enable = true;
+    git.enable = true;
+    neovim.enable = true;
+  };
 
   fonts.fontconfig.enable = true;
 
@@ -43,7 +49,6 @@
     pkgs.firefox
     pkgs.tmux
     pkgs.kitty
-    pkgs.stable.wezterm
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the

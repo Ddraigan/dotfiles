@@ -98,6 +98,8 @@
         "$mod" = "SUPER";
 
         bind = [
+          "$mod, T, exec, [float;tile] wezterm start --always-new-process"
+
           "$mod SHIFT, B, exec, $browser"
           "$mod SHIFT, T, exec, $terminal"
           "$mod SHIFT, F, exec, $fileManager"

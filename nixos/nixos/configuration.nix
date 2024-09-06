@@ -26,6 +26,10 @@
     package = pkgs.pulseaudioFull;
   };
 
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+
   nix =
     let
       flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
@@ -37,10 +41,20 @@
       };
     };
 
+  # programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+  programs = {
+    zsh.enable = true;
+    hyprland.enable = true;
+  };
+
+  fonts.fontDir.enable = true;
+
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/sda";
+    useOSProber = true;
+  };
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -139,13 +153,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
-  # User configuration options
-  programs.zsh.enable = true;
-  programs.hyprland.enable = true;
-  # programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-
-  fonts.fontDir.enable = true;
 
   #sound.enable = true;
   #hardware.pulseaudio = {
