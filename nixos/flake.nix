@@ -2,7 +2,7 @@
   description = "Nixos config flake";
 
   inputs = {
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     #nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -19,7 +19,13 @@
       inherit (self) outputs;
     in
     {
-      #overlays = import ./modules/overlays { inherit inputs; };
+
+      overlays = import ./overlays { inherit inputs; };
+
+      nixosModules = import ./modules/nixos;
+
+      homeManagerModules = import ./modules/home-manager;
+
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem
           {
