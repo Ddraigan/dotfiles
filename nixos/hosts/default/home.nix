@@ -19,15 +19,32 @@ in
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   fonts.fontconfig.enable = true;
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
 
+  # Apparantly this will fix mouse theme issues
+  home.pointerCursor = {
+    gtk.enable = true;
+    # x11.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 16;
+  };
 
+  gtk = {
+    enable = true;
+
+    theme = {
+      package = pkgs.flat-remix-gtk;
+      name = "Flat-Remix-GTK-Grey-Darkest";
+    };
+
+    iconTheme = {
+      package = pkgs.gnome.adwaita-icon-theme;
+      name = "Adwaita";
+    };
+
+  };
 
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
     unstable.neovim
     pkgs.git
     pkgs.firefox
