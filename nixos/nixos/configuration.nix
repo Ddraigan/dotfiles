@@ -17,7 +17,13 @@
     overlays = [ outputs.overlays.stable-packages ];
     config = {
       allowUnfree = true;
+      pulseaudio = true;
     };
+  };
+
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
   };
 
   nix =
@@ -141,12 +147,7 @@
 
   fonts.fontDir.enable = true;
 
-  # hardware.enableAllFirmware = true;
-
   #sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
-  nixpkgs.config.pulseaudio = true;
   #hardware.pulseaudio = {
   #  enable = true;
   #};
