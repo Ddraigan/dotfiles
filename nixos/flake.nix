@@ -1,5 +1,3 @@
-# flake.nix
-
 {
   description = "Nixos config flake";
 
