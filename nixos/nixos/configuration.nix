@@ -2,15 +2,34 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ inputs, outputs, lib, config, pkgs, ... }:
 
 {
   imports =
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
+      # Import home-manager's nixos module
+      inputs.home-manager.nixosModules.home-manager
     ];
+
+  nixpkgs = {
+    overlays = [ ];
+    config = {
+      allowUnfree = true;
+    };
+  };
+
+  nix =
+    let
+      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in
+    {
+      settings = {
+        experimental-features = "nix-command flakes";
+        nix-path = config.nix.nixPath;
+      };
+    };
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -54,38 +73,39 @@
   # Configure console keymap
   console.keyMap = "dvorak";
 
+  users.defaultUserShell = pkgs.zsh;
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.leon = {
-    isNormalUser = true;
-    description = "Leon Jones";
-    extraGroups = [ "networkmanager" "wheel" "sound" "video" "input" ];
-    packages = with pkgs; [ ];
+  users.users = {
+    leon = {
+      isNormalUser = true;
+      description = "Leon Jones";
+      extraGroups = [ "networkmanager" "wheel" "sound" "video" "input" ];
+      #openssh.authorizedKeys.keys = [ ];
+      #packages = with pkgs; [ ];
+    };
   };
 
   home-manager = {
     # Also pass inputs to home-manager modules
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs outputs; };
     users = {
-      "leon" = import ./home.nix;
+      "leon" = import ../home-manager/home.nix;
     };
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-    kitty
-    wezterm
-    rofi-wayland
-    xorg.xorgproto
-    libGL
-    nodejs_22
-    llvmPackages_12.clangUseLLVM
-  ];
+  # environment.systemPackages = [
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #  wget
+  #  pkgs.kitty
+  #  pkgs.neovim
+  #  pkgs.rofi-wayland
+  #  pkgs.xorg.xorgproto
+  #  pkgs.libGL
+  # pkgs.nodejs_22
+  # pkgs.llvmPackages_12.clangUseLLVM
+  #];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -115,7 +135,6 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
   # User configuration options
-  users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
   programs.hyprland.enable = true;
   # programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
@@ -137,7 +156,4 @@
   #  alsa.enable = true;
   #  pulse.enable = true;
   #};
-
-  nix.settings.experimental-features = [ "flakes" "nix-command" ];
-
 }
