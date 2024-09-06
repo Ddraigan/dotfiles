@@ -36,14 +36,34 @@
   programs.git.enable = true;
   programs.neovim.enable = true;
 
-  # Nicely reload system units when changing configs
-  #systemd.user.startService = "sd-switch";
-
   fonts.fontconfig.enable = true;
-  # wayland.windowManager.hyprland.enable = true;
+
   wayland.windowManager.hyprland = {
     enable = true;
-    settings = { };
+    settings = {
+
+      input = {
+        kb_layout = "us";
+        kb_variant = "dvorak";
+
+        follow_mouse = 1;
+
+        # -1.0 - 1.0, 0 means no modification.
+        sensitivity = 0;
+
+        touchpad = {
+          natural_scroll = true;
+        };
+      };
+
+      "$mod" = "SUPER";
+
+      bind = [
+        "$mod, X, exit"
+        "$mod, B, exec, firefox"
+        "$mod, T, exec, kitty"
+      ];
+    };
   };
 
   home.packages = [
