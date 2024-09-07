@@ -1,8 +1,8 @@
 { inputs, outputs, lib, config, pkgs, ... }:
 
 {
-  imports = [
-    outputs.homeManagerModules.hyprland
+  imports = with outputs.homeManagerModules; [
+    hyprland
   ];
 
   nixpkgs = {
