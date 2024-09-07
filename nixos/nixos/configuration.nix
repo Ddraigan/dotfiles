@@ -14,7 +14,7 @@
     ];
 
   nixpkgs = {
-    overlays = [ outputs.overlays.stable-packages ];
+    overlays = [ outputs.overlays.unstable-packages ];
     config = {
       allowUnfree = true;
       pulseaudio = true;

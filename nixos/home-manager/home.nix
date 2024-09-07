@@ -7,7 +7,7 @@
   ];
 
   nixpkgs = {
-    overlays = [ outputs.overlays.stable-packages ];
+    overlays = [ outputs.overlays.unstable-packages ];
 
     # Config for nixpkgs instance
     config = {
@@ -40,7 +40,7 @@
     # };
     home-manager.enable = true;
     git.enable = true;
-    neovim.enable = true;
+    #neovim.enable = true;
   };
 
   fonts.fontconfig.enable = true;
@@ -50,6 +50,8 @@
     pkgs.firefox
     pkgs.tmux
     pkgs.kitty
+    pkgs.unstable.neovim
+    pkgs.wezterm
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
