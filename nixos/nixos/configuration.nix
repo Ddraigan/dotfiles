@@ -48,7 +48,7 @@
     starship = {
       enable = true;
       settings = {
-        add_newline = false;
+        add_newline = true;
         format = "$shlvl$shell$username$hostname$nix_shell$git_branch$git_commit$git_state$git_status$directory$jobs$cmd_duration$character";
         shlvl = {
           disabled = false;
@@ -59,8 +59,8 @@
           disabled = false;
           format = "$indicator";
           fish_indicator = "";
-          bash_indicator = "[BASH](bright-white) ";
-          zsh_indicator = "[ZSH](bright-white) ";
+          bash_indicator = "[bash](bright-white) ";
+          zsh_indicator = "[zsh](bright-white) ";
         };
         username = {
           style_user = "bright-white bold";
