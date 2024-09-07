@@ -3,6 +3,7 @@
 {
   imports = [
     #  ../../modules/home-manager/desktop/hyprland.nix
+    ../modules/home-manager/hyprland.nix
   ];
 
   nixpkgs = {
@@ -33,10 +34,10 @@
 
   # Let Home Manager install and manage itself.
   programs = {
-    wezterm = {
-      enable = true;
-      package = inputs.wezterm.packages.${pkgs.system}.default;
-    };
+    # wezterm = {
+    #   enable = true;
+    #   package = inputs.wezterm.packages.${pkgs.system}.default;
+    # };
     home-manager.enable = true;
     git.enable = true;
     neovim.enable = true;
