@@ -37,13 +37,15 @@
         windowrulev2 = "suppressevent maximize, class:.*";
 
         general = {
+          border_size = 2;
           gaps_in = 5;
           gaps_out = 20;
 
-          border_size = 2;
+          # "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+          # "col.inactive_border" = "rgba(595959aa)";
 
-          "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          "col.inactive_border" = "rgba(595959aa)";
+          "col.inactive_border" = "$mantle";
+          "col.active_border" = "$border";
 
           resize_on_border = true;
 
@@ -75,20 +77,30 @@
 
         animations = {
           enabled = true;
-          bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+          #   bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+          #   animation = [
+          #     "windows, 1, 7, myBezier"
+          #     "windowsOut, 1, 7, default, popin 80%"
+          #     "border, 1, 10, default"
+          #     "borderangle, 1, 8, default"
+          #     "fade, 1, 7, default"
+          #     "workspaces, 1, 6, default"
+          #   ];
+          bezier = "overshot,0.13,0.99,0.29,1.1";
           animation = [
-            "windows, 1, 7, myBezier"
-            "windowsOut, 1, 7, default, popin 80%"
-            "border, 1, 10, default"
-            "borderangle, 1, 8, default"
-            "fade, 1, 7, default"
-            "workspaces, 1, 6, default"
+            "windows         , 1,  4, overshot, slide"
+            "border          , 1, 10, default"
+            "fade            , 1, 10, default"
+            "workspaces      , 1,  6, default , slide"
+            "specialWorkspace, 1,  6, default , fade"
           ];
         };
 
         dwindle = {
           pseudotile = true;
           preserve_split = true;
+          # no_gaps_when_only = true;
+          special_scale_factor = 0.8;
         };
 
         misc = {
@@ -183,7 +195,9 @@
           "$mod, W, togglespecialworkspace, magic"
           "$mod SHIFT, W, movetoworkspace, special:magic"
         ];
-      };
+      }
+
+      // import ./mocha.nix { };
     };
   };
 }

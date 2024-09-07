@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    #nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -18,8 +17,6 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
-
-    # wezterm.url = "github:wez/wezterm?dir=nix";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
@@ -29,10 +26,8 @@
     {
 
       overlays = import ./overlays { inherit inputs; };
-
       nixosModules = import ./modules/nixos;
-
-      homeManagerModules = import ./modules/home-manager;
+      homeManagerModules = import ./modules/home-manager/imports.nix;
 
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem

@@ -2,8 +2,7 @@
 
 {
   imports = [
-    #  ../../modules/home-manager/desktop/hyprland.nix
-    ../modules/home-manager/hyprland.nix
+    outputs.homeManagerModules.hyprland
   ];
 
   nixpkgs = {

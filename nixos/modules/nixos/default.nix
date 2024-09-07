@@ -1,0 +1,3 @@
+{
+  # modulename = import ./whatever;
+}
