@@ -22,12 +22,15 @@
 
         "$terminal" = "wezterm";
         "$fileManager" = "dolphin";
-        "$menu" = "wofi --show drun";
+        "$menu" = "rofi -show drun -show-icons";
         "$browser" = "firefox";
 
         exec-once = [
           "$terminal"
           "$browser"
+          "waybar"
+          "dunst"
+          "nm-applet --indicator"
           "wl-paste -p --watch wl-copy"
         ];
 
@@ -114,30 +117,46 @@
         "$mod" = "SUPER";
 
         bind = [
+          # Clipboard
           "$mod SHIFT, I, exec, grim -l 0-g $(slurp) - | wl-copy"
           "$mod, V, exec, wl-paste"
           "$mod, C, exec, wl-copy"
 
-          "$mod SHIFT, B, exec, $browser"
-          "$mod SHIFT, T, exec, $terminal"
-          "$mod SHIFT, F, exec, $fileManager"
-          "$mod SHIFT, M, exec, $menu"
+          "$mod, D, exec, $menu"
+          "$mod, B, exec, $browser"
+          "$mod, T, exec, $terminal"
+          "$mod, F, exec, $fileManager"
+          "$mod, M, exec, $menu"
 
-          "$mod, X, exit"
-          "$mod, Q, killactive"
-          "$mod, F, togglefloating"
-          "$mod, P, pseudo"
-          "$mod, S, togglesplit"
+          "$mod SHIFT, X, exit"
+          "$mod SHIFT, Q, killactive"
+          "$mod SHIFT, F, togglefloating"
+          "$mod SHIFT, P, pseudo"
+          "$mod SHIFT, S, togglesplit"
 
+          # Window Focus
           "$mod, left, movefocus, l"
           "$mod, right, movefocus, r"
           "$mod, up, movefocus, u"
           "$mod, down, movefocus, d"
 
+          # Vim Style Window Focus
           "$mod, h, movefocus, l"
           "$mod, l, movefocus, r"
           "$mod, k, movefocus, u"
           "$mod, j, movefocus, d"
+
+          # Vim Window Movement
+          "$mod SHIFT, H, movewindow, l"
+          "$mod SHIFT, L, movewindow, r"
+          "$mod SHIFT, K, movewindow, u"
+          "$mod SHIFT, J, movewindow, d"
+
+          # Vim Window Resize
+          "$mod ALT, H, resizeactive, -10 0"
+          "$mod ALT, L, resizeactive, 10 0"
+          "$mod ALT, K, resizeactive, 0 -10"
+          "$mod ALT, J, resizeactive, 0 10"
 
           "$mod, 1, workspace, 1"
           "$mod, 2, workspace, 2"
