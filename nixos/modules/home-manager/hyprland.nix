@@ -1,11 +1,26 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, inputs, lib, config, ... }:
 
 {
   config = {
     wayland.windowManager.hyprland = {
       enable = true;
+      # plugins = [
+      # inputs.hyprland-plugins.packages."${pkgs.system}".borders-plus-plus
+      # ];
       settings = {
-        "$terminal" = "kitty";
+        # "plugin:borders-plus-plus" = {
+        #   add_borders = 1;
+        #
+        #   "col.border_1" = "rgb(ffffff)";
+        #   "col.border_2" = "rgb(2222ff)";
+        #
+        #   border_size_1 = 10;
+        #   border_size_2 = -1;
+        #
+        #   natural_rounding = "yes";
+        # };
+
+        "$terminal" = "wezterm";
         "$fileManager" = "dolphin";
         "$menu" = "wofi --show drun";
         "$browser" = "firefox";
@@ -13,6 +28,7 @@
         exec-once = [
           "$terminal"
           "$browser"
+          "wl-paste -p --watch wl-copy"
         ];
 
         windowrulev2 = "suppressevent maximize, class:.*";
@@ -98,7 +114,9 @@
         "$mod" = "SUPER";
 
         bind = [
-          "$mod, T, exec, [float;tile] wezterm start --always-new-process"
+          "$mod SHIFT, I, exec, grim -l 0-g $(slurp) - | wl-copy"
+          "$mod, V, exec, wl-paste"
+          "$mod, C, exec, wl-copy"
 
           "$mod SHIFT, B, exec, $browser"
           "$mod SHIFT, T, exec, $terminal"

@@ -117,17 +117,18 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  # environment.systemPackages = [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  #  pkgs.kitty
-  #  pkgs.neovim
-  #  pkgs.rofi-wayland
-  #  pkgs.xorg.xorgproto
-  #  pkgs.libGL
-  # pkgs.nodejs_22
-  # pkgs.llvmPackages_12.clangUseLLVM
-  #];
+  environment.systemPackages = [
+    # pkgs.waybar
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
+    #  pkgs.kitty
+    #  pkgs.neovim
+    #  pkgs.rofi-wayland
+    #  pkgs.xorg.xorgproto
+    #  pkgs.libGL
+    # pkgs.nodejs_22
+    # pkgs.llvmPackages_12.clangUseLLVM
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
