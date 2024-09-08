@@ -66,12 +66,20 @@
           "col.shadow" = "rgba(1a1a1aee)";
 
           # https://wiki.hyprland.org/Configuring/Variables/#blur
+          # blur = {
+          #   enabled = true;
+          #   size = 3;
+          #   passes = 1;
+          #
+          #   vibrancy = 0.1696;
+          # };
           blur = {
             enabled = true;
-            size = 3;
-            passes = 1;
-
-            vibrancy = 0.1696;
+            size = 7;
+            passes = 3;
+            new_optimizations = true;
+            xray = true;
+            ignore_opacity = true;
           };
         };
 
@@ -130,7 +138,8 @@
 
         bind = [
           # Clipboard
-          "$mod SHIFT, I, exec, grim -l 0-g $(slurp) - | wl-copy"
+          # "$mod SHIFT, I, exec, grim -l 0-g $(slurp) - | wl-copy"
+          "$mod SHIFT, I, exec, hyprshot -m region output --clipboard-only"
           "$mod, V, exec, wl-paste"
           "$mod, C, exec, wl-copy"
 

@@ -57,6 +57,7 @@
     pkgs.unstable.neovim
     pkgs.unzip
     pkgs.ripgrep
+    pkgs.hyprshot
 
     # Wayland
     pkgs.grim
