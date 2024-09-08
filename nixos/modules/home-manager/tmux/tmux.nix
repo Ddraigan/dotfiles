@@ -44,6 +44,25 @@
       plugins = [
         {
           plugin = pkgs.tmuxPlugins.catppuccin;
+          extraConfig = ''
+            set -g @catppuccin_window_left_separator " "
+            set -g @catppuccin_window_right_separator " "
+            set -g @catppuccin_window_middle_separator " "
+
+            set -g @catppuccin_window_default_fill "all"
+            set -g @catppuccin_window_default_color "bg"
+            set -g @catppuccin_window_default_background "none"
+            set -g @catppuccin_window_default_text "#W"
+
+            set -g @catppuccin_window_current_fill "all"
+            set -g @catppuccin_window_current_color "magenta"
+            set -g @catppuccin_window_current_background "none"
+            set -g @catppuccin_window_current_text "#W"
+
+            set -g @catppuccin_status_modules_right "session"
+            set -g @catppuccin_status_left_separator  " "
+            set -g @catppuccin_status_right_separator ""
+          '';
         }
         {
           plugin = pkgs.tmuxPlugins.vim-tmux-navigator;
