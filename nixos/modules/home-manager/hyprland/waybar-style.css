@@ -65,8 +65,8 @@ window#waybar {
 	padding: 0 2px;
 	color: @text;
 }
-#workspaces button.focused {
-	color: @sky;
+#workspaces button.active {
+	color: @pink;
 }
 #workspaces button:hover {
 	box-shadow: inherit;
