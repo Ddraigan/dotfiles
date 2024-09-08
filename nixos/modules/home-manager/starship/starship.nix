@@ -17,6 +17,7 @@
           "$git_metrics"
           "$git_status"
           "$fill"
+          "$rust"
           "$nodejs"
           "$golang"
           "$python"

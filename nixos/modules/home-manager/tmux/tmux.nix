@@ -37,15 +37,34 @@
         # set vi-mode
         set-window-option -g mode-keys vi
 
-        # keybindings
-        bind-key -T copy-mode-vi v send-keys -X begin-selection
-        bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-        bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-
         bind v split-window -h -c "#{pane_current_path}"
         bind h split-window -v -c "#{pane_current_path}"
       '';
+
+      plugins = [
+        {
+          plugin = pkgs.tmuxPlugins.catppuccin;
+        }
+        {
+          plugin = pkgs.tmuxPlugins.vim-tmux-navigator;
+          extraConfig =
+            ''
+              # set vi-mode
+              set-window-option -g mode-keys vi
+            '';
+        }
+        {
+          plugin = pkgs.tmuxPlugins.yank;
+          extraConfig =
+            ''
+              # keybindings
+              bind-key -T copy-mode-vi v send-keys -X begin-selection
+              bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+              bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+            '';
+        }
+        pkgs.tmuxPlugins.sensible
+      ];
     };
-    # plugins = [ ];
   };
 }
