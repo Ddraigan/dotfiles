@@ -6,6 +6,7 @@
     tmux
     wezterm
     starship
+    zsh
   ];
 
   nixpkgs = {
@@ -42,6 +43,7 @@
     # };
     home-manager.enable = true;
     git.enable = true;
+    zsh.enable = true;
     #neovim.enable = true;
   };
 
@@ -53,6 +55,7 @@
     pkgs.kitty
     pkgs.unstable.neovim
     pkgs.unzip
+    pkgs.ripgrep
 
     # Wayland
     pkgs.waybar
