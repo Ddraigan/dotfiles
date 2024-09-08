@@ -3,6 +3,9 @@
 {
   imports = with outputs.homeManagerModules; [
     hyprland
+    tmux
+    wezterm
+    starship
   ];
 
   nixpkgs = {
@@ -47,10 +50,9 @@
   home.packages = [
     # unstable.neovim
     pkgs.firefox
-    pkgs.tmux
     pkgs.kitty
     pkgs.unstable.neovim
-    pkgs.wezterm
+    pkgs.unzip
 
     # Wayland
     pkgs.waybar
