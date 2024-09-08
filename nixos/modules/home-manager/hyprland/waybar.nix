@@ -1,0 +1,138 @@
+{ pkgs, lib, config, ... }:
+
+{
+  config = {
+    home.packages = [
+      pkgs.tmux
+    ];
+    programs.waybar = {
+      enable = true;
+      systemd.enable = true;
+      style =
+        ''
+          ${builtins.readFile ./waybar-style.css}
+        '';
+      settings = [{
+        height = 30;
+        layer = "top";
+        position = "top";
+        tray = { spacing = 10; };
+        modules-left = [
+          "hyprland/workspaces"
+          "custom/right-arrow-dark"
+        ];
+        modules-center = [
+          "custom/left-arrow-dark"
+          "clock#1"
+          "custom/left-arrow-light"
+          "custom/left-arrow-dark"
+          "clock#2"
+          "custom/right-arrow-dark"
+          "custom/right-arrow-light"
+          "clock#3"
+          "custom/right-arrow-dark"
+        ];
+        modules-right = [
+          "custom/left-arrow-dark"
+          "pulseaudio"
+          "custom/left-arrow-light"
+          "custom/left-arrow-dark"
+          "memory"
+          "custom/left-arrow-light"
+          "custom/left-arrow-dark"
+          "cpu"
+          "custom/left-arrow-light"
+          "custom/left-arrow-dark"
+          "disk"
+          "custom/left-arrow-light"
+          "custom/left-arrow-dark"
+          "battery"
+          "custom/left-arrow-light"
+          "custom/left-arrow-dark"
+          "tray"
+          "custom/left-arrow-light"
+          "custom/left-arrow-dark"
+          "temperature"
+        ];
+        "custom/left-arrow-dark" = {
+          format = "";
+          tooltip = false;
+        };
+        "custom/left-arrow-light" = {
+          format = "";
+          tooltip = false;
+        };
+        "custom/right-arrow-dark" = {
+          format = "";
+          tooltip = false;
+        };
+        "custom/right-arrow-light" = {
+          format = "";
+          tooltip = false;
+        };
+        "clock#1" = {
+          format = "{:%a}";
+          tooltip = false;
+        };
+        "clock#2" = {
+          format = "{:%H:%M}";
+          tooltip = false;
+        };
+        "clock#3" = {
+          format = "{:%d-%m}";
+          tooltip = false;
+        };
+        battery = {
+          format = "{capacity}% {icon}";
+          format-alt = "{time} {icon}";
+          format-charging = "{capacity}% ";
+          format-icons = [ "" "" "" "" "" ];
+          format-plugged = "{capacity}% ";
+          states = {
+            critical = 15;
+            warning = 30;
+          };
+        };
+        cpu = {
+          format = "{usage}% ";
+          tooltip = false;
+        };
+        memory = { format = "{}% "; };
+        network = {
+          interval = 1;
+          format-alt = "{ifname}: {ipaddr}/{cidr}";
+          format-disconnected = "Disconnected ⚠";
+          format-ethernet = "{ifname}: {ipaddr}/{cidr}   up: {bandwidthUpBits} down: {bandwidthDownBits}";
+          format-linked = "{ifname} (No IP) ";
+          format-wifi = "{essid} ({signalStrength}%) ";
+        };
+        pulseaudio = {
+          format = "{volume}% {icon} {format_source}";
+          format-bluetooth = "{volume}% {icon} {format_source}";
+          format-bluetooth-muted = " {icon} {format_source}";
+          format-icons = {
+            car = "";
+            default = [ "" "" "" ];
+            handsfree = "";
+            headphones = "";
+            headset = "";
+            phone = "";
+            portable = "";
+          };
+          format-muted = " {format_source}";
+          format-source = "{volume}% ";
+          format-source-muted = "";
+          on-click = "pavucontrol";
+        };
+        "hyprland/mode" = { format = ''<span style="italic">{}</span>''; };
+        temperature = {
+          critical-threshold = 80;
+          format = "{temperatureC}°C {icon}";
+          format-icons = [ "" "" "" ];
+        };
+      }];
+
+    };
+
+  };
+}

@@ -17,12 +17,12 @@
       #   ".." = "cd ..";
       # };
 
-      # initExtra = lib.mkIf config.zsh.autoAttachToTmux ''
-      #   # Auto attach to Tmux session or create a new session called default
-      #   if ! { [ "$TERM" = "xterm-256color" ] && [ -n "$TMUX" ]; } then
-      #     tmux new -As default
-      #   fi
-      # '';
+      initExtra = ''
+        # Auto attach to Tmux session or create a new session called default
+        if ! { [ "$TERM" = "xterm-256color" ] && [ -n "$TMUX" ]; } then
+          tmux new -As default
+        fi
+      '';
     };
   };
 }

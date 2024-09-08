@@ -7,6 +7,7 @@
     wezterm
     starship
     zsh
+    waybar
   ];
 
   nixpkgs = {
@@ -58,7 +59,6 @@
     pkgs.ripgrep
 
     # Wayland
-    pkgs.waybar
     pkgs.grim
     pkgs.slurp
     pkgs.wl-clipboard
