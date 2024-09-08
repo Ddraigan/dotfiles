@@ -7,9 +7,12 @@ end
 
 config.enable_wayland = false;
 config.color_scheme = "Catppuccin Mocha"
+config.colors = {
+	background = 'transparent'
+}
 config.enable_tab_bar = false
 config.automatically_reload_config = true
-config.window_background_opacity = 1
+config.window_background_opacity = 0
 -- config.window_background_image = "/home/leon/Pictures/leavesbg.jpg"
 config.window_background_image_hsb = {
 	hue = 1.0,
