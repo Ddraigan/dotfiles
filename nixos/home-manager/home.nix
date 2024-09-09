@@ -52,7 +52,6 @@
     pkgs.wl-clipboard
     pkgs.dunst
     pkgs.libnotify
-    # pkgs.rofi-wayland
     pkgs.networkmanagerapplet
     pkgs.pavucontrol
 
