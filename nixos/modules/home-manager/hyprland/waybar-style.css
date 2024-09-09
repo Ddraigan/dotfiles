@@ -27,11 +27,11 @@
 
 * {
 	font-size: 14px;
-	font-family: monospace;
+	/*font-family: monospace;*/
 }
 
 window#waybar {
-	background: @base;
+	background: transparent;
 	color: @text;
 }
 
@@ -57,8 +57,20 @@ window#waybar {
 #battery,
 #disk,
 #temperature,
+#network,
 #tray {
 	background: @crust;
+}
+
+#clock,
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#temperature,
+#network,
+#disk {
+	padding: 0 10px;
 }
 
 #workspaces button {
@@ -73,7 +85,7 @@ window#waybar {
 	text-shadow: inherit;
 }
 #workspaces button:hover {
-	background: @crust;
+	background: @pink;
 	border: @mantle;
 	padding: 0 3px;
 }
@@ -96,12 +108,10 @@ window#waybar {
 #temperature {
   color: @rosewater;
 }
-
-#clock,
-#pulseaudio,
-#memory,
-#cpu,
-#battery,
-#disk {
-	padding: 0 10px;
+#tray {
+  padding-right: 10px;
+}
+#network {
+  color: @sapphire;
+  padding-right: 10px;
 }

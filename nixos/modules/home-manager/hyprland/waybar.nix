@@ -59,10 +59,11 @@
           "battery"
           "custom/left-arrow-light"
           "custom/left-arrow-dark"
-          "tray"
+          "temperature"
           "custom/left-arrow-light"
           "custom/left-arrow-dark"
-          "temperature"
+          # "network"
+          "tray"
         ];
         "custom/left-arrow-dark" = {
           format = "";
@@ -115,6 +116,7 @@
           format-ethernet = "{ifname}: {ipaddr}/{cidr}   up: {bandwidthUpBits} down: {bandwidthDownBits}";
           format-linked = "{ifname} (No IP) ";
           format-wifi = "{essid} ({signalStrength}%) ";
+          on-click = "nm-applet";
         };
         pulseaudio = {
           format = "{volume}% {icon} {format_source}";
@@ -134,7 +136,6 @@
           format-source-muted = "";
           on-click = "pavucontrol";
         };
-        "hyprland/mode" = { format = ''<span style="italic">{}</span>''; };
         temperature = {
           critical-threshold = 80;
           format = "{temperatureC}°C {icon}";

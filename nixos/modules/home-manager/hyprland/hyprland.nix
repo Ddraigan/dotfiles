@@ -28,7 +28,6 @@
         exec-once = [
           "$terminal"
           "$browser"
-          # "waybar"
           "dunst"
           "nm-applet --indicator"
           "wl-paste -p --watch wl-copy"
