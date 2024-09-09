@@ -34,51 +34,55 @@
         modules-center = [
           "custom/left-arrow-dark"
           "clock#1"
-          "custom/left-arrow-light"
+          "custom/right-arrow-dark"
           "custom/left-arrow-dark"
           "clock#2"
           "custom/right-arrow-dark"
-          "custom/right-arrow-light"
+          "custom/left-arrow-dark"
           "clock#3"
           "custom/right-arrow-dark"
         ];
         modules-right = [
           "custom/left-arrow-dark"
           "pulseaudio"
-          "custom/left-arrow-light"
+          "custom/right-arrow-dark"
           "custom/left-arrow-dark"
           "memory"
-          "custom/left-arrow-light"
+          "custom/right-arrow-dark"
           "custom/left-arrow-dark"
           "cpu"
-          "custom/left-arrow-light"
+          "custom/right-arrow-dark"
           "custom/left-arrow-dark"
           "disk"
-          "custom/left-arrow-light"
+          "custom/right-arrow-dark"
           "custom/left-arrow-dark"
           "battery"
-          "custom/left-arrow-light"
+          "custom/right-arrow-dark"
           "custom/left-arrow-dark"
           "temperature"
-          "custom/left-arrow-light"
+          "custom/right-arrow-dark"
           "custom/left-arrow-dark"
           # "network"
           "tray"
         ];
         "custom/left-arrow-dark" = {
-          format = "";
+          # format = "";
+          format = "";
           tooltip = false;
         };
         "custom/left-arrow-light" = {
-          format = "";
+          # format = "";
+          format = "";
           tooltip = false;
         };
         "custom/right-arrow-dark" = {
-          format = "";
+          # format = "";
+          format = "";
           tooltip = false;
         };
         "custom/right-arrow-light" = {
-          format = "";
+          # format = "";
+          format = "";
           tooltip = false;
         };
         "clock#1" = {
