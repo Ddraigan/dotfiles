@@ -5,4 +5,5 @@
   starship = import ./starship/starship.nix;
   zsh = import ./zsh/zsh.nix;
   waybar = import ./hyprland/waybar.nix;
+  neovim = import ./nvim.nix;
 }

@@ -8,6 +8,7 @@
     starship
     zsh
     waybar
+    neovim
   ];
 
   nixpkgs = {
@@ -51,10 +52,8 @@
   fonts.fontconfig.enable = true;
 
   home.packages = [
-    # unstable.neovim
     pkgs.firefox
     pkgs.kitty
-    pkgs.unstable.neovim
     pkgs.unzip
     pkgs.ripgrep
     pkgs.hyprshot
