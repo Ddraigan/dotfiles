@@ -1,6 +1,7 @@
 { inputs, outputs, lib, config, pkgs, ... }:
 
 {
+  # These imports activate the module
   imports = with outputs.homeManagerModules; [
     hyprland
     tmux
@@ -9,6 +10,7 @@
     zsh
     waybar
     neovim
+    rofi-wayland
   ];
 
   nixpkgs = {
@@ -28,32 +30,18 @@
     homeDirectory = "/home/leon";
   };
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "24.05"; # Please read the comment before changing.
 
   # Let Home Manager install and manage itself.
   programs = {
-    # wezterm = {
-    #   enable = true;
-    #   package = inputs.wezterm.packages.${pkgs.system}.default;
-    # };
     home-manager.enable = true;
     git.enable = true;
     zsh.enable = true;
-    #neovim.enable = true;
   };
 
   fonts.fontconfig.enable = true;
 
   home.packages = [
     pkgs.firefox
-    pkgs.kitty
     pkgs.unzip
     pkgs.ripgrep
     pkgs.hyprshot
@@ -64,7 +52,7 @@
     pkgs.wl-clipboard
     pkgs.dunst
     pkgs.libnotify
-    pkgs.rofi-wayland
+    # pkgs.rofi-wayland
     pkgs.networkmanagerapplet
     pkgs.pavucontrol
 
@@ -84,7 +72,14 @@
     # '')
   ];
 
-
+  # This value determines the Home Manager release that your configuration is
+  # compatible with. This helps avoid breakage when a new Home Manager release
+  # introduces backwards incompatible changes.
+  #
+  # You should not change this value, even if you update Home Manager. If you do
+  # want to update the value, then make sure to first check the Home Manager
+  # release notes.
+  home.stateVersion = "24.05"; # Please read the comment before changing.
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
