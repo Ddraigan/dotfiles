@@ -68,7 +68,7 @@
             new_optimizations = true;
             xray = true;
             ignore_opacity = true;
-            brightness = 0.4;
+            brightness = 0.3;
           };
         };
 
