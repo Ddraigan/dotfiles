@@ -26,8 +26,11 @@
     package = pkgs.pulseaudioFull;
   };
 
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
+  environment = {
+    # systemPackages = [ ];
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+    };
   };
 
   nix =
@@ -45,30 +48,6 @@
   programs = {
     zsh.enable = true;
     hyprland.enable = true;
-    # starship = {
-    #   enable = true;
-    #   settings = {
-    #     add_newline = true;
-    #     format = "$shlvl$shell$username$hostname$nix_shell$git_branch$git_commit$git_state$git_status$directory$jobs$cmd_duration$character";
-    #     shlvl = {
-    #       disabled = false;
-    #       symbol = "ﰬ";
-    #       style = "bright-red bold";
-    #     };
-    #     shell = {
-    #       disabled = false;
-    #       format = "$indicator";
-    #       fish_indicator = "";
-    #       bash_indicator = "[bash](bright-white) ";
-    #       zsh_indicator = "[zsh](bright-white) ";
-    #     };
-    #     username = {
-    #       style_user = "bright-white bold";
-    #       style_root = "bright-red bold";
-    #     };
-    #   };
-    # };
-
   };
 
   fonts.fontDir.enable = true;
@@ -96,18 +75,19 @@
   time.timeZone = "Europe/London";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_GB.UTF-8";
-    LC_IDENTIFICATION = "en_GB.UTF-8";
-    LC_MEASUREMENT = "en_GB.UTF-8";
-    LC_MONETARY = "en_GB.UTF-8";
-    LC_NAME = "en_GB.UTF-8";
-    LC_NUMERIC = "en_GB.UTF-8";
-    LC_PAPER = "en_GB.UTF-8";
-    LC_TELEPHONE = "en_GB.UTF-8";
-    LC_TIME = "en_GB.UTF-8";
+  i18n = {
+    defaultLocale = "en_GB.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_GB.UTF-8";
+      LC_IDENTIFICATION = "en_GB.UTF-8";
+      LC_MEASUREMENT = "en_GB.UTF-8";
+      LC_MONETARY = "en_GB.UTF-8";
+      LC_NAME = "en_GB.UTF-8";
+      LC_NUMERIC = "en_GB.UTF-8";
+      LC_PAPER = "en_GB.UTF-8";
+      LC_TELEPHONE = "en_GB.UTF-8";
+      LC_TIME = "en_GB.UTF-8";
+    };
   };
 
   # Configure keymap in X11
@@ -119,15 +99,16 @@
   # Configure console keymap
   console.keyMap = "dvorak";
 
-  users.defaultUserShell = pkgs.zsh;
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users = {
-    leon = {
-      isNormalUser = true;
-      description = "Leon Jones";
-      extraGroups = [ "networkmanager" "wheel" "sound" "video" "input" ];
-      #openssh.authorizedKeys.keys = [ ];
-      #packages = with pkgs; [ ];
+  users = {
+    defaultUserShell = pkgs.zsh;
+    users = {
+      leon = {
+        isNormalUser = true;
+        description = "Leon Jones";
+        extraGroups = [ "networkmanager" "wheel" "sound" "video" "input" ];
+        #openssh.authorizedKeys.keys = [ ];
+        #packages = with pkgs; [ ];
+      };
     };
   };
 
@@ -138,21 +119,6 @@
       "leon" = import ../home-manager/home.nix;
     };
   };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = [
-    # pkgs.waybar
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-    #  pkgs.kitty
-    #  pkgs.neovim
-    #  pkgs.rofi-wayland
-    #  pkgs.xorg.xorgproto
-    #  pkgs.libGL
-    # pkgs.nodejs_22
-    # pkgs.llvmPackages_12.clangUseLLVM
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
