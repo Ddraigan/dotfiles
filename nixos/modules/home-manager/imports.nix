@@ -7,4 +7,5 @@
   waybar = import ./hyprland/waybar.nix;
   rofi-wayland = import ./rofi/rofi.nix;
   neovim = import ./nvim.nix;
+  zoxide = import ./zoxde.nix;
 }

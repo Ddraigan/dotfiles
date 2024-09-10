@@ -11,6 +11,7 @@
     waybar
     neovim
     rofi-wayland
+    zoxide
   ];
 
   nixpkgs = {
@@ -40,13 +41,17 @@
     sessionVariables = {
       EDITOR = "nvim";
     };
+    shellAliases = [
+      (lib.mkIf programs.zoxide.enable {
+        cd = "z";
+      })
+    ];
     packages = [
       pkgs.firefox
       pkgs.unzip
       pkgs.zip
       pkgs.ripgrep
       pkgs.fzf
-      pkgs.zoxide
 
       # Wayland
       pkgs.grim
@@ -62,15 +67,7 @@
         fonts = [ "Hack" ];
       })
     ];
-    # Home Manager is pretty good at managing dotfiles. The primary way to manage
-    # plain files is through 'home.file'.
-    # home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-    # };
-    # This fixes mouse theme issues in hyprland
+    # home.file = {};
     pointerCursor = {
       gtk.enable = true;
       package = pkgs.bibata-cursors;
