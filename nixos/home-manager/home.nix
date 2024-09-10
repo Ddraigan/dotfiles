@@ -38,10 +38,12 @@
     username = "leon";
     homeDirectory = "/home/leon";
     stateVersion = "24.05";
-    sessionVariables = {
-      EDITOR = "nvim";
-    };
-    shellAliases = [
+    sessionVariables = lib.mkMerge [
+      (lib.mkIf config.neovim.enable {
+        EDITOR = "nvim";
+      })
+    ];
+    shellAliases = lib.mkMerge [
       (lib.mkIf programs.zoxide.enable {
         cd = "z";
       })
