@@ -40,9 +40,6 @@
           gaps_in = 5;
           gaps_out = 20;
 
-          # "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          # "col.inactive_border" = "rgba(595959aa)";
-
           "col.inactive_border" = "$mantle";
           "col.active_border" = "$border";
 
@@ -64,35 +61,19 @@
           shadow_render_power = 3;
           "col.shadow" = "rgba(1a1a1aee)";
 
-          # https://wiki.hyprland.org/Configuring/Variables/#blur
-          # blur = {
-          #   enabled = true;
-          #   size = 3;
-          #   passes = 1;
-          #
-          #   vibrancy = 0.1696;
-          # };
           blur = {
             enabled = true;
-            size = 7;
-            passes = 3;
+            size = 3;
+            passes = 2;
             new_optimizations = true;
             xray = true;
             ignore_opacity = true;
+            brightness = 0.4;
           };
         };
 
         animations = {
           enabled = true;
-          #   bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-          #   animation = [
-          #     "windows, 1, 7, myBezier"
-          #     "windowsOut, 1, 7, default, popin 80%"
-          #     "border, 1, 10, default"
-          #     "borderangle, 1, 8, default"
-          #     "fade, 1, 7, default"
-          #     "workspaces, 1, 6, default"
-          #   ];
           bezier = "overshot,0.13,0.99,0.29,1.1";
           animation = [
             "windows         , 1,  4, overshot, slide"
@@ -106,13 +87,12 @@
         dwindle = {
           pseudotile = true;
           preserve_split = true;
-          # no_gaps_when_only = true;
           special_scale_factor = 0.8;
         };
 
         misc = {
-          force_default_wallpaper = -1;
-          disable_hyprland_logo = false;
+          force_default_wallpaper = 0;
+          disable_hyprland_logo = true;
         };
 
         input = {
@@ -120,17 +100,14 @@
           kb_variant = "dvorak";
 
           follow_mouse = 1;
-
-          # -1.0 - 1.0, 0 means no modification.
           sensitivity = 0;
-
           touchpad = {
             natural_scroll = true;
           };
         };
 
         gestures = {
-          workspace_swipe = false;
+          workspace_swipe = true;
         };
 
         "$mod" = "SUPER";
@@ -150,7 +127,8 @@
 
           "$mod SHIFT, X, exit"
           "$mod SHIFT, Q, killactive"
-          "$mod SHIFT, F, togglefloating"
+          "$mod SHIFT, F, fullscreen"
+          "$mod SHIFT, Z, togglefloating"
           "$mod SHIFT, P, pseudo"
           "$mod SHIFT, S, togglesplit"
 

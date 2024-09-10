@@ -4,6 +4,7 @@
   # These imports activate the module
   imports = with outputs.homeManagerModules; [
     hyprland
+    hyprpaper
     tmux
     wezterm
     starship
@@ -38,16 +39,12 @@
     username = "leon";
     homeDirectory = "/home/leon";
     stateVersion = "24.05";
-    sessionVariables = lib.mkMerge [
-      (lib.mkIf config.neovim.enable {
-        EDITOR = "nvim";
-      })
-    ];
-    shellAliases = lib.mkMerge [
-      (lib.mkIf programs.zoxide.enable {
-        cd = "z";
-      })
-    ];
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
+    shellAliases = {
+      cd = "z";
+    };
     packages = [
       pkgs.firefox
       pkgs.unzip

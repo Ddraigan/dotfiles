@@ -45,29 +45,31 @@
         {
           plugin = pkgs.tmuxPlugins.catppuccin;
           extraConfig = ''
-            set -g @catppuccin_window_left_separator ""
-            set -g @catppuccin_window_right_separator ""
+            set -g @catppuccin_window_left_separator ""
+            set -g @catppuccin_window_right_separator ""
             set -g @catppuccin_window_middle_separator " "
+            # set -g @catppuccin_window_current_middle_separator "█"
             set -g @catppuccin_window_number_position "right"
 
             set -g @catppuccin_window_default_fill "number"
             set -g @catppuccin_window_default_color "green"
-            # set -g @catppuccin_window_default_background "base"
+            # set -g @catppuccin_window_default_background ""
             set -g @catppuccin_window_default_text "#W"
 
-            set -g @catppuccin_window_current_left_separator ""
+            set -g @catppuccin_window_current_left_separator ""
             set -g @catppuccin_window_current_middle_separator " "
             # set -g @catppuccin_window_current_middle_separator "█"
-            set -g @catppuccin_window_current_right_separator ""
+            set -g @catppuccin_window_current_right_separator ""
 
             set -g @catppuccin_window_current_fill "number"
             set -g @catppuccin_window_current_color "magenta"
-            # set -g @catppuccin_window_current_background "crust"
+            # set -g @catppuccin_window_current_background ""
             set -g @catppuccin_window_current_text "#W"
 
             set -g @catppuccin_status_modules_right "application session"
-            set -g @catppuccin_status_left_separator  ""
-            set -g @catppuccin_status_right_separator ""
+            set -g @catppuccin_status_background "theme"
+            set -g @catppuccin_status_left_separator  ""
+            set -g @catppuccin_status_right_separator ""
             set -g @catppuccin_application_icon ""
           '';
         }
