@@ -28,48 +28,42 @@
   home = {
     username = "leon";
     homeDirectory = "/home/leon";
+    packages = [
+      pkgs.firefox
+      pkgs.unzip
+      pkgs.zip
+      pkgs.ripgrep
+      pkgs.fzf
+
+      # Wayland
+      pkgs.grim
+      pkgs.slurp
+      pkgs.wl-clipboard
+      pkgs.dunst
+      pkgs.libnotify
+      pkgs.networkmanagerapplet
+      pkgs.pavucontrol
+      pkgs.hyprshot
+
+      (pkgs.nerdfonts.override {
+        fonts = [ "Hack" ];
+      })
+    ];
   };
 
 
   # Let Home Manager install and manage itself.
   programs = {
     home-manager.enable = true;
-    git.enable = true;
+    git = {
+      enable = true;
+      userName = "Ddraigan";
+      userEmail = "lkjjones1999@gmail.com";
+    };
     zsh.enable = true;
   };
 
   fonts.fontconfig.enable = true;
-
-  home.packages = [
-    pkgs.firefox
-    pkgs.unzip
-    pkgs.ripgrep
-    pkgs.hyprshot
-
-    # Wayland
-    pkgs.grim
-    pkgs.slurp
-    pkgs.wl-clipboard
-    pkgs.dunst
-    pkgs.libnotify
-    pkgs.networkmanagerapplet
-    pkgs.pavucontrol
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    (pkgs.nerdfonts.override {
-      fonts = [ "Hack" ];
-    })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ];
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
