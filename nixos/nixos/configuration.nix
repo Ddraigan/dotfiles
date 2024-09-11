@@ -26,7 +26,12 @@
     # Also pass inputs to home-manager modules
     extraSpecialArgs = { inherit inputs outputs; };
     users = {
-      "leon" = import ../home-manager/home.nix;
+      "leon" = {
+        imports = [
+          ../home-manager/home.nix
+          # inputs.catppuccin.homeManagerModules.catppuccin
+        ];
+      };
     };
   };
 

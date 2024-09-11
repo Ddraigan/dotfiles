@@ -5,6 +5,7 @@
   imports = with outputs.homeManagerModules; [
     hyprland
     ags
+    catppuccin
     hyprpaper
     tmux
     wezterm
@@ -70,18 +71,27 @@
     # home.file = {};
     pointerCursor = {
       gtk.enable = true;
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
+      # package = pkgs.bibata-cursors;
+      package = pkgs.catppuccin-cursors;
+      name = "mochaSky";
+      # name = "Bibata-Modern-Classic";
       size = 16;
     };
   };
 
   gtk = {
     enable = true;
-    theme = {
-      package = pkgs.flat-remix-gtk;
-      name = "Flat-Remix-GTK-Grey-Darkest";
+    catppuccin = {
+      enable = true;
+      flavor = "mocha";
+      accent = "pink";
+      size = "standard";
+      tweaks = [ "normal" ];
     };
+    # theme = {
+    #   package = pkgs.flat-remix-gtk;
+    #   name = "Flat-Remix-GTK-Grey-Darkest";
+    # };
     iconTheme = {
       package = pkgs.gnome.adwaita-icon-theme;
       name = "Adwaita";

@@ -21,6 +21,7 @@
           "$terminal"
           "$browser"
           "dunst"
+          "ags"
           "nm-applet --indicator"
           "wl-paste -p --watch wl-copy"
         ];
