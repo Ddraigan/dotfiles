@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { inputs, outputs, lib, config, pkgs, ... }:
 
 {
@@ -12,6 +8,27 @@
       # Import home-manager's nixos module
       inputs.home-manager.nixosModules.home-manager
     ];
+
+  users = {
+    defaultUserShell = pkgs.zsh;
+    users = {
+      leon = {
+        isNormalUser = true;
+        description = "Leon Jones";
+        extraGroups = [ "networkmanager" "wheel" "sound" "video" "input" ];
+        #openssh.authorizedKeys.keys = [ ];
+        #packages = with pkgs; [ ];
+      };
+    };
+  };
+
+  home-manager = {
+    # Also pass inputs to home-manager modules
+    extraSpecialArgs = { inherit inputs outputs; };
+    users = {
+      "leon" = import ../home-manager/home.nix;
+    };
+  };
 
   nixpkgs = {
     overlays = [ outputs.overlays.unstable-packages ];
@@ -98,27 +115,6 @@
 
   # Configure console keymap
   console.keyMap = "dvorak";
-
-  users = {
-    defaultUserShell = pkgs.zsh;
-    users = {
-      leon = {
-        isNormalUser = true;
-        description = "Leon Jones";
-        extraGroups = [ "networkmanager" "wheel" "sound" "video" "input" ];
-        #openssh.authorizedKeys.keys = [ ];
-        #packages = with pkgs; [ ];
-      };
-    };
-  };
-
-  home-manager = {
-    # Also pass inputs to home-manager modules
-    extraSpecialArgs = { inherit inputs outputs; };
-    users = {
-      "leon" = import ../home-manager/home.nix;
-    };
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
