@@ -4,6 +4,7 @@
       pkgs.starship
     ];
     programs.starship = {
+      catppuccin.enable = true;
       enable = true;
       settings = {
         add_newline = false;

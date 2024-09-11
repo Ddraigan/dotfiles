@@ -1,3 +1,5 @@
+import { applauncher } from "./applauncher.js"
+
 const hyprland = await Service.import("hyprland")
 const notifications = await Service.import("notifications")
 const mpris = await Service.import("mpris")
@@ -209,6 +211,7 @@ App.config({
     style: "./style.css",
     windows: [
         Bar(),
+        applauncher,
 
         // you can call it, for each monitor
         // Bar(0),
