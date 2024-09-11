@@ -14,7 +14,8 @@
       settings = {
         "$terminal" = "wezterm";
         "$fileManager" = "dolphin";
-        "$menu" = "rofi -show drun -show-icons";
+        # "$menu" = "rofi -show drun -show-icons";
+        "$menu" = "ags -t applauncher";
         "$browser" = "firefox";
 
         exec-once = [
