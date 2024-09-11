@@ -9,7 +9,7 @@
         # pkgs.hyprlandPlugins.Hyprspace
 
         # Flake / Home-manager verison?
-        inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
+        # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
       ];
       settings = {
         "$terminal" = "wezterm";
@@ -106,7 +106,7 @@
 
         bind = [
           # Plugins
-          "$mod, TAB, overview:toggle"
+          # "$mod, TAB, overview:toggle"
           # Clipboard
           # "$mod SHIFT, I, exec, grim -l 0-g $(slurp) - | wl-copy"
           "$mod SHIFT, I, exec, hyprshot -m region output --clipboard-only"
