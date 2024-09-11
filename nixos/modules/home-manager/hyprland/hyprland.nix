@@ -4,22 +4,14 @@
   config = {
     wayland.windowManager.hyprland = {
       enable = true;
-      # plugins = [
-      # inputs.hyprland-plugins.packages."${pkgs.system}".borders-plus-plus
-      # ];
-      settings = {
-        # "plugin:borders-plus-plus" = {
-        #   add_borders = 1;
-        #
-        #   "col.border_1" = "rgb(ffffff)";
-        #   "col.border_2" = "rgb(2222ff)";
-        #
-        #   border_size_1 = 10;
-        #   border_size_2 = -1;
-        #
-        #   natural_rounding = "yes";
-        # };
+      plugins = [
+        # Nixpkgs version
+        # pkgs.hyprlandPlugins.Hyprspace
 
+        # Flake / Home-manager verison?
+        inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
+      ];
+      settings = {
         "$terminal" = "wezterm";
         "$fileManager" = "dolphin";
         "$menu" = "rofi -show drun -show-icons";
@@ -113,6 +105,8 @@
         "$mod" = "SUPER";
 
         bind = [
+          # Plugins
+          "$mod, TAB, overview:toggle"
           # Clipboard
           # "$mod SHIFT, I, exec, grim -l 0-g $(slurp) - | wl-copy"
           "$mod SHIFT, I, exec, hyprshot -m region output --clipboard-only"
@@ -183,7 +177,9 @@
         ];
       }
 
-      // import ./mocha.nix { };
+      // import
+        ./mocha.nix
+        { };
     };
   };
 }

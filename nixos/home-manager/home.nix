@@ -4,6 +4,7 @@
   # These imports activate the module
   imports = with outputs.homeManagerModules; [
     hyprland
+    ags
     hyprpaper
     tmux
     wezterm
