@@ -6,16 +6,6 @@
       pkgs.waybar
     ];
     programs.waybar = {
-      # package = pkgs.waybar.overrideAttrs (oa: {
-      #   mesonFlags = (oa.mesonFlags or  [ ]) ++ [ "-Dexperimental=true" ];
-      #   patches = (oa.patches or [ ]) ++ [
-      #     (pkgs.fetchpatch {
-      #       name = "fix waybar hyprctl";
-      #       url = "https://aur.archlinux.org/cgit/aur.git/plain/hyprctl.patch?h=waybar-hyprland-git";
-      #       sha256 = "sha256-pY3+9Dhi61Jo2cPnBdmn3NUTSA8bAbtgsk2ooj4y7aQ=";
-      #     })
-      #   ];
-      # });
       enable = true;
       catppuccin.enable = false; # Already in config
       systemd.enable = true;
@@ -29,40 +19,21 @@
         position = "top";
         tray = { spacing = 10; };
         modules-left = [
-          "hyprland/workspaces"
-          "custom/right-arrow-dark"
+          "clock#1"
+          "clock#2"
+          "clock#3"
         ];
         modules-center = [
-          "custom/left-arrow-dark"
-          "clock#1"
-          "custom/right-arrow-dark"
-          "custom/left-arrow-dark"
-          "clock#2"
-          "custom/right-arrow-dark"
-          "custom/left-arrow-dark"
-          "clock#3"
-          "custom/right-arrow-dark"
+          "hyprland/workspaces"
         ];
         modules-right = [
           "custom/left-arrow-dark"
           "pulseaudio"
-          "custom/right-arrow-dark"
-          "custom/left-arrow-dark"
           "memory"
-          "custom/right-arrow-dark"
-          "custom/left-arrow-dark"
           "cpu"
-          "custom/right-arrow-dark"
-          "custom/left-arrow-dark"
           "disk"
-          "custom/right-arrow-dark"
-          "custom/left-arrow-dark"
           "battery"
-          "custom/right-arrow-dark"
-          "custom/left-arrow-dark"
           "temperature"
-          "custom/right-arrow-dark"
-          "custom/left-arrow-dark"
           # "network"
           "tray"
         ];
@@ -71,17 +42,7 @@
           format = "";
           tooltip = false;
         };
-        "custom/left-arrow-light" = {
-          # format = "";
-          format = "";
-          tooltip = false;
-        };
         "custom/right-arrow-dark" = {
-          # format = "";
-          format = "";
-          tooltip = false;
-        };
-        "custom/right-arrow-light" = {
           # format = "";
           format = "";
           tooltip = false;

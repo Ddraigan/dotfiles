@@ -35,16 +35,19 @@ window#waybar {
 	color: @text;
 }
 
+.module {
+	background: @crust;
+  border-radius: 0px 0px 5px 5px;
+}
+
+/*.modules-center {*/
+/*  border-radius: 0px 0px 5px 5px;*/
+/*}*/
+
 #custom-right-arrow-dark,
 #custom-left-arrow-dark {
 	color: @crust;
   font-size: 25px;
-}
-#custom-right-arrow-light,
-#custom-left-arrow-light {
-	color: @crust;
-	background: @crust;
-  font-size: 30px;
 }
 
 #workspaces,
@@ -60,20 +63,7 @@ window#waybar {
 #network,
 #tray {
 	background: @crust;
-  /*border-color: @surface0;*/
-  /*border-width: 1px;*/
-  /*border-style: solid;*/
-}
-
-#clock,
-#pulseaudio,
-#memory,
-#cpu,
-#battery,
-#temperature,
-#network,
-#disk {
-	padding: 0 5px;
+  padding: 0 10px ;
 }
 
 #workspaces button {
