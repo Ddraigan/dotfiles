@@ -5,7 +5,9 @@ export function Workspaces() {
     const workspaces = hyprland.bind("workspaces")
         .as(ws => ws.map(({ id }) => Widget.Button({
             on_clicked: () => hyprland.messageAsync(`dispatch workspace ${id}`),
-            child: Widget.Label(`${id}`),
+            //child: Widget.Label(`${id}`),
+                                //
+            child: Widget.Label(``),
             class_name: activeId.as(i => `${i === id ? "focused" : ""}`),
         })))
 
