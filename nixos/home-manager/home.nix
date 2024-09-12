@@ -13,7 +13,6 @@
     zsh
     waybar
     neovim
-    rofi-wayland
     zoxide
   ];
 

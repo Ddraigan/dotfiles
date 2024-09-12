@@ -7,7 +7,6 @@
   starship = import ./starship/starship.nix;
   zsh = import ./zsh/zsh.nix;
   waybar = import ./hyprland/waybar.nix;
-  rofi-wayland = import ./rofi/rofi.nix;
   neovim = import ./nvim.nix;
   zoxide = import ./zoxide.nix;
   hyprpaper = import ./hyprland/hyprpaper.nix;
