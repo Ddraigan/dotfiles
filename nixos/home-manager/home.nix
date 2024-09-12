@@ -33,6 +33,12 @@
       userEmail = "lkjjones1999@gmail.com";
     };
     zsh.enable = true;
+    gnome = {
+      nautilus = {
+        enable = true;
+        catppuccin.enable = true;
+      };
+    };
   };
 
   fonts.fontconfig.enable = true;
@@ -53,6 +59,7 @@
       pkgs.zip
       pkgs.ripgrep
       pkgs.fzf
+      pkgs.gnome.nautilus
 
       # Wayland
       pkgs.grim
@@ -68,14 +75,12 @@
         fonts = [ "Hack" ];
       })
     ];
-    # home.file = {};
     pointerCursor = {
       gtk.enable = true;
-      # package = pkgs.bibata-cursors;
-      package = pkgs.catppuccin-cursors;
-      name = "mochaSky";
-      # name = "Bibata-Modern-Classic";
+      package = pkgs.catppuccin-cursors.mochaLavender;
       size = 16;
+      # package = pkgs.bibata-cursors;
+      # name = "Bibata-Modern-Classic";
     };
   };
 
@@ -88,13 +93,12 @@
       size = "standard";
       tweaks = [ "normal" ];
     };
-    # theme = {
-    #   package = pkgs.flat-remix-gtk;
-    #   name = "Flat-Remix-GTK-Grey-Darkest";
-    # };
+    # cursorTheme.package = pkgs.catppuccin-cursors.mochaLavender;
     iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
-      name = "Adwaita";
+      package = pkgs.morewaita-icon-theme;
+      name = "MoreWaita"; # ????
+      # package = pkgs.gnome.adwaita-icon-theme;
+      # name = "Adwaita";
     };
   };
 }
