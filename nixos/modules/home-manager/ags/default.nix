@@ -1,8 +1,8 @@
 { inputs, pkgs, ... }:
 {
-  imports = [
-    inputs.ags.homeManagerModules.default
-  ];
+  # imports = [
+  #   inputs.ags.homeManagerModules.default
+  # ];
   programs.ags = {
     enable = false;
     # null or path, leave as null if you don't want hm to manage the config

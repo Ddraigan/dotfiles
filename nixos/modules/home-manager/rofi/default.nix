@@ -6,6 +6,7 @@
       inherit (config.lib.formats.rasi) mkLiteral;
     in
     {
+      enable = true;
       cycle = true;
       # Install the wayland variant of rofi
       package = pkgs.rofi-wayland;

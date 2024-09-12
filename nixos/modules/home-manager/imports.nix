@@ -1,6 +1,6 @@
 {
   hyprland = import ./hyprland/hyprland.nix;
-  ags = import ./ags;
+  # ags = import ./ags;
   rofi = import ./rofi;
   catppuccin = import ./catppuccin.nix;
   tmux = import ./tmux/tmux.nix;

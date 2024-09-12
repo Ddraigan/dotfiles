@@ -4,7 +4,7 @@
   # These imports activate the module
   imports = with outputs.homeManagerModules; [
     hyprland
-    ags
+    # ags
     rofi
     catppuccin
     hyprpaper
