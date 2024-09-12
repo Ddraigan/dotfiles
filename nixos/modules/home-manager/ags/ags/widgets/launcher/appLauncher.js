@@ -1,10 +1,10 @@
 const { query } = await Service.import("applications")
-const WINDOW_NAME = "applauncher"
+const APP_LAUNCHER = "applauncher"
 
 /** @param {import('resource:///com/github/Aylur/ags/service/applications.js').Application} app */
 const AppItem = app => Widget.Button({
     on_clicked: () => {
-        App.closeWindow(WINDOW_NAME)
+        App.closeWindow(APP_LAUNCHER)
         app.launch()
     },
     attribute: { app },
@@ -52,7 +52,7 @@ const Applauncher = ({ width = 500, height = 500, spacing = 12 }) => {
             // make sure we only consider visible (searched for) applications
 	    const results = applications.filter((item) => item.visible);
             if (results[0]) {
-                App.toggleWindow(WINDOW_NAME)
+                App.toggleWindow(APP_LAUNCHER)
                 results[0].attribute.app.launch()
             }
         },
@@ -78,7 +78,7 @@ const Applauncher = ({ width = 500, height = 500, spacing = 12 }) => {
             }),
         ],
         setup: self => self.hook(App, (_, windowName, visible) => {
-            if (windowName !== WINDOW_NAME)
+            if (windowName !== APP_LAUNCHER)
                 return
 
             // when the applauncher shows up
@@ -92,10 +92,10 @@ const Applauncher = ({ width = 500, height = 500, spacing = 12 }) => {
 }
 
 // there needs to be only one instance
-export const applauncher = Widget.Window({
-    name: WINDOW_NAME,
+export const appLauncher = Widget.Window({
+    name: APP_LAUNCHER,
     setup: self => self.keybind("Escape", () => {
-        App.closeWindow(WINDOW_NAME)
+        App.closeWindow(APP_LAUNCHER)
     }),
     visible: false,
     keymode: "exclusive",
