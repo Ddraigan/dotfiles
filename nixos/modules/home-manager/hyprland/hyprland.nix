@@ -14,7 +14,7 @@
       settings = {
         "$terminal" = "wezterm";
         "$fileManager" = "nautilus";
-        # "$menu" = "rofi -show drun -show-icons";
+        "$menu" = "rofi -show drun -show-icons";
         # "$menu" = "ags -t applauncher";
         "$browser" = "firefox";
 

@@ -5,6 +5,7 @@
   imports = with outputs.homeManagerModules; [
     hyprland
     ags
+    rofi
     catppuccin
     hyprpaper
     tmux
