@@ -1,11 +1,11 @@
-import { Workspaces } from "./components/workspaces"
-import { Media } from "./components/media"
-import { SysTray } from "./components/systray"
-import { Clock } from "./components/clock"
-import { ClientTitle } from "./components/clientTitle"
-import { Notifications } from "./components/notifications"
-import { Volume } from "./components/volume"
-import { BatteryLabel } from "./components/batteryLabel"
+import { Workspaces } from "./components/workspaces.js"
+import { Media } from "./components/media.js"
+import { SysTray } from "./components/systray.js"
+import { Clock } from "./components/clock.js"
+import { ClientTitle } from "./components/clientTitle.js"
+import { Notifications } from "./components/notifications.js"
+import { Volume } from "./components/volume.js"
+import { BatteryLabel } from "./components/batteryLabel.js"
 
 // layout of the bar
 function Left() {

@@ -68,7 +68,6 @@ const Applauncher = ({ width = 500, height = 500, spacing = 12 }) => {
         css: `margin: ${spacing * 2}px;`,
         children: [
             entry,
-
             // wrap the list in a scrollable
             Widget.Scrollable({
                 hscroll: "never",
@@ -99,6 +98,7 @@ export const appLauncher = Widget.Window({
     }),
     visible: false,
     keymode: "exclusive",
+    css: 'border-radius: 15px;',
     child: Applauncher({
         width: 500,
         height: 500,

@@ -21,7 +21,7 @@
         exec-once = [
           "$terminal"
           "$browser"
-          "dunst"
+          # "dunst"
           "ags"
           "nm-applet --indicator"
           "wl-paste -p --watch wl-copy"
