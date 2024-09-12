@@ -70,9 +70,9 @@
     ];
     pointerCursor = {
       gtk.enable = true;
-      package = pkgs.catppuccin-cursors.mochaLavender;
+      # package = pkgs.catppuccin-cursors.mochaLavender;
       size = 16;
-      name = "mochaLavender";
+      # name = "mochaLavender";
       # package = pkgs.bibata-cursors;
       # name = "Bibata-Modern-Classic";
     };

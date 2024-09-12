@@ -15,14 +15,14 @@
         "$terminal" = "wezterm";
         "$fileManager" = "nautilus";
         # "$menu" = "rofi -show drun -show-icons";
-        "$menu" = "ags -t applauncher";
+        # "$menu" = "ags -t applauncher";
         "$browser" = "firefox";
 
         exec-once = [
           "$terminal"
           "$browser"
-          # "dunst"
-          "ags"
+          "dunst"
+          # "ags"
           "nm-applet --indicator"
           "wl-paste -p --watch wl-copy"
         ];

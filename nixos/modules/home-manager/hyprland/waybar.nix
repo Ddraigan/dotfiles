@@ -16,7 +16,8 @@
       #     })
       #   ];
       # });
-      enable = false;
+      enable = true;
+      catppuccin.enable = false; # Already in config
       systemd.enable = true;
       style =
         ''

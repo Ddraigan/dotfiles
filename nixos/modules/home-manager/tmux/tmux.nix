@@ -6,6 +6,7 @@
       pkgs.tmux
     ];
     programs.tmux = {
+      catppuccin.enable = false; # Already in config
       enable = true;
       prefix = "C-Space";
       terminal = "xterm-256color";
