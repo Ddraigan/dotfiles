@@ -13,7 +13,7 @@
       ];
       settings = {
         "$terminal" = "wezterm";
-        "$fileManager" = "dolphin";
+        "$fileManager" = "nautilus";
         # "$menu" = "rofi -show drun -show-icons";
         "$menu" = "ags -t applauncher";
         "$browser" = "firefox";

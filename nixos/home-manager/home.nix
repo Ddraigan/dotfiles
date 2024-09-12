@@ -33,12 +33,6 @@
       userEmail = "lkjjones1999@gmail.com";
     };
     zsh.enable = true;
-    gnome = {
-      nautilus = {
-        enable = true;
-        catppuccin.enable = true;
-      };
-    };
   };
 
   fonts.fontconfig.enable = true;
@@ -79,6 +73,7 @@
       gtk.enable = true;
       package = pkgs.catppuccin-cursors.mochaLavender;
       size = 16;
+      name = "mochaLavender";
       # package = pkgs.bibata-cursors;
       # name = "Bibata-Modern-Classic";
     };
