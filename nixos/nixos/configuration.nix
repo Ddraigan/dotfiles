@@ -49,7 +49,9 @@
   };
 
   environment = {
-    # systemPackages = [ ];
+    systemPackages = [
+      pkgs.upower
+    ];
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
@@ -113,9 +115,12 @@
   };
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "dvorak";
+  services = {
+    upower.enable = true;
+    xserver.xkb = {
+      layout = "us";
+      variant = "dvorak";
+    };
   };
 
   # Configure console keymap

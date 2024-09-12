@@ -14,9 +14,11 @@
       accountsservice
     ];
   };
-  home.file = {
-    ".config/ags/" = {
-      source = ./ags;
+  home = {
+    file = {
+      ".config/ags/" = {
+        source = ./ags;
+      };
     };
   };
 }
