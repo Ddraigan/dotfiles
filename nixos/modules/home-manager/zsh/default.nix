@@ -11,11 +11,6 @@
         expireDuplicatesFirst = true;
         ignoreDups = true;
       };
-      # shellAliases = {
-      #   # General aliases
-      #   cp = "cp -iv";
-      #   ".." = "cd ..";
-      # };
 
       initExtra = ''
         # Auto attach to Tmux session or create a new session called default

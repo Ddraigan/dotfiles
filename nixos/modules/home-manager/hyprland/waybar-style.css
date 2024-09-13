@@ -25,6 +25,7 @@
 @define-color mantle #181825;
 @define-color crust #11111b;
 
+
 * {
 	font-size: 14px;
 	/*font-family: monospace;*/
@@ -37,7 +38,7 @@ window#waybar {
 
 .module {
 	background: @crust;
-  border-radius: 0px 0px 5px 5px;
+	border-radius: 0px 0px 5px 5px;
 }
 
 /*.modules-center {*/
@@ -47,7 +48,7 @@ window#waybar {
 #custom-right-arrow-dark,
 #custom-left-arrow-dark {
 	color: @crust;
-  font-size: 25px;
+	font-size: 25px;
 }
 
 #workspaces,
@@ -63,23 +64,26 @@ window#waybar {
 #network,
 #tray {
 	background: @crust;
-  padding: 0 10px ;
+	padding: 0 10px;
 }
 
 #workspaces button {
 	padding: 0 2px;
 	color: @text;
 }
+
 #workspaces button.active {
 	color: @pink;
 }
+
 #workspaces button:hover {
 	box-shadow: inherit;
 	text-shadow: inherit;
 }
+
 #workspaces button:hover {
 	background: @pink;
-  color: @crust;
+	color: @crust;
 	border: @mantle;
 	padding: 0 3px;
 }
@@ -87,25 +91,32 @@ window#waybar {
 #pulseaudio {
 	color: @sky;
 }
+
 #memory {
 	color: @green;
 }
+
 #cpu {
 	color: @blue;
 }
+
 #battery {
 	color: @pink;
 }
+
 #disk {
 	color: @mauve;
 }
+
 #temperature {
-  color: @rosewater;
+	color: @rosewater;
 }
+
 #tray {
-  padding-right: 10px;
+	padding-right: 10px;
 }
+
 #network {
-  color: @sapphire;
-  padding-right: 10px;
+	color: @sapphire;
+	padding-right: 10px;
 }

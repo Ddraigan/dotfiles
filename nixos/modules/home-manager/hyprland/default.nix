@@ -2,6 +2,15 @@
 
 {
   config = {
+    home.packages = with pkgs; [
+      gnome.nautilus
+      grim
+      slurp
+      wl-clipboard
+      libnotify
+      networkmanagerapplet
+      hyprshot
+    ];
     wayland.windowManager.hyprland = {
       enable = true;
       plugins = [
@@ -15,14 +24,12 @@
         "$terminal" = "wezterm";
         "$fileManager" = "nautilus";
         "$menu" = "rofi -show drun -show-icons";
-        # "$menu" = "ags -t applauncher";
         "$browser" = "firefox";
 
         exec-once = [
           "$terminal"
           "$browser"
           "dunst"
-          # "ags"
           "nm-applet --indicator"
           "wl-paste -p --watch wl-copy"
         ];
@@ -73,7 +80,7 @@
             "windows         , 1,  4, overshot, slide"
             "border          , 1, 10, default"
             "fade            , 1, 10, default"
-            "workspaces      , 1,  6, default , slide"
+            "workspaces      , 1,  6, default , fade"
             "specialWorkspace, 1,  6, default , fade"
           ];
         };
@@ -110,7 +117,6 @@
           # Plugins
           # "$mod, TAB, overview:toggle"
           # Clipboard
-          # "$mod SHIFT, I, exec, grim -l 0-g $(slurp) - | wl-copy"
           "$mod SHIFT, I, exec, hyprshot -m region output --clipboard-only"
           "$mod, V, exec, wl-paste"
           "$mod, C, exec, wl-copy"
@@ -119,7 +125,6 @@
           "$mod, B, exec, $browser"
           "$mod, T, exec, $terminal"
           "$mod, F, exec, $fileManager"
-          "$mod, M, exec, $menu"
 
           "$mod SHIFT, X, exit"
           "$mod SHIFT, Q, killactive"

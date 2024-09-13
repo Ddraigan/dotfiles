@@ -10,7 +10,7 @@
       cycle = true;
       # Install the wayland variant of rofi
       package = pkgs.rofi-wayland;
-      # Set terminal to kitty
+      # Set terminal to wezterm
       terminal = "${pkgs.wezterm}/bin/wezterm";
     };
 }

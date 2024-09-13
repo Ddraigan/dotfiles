@@ -2,8 +2,13 @@
 
 {
   config = {
-    home.packages = [
-      pkgs.waybar
+    home.packages = with pkgs; [
+      waybar
+      rofi-bluetooth
+      amixer
+      btop
+      pavucontrol
+      dunst
     ];
     programs.waybar = {
       enable = true;
@@ -11,101 +16,207 @@
       systemd.enable = true;
       style =
         ''
-          ${builtins.readFile ./waybar-style.css}
+          ${builtins.readFile ./style.css}
         '';
       settings = [{
-        height = 30;
         layer = "top";
-        position = "top";
-        tray = { spacing = 10; };
         modules-left = [
-          "clock#1"
-          "clock#2"
-          "clock#3"
+          "custom/logo"
+          "clock"
+          "custom/weather"
+          "disk"
+          "memory"
+          "cpu"
+          "temperature"
+          "custom/powerDraw"
+          "hyprland/window"
         ];
         modules-center = [
           "hyprland/workspaces"
         ];
         modules-right = [
-          "custom/left-arrow-dark"
-          "pulseaudio"
-          "memory"
-          "cpu"
-          "disk"
-          "battery"
-          "temperature"
-          # "network"
           "tray"
+          "custom/clipboard"
+          "backlight"
+          "bluetooth"
+          "pulseaudio"
+          "network"
+          "battery"
         ];
-        "custom/left-arrow-dark" = {
-          # format = "";
-          format = "";
+
+        "custom/logo" = {
+          format = ./nixos-icon.svg;
           tooltip = false;
         };
-        "custom/right-arrow-dark" = {
-          # format = "";
-          format = "";
-          tooltip = false;
-        };
-        "clock#1" = {
-          format = "{:%a}";
-          tooltip = false;
-        };
-        "clock#2" = {
-          format = "{:%H:%M}";
-          tooltip = false;
-        };
-        "clock#3" = {
-          format = "{:%d-%m}";
-          tooltip = false;
-        };
-        battery = {
-          format = "{capacity}% {icon}";
-          format-alt = "{time} {icon}";
-          format-charging = "{capacity}% ";
-          format-icons = [ "" "" "" "" "" ];
-          format-plugged = "{capacity}% ";
-          states = {
-            critical = 15;
-            warning = 30;
+
+        "hyprland/workspaces" = {
+          format = "{icon}";
+          format-icons = {
+            "1" = "";
+            "2" = "";
+            "3" = "";
+            "4" = "";
+            "5" = "";
+            "6" = "";
+            "active" = "";
+            "default" = "";
           };
         };
-        cpu = {
-          format = "{usage}% ";
-          tooltip = false;
+
+        "custom/weather" = {
+          format = "{}";
+          return-type = "json";
+          exec = "~/.config/waybar/scripts/weather.sh";
+          interval = 10;
+          on-click = "firefox https://wttr.in";
         };
-        memory = { format = "{}% "; };
-        network = {
+
+        "custom/clipboard" = {
+          format = "󰅍";
+          on-click = "cliphist list | rofi -dmenu | cliphist decode | wl-copy";
+          interval = 86400;
+        };
+
+        clock = {
+          format = "{:%I:%M:%S %p}";
           interval = 1;
-          format-alt = "{ifname}: {ipaddr}/{cidr}";
-          format-disconnected = "Disconnected ⚠";
-          format-ethernet = "{ifname}: {ipaddr}/{cidr}   up: {bandwidthUpBits} down: {bandwidthDownBits}";
-          format-linked = "{ifname} (No IP) ";
-          format-wifi = "{essid} ({signalStrength}%) ";
-          on-click = "nm-applet";
+          tooltip-format = "\n<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          calendar-weeks-pos = "right";
+          today-format = "<span color='#7645AD'><b><u>{}</u></b></span>";
+          format-calendar = "<span color='#aeaeae'><b>{}</b></span>";
+          format-calendar-weeks = "<span color='#aeaeae'><b>W{:%V}</b></span>";
+          format-calendar-weekdays = "<span color='#aeaeae'><b>{}</b></span>";
         };
+
+        bluetooth = {
+          format-on = "";
+          format-off = "";
+          format-disabled = "󰂲";
+          format-connected = "󰂴";
+          format-connected-battery = "{device_battery_percentage}% 󰂴";
+          tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
+          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+          tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
+          on-click = "rofi-bluetooth";
+        };
+
+        network = {
+          format-wifi = " ";
+          format-ethernet = "󰈁";
+          format-disconnected = "";
+          tooltip-format = "{ipaddr}";
+          tooltip-format-wifi = "{essid} ({signalStrength}%)  | {ipaddr}";
+          tooltip-format-ethernet = "{ifname} | {ipaddr}";
+          # TODO:
+          on-click = "networkmanager_dmenu";
+        };
+
+        battery = {
+          interval = 1;
+          states = {
+            good = 95;
+            warning = 30;
+            critical = 20;
+          };
+          format = "{capacity}%  {icon} ";
+          format-charging = "{capacity}% 󰂄 ";
+          format-plugged = "{capacity}% 󰂄 ";
+          format-alt = "{time} {icon}";
+          format-icons = [
+            "󰁻"
+            "󰁼"
+            "󰁾"
+            "󰂀"
+            "󰂂"
+            "󰁹"
+          ];
+        };
+
+        backlight = {
+          device = "intel_backlight";
+          format = "<span font='12'>{icon}</span>";
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
+          on-scroll-down = "light -A 10";
+          on-scroll-up = "light -U 10";
+          smooth-scrolling-threshold = 1;
+        };
+
+        disk = {
+          interval = 30;
+          format = "  {percentage_used}%";
+          path = "/";
+        };
+
+        cpu = {
+          interval = 1;
+          format = " {usage}%";
+          min-length = 6;
+          max-length = 6;
+          format-icons = [ "▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ];
+        };
+
+        memory = {
+          format = " {percentage}%";
+        };
+
+        "hyprland/window" = {
+          format = "( {class} )";
+          rewrite = {
+            "(.*) - Mozilla Firefox" = "🌎 $1";
+            "(.*) - zsh" = "> [$1]";
+          };
+        };
+
+        temperature = {
+          format = " {temperatureC}°C";
+          format-critical = " {temperatureC}°C";
+          interval = 1;
+          critical-threshold = 80;
+          on-click = "btop";
+        };
+
         pulseaudio = {
-          format = "{volume}% {icon} {format_source}";
-          format-bluetooth = "{volume}% {icon} {format_source}";
-          format-bluetooth-muted = " {icon} {format_source}";
+          format = "{volume}% {icon}";
+          format-bluetooth = "󰂰";
+          format-muted = "<span font='12'></span>";
           format-icons = {
-            car = "";
-            default = [ "" "" "" ];
-            handsfree = "";
             headphones = "";
-            headset = "";
+            bluetooth = "󰥰";
+            handsfree = "";
+            headset = "󱡬";
             phone = "";
             portable = "";
+            car = "";
+            default = [ "" "" "" ];
           };
-          format-muted = " {format_source}";
-          format-source = "{volume}% ";
-          format-source-muted = "";
-          on-click = "pavucontrol";
+          justify = "center";
+          on-click = "amixer sset Master toggle";
+          on-click-right = "pavucontrol";
+          tooltip-format = "{icon}  {volume}%";
         };
-        temperature = {
-          critical-threshold = 80;
-          format = "{temperatureC}°C {icon}";
-          format-icons = [ "" "" "" ];
+
+        tray = {
+          icon-size = 14;
+          spacing = 10;
+        };
+
+        upower = {
+          show-icon = false;
+          hide-if-empty = true;
+          tooltip = true;
+          tooltip-spacing = 20;
         };
       }];
 

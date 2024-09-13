@@ -4,7 +4,6 @@
   # These imports activate the module
   imports = with outputs.homeManagerModules; [
     hyprland
-    # ags
     rofi
     catppuccin
     hyprpaper
@@ -32,7 +31,6 @@
       userName = "Ddraigan";
       userEmail = "lkjjones1999@gmail.com";
     };
-    zsh.enable = true;
   };
 
   fonts.fontconfig.enable = true;
@@ -53,17 +51,6 @@
       pkgs.zip
       pkgs.ripgrep
       pkgs.fzf
-      pkgs.gnome.nautilus
-
-      # Wayland
-      pkgs.grim
-      pkgs.slurp
-      pkgs.wl-clipboard
-      pkgs.dunst
-      pkgs.libnotify
-      pkgs.networkmanagerapplet
-      pkgs.pavucontrol
-      pkgs.hyprshot
 
       (pkgs.nerdfonts.override {
         fonts = [ "Hack" ];
@@ -71,11 +58,7 @@
     ];
     pointerCursor = {
       gtk.enable = true;
-      # package = pkgs.catppuccin-cursors.mochaLavender;
       size = 16;
-      # name = "mochaLavender";
-      # package = pkgs.bibata-cursors;
-      # name = "Bibata-Modern-Classic";
     };
   };
 
@@ -88,12 +71,9 @@
       size = "standard";
       tweaks = [ "normal" ];
     };
-    # cursorTheme.package = pkgs.catppuccin-cursors.mochaLavender;
     iconTheme = {
       package = pkgs.morewaita-icon-theme;
       name = "MoreWaita"; # ????
-      # package = pkgs.gnome.adwaita-icon-theme;
-      # name = "Adwaita";
     };
   };
 }
