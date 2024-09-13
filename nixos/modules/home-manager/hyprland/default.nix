@@ -8,10 +8,10 @@
       slurp
       wl-clipboard
       libnotify
-      networkmanagerapplet
       hyprshot
     ];
     wayland.windowManager.hyprland = {
+      waybar.enable = true;
       enable = true;
       plugins = [
         # Nixpkgs version

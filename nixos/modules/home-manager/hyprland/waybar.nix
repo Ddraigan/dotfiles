@@ -1,7 +1,10 @@
 { pkgs, lib, config, ... }:
 
 {
-  config = {
+  options = {
+    waybar.enable = lib.mkEnableOption "Enable Waybar";
+  };
+  config = lib.mkIf config.waybar.enable {
     home.packages = with pkgs; [
       waybar
       rofi-bluetooth
@@ -9,6 +12,7 @@
       btop
       pavucontrol
       dunst
+      networkmanagerapplet
     ];
     programs.waybar = {
       enable = true;
