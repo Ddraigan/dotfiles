@@ -1,4 +1,4 @@
-{ inputs, outputs, lib, config, pkgs, ... }:
+{ inputs, lib, config, pkgs, ... }:
 
 {
   imports =
@@ -24,19 +24,18 @@
 
   home-manager = {
     # Also pass inputs to home-manager modules
-    extraSpecialArgs = { inherit inputs outputs; };
+    extraSpecialArgs = { inherit inputs; };
     users = {
       "leon" = {
         imports = [
           ../home-manager/home.nix
-          # inputs.catppuccin.homeManagerModules.catppuccin
         ];
       };
     };
   };
 
   nixpkgs = {
-    overlays = [ outputs.overlays.unstable-packages ];
+    overlays = [ inputs.self.overlays.unstable-packages ];
     config = {
       allowUnfree = true;
       pulseaudio = true;

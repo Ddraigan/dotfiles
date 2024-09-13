@@ -1,4 +1,4 @@
-{ pkgs, outputs, lib, config, ... }: {
+{ pkgs, lib, config, ... }: {
   config = {
     home.packages = [
       pkgs.unstable.neovim

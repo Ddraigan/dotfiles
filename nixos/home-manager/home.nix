@@ -1,8 +1,8 @@
-{ inputs, outputs, lib, config, pkgs, ... }:
+{ inputs, lib, config, pkgs, ... }:
 
 {
   # These imports activate the module
-  imports = with outputs.homeManagerModules; [
+  imports = with inputs.self.homeManagerModules; [
     hyprland
     rofi
     catppuccin
@@ -17,7 +17,7 @@
   ];
 
   nixpkgs = {
-    overlays = [ outputs.overlays.unstable-packages ];
+    overlays = [ inputs.self.overlays.unstable-packages ];
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;

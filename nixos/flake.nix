@@ -19,9 +19,6 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
-    let
-      inherit (self) outputs;
-    in
     {
 
       overlays = import ./overlays { inherit inputs; };
@@ -31,7 +28,7 @@
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem
           {
-            specialArgs = { inherit inputs outputs; };
+            specialArgs = { inherit inputs; };
             modules = [ ./nixos/configuration.nix ];
           };
       };
