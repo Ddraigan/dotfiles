@@ -10,8 +10,8 @@
       libnotify
       hyprshot
     ];
+    waybar.enable = true;
     wayland.windowManager.hyprland = {
-      waybar.enable = true;
       enable = true;
       plugins = [
         # Nixpkgs version
