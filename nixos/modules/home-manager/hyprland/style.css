@@ -39,6 +39,7 @@ window#waybar {
 }
 
 #custom-logo {
+  background-image: url("./nixos-icon.svg");
 	padding: 0 10px;
 }
 

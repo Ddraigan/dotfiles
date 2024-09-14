@@ -8,7 +8,6 @@
     home.packages = with pkgs; [
       waybar
       rofi-bluetooth
-      amixer
       btop
       pavucontrol
       dunst
@@ -49,7 +48,7 @@
         ];
 
         "custom/logo" = {
-          format = ./nixos-icon.svg;
+          format = "  ";
           tooltip = false;
         };
 
