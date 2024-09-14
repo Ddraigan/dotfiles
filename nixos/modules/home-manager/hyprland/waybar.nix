@@ -52,6 +52,13 @@
           tooltip = false;
         };
 
+        "custom/powerDraw" = {
+          format = "{}";
+          interval = 1;
+          exec = "./scripts/powerdraw.sh";
+          return-type = "json";
+        };
+
         "hyprland/workspaces" = {
           format = "{icon}";
           format-icons = {
