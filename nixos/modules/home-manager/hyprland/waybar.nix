@@ -24,7 +24,7 @@
       settings = [{
         layer = "top";
         modules-left = [
-          "custom/logo"
+          # "custom/logo"
           "clock"
           "custom/weather"
           "disk"
