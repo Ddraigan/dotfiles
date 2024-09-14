@@ -179,6 +179,7 @@
           rewrite = {
             "(.*) - Mozilla Firefox" = "🌎 $1";
             "(.*) - zsh" = "> [$1]";
+            "(.*) - org.wezfurlong.wezterm" = "> [$1]";
           };
         };
 

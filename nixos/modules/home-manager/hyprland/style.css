@@ -124,7 +124,6 @@ window#waybar {
 	animation-direction: alternate;
 }
 
-
 @keyframes blink {
 	to {
 		background-color: @text;
