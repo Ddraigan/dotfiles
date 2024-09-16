@@ -18,12 +18,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, catppuccin, ... } @ inputs:
     {
-
       overlays = import ./overlays { inherit inputs; };
-      nixosModules = import ./modules/nixos;
-      homeManagerModules = import ./modules/home-manager/imports.nix;
+      # nixosModules = import ./modules/nixos;
+      # homeManagerModules = import ./modules/home-manager;
 
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem
@@ -31,6 +30,20 @@
             specialArgs = { inherit inputs; };
             modules = [ ./nixos/configuration.nix ];
           };
+      };
+
+      homeConfigurations = {
+        leon = inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+          };
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ./home-manager/home.nix
+            ./modules/home-manager
+            catppuccin.homeManagerModules.catppuccin
+          ];
+        };
       };
     };
 }

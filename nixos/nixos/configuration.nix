@@ -6,7 +6,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # Import home-manager's nixos module
-      inputs.home-manager.nixosModules.home-manager
+      # inputs.home-manager.nixosModules.home-manager
     ];
 
   users = {
@@ -18,18 +18,6 @@
         extraGroups = [ "networkmanager" "wheel" "sound" "video" "input" ];
         #openssh.authorizedKeys.keys = [ ];
         #packages = with pkgs; [ ];
-      };
-    };
-  };
-
-  home-manager = {
-    # Also pass inputs to home-manager modules
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "leon" = {
-        imports = [
-          ../home-manager/home.nix
-        ];
       };
     };
   };
@@ -50,6 +38,7 @@
   environment = {
     systemPackages = [
       pkgs.upower
+      pkgs.home-manager
     ];
     sessionVariables = {
       NIXOS_OZONE_WL = "1";

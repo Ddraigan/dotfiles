@@ -2,19 +2,30 @@
 
 {
   # These imports activate the module
-  imports = with inputs.self.homeManagerModules; [
-    hyprland
-    rofi
-    catppuccin
-    hyprpaper
-    tmux
-    wezterm
-    starship
-    zsh
-    waybar
-    neovim
-    zoxide
-  ];
+  # imports = with inputs.self.homeManagerModules; [
+  #   hyprland
+  #   rofi
+  #   catppuccin
+  #   hyprpaper
+  #   tmux
+  #   wezterm
+  #   starship
+  #   zsh
+  #   waybar
+  #   neovim
+  #   zoxide
+  # ];
+
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+    accent = "pink";
+    pointerCursor = {
+      enable = true;
+      flavor = "mocha";
+      accent = "sapphire";
+    };
+  };
 
   nixpkgs = {
     overlays = [ inputs.self.overlays.unstable-packages ];
