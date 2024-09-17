@@ -1,21 +1,6 @@
 { inputs, lib, config, pkgs, ... }:
 
 {
-  # These imports activate the module
-  # imports = with inputs.self.homeManagerModules; [
-  #   hyprland
-  #   rofi
-  #   catppuccin
-  #   hyprpaper
-  #   tmux
-  #   wezterm
-  #   starship
-  #   zsh
-  #   waybar
-  #   neovim
-  #   zoxide
-  # ];
-
   catppuccin = {
     enable = true;
     flavor = "mocha";
