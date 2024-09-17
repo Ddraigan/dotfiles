@@ -1,12 +1,11 @@
 { pkgs, lib, config, ... }: {
   config = {
     home.packages = [
-      pkgs.wezterm
+      pkgs.unstable.neovim
     ];
-
     home.file = {
-      ".config/wezterm" = {
-        source = ../../../../wezterm;
+      ".config/nvim" = {
+        source = ../../../../../nvim;
       };
     };
   };

@@ -4,13 +4,8 @@
   imports = [
     ./hyprland
     ./rofi
-    ./tmux
-    ./wezterm
-    ./starship
-    ./zsh
+    ./terminal
     ./hyprland/waybar.nix
-    ./nvim.nix
-    ./zoxide.nix
     ./hyprland/hyprpaper.nix
   ];
 }
