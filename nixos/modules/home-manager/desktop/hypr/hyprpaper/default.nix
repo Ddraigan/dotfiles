@@ -10,10 +10,10 @@
       settings = {
         ipc = "off";
         preload = [
-          "~/dotfiles/nixos/modules/home-manager/hyprland/skyline.jpg"
+          "~/dotfiles/nixos/modules/home-manager/desktop/hypr/hyprpaper/skyline.jpg"
         ];
         wallpaper = [
-          ",~/dotfiles/nixos/modules/home-manager/hyprland/skyline.jpg"
+          "~/dotfiles/nixos/modules/home-manager/desktop/hypr/hyprpaper/skyline.jpg"
         ];
       };
     };

@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./desktop
-    ./terminal
+    ./hyprland
+    ./hyprpaper
   ];
 }

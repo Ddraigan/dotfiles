@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ./desktop
-    ./terminal
+    ./hypr
+    ./waybar
+    ./rofi
   ];
 }
