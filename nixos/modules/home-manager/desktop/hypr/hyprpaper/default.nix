@@ -8,12 +8,12 @@
     services.hyprpaper = {
       enable = true;
       settings = {
-        ipc = "off";
+        # ipc = "off";
         preload = [
-          "~/Pictures/skyline.jpg"
+          "~/dotfiles/nixos/modules/home-manager/desktop/hypr/hyprpaper/skyline.jpg"
         ];
         wallpaper = [
-          "~/Pictures/skyline.jpg"
+          ",~/dotfiles/nixos/modules/home-manager/desktop/hypr/hyprpaper/skyline.jpg"
         ];
       };
     };
