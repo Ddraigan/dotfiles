@@ -1,5 +1,8 @@
-{ pkgs, lib, config, ... }: {
-  config = {
+{ pkgs, lib, config, ... }:
+
+{
+  options.modules.terminal.starship.enable = lib.mkEnableOption "Enable Starship";
+  config = lib.mkIf config.modules.terminal.starship.enable {
     home.packages = [
       pkgs.starship
     ];

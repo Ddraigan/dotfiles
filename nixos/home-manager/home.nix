@@ -12,6 +12,25 @@
     };
   };
 
+  modules = {
+    desktop = {
+      hypr = {
+        hyprland.enable = true;
+        hyprpaper.enable = true;
+      };
+      rofi.enable = true;
+      waybar.enable = true;
+    };
+    terminal = {
+      nvim.enable = true;
+      starship.enable = true;
+      tmux.enable = true;
+      wezterm.enable = true;
+      zoxide.enable = true;
+      zsh.enable = true;
+    };
+  };
+
   nixpkgs = {
     overlays = [ inputs.self.overlays.unstable-packages ];
     config = {

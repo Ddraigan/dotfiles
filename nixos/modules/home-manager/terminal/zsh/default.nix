@@ -1,5 +1,8 @@
-{ pkgs, lib, config, ... }: {
-  config = {
+{ pkgs, lib, config, ... }:
+
+{
+  options.modules.terminal.zsh.enable = lib.mkEnableOption "Enable zsh";
+  config = lib.mkIf config.modules.terminal.zsh.enable {
     home.packages = [
       pkgs.zsh
     ];

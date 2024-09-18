@@ -1,10 +1,8 @@
 { pkgs, lib, config, ... }:
 
 {
-  options = {
-    waybar.enable = lib.mkEnableOption "Enable Waybar";
-  };
-  config = lib.mkIf config.waybar.enable {
+  options.modules.desktop.waybar.enable = lib.mkEnableOption "Enable Waybar";
+  config = lib.mkIf config.modules.desktop.waybar.enable {
     home.packages = with pkgs; [
       waybar
       rofi-bluetooth

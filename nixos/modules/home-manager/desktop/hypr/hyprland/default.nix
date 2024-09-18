@@ -1,7 +1,8 @@
 { pkgs, inputs, lib, config, ... }:
 
 {
-  config = {
+  options.modules.desktop.hypr.hyprland.enable = lib.mkEnableOption "Enable Hyprland";
+  config = lib.mkIf config.modules.desktop.hypr.hyprland.enable {
     home.packages = with pkgs; [
       gnome.nautilus
       grim
@@ -10,7 +11,6 @@
       libnotify
       hyprshot
     ];
-    waybar.enable = true;
     wayland.windowManager.hyprland = {
       enable = true;
       plugins = [

@@ -1,7 +1,8 @@
 { pkgs, lib, config, ... }:
 
 {
-  config = {
+  options.modules.desktop.hypr.hyprpaper.enable = lib.mkEnableOption "Enable HyprPaper";
+  config = lib.mkIf config.modules.desktop.hypr.hyprpaper.enable {
     home.packages = [
       pkgs.hyprpaper
     ];

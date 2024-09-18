@@ -1,7 +1,8 @@
 { pkgs, lib, config, ... }:
 
 {
-  config = {
+  options.modules.terminal.tmux.enable = lib.mkEnableOption "Enable Tmux";
+  config = lib.mkIf config.modules.terminal.tmux.enable {
     home.packages = [
       pkgs.tmux
     ];
