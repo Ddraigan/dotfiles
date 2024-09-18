@@ -184,7 +184,7 @@
           rewrite = {
             "(.*) - Mozilla Firefox" = "🌎 $1";
             "(.*) - zsh" = "> [$1]";
-            "(.*) - org.wezfurlong.wezterm" = "> [$1]";
+            "(.*) - wezterm" = "> $1";
           };
         };
 
@@ -193,7 +193,7 @@
           format-critical = " {temperatureC}°C";
           interval = 1;
           critical-threshold = 80;
-          on-click = "btop";
+          on-click = "btop -lc";
         };
 
         pulseaudio = {
