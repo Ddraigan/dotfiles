@@ -76,7 +76,7 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   networking = {
-    hostName = "nixos";
+    hostName = "leon-laptop";
     networkmanager = {
       enable = true;
       wifi.powersave = false;

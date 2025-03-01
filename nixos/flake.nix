@@ -25,10 +25,10 @@
       # homeManagerModules = import ./modules/home-manager;
 
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem
+        leon-laptop = nixpkgs.lib.nixosSystem
           {
             specialArgs = { inherit inputs; };
-            modules = [ ./nixos/configuration.nix ];
+            modules = [ ./machines/leon-laptop/configuration.nix ];
           };
       };
 
