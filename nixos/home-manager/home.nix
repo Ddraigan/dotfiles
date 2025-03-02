@@ -41,6 +41,7 @@
 
   programs = {
     home-manager.enable = true;
+    spotify-player.enable = true;
     git = {
       enable = true;
       userName = "Ddraigan";
@@ -66,6 +67,7 @@
       pkgs.zip
       pkgs.ripgrep
       pkgs.fzf
+      inputs.zen-browser.packages."${pkgs.system}".default
 
       (pkgs.nerdfonts.override {
         fonts = [ "Hack" ];

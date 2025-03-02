@@ -4,7 +4,7 @@
   options.modules.desktop.hypr.hyprland.enable = lib.mkEnableOption "Enable Hyprland";
   config = lib.mkIf config.modules.desktop.hypr.hyprland.enable {
     home.packages = with pkgs; [
-      gnome.nautilus
+      nautilus
       grim
       slurp
       wl-clipboard
@@ -24,7 +24,7 @@
         "$terminal" = "wezterm";
         "$fileManager" = "nautilus";
         "$menu" = "rofi -show drun -show-icons";
-        "$browser" = "firefox";
+        "$browser" = "zen";
 
         exec-once = [
           "$terminal"
@@ -58,10 +58,12 @@
           active_opacity = 1.0;
           inactive_opacity = 1.0;
 
-          drop_shadow = true;
-          shadow_range = 4;
-          shadow_render_power = 3;
-          "col.shadow" = "rgba(1a1a1aee)";
+          shadow = {
+            enabled = true;
+            range = 4;
+            render_power = 3;
+            color = "rgba(1a1a1aee)";
+          };
 
           blur = {
             enabled = true;
@@ -73,6 +75,11 @@
             brightness = 0.3;
           };
         };
+
+        monitor = [
+          "DP-2, preferred, 0x0, 1"
+          ", preferred, auto-left, auto"
+        ];
 
         animations = {
           enabled = true;
@@ -99,7 +106,7 @@
 
         input = {
           kb_layout = "us";
-          kb_variant = "dvorak";
+          kb_variant = "";
 
           follow_mouse = 1;
           sensitivity = 0;
