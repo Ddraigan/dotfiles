@@ -2,6 +2,7 @@
 
 {
   options.modules.desktop.hypr.hyprland.enable = lib.mkEnableOption "Enable Hyprland";
+
   config = lib.mkIf config.modules.desktop.hypr.hyprland.enable {
     home.packages = with pkgs; [
       nautilus
@@ -14,17 +15,19 @@
     wayland.windowManager.hyprland = {
       enable = true;
       plugins = [
-        # Nixpkgs version
-        # pkgs.hyprlandPlugins.Hyprspace
-
         # Flake / Home-manager verison?
-        # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
+        # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
       ];
       settings = {
         "$terminal" = "wezterm";
         "$fileManager" = "nautilus";
-        "$menu" = "rofi -show drun -show-icons";
+        # "$menu" = "rofi -show drun -show-icons";
+        "$menu" = "walker";
         "$browser" = "zen";
+
+        env = [
+          "XDG_SCREENSHOTS_DIR,$HOME/screenshots"
+        ];
 
         exec-once = [
           "$terminal"
@@ -41,30 +44,24 @@
           border_size = 2;
           gaps_in = 5;
           gaps_out = 20;
+          resize_on_border = true;
+          allow_tearing = false;
+          layout = "dwindle";
 
           "col.inactive_border" = "$mantle";
           "col.active_border" = "$border";
-
-          resize_on_border = true;
-
-          allow_tearing = false;
-
-          layout = "dwindle";
         };
 
         decoration = {
           rounding = 10;
-
           active_opacity = 1.0;
           inactive_opacity = 1.0;
-
           shadow = {
             enabled = true;
             range = 4;
             render_power = 3;
             color = "rgba(1a1a1aee)";
           };
-
           blur = {
             enabled = true;
             size = 3;

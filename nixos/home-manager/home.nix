@@ -25,7 +25,8 @@
         hyprland.enable = true;
         hyprpaper.enable = true;
       };
-      rofi.enable = true;
+      rofi.enable = false;
+      walker.enable = true;
       waybar.enable = true;
     };
     terminal = {
