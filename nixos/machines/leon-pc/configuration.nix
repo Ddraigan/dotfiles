@@ -77,6 +77,7 @@
       pkgs.home-manager
       pkgs.mangohud
       pkgs.protonup
+      pkgs.unstable.hyprnotify
       # (pkgs.heroic.override {
       #   extraPkgs = pkgs: [
       #     pkgs.gamescope
