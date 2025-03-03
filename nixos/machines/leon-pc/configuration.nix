@@ -75,9 +75,12 @@
     systemPackages = [
       pkgs.upower
       pkgs.home-manager
+      pkgs.mangohud
+      pkgs.protonup
     ];
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/leon/.steam/root/compatibilitytools.d";
     };
   };
 
@@ -96,6 +99,11 @@
   programs = {
     zsh.enable = true;
     hyprland.enable = true;
+    steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+    };
+    gamemode.enable = true;
   };
 
   fonts.fontDir.enable = true;

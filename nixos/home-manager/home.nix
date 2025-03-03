@@ -5,10 +5,17 @@
     enable = true;
     flavor = "mocha";
     accent = "pink";
-    pointerCursor = {
+    cursors = {
       enable = true;
       flavor = "mocha";
       accent = "sapphire";
+    };
+    gtk = {
+      enable = true;
+      flavor = "mocha";
+      accent = "pink";
+      size = "standard";
+      tweaks = [ "normal" ];
     };
   };
 
@@ -81,13 +88,6 @@
 
   gtk = {
     enable = true;
-    catppuccin = {
-      enable = true;
-      flavor = "mocha";
-      accent = "pink";
-      size = "standard";
-      tweaks = [ "normal" ];
-    };
     iconTheme = {
       package = pkgs.morewaita-icon-theme;
       name = "MoreWaita"; # ????

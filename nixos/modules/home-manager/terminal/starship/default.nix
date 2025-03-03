@@ -6,8 +6,8 @@
     home.packages = [
       pkgs.starship
     ];
+    catppuccin.starship.enable = true;
     programs.starship = {
-      catppuccin.enable = true;
       enable = true;
       settings = {
         add_newline = false;

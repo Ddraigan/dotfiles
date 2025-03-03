@@ -11,9 +11,9 @@
       dunst
       networkmanagerapplet
     ];
+    catppuccin.waybar.enable = false; # Already in config
     programs.waybar = {
       enable = true;
-      catppuccin.enable = false; # Already in config
       systemd.enable = true;
       style =
         ''
