@@ -53,6 +53,9 @@
       enable = true;
       userName = "Ddraigan";
       userEmail = "lkjjones1999@gmail.com";
+      extraConfig = {
+        init.defaultBranch = "main";
+      };
     };
   };
 
