@@ -56,7 +56,7 @@
     upower.enable = true;
     xserver = {
       xkb = {
-        layout = "gb";
+        layout = "us";
         variant = "";
       };
       videoDrivers = [ "nvidia" ];
@@ -69,7 +69,7 @@
   };
 
   # Configure console keymap
-  console.keyMap = "uk";
+  console.keyMap = "us";
 
   environment = {
     systemPackages = [
@@ -77,6 +77,11 @@
       pkgs.home-manager
       pkgs.mangohud
       pkgs.protonup
+      # (pkgs.heroic.override {
+      #   extraPkgs = pkgs: [
+      #     pkgs.gamescope
+      #   ];
+      # })
     ];
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
