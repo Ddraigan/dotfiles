@@ -19,7 +19,8 @@
     };
     hyprlock = {
       url = "github:hyprwm/hyprlock";
-      inputs.hyprland.follows = "hyprland";
+      # Doesn't have this sadly
+      # inputs.hyprland.follows = "hyprland";
     };
     Hyprspace = {
       url = "github:KZDKM/Hyprspace";

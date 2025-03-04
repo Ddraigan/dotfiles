@@ -23,7 +23,7 @@
         modules-left = [
           # "custom/logo"
           "clock"
-          "custom/weather"
+          # "custom/weather"
           "disk"
           "memory"
           "cpu"
@@ -38,8 +38,9 @@
           "tray"
           "custom/clipboard"
           "backlight"
-          "bluetooth"
-          "pulseaudio"
+          # "bluetooth"
+          # "pulseaudio"
+          "wireplumber"
           "network"
           "battery"
         ];
@@ -80,7 +81,8 @@
 
         "custom/clipboard" = {
           format = "󰅍";
-          on-click = "cliphist list | rofi -dmenu | cliphist decode | wl-copy";
+          on-click = "walker --modules clipboard";
+          # on-click = "cliphist list | rofi -dmenu | cliphist decode | wl-copy";
           interval = 86400;
         };
 
@@ -95,19 +97,19 @@
           format-calendar-weekdays = "<span color='#aeaeae'><b>{}</b></span>";
         };
 
-        bluetooth = {
-          format-on = "";
-          format-off = "";
-          format-disabled = "󰂲";
-          format-connected = "󰂴";
-          format-connected-battery = "{device_battery_percentage}% 󰂴";
-          tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
-          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
-          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
-          tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
-          on-click = "rofi-bluetooth";
-        };
-
+        # bluetooth = {
+        #   format-on = "";
+        #   format-off = "";
+        #   format-disabled = "󰂲";
+        #   format-connected = "󰂴";
+        #   format-connected-battery = "{device_battery_percentage}% 󰂴";
+        #   tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
+        #   tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
+        #   tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+        #   tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
+        #   on-click = "rofi-bluetooth";
+        # };
+        #
         network = {
           format-wifi = " ";
           format-ethernet = "󰈁";
@@ -195,9 +197,8 @@
           on-click = "btop -lc";
         };
 
-        pulseaudio = {
+        wireplumber = {
           format = "{volume}% {icon}";
-          format-bluetooth = "󰂰";
           format-muted = "<span font='12'></span>";
           format-icons = {
             headphones = "";
@@ -215,6 +216,26 @@
           tooltip-format = "{icon}  {volume}%";
         };
 
+        # pulseaudio = {
+        #   format = "{volume}% {icon}";
+        #   format-bluetooth = "󰂰";
+        #   format-muted = "<span font='12'></span>";
+        #   format-icons = {
+        #     headphones = "";
+        #     bluetooth = "󰥰";
+        #     handsfree = "";
+        #     headset = "󱡬";
+        #     phone = "";
+        #     portable = "";
+        #     car = "";
+        #     default = [ "" "" "" ];
+        #   };
+        #   justify = "center";
+        #   on-click = "amixer sset Master toggle";
+        #   on-click-right = "pavucontrol";
+        #   tooltip-format = "{icon}  {volume}%";
+        # };
+        #
         tray = {
           icon-size = 14;
           spacing = 10;
