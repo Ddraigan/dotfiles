@@ -120,13 +120,26 @@
         };
 
         "$mod" = "SUPER";
+        "$LMB" = "mouse:272";
+        "$RMB" = "mouse:273";
 
+        # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
+        # r -> release, will trigger on release of a key.
+        # e -> repeat, will repeat when held.
+        # n -> non-consuming, key/mouse events will be passed to the active window in addition to triggering the dispatcher.
+        # m -> mouse, see below
+        # t -> transparent, cannot be shadowed by other binds.
+        # i -> ignore mods, will ignore modifiers.
         bindel = [
           "XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"
           "XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
         ];
         binde = [
           "XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ];
+        bindm = [
+          "SHIFT, $LMB, movewindow"
+          "ALT, $LMB, resizewindow"
         ];
         bind = [
           # Plugins
