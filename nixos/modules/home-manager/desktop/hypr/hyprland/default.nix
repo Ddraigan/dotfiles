@@ -22,6 +22,7 @@
     ];
     wayland.windowManager.hyprland = {
       enable = true;
+      xwayland.enable = true;
       plugins = [
         # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
         inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo

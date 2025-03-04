@@ -11,7 +11,7 @@
       leon = {
         isNormalUser = true;
         description = "Leon Jones";
-        extraGroups = [ "networkmanager" "wheel" "sound" "video" "input" ];
+        extraGroups = [ "networkmanager" "wheel" "sound" "video" "input" "pipewire" ];
         #openssh.authorizedKeys.keys = [ ];
         #packages = with pkgs; [ ];
       };
@@ -57,9 +57,11 @@
     };
     pipewire = {
       enable = true;
+      audio.enable = true;
       alsa.enable = true;
       pulse.enable = true;
       jack.enable = true;
+      wireplumber.enable = true;
     };
   };
 
@@ -72,6 +74,9 @@
       pkgs.home-manager
       pkgs.mangohud
       pkgs.protonup
+      (pkgs.discord.override {
+       withVencord = true;
+       })
       # pkgs.unstable.hyprnotify
       # (pkgs.heroic.override {
       #   extraPkgs = pkgs: [
