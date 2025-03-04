@@ -24,6 +24,7 @@
       hypr = {
         hyprland.enable = true;
         hyprpaper.enable = true;
+        hyprlock.enable = true;
       };
       rofi.enable = false;
       walker.enable = true;
@@ -46,6 +47,8 @@
       allowUnfreePredicate = _: true;
     };
   };
+
+  services.easyeffects.enable = true;
 
   programs = {
     home-manager.enable = true;

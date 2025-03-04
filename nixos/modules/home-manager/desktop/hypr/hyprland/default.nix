@@ -25,11 +25,11 @@
         "$menu" = "walker";
         "$browser" = "zen";
 
-        env = [
-          "XDG_SCREENSHOTS_DIR,$HOME/screenshots"
-          "XDG_PICTURES_DIR,$HOME/screenshots"
-          "HYPRSHOT_DIR,$HOME/screenshots"
-        ];
+        # env = [
+        #   "XDG_SCREENSHOTS_DIR,$HOME/screenshots"
+        #   "XDG_PICTURES_DIR,$HOME/screenshots"
+        #   "HYPRSHOT_DIR,$HOME/screenshots"
+        # ];
 
         exec-once = [
           "$terminal"
@@ -125,11 +125,11 @@
           # Plugins
           # "$mod, TAB, overview:toggle"
           # Clipboard
-          "$mod SHIFT, I, exec, hyprshot -m region output --clipboard-only"
+          "$mod, i, exec, hyprshot -m region output --clipboard-only"
+          "$mod SHIFT, I, exec, hyprshot -m window"
+          ", PRINT, exec, hyprshot -m window"
           "$mod, V, exec, wl-paste"
           "$mod, C, exec, wl-copy"
-
-          ", PRINT, exec, hyprshot -m window"
 
           "$mod, D, exec, $menu"
           "$mod, B, exec, $browser"

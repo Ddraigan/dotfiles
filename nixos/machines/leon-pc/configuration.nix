@@ -103,6 +103,7 @@
 
   # programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   programs = {
+    dconf.enable = true;
     zsh.enable = true;
     hyprland.enable = true;
     steam = {
