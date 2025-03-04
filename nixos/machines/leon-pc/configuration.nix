@@ -84,7 +84,7 @@
       #   ];
       # })
     ];
-    vairables = {
+    variables = {
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_TYPE = "wayland";
       XDG_SESSION_DESKTOP = "Hyprland";
@@ -97,6 +97,20 @@
       GDK_BACKEND = "wayland";
       WLR_NO_HARDWARE_CURSORS = "1";
     };
+  };
+
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    config = {
+      common.default = [ "gtk" ];
+      hyprland.default = [ "gtk" "hyprland" ];
+    };
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-wlr
+        pkgs.xdg-desktop-portal-hyprland
+    ];
   };
 
   nix =
