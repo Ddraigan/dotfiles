@@ -1,22 +1,30 @@
-{ pkgs, inputs, lib, config, ... }:
+{ pkgs, inputs, lib, config, system, ... }:
 
 {
   options.modules.desktop.hypr.hyprland.enable = lib.mkEnableOption "Enable Hyprland";
 
   config = lib.mkIf config.modules.desktop.hypr.hyprland.enable {
     home.packages = with pkgs; [
+      # File Manager
       nautilus
+
+      # Clipboard
+      wl-clipboard
+
+      # Notifications
+      # dunst (has its own config)
+      libnotify
+
+      # Screenshot Utils
+      hyprshot
       grim
       slurp
-      wl-clipboard
-      libnotify
-      hyprshot
     ];
     wayland.windowManager.hyprland = {
       enable = true;
       plugins = [
-        # Flake / Home-manager verison?
         # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
+        inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
       ];
       settings = {
         "$terminal" = "wezterm";
@@ -25,16 +33,16 @@
         "$menu" = "walker";
         "$browser" = "zen";
 
-        # env = [
-        #   "XDG_SCREENSHOTS_DIR,$HOME/screenshots"
-        #   "XDG_PICTURES_DIR,$HOME/screenshots"
-        #   "HYPRSHOT_DIR,$HOME/screenshots"
-        # ];
+        env = [
+          "XDG_SCREENSHOTS_DIR,$HOME/Pictures/screenshots"
+          "XDG_PICTURES_DIR,$HOME/Pictures"
+          "HYPRSHOT_DIR,$HOME/Pictures/screenshots"
+        ];
 
         exec-once = [
           "$terminal"
           # "$browser"
-          "hyprnotify"
+          # "hyprnotify"
           # "dunst"
           # "waybar"
           "nm-applet --indicator"
@@ -120,10 +128,31 @@
         };
 
         "$mod" = "SUPER";
+        "$LMB" = "mouse:272";
+        "$RMB" = "mouse:273";
 
+        # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
+        # r -> release, will trigger on release of a key.
+        # e -> repeat, will repeat when held.
+        # n -> non-consuming, key/mouse events will be passed to the active window in addition to triggering the dispatcher.
+        # m -> mouse, see below
+        # t -> transparent, cannot be shadowed by other binds.
+        # i -> ignore mods, will ignore modifiers.
+        bindel = [
+          "XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"
+          "XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
+        ];
+        binde = [
+          "XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ];
+        bindm = [
+          "SHIFT, $LMB, movewindow"
+          "ALT, $LMB, resizewindow"
+        ];
         bind = [
           # Plugins
-          # "$mod, TAB, overview:toggle"
+          "$mod, TAB, overview:toggle"
+
           # Clipboard
           "$mod, i, exec, hyprshot -m region output --clipboard-only"
           "$mod SHIFT, I, exec, hyprshot -m window"

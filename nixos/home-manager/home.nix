@@ -29,6 +29,7 @@
       rofi.enable = false;
       walker.enable = true;
       waybar.enable = true;
+      dunst.enable = true;
     };
     terminal = {
       nvim.enable = true;
