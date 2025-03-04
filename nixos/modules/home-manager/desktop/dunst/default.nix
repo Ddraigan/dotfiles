@@ -144,7 +144,7 @@
 
           ### Text ###
 
-          font = "Fira Mono 12";
+          font = "Hack Nerd Font, Hack NF";
 
           # The spacing between lines.  If the height is smaller than the
           # font height, it will get raised to the font height.
