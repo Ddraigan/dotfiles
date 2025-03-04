@@ -107,6 +107,8 @@
     gamemode.enable = true;
   };
 
+  security.pam.services.hyprlock = { }; # Can't unlock without this
+
   fonts.fontDir.enable = true;
 
   # Bootloader.

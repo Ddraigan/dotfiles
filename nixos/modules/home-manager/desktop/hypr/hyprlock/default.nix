@@ -1,7 +1,7 @@
 { pkgs, lib, config, inputs, system, ... }:
 
 let
-  hyprlock-package = inputs.hyprlock.packages.${system}.hyprlock;
+  hyprlock-package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
   # username = config.${namespace}.user.name;
   main-monitor = "";
 in
@@ -10,10 +10,9 @@ in
     enable = lib.mkEnableOption "Enable Hyprlock";
   };
   config = lib.mkIf config.modules.desktop.hypr.hyprlock.enable {
-    security.pam.services.hyprlock = { }; # Can't unlock without this
-    modules.desktop.hypr.hyprland.settings = {
+    wayland.windowManager.hyprland.settings = {
       bind = [
-        "$mod CTRL, ESC, exec, hyprlock-blur"
+        "$mod CTRL, ESC, exec, hyprlock"
       ];
     };
     programs.hyprlock = {
