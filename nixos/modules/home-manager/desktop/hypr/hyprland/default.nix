@@ -42,7 +42,7 @@
           "$terminal"
           # "$browser"
           # "hyprnotify"
-          "dunst"
+          # "dunst"
           # "waybar"
           "nm-applet --indicator"
           "wl-paste -p --watch wl-copy"
