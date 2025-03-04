@@ -5,5 +5,6 @@
     ./hyprland
     ./hyprpaper
     ./hyprlock
+    ./hypridle
   ];
 }

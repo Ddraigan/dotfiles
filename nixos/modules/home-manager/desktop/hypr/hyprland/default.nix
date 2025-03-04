@@ -5,17 +5,24 @@
 
   config = lib.mkIf config.modules.desktop.hypr.hyprland.enable {
     home.packages = with pkgs; [
+      # File Manager
       nautilus
+
+      # Clipboard
+      wl-clipboard
+
+      # Notifications
+      # dunst (has its own config)
+      libnotify
+
+      # Screenshot Utils
+      hyprshot
       grim
       slurp
-      wl-clipboard
-      libnotify
-      hyprshot
     ];
     wayland.windowManager.hyprland = {
       enable = true;
       plugins = [
-        # Flake / Home-manager verison?
         # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
       ];
       settings = {
@@ -26,16 +33,16 @@
         "$browser" = "zen";
 
         env = [
-          "XDG_SCREENSHOTS_DIR,$HOME/screenshots"
-          "XDG_PICTURES_DIR,$HOME/screenshots"
-          "HYPRSHOT_DIR,$HOME/screenshots"
+          "XDG_SCREENSHOTS_DIR,$HOME/Pictures/screenshots"
+          "XDG_PICTURES_DIR,$HOME/Pictures"
+          "HYPRSHOT_DIR,$HOME/Pictures/screenshots"
         ];
 
         exec-once = [
           "$terminal"
           # "$browser"
-          "hyprnotify"
-          # "dunst"
+          # "hyprnotify"
+          "dunst"
           # "waybar"
           "nm-applet --indicator"
           "wl-paste -p --watch wl-copy"

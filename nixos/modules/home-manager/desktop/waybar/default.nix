@@ -8,7 +8,6 @@
       rofi-bluetooth
       btop
       pavucontrol
-      dunst
       networkmanagerapplet
     ];
     catppuccin.waybar.enable = false; # Already in config

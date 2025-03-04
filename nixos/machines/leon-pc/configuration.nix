@@ -1,13 +1,9 @@
 { inputs, lib, config, pkgs, ... }:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      # Import home-manager's nixos module
-      # inputs.home-manager.nixosModules.home-manager
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   users = {
     defaultUserShell = pkgs.zsh;
@@ -41,10 +37,8 @@
     nvidia = {
       modesetting.enable = true;
       powerManagement = {
-        # Unlikely to need this one (Experimental)
-        enable = false;
-        # Puts the GPU to sleep, don't want this
-        finegrained = false;
+        enable = false; #Unlikely to need this one (Experimental)
+        finegrained = false; #Puts the GPU to sleep, don't want this
       };
       open = true;
       nvidiaSettings = true;
@@ -77,7 +71,7 @@
       pkgs.home-manager
       pkgs.mangohud
       pkgs.protonup
-      pkgs.unstable.hyprnotify
+      # pkgs.unstable.hyprnotify
       # (pkgs.heroic.override {
       #   extraPkgs = pkgs: [
       #     pkgs.gamescope

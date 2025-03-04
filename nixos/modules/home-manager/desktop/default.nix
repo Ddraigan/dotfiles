@@ -6,5 +6,6 @@
     ./waybar
     ./rofi
     ./walker
+    ./dunst
   ];
 }
