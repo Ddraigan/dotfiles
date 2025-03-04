@@ -1,4 +1,4 @@
-{ pkgs, inputs, lib, config, ... }:
+{ pkgs, inputs, lib, config, system, ... }:
 
 {
   options.modules.desktop.hypr.hyprland.enable = lib.mkEnableOption "Enable Hyprland";
@@ -24,6 +24,7 @@
       enable = true;
       plugins = [
         # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
+        inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
       ];
       settings = {
         "$terminal" = "wezterm";
@@ -150,7 +151,8 @@
         ];
         bind = [
           # Plugins
-          # "$mod, TAB, overview:toggle"
+          "$mod, TAB, overview:toggle"
+
           # Clipboard
           "$mod SHIFT, I, exec, hyprshot -m region output --clipboard-only"
           "$mod, V, exec, wl-paste"
