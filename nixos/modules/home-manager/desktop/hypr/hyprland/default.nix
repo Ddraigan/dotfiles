@@ -27,6 +27,18 @@
         inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
       ];
       settings = {
+        "plugin:hyprexpo" = {
+          columns = 3;
+          gap_size = 5;
+          bg_col = "rgb(111111)";
+          workspace_method = "center current"; # [center/first] [workspace] e.g. first 1 or center m+1
+
+            enable_gesture = true; # laptop touchpad
+            gesture_fingers = 3;  # 3 or 4
+            gesture_distance = 300; # how far is the "max"
+            gesture_positive = true; # positive = swipe down. Negative = swipe up.
+        };
+
         "$terminal" = "wezterm";
         "$fileManager" = "nautilus";
         # "$menu" = "rofi -show drun -show-icons";
@@ -139,11 +151,13 @@
         # t -> transparent, cannot be shadowed by other binds.
         # i -> ignore mods, will ignore modifiers.
         bindel = [
-          "XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"
-          "XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
+            # Doesn't exist?
+          # "XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"
+          # "XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
         ];
         binde = [
-          "XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+              # Doesn't exist?
+          # "XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ];
         bindm = [
           "SHIFT, $LMB, movewindow"
@@ -152,9 +166,9 @@
         bind = [
           # Plugins
           # "$mod, TAB, overview:toggle"
-          "$mod, TAB, hyprexpo:expo, toggle"
+          "$mod, Tab, hyprexpo:expo, toggle"
 
-          "$mod CTRL, ESC, exec, hyprlock"
+          "$mod, escape, exec, hyprlock"
 
           # Clipboard
           "$mod, i, exec, hyprshot -m region output --clipboard-only"

@@ -10,6 +10,7 @@ in
     enable = lib.mkEnableOption "Enable Hyprlock";
   };
   config = lib.mkIf config.modules.desktop.hypr.hyprlock.enable {
+# TODO: for some reason it skips inputting a password??
     programs.hyprlock = {
       enable = true;
       package = hyprlock-package;

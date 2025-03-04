@@ -10,7 +10,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin.url = "github:catppuccin/nix";
-    # ags.url = "github:Aylur/ags";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     hyprland.url = "github:hyprwm/Hyprland";
     walker.url = "github:abenz1267/walker";
@@ -24,12 +23,11 @@
     };
     Hyprspace = {
       url = "github:KZDKM/Hyprspace";
-      # Hyprspace uses latest Hyprland. We declare this to keep them in sync.
       inputs.hyprland.follows = "hyprland";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, catppuccin, zen-browser, walker, hyprlock, Hyprspace, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, catppuccin, zen-browser, walker, hyprland, hyprlock, Hyprspace, ... } @ inputs:
     {
       overlays = import ./overlays { inherit inputs; };
       # nixosModules = import ./modules/nixos;
@@ -57,6 +55,7 @@
           modules = [
             ./home-manager/home.nix
             ./modules/home-manager
+            hyprland.homeManagerModules.default
             catppuccin.homeManagerModules.catppuccin
             walker.homeManagerModules.walker
           ];
