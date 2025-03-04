@@ -84,9 +84,18 @@
       #   ];
       # })
     ];
+    vairables = {
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_SESSION_TYPE = "wayland";
+      XDG_SESSION_DESKTOP = "Hyprland";
+    };
     sessionVariables = {
-      NIXOS_OZONE_WL = "1";
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/leon/.steam/root/compatibilitytools.d";
+      NIXOS_OZONE_WL = "1";
+      MOZ_ENABLE_WAYLAND = "1";
+      T_QPA_PLATFORM = "wayland";
+      GDK_BACKEND = "wayland";
+      WLR_NO_HARDWARE_CURSORS = "1";
     };
   };
 
@@ -104,6 +113,7 @@
   programs = {
     dconf.enable = true;
     zsh.enable = true;
+    xwayland.enable = true;
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
