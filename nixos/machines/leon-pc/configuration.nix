@@ -59,6 +59,7 @@
       enable = true;
       alsa.enable = true;
       pulse.enable = true;
+      jack.enable = true;
     };
   };
 
@@ -110,7 +111,10 @@
     gamemode.enable = true;
   };
 
-  security.pam.services.hyprlock = { }; # Can't unlock without this
+  security = {
+    rtkit.enable = true;
+    pam.services.hyprlock = { }; # Can't unlock without this}
+  };
 
   fonts.fontDir.enable = true;
 
@@ -183,9 +187,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
 
-  #sound.enable = true;
   #hardware.pulseaudio = {
   #  enable = true;
   #};
-  #security.rtkit.enable = true;
 }

@@ -4,6 +4,9 @@
   options.modules.desktop.dunst.enable = lib.mkEnableOption "Enable Dunst";
 
   config = lib.mkIf config.modules.desktop.dunst.enable {
+    home.packages = [
+      pkgs.libnotify
+    ];
     services.dunst = {
       enable = true;
       settings = {

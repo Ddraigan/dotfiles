@@ -13,7 +13,7 @@
 
       # Notifications
       # dunst (has its own config)
-      libnotify
+      # libnotify (with dunst)
 
       # Screenshot Utils
       hyprshot
