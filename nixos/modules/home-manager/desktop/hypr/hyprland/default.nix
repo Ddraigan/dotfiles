@@ -24,7 +24,7 @@
       enable = true;
       plugins = [
         # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
-        inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+        inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
       ];
       settings = {
         "$terminal" = "wezterm";
@@ -151,7 +151,10 @@
         ];
         bind = [
           # Plugins
-          "$mod, TAB, overview:toggle"
+          # "$mod, TAB, overview:toggle"
+          "$mod, TAB, hyprexpo:expo, toggle"
+
+          "$mod CTRL, ESC, exec, hyprlock"
 
           # Clipboard
           "$mod, i, exec, hyprshot -m region output --clipboard-only"

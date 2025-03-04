@@ -99,7 +99,10 @@
   programs = {
     dconf.enable = true;
     zsh.enable = true;
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+      };
     steam = {
       enable = true;
       gamescopeSession.enable = true;
