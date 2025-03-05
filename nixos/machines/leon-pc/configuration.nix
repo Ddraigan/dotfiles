@@ -131,7 +131,6 @@
   programs = {
     dconf.enable = true;
     zsh.enable = true;
-    xwayland.enable = true;
     hyprland = {
       enable = true;
       xwayland = true;
