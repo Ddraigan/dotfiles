@@ -73,7 +73,7 @@
           # "hyprnotify"
           # "dunst"
           # "waybar"
-          "systemctl --user enable --now hypridle.service" # To start hypridle at launch with uwsm
+          # "systemctl --user enable --now hypridle.service" # To start hypridle at launch with uwsm
           "nm-applet --indicator"
           "wl-paste -p --watch wl-copy"
         ];
