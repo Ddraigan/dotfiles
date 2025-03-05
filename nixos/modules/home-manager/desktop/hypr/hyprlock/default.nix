@@ -3,21 +3,20 @@
 let
   hyprlock-package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
   # username = config.${namespace}.user.name;
-  main-monitor = "";
+  main-monitor = "DP-2";
 in
 {
   options.modules.desktop.hypr.hyprlock = {
     enable = lib.mkEnableOption "Enable Hyprlock";
   };
   config = lib.mkIf config.modules.desktop.hypr.hyprlock.enable {
-# TODO: for some reason it skips inputting a password??
     programs.hyprlock = {
       enable = true;
       package = hyprlock-package;
       settings = {
         general = {
           disable_loading_bar = true;
-          grace = 100;
+          grace = 5;
           hide_cursor = true;
           no_fade_in = false;
         };

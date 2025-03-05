@@ -86,9 +86,12 @@
       pkgs.mangohud
       pkgs.protonup
       pkgs.hyprpolkitagent
+      pkgs.pulseaudio
+      pkgs.kdePackages.xwaylandvideobridge
       # pkgs.bitwarden
       pkgs.discord-canary
-      # pkgs.vesktop
+      pkgs.vesktop
+      pkgs.webcord
       # (pkgs.discord.override {
       #  withVencord = true;
       #  })
