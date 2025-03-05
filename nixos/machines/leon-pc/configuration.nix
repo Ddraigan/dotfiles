@@ -87,6 +87,7 @@
       pkgs.protonup
       pkgs.hyprpolkitagent
       pkgs.bitwarden
+      pkgs.discord-canary
       # pkgs.vesktop
       # (pkgs.discord.override {
       #  withVencord = true;
