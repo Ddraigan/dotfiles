@@ -20,7 +20,6 @@
         # if ! { [ "$TERM" = "xterm-256color" ] && [ -n "$TMUX" ]; } then
         #   tmux new -As default
         # fi
-
       '';
     };
   };

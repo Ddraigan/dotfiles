@@ -59,7 +59,7 @@
   services = {
     upower.enable = true;
     xserver = {
-      enable = true;
+      enable = false;
       xkb = {
         layout = "us";
         variant = "";
@@ -100,7 +100,7 @@
       # })
     ];
     variables = {
-    # UWSM will automatically set these ones
+        # UWSM manages these
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_TYPE = "wayland";
       XDG_SESSION_DESKTOP = "Hyprland";
@@ -131,7 +131,6 @@
   programs = {
     dconf.enable = true;
     zsh.enable = true;
-    xwayland.enable = true;
     hyprland = {
       enable = true;
       xwayland.enable = true;
