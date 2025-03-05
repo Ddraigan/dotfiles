@@ -145,6 +145,20 @@
     gamemode.enable = true;
   };
 
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    config = {
+      common.default = [ "gtk" ];
+      hyprland.default = [ "hyprland" "gtk" ];
+    };
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+      # pkgs.xdg-desktop-portal-wlr
+    ];
+  };
+
   security = {
     rtkit.enable = true;
     pam.services.hyprlock = { }; # Can't unlock without this}
