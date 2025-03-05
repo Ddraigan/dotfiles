@@ -74,9 +74,10 @@
       pkgs.home-manager
       pkgs.mangohud
       pkgs.protonup
-      (pkgs.discord.override {
-       withVencord = true;
-       })
+      pkgs.vesktop
+      # (pkgs.discord.override {
+      #  withVencord = true;
+      #  })
       # pkgs.unstable.hyprnotify
       # (pkgs.heroic.override {
       #   extraPkgs = pkgs: [
@@ -107,9 +108,9 @@
       hyprland.default = [ "gtk" "hyprland" ];
     };
     extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-wlr
-        pkgs.xdg-desktop-portal-hyprland
+        # pkgs.xdg-desktop-portal-hyprland
     ];
   };
 
