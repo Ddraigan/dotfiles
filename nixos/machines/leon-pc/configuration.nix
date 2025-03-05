@@ -88,6 +88,7 @@
       pkgs.hyprpolkitagent
       pkgs.pulseaudio
       pkgs.kdePackages.xwaylandvideobridge
+      pkgs.helvum
       # pkgs.bitwarden
       pkgs.discord-canary
       pkgs.vesktop

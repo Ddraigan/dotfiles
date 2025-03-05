@@ -190,6 +190,7 @@
         };
 
         temperature = {
+          hwmon-path = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input";
           format = " {temperatureC}°C";
           format-critical = " {temperatureC}°C";
           interval = 1;
@@ -198,6 +199,8 @@
         };
 
         wireplumber = {
+          # on-scroll-up = "pw-volume change +2.0%";
+          # on-scroll-down = "pw-volume change -2.0%";
           format = "{volume}% {icon}";
           format-muted = "<span font='12'></span>";
           format-icons = {
@@ -211,7 +214,7 @@
             default = [ "" "" "" ];
           };
           justify = "center";
-          on-click = "amixer sset Master toggle";
+          on-click = "helvum";
           on-click-right = "pavucontrol";
           tooltip-format = "{icon}  {volume}%";
         };
