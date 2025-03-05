@@ -24,3 +24,13 @@
     };
   };
 }
+
+# Use this to bring up the uwsm compositor menu
+# if uwsm check may-start && uwsm select; then
+# 	exec systemd-cat -t uwsm_start uwsm start default
+# fi
+
+# Use this to go straight into hyprland
+#  if uwsm check may-start; then
+#     exec uwsm start hyprland.desktop
+# fi 
