@@ -87,8 +87,9 @@
       pkgs.protonup
       pkgs.hyprpolkitagent
       pkgs.pulseaudio
-      pkgs.kdePackages.xwaylandvideobridge
+      pkgs.xwaylandvideobridge
       pkgs.helvum
+      pkgs.spotify
       # pkgs.bitwarden
       pkgs.discord-canary
       pkgs.vesktop
@@ -220,8 +221,8 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 57621 ];
+  networking.firewall.allowedUDPPorts = [ 5353 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
