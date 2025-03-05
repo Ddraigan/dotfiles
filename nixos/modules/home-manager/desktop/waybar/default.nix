@@ -28,7 +28,7 @@
           "memory"
           "cpu"
           "temperature"
-          "custom/powerDraw"
+          # "custom/powerDraw"
           "hyprland/window"
         ];
         modules-center = [
@@ -45,17 +45,17 @@
           "battery"
         ];
 
-        "custom/logo" = {
-          format = "  ";
-          tooltip = false;
-        };
+        # "custom/logo" = {
+        #   format = "  ";
+        #   tooltip = false;
+        # };
 
-        "custom/powerDraw" = {
-          format = "{}";
-          interval = 1;
-          exec = "./scripts/powerdraw.sh";
-          return-type = "json";
-        };
+        # "custom/powerDraw" = {
+        #   format = "{}";
+        #   interval = 1;
+        #   exec = "./scripts/powerdraw.sh";
+        #   return-type = "json";
+        # };
 
         "hyprland/workspaces" = {
           format = "{icon}";
@@ -181,7 +181,7 @@
         };
 
         "hyprland/window" = {
-          format = "( {class} )";
+          format = "( {} )";
           rewrite = {
             "(.*) - Mozilla Firefox" = "🌎 $1";
             "(.*) - zsh" = "> [$1]";
