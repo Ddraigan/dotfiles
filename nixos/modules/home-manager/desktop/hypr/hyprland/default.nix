@@ -22,6 +22,7 @@
     ];
     xdg.portal = {
       enable = true;
+      systemd.enable = false;
       xdgOpenUsePortal = true;
       config = {
         common.default = [ "gtk" ];
