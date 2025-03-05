@@ -31,8 +31,6 @@
   outputs = { self, nixpkgs, home-manager, catppuccin, zen-browser, walker, hyprland, hyprlock, Hyprspace, ... } @ inputs:
     {
       overlays = import ./overlays { inherit inputs; };
-      # nixosModules = import ./modules/nixos;
-      # homeManagerModules = import ./modules/home-manager;
 
       nixosConfigurations = {
         leon-laptop = nixpkgs.lib.nixosSystem
@@ -56,7 +54,7 @@
           modules = [
             ./home-manager/home.nix
             ./modules/home-manager
-            hyprland.homeManagerModules.default
+            # hyprland.homeManagerModules.default
             catppuccin.homeManagerModules.catppuccin
             walker.homeManagerModules.walker
           ];

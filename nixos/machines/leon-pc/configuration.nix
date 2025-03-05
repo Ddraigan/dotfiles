@@ -11,7 +11,7 @@
       leon = {
         isNormalUser = true;
         description = "Leon Jones";
-        extraGroups = [ "networkmanager" "wheel" "sound" "video" "input" "pipewire" ];
+        extraGroups = [ "networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire" ];
         #openssh.authorizedKeys.keys = [ ];
         #packages = with pkgs; [ ];
       };
@@ -29,7 +29,11 @@
   hardware = {
     pulseaudio = {
       enable = false;
-      package = pkgs.pulseaudioFull;
+      # package = pkgs.pulseaudioFull;
+    };
+    bluetooth = {
+      enable = false;
+      powerOnBoot = false;
     };
     graphics = {
       enable = true;
@@ -100,20 +104,6 @@
     };
   };
 
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
-    config = {
-      common.default = [ "gtk" ];
-      hyprland.default = [ "gtk" "hyprland" ];
-    };
-    extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-wlr
-        # pkgs.xdg-desktop-portal-hyprland
-    ];
-  };
-
   nix =
     let
       flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
@@ -122,6 +112,8 @@
       settings = {
         experimental-features = "nix-command flakes";
         nix-path = config.nix.nixPath;
+        substituters = [ "https://hyprland.cachix.org" ];
+        trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
       };
     };
 
@@ -131,8 +123,11 @@
     xwayland.enable = true;
     hyprland = {
       enable = true;
-      package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-      };
+      xwayland = true;
+      withUWSM = true;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    };
     steam = {
       enable = true;
       gamescopeSession.enable = true;
@@ -146,13 +141,6 @@
   };
 
   fonts.fontDir.enable = true;
-
-  # Bootloader.
-  # boot.loader.grub = {
-  #   enable = true;
-  #   device = "/dev/sda";
-  #   useOSProber = true;
-  # };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -215,8 +203,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
-  #hardware.pulseaudio = {
-  #  enable = true;
-  #};
 }

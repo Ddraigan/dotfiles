@@ -20,9 +20,23 @@
       grim
       slurp
     ];
+    xdg.portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      config = {
+        common.default = [ "gtk" ];
+        hyprland.default = [ "gtk" "hyprland" ];
+      };
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        # pkgs.xdg-desktop-portal-wlr
+        # pkgs.xdg-desktop-portal-hyprland
+      ];
+    };
     wayland.windowManager.hyprland = {
       enable = true;
-      xwayland.enable = true;
+      package = null;
+      portalPackage = null;
       plugins = [
         # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
         inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
@@ -34,10 +48,10 @@
           bg_col = "rgb(111111)";
           workspace_method = "center current"; # [center/first] [workspace] e.g. first 1 or center m+1
 
-            enable_gesture = true; # laptop touchpad
-            gesture_fingers = 3;  # 3 or 4
-            gesture_distance = 300; # how far is the "max"
-            gesture_positive = true; # positive = swipe down. Negative = swipe up.
+          enable_gesture = true; # laptop touchpad
+          gesture_fingers = 3; # 3 or 4
+          gesture_distance = 300; # how far is the "max"
+          gesture_positive = true; # positive = swipe down. Negative = swipe up.
         };
 
         "$terminal" = "wezterm";
@@ -152,12 +166,12 @@
         # t -> transparent, cannot be shadowed by other binds.
         # i -> ignore mods, will ignore modifiers.
         bindel = [
-            # Doesn't exist?
+          # Doesn't exist?
           # "XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"
           # "XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
         ];
         binde = [
-              # Doesn't exist?
+          # Doesn't exist?
           # "XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ];
         bindm = [
