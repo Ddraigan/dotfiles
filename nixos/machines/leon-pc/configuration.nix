@@ -79,6 +79,7 @@
       pkgs.mangohud
       pkgs.protonup
       pkgs.hyprpolkitagent
+      pkgs.bitwarden
       # pkgs.vesktop
       # (pkgs.discord.override {
       #  withVencord = true;
