@@ -33,10 +33,10 @@
   };
 
   hardware = {
-    # pulseaudio = {
-    #   enable = false;
-    #   # package = pkgs.pulseaudioFull;
-    # };
+    pulseaudio = {
+      enable = false;
+      # package = pkgs.pulseaudioFull;
+    };
     bluetooth = {
       enable = false;
       powerOnBoot = false;
@@ -59,6 +59,7 @@
   services = {
     upower.enable = true;
     xserver = {
+      enable = true;
       xkb = {
         layout = "us";
         variant = "";
@@ -98,12 +99,12 @@
       #   ];
       # })
     ];
-    # variables = {
+    variables = {
     # UWSM will automatically set these ones
-    #   XDG_CURRENT_DESKTOP = "Hyprland";
-    #   XDG_SESSION_TYPE = "wayland";
-    #   XDG_SESSION_DESKTOP = "Hyprland";
-    # };
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_SESSION_TYPE = "wayland";
+      XDG_SESSION_DESKTOP = "Hyprland";
+    };
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/leon/.steam/root/compatibilitytools.d";
       NIXOS_OZONE_WL = "1";
@@ -134,7 +135,7 @@
     hyprland = {
       enable = true;
       xwayland.enable = true;
-      withUWSM = true;
+      # withUWSM = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };

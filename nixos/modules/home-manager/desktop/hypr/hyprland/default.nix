@@ -30,13 +30,13 @@
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
         # pkgs.xdg-desktop-portal-wlr
-        # pkgs.xdg-desktop-portal-hyprland
+        pkgs.xdg-desktop-portal-hyprland
       ];
     };
     wayland.windowManager.hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      systemd.enable = false;
+      systemd.enable = true;
       plugins = [
         # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
         inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
@@ -72,9 +72,10 @@
           # "hyprnotify"
           # "dunst"
           # "waybar"
-          "systemctl --user enable --now hypridle.service" # To start hypridle at launch with uwsm
-          "systemctl --user enable --now hyprpaper.service"
-          "systemctl --user enable --now waybar.service"
+          # "systemctl --user enable --now hypridle.service" # To start hypridle at launch with uwsm
+          # "systemctl --user enable --now hyprpaper.service"
+          # "systemctl --user enable --now waybar.service"
+          # "systemctl --user enable --now walker.service"
           "nm-applet --indicator"
           "wl-paste -p --watch wl-copy"
         ];
