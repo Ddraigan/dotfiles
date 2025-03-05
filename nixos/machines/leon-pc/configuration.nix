@@ -12,7 +12,14 @@
         isNormalUser = true;
         description = "Leon Jones";
         extraGroups = [ "networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire" ];
-        #openssh.authorizedKeys.keys = [ ];
+        openssh.authorizedKeys.keys =
+          let
+            authorizedKeys = pkgs.fetchurl {
+              url = "https://github.com/Ddraigan.keys";
+              hash = "SHA256:rhL8wfj3Cr48CbD+J+pgLcYqIegVdZPx9F+U/VnuG6M";
+            };
+          in
+          pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
         #packages = with pkgs; [ ];
       };
     };
