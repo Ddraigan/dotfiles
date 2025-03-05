@@ -22,7 +22,6 @@
     ];
     xdg.portal = {
       enable = true;
-      systemd.enable = false;
       xdgOpenUsePortal = true;
       config = {
         common.default = [ "gtk" ];
@@ -36,8 +35,8 @@
     };
     wayland.windowManager.hyprland = {
       enable = true;
-      package = null;
-      portalPackage = null;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      systemd.enable = false;
       plugins = [
         # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
         inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
@@ -73,7 +72,9 @@
           # "hyprnotify"
           # "dunst"
           # "waybar"
-          # "systemctl --user enable --now hypridle.service" # To start hypridle at launch with uwsm
+          "systemctl --user enable --now hypridle.service" # To start hypridle at launch with uwsm
+          "systemctl --user enable --now hyprpaper.service"
+          "systemctl --user enable --now waybar.service"
           "nm-applet --indicator"
           "wl-paste -p --watch wl-copy"
         ];

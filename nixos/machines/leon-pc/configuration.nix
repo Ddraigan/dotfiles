@@ -29,15 +29,14 @@
     overlays = [ inputs.self.overlays.unstable-packages ];
     config = {
       allowUnfree = true;
-      pulseaudio = false;
     };
   };
 
   hardware = {
-    pulseaudio = {
-      enable = false;
-      # package = pkgs.pulseaudioFull;
-    };
+    # pulseaudio = {
+    #   enable = false;
+    #   # package = pkgs.pulseaudioFull;
+    # };
     bluetooth = {
       enable = false;
       powerOnBoot = false;
@@ -86,7 +85,7 @@
       pkgs.mangohud
       pkgs.protonup
       pkgs.hyprpolkitagent
-      pkgs.bitwarden
+      # pkgs.bitwarden
       pkgs.discord-canary
       # pkgs.vesktop
       # (pkgs.discord.override {
@@ -131,9 +130,10 @@
   programs = {
     dconf.enable = true;
     zsh.enable = true;
+    xwayland.enable = true;
     hyprland = {
       enable = true;
-      xwayland = true;
+      xwayland.enable = true;
       withUWSM = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
