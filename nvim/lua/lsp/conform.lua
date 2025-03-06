@@ -8,6 +8,7 @@ return {
       lua = { "stylua" },
       javascript = { { "prettierd", "prettier" } },
       typescript = { { "prettierd", "prettier" } },
+      nix = { "alejandra" },
       -- Use the "_" filetype to run formatters on filetypes that don't
       -- have other formatters configured.
       ["_"] = { "trim_whitespace" },
