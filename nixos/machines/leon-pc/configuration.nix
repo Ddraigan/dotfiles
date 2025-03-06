@@ -88,6 +88,7 @@
       jack.enable = true;
       wireplumber.enable = true;
     };
+    displayManager.sddm.wayland.enable = true;
   };
 
   # Configure console keymap
@@ -151,6 +152,16 @@
   programs = {
     dconf.enable = true;
     zsh.enable = true;
+    uwsm = {
+      enable = true;
+      waylandCompositors = {
+        hyprland = {
+          prettyName = "Hyprland";
+          comment = "Hyprland compositor managed by UWSM";
+          binPath = ""; # TODO:
+        };
+      };
+    };
     hyprland = {
       enable = true;
       xwayland.enable = true;

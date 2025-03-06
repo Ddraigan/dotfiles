@@ -23,8 +23,19 @@
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      systemd.enable = false;
+      package = null;
+      # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      systemd = {
+        enable = false;
+        variables = [
+          "--all"
+          # "DISPLAY"
+          # "HYPRLAND_INSTANCE_SIGNATURE"
+          # "WAYLAND_DISPLAY"
+          # "XDG_CURRENT_DESKTOP"
+          # "QT_QPA_PLATFORM"
+        ];
+      };
       plugins = [
         # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
         inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
