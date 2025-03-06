@@ -1,6 +1,4 @@
 {
-  pkgs,
-  inputs,
   lib,
   config,
   ...
@@ -13,14 +11,15 @@
       runAsService = false;
       config = {
         search.placeholder = "Search";
+        app_launch_prefix = "uwsm app -- ";
         ui = {
           fullscreen = true;
           window.box.width = 800;
         };
         list = {
           height = 800;
-          maxEntries = 15;
-          dynamicSub = true;
+          max_entries = 15;
+          dynamic_sub = true;
         };
         keys = {
           next = "ctrl n";
