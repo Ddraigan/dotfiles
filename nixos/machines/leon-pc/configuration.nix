@@ -13,6 +13,12 @@
   #   popups = 0.8;
   # };
 
+  modules = {
+    desktop = {
+      thunar = true;
+    };
+  };
+
   users = {
     defaultUserShell = pkgs.zsh;
     users = {

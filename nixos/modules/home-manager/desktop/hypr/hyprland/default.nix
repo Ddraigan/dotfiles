@@ -6,7 +6,7 @@
   config = lib.mkIf config.modules.desktop.hypr.hyprland.enable {
     home.packages = with pkgs; [
       # File Manager
-      nautilus
+      # nautilus
 
       # Clipboard
       wl-clipboard
@@ -43,7 +43,8 @@
         };
 
         "$terminal" = "wezterm";
-        "$fileManager" = "nautilus";
+        # "$fileManager" = "nautilus";
+        "$fileManager" = "thunar";
         # "$menu" = "rofi -show drun -show-icons";
         "$menu" = "walker";
         "$browser" = "zen";

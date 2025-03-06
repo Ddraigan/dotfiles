@@ -43,8 +43,9 @@
           {
             specialArgs = { inherit inputs; };
             modules = [
-                ./machines/leon-pc/configuration.nix
-                # inputs.stylix.nixosModules.stylix
+              ./machines/leon-pc/configuration.nix
+              ./modules/nixos
+              # inputs.stylix.nixosModules.stylix
             ];
           };
       };
