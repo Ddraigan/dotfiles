@@ -121,9 +121,9 @@
     ];
     variables = {
       # UWSM manages these
-      XDG_CURRENT_DESKTOP = "Hyprland";
-      XDG_SESSION_TYPE = "wayland";
-      XDG_SESSION_DESKTOP = "Hyprland";
+      # XDG_CURRENT_DESKTOP = "Hyprland";
+      # XDG_SESSION_TYPE = "wayland";
+      # XDG_SESSION_DESKTOP = "Hyprland";
     };
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/leon/.steam/root/compatibilitytools.d";
@@ -154,7 +154,7 @@
     hyprland = {
       enable = true;
       xwayland.enable = true;
-      # withUWSM = true;
+      withUWSM = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
