@@ -1,4 +1,4 @@
-{ pkgs, inputs, lib, config, system, ... }:
+{ pkgs, inputs, lib, config, ... }:
 
 {
   options.modules.desktop.hypr.hyprland.enable = lib.mkEnableOption "Enable Hyprland";
