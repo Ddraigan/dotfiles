@@ -108,7 +108,7 @@
       pkgs.xwaylandvideobridge
       pkgs.helvum
       pkgs.spotify
-      # pkgs.nemo-with-extensions
+      pkgs.nemo-with-extensions
       # pkgs.bitwarden
       (pkgs.discord-canary.override
         {

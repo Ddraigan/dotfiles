@@ -59,9 +59,9 @@
           };
 
           "$terminal" = "wezterm";
-          "$fileManager" = "nautilus";
+          # "$fileManager" = "nautilus";
           # "$fileManager" = "thunar";
-          # "$fileManager" = "nemo";
+          "$fileManager" = "nemo";
           # "$menu" = "rofi -show drun -show-icons";
           "$menu" = "walker";
           "$browser" = "zen";
