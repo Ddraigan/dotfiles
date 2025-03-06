@@ -1,6 +1,10 @@
-{ inputs, lib, config, pkgs, ... }:
-
 {
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -13,11 +17,11 @@
   #   popups = 0.8;
   # };
 
-  modules = {
-    desktop = {
-      thunar = false;
-    };
-  };
+  # modules = {
+  #   desktop = {
+  #     thunar = false;
+  #   };
+  # };
 
   users = {
     defaultUserShell = pkgs.zsh;
@@ -25,14 +29,13 @@
       leon = {
         isNormalUser = true;
         description = "Leon Jones";
-        extraGroups = [ "networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire" ];
-        openssh.authorizedKeys.keys =
-          let
-            authorizedKeys = pkgs.fetchurl {
-              url = "https://github.com/Ddraigan.keys";
-              hash = "SHA256:rhL8wfj3Cr48CbD+J+pgLcYqIegVdZPx9F+U/VnuG6M";
-            };
-          in
+        extraGroups = ["networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire"];
+        openssh.authorizedKeys.keys = let
+          authorizedKeys = pkgs.fetchurl {
+            url = "https://github.com/Ddraigan.keys";
+            hash = "SHA256:rhL8wfj3Cr48CbD+J+pgLcYqIegVdZPx9F+U/VnuG6M";
+          };
+        in
           pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
         #packages = with pkgs; [ ];
       };
@@ -40,7 +43,7 @@
   };
 
   nixpkgs = {
-    overlays = [ inputs.self.overlays.unstable-packages ];
+    overlays = [inputs.self.overlays.unstable-packages];
     config = {
       allowUnfree = true;
     };
@@ -78,7 +81,7 @@
         layout = "us";
         variant = "";
       };
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = ["nvidia"];
     };
     pipewire = {
       enable = true;
@@ -136,31 +139,29 @@
     };
   };
 
-  nix =
-    let
-      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-    in
-    {
-      settings = {
-        experimental-features = "nix-command flakes";
-        nix-path = config.nix.nixPath;
-        substituters = [ "https://hyprland.cachix.org" ];
-        trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
-      };
+  nix = let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
+    settings = {
+      experimental-features = "nix-command flakes";
+      nix-path = config.nix.nixPath;
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
+  };
 
   programs = {
     dconf.enable = true;
     zsh.enable = true;
     uwsm = {
       enable = true;
-      waylandCompositors = {
-        hyprland = {
-          prettyName = "Hyprland";
-          comment = "Hyprland compositor managed by UWSM";
-          binPath = ""; # TODO:
-        };
-      };
+      # waylandCompositors = {
+      #   hyprland = {
+      #     prettyName = "Hyprland";
+      #     comment = "Hyprland compositor managed by UWSM";
+      #     binPath = "/home/leon/.nix-profile/bin/Hyprland"; # TODO:
+      #   };
+      # };
     };
     hyprland = {
       enable = true;
@@ -180,8 +181,8 @@
     enable = true;
     xdgOpenUsePortal = true;
     config = {
-      common.default = [ "gtk" ];
-      hyprland.default = [ "hyprland" "gtk" ];
+      common.default = ["gtk"];
+      hyprland.default = ["hyprland" "gtk"];
     };
     extraPortals = [
       # pkgs.xdg-desktop-portal-hyprland
@@ -192,7 +193,7 @@
 
   security = {
     rtkit.enable = true;
-    pam.services.hyprlock = { }; # Can't unlock without this}
+    pam.services.hyprlock = {}; # Can't unlock without this}
     polkit.enable = true;
   };
 
@@ -247,8 +248,8 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 57621 ];
-  networking.firewall.allowedUDPPorts = [ 5353 ];
+  networking.firewall.allowedTCPPorts = [57621];
+  networking.firewall.allowedUDPPorts = [5353];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

@@ -1,12 +1,16 @@
-{ pkgs, inputs, lib, config, ... }:
-
 {
+  pkgs,
+  inputs,
+  lib,
+  config,
+  ...
+}: {
   options.modules.desktop.walker.enable = lib.mkEnableOption "Enable Waklker";
 
   config = lib.mkIf config.modules.desktop.walker.enable {
     programs.walker = {
       enable = true;
-      runAsService = true;
+      runAsService = false;
       config = {
         search.placeholder = "Search";
         ui = {
