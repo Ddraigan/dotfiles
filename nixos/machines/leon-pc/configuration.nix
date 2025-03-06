@@ -91,7 +91,11 @@
       jack.enable = true;
       wireplumber.enable = true;
     };
-    displayManager.sddm.wayland.enable = true;
+    displayManager = {
+      sddm = {
+        wayland.enable = true;
+      };
+    };
   };
 
   # Configure console keymap
