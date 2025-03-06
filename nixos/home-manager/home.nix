@@ -1,6 +1,10 @@
-{ inputs, lib, config, pkgs, ... }:
-
 {
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   catppuccin = {
     enable = false;
     flavor = "mocha";
@@ -15,7 +19,16 @@
       flavor = "mocha";
       accent = "pink";
       size = "standard";
-      tweaks = [ "normal" ];
+      tweaks = ["normal"];
+    };
+  };
+
+  dconf = {
+    settings = {
+      "org/cinnamon/desktop/applications/terminal" = {
+        exec = "uwsm app -- wezterm";
+        # exec-arg = ""; # argument
+      };
     };
   };
 
@@ -42,7 +55,7 @@
   };
 
   nixpkgs = {
-    overlays = [ inputs.self.overlays.unstable-packages ];
+    overlays = [inputs.self.overlays.unstable-packages];
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
@@ -64,7 +77,9 @@
     };
   };
 
-  fonts.fontconfig.enable = true;
+  fonts = {
+    fontconfig.enable = true;
+  };
 
   home = {
     username = "leon";
@@ -76,6 +91,11 @@
     shellAliases = {
       cd = "z";
     };
+    file = {
+      ".gnome2/accels/nemo".text = ''
+        (gtk_accel_path "<Actions>/DirViewActions/OpenInTerminal" "F4")
+      '';
+    };
     packages = [
       pkgs.firefox
       pkgs.unzip
@@ -85,7 +105,7 @@
       inputs.zen-browser.packages."${pkgs.system}".default
 
       (pkgs.nerdfonts.override {
-        fonts = [ "Hack" ];
+        fonts = ["Hack"];
       })
     ];
     pointerCursor = {
@@ -96,9 +116,13 @@
 
   gtk = {
     enable = true;
+    # iconTheme = {
+    #   package = pkgs.morewaita-icon-theme;
+    #   name = "MoreWaita";
+    # };
     iconTheme = {
-      package = pkgs.morewaita-icon-theme;
-      name = "MoreWaita"; # ????
+      package = pkgs.candy-icons;
+      name = "candy-icons";
     };
   };
 }

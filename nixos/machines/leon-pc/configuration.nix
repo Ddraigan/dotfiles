@@ -200,7 +200,12 @@
     polkit.enable = true;
   };
 
-  fonts.fontDir.enable = true;
+  fonts = {
+    fontDir.enable = true;
+    # packages = with pkgs; [
+    #   candy-icons
+    # ];
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
