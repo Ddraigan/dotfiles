@@ -44,7 +44,8 @@
 
         "$terminal" = "wezterm";
         # "$fileManager" = "nautilus";
-        "$fileManager" = "thunar";
+        # "$fileManager" = "thunar";
+        "$fileManager" = "nemo";
         # "$menu" = "rofi -show drun -show-icons";
         "$menu" = "walker";
         "$browser" = "zen";

@@ -15,7 +15,7 @@
 
   modules = {
     desktop = {
-      thunar = true;
+      thunar = false;
     };
   };
 
@@ -104,10 +104,11 @@
       pkgs.xwaylandvideobridge
       pkgs.helvum
       pkgs.spotify
+      pkgs.nemo-with-extensions
       # pkgs.bitwarden
       pkgs.discord-canary
-      pkgs.vesktop
-      pkgs.webcord
+      # pkgs.vesktop
+      # pkgs.webcord
       # (pkgs.discord.override {
       #  withVencord = true;
       #  })
@@ -119,7 +120,7 @@
       # })
     ];
     variables = {
-        # UWSM manages these
+      # UWSM manages these
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_TYPE = "wayland";
       XDG_SESSION_DESKTOP = "Hyprland";

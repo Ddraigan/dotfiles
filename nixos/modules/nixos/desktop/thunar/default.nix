@@ -2,7 +2,10 @@
 
 {
   options.modules.desktop.thunar.enable = lib.mkEnableOption "Enable Thunar";
-  config = lib.mkIf config.modules.desktop.thunar.enable { 
+  config = lib.mkIf config.modules.desktop.thunar.enable {
+    environment.systemPackages = with pkgs; [
+      # ffmpegthumbnailer
+    ];
     programs = {
       thunar = {
         enable = true;
