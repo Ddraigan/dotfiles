@@ -2,7 +2,7 @@
 
 {
   catppuccin = {
-    enable = true;
+    enable = false;
     flavor = "mocha";
     accent = "pink";
     cursors = {

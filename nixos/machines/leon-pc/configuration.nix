@@ -5,6 +5,14 @@
     ./hardware-configuration.nix
   ];
 
+  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+  # stylix.opacity = {
+  #   applications = 0.4;
+  #   terminal = 1.0;
+  #   desktop = 0.4;
+  #   popups = 0.8;
+  # };
+
   users = {
     defaultUserShell = pkgs.zsh;
     users = {

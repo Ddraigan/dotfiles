@@ -26,6 +26,7 @@
       url = "github:KZDKM/Hyprspace";
       inputs.hyprland.follows = "hyprland";
     };
+    # stylix.url = "github:danth/stylix";
   };
 
   outputs = { self, nixpkgs, home-manager, catppuccin, zen-browser, walker, hyprland, hyprlock, Hyprspace, ... } @ inputs:
@@ -41,7 +42,10 @@
         leon-pc = nixpkgs.lib.nixosSystem
           {
             specialArgs = { inherit inputs; };
-            modules = [ ./machines/leon-pc/configuration.nix ];
+            modules = [
+                ./machines/leon-pc/configuration.nix
+                # inputs.stylix.nixosModules.stylix
+            ];
           };
       };
 
