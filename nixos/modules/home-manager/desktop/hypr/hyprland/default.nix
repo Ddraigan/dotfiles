@@ -189,19 +189,19 @@
             # "$mod, TAB, overview:toggle"
             "$mod, Tab, hyprexpo:expo, toggle"
 
-            "$mod, escape, exec, hyprlock"
+            "$mod, escape, exec, uwsm app -- hyprlock"
 
             # Clipboard
-            "$mod, i, exec, hyprshot -m region output --clipboard-only"
-            "$mod SHIFT, I, exec, hyprshot -m window"
-            ", PRINT, exec, hyprshot -m window"
-            "$mod, V, exec, wl-paste"
-            "$mod, C, exec, wl-copy"
+            "$mod, i, exec, uwsm app -- hyprshot -m region output --clipboard-only"
+            "$mod SHIFT, I, exec, uwsm app -- hyprshot -m window"
+            ", PRINT, exec, uwsm app -- hyprshot -m window"
+            "$mod, V, exec, uwsm app -- wl-paste"
+            "$mod, C, exec, uwsm app -- wl-copy"
 
-            "$mod, D, exec, $menu"
-            "$mod, B, exec, $browser"
-            "$mod, T, exec, $terminal"
-            "$mod, F, exec, $fileManager"
+            "$mod, D, exec, uwsm app -- $menu"
+            "$mod, B, exec, uwsm app -- $browser"
+            "$mod, T, exec, uwsm app -- $terminal"
+            "$mod, F, exec, uwsm app -- $fileManager"
 
             "$mod SHIFT, X, exit"
             "$mod SHIFT, Q, killactive"
