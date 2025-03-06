@@ -10,6 +10,7 @@
       pavucontrol
       networkmanagerapplet
     ];
+    user.services.waybar.wantedBy = [ "graphical-session.target" ];
     catppuccin.waybar.enable = false; # Already in config
     programs.waybar = {
       enable = true;
