@@ -299,11 +299,10 @@
             "$mod SHIFT, 9, split:movetoworkspace, 9"
             "$mod SHIFT, 0, split:movetoworkspace, 0"
 
-            "$mod, n, split:swapactiveworkspace, c"
+            "$mod, n, split:swapactiveworkspaces, current +1"
 
             "$mod, W, togglespecialworkspace, magic"
-            # "$mod SHIFT, W, movetoworkspace, special:magic"
-            "$mod SHIFT, W, split-movetoworkspace, special:magic"
+            "$mod SHIFT, W, split:movetoworkspace, special:magic"
           ];
         }
         // import
