@@ -22,14 +22,18 @@
       # Doesn't have this sadly
       # inputs.hyprland.follows = "hyprland";
     };
-    Hyprspace = {
+    hyprspace = {
       url = "github:KZDKM/Hyprspace";
+      inputs.hyprland.follows = "hyprland";
+    };
+    split-monitor-workspaces = {
+      url = "github:Duckonaut/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
     };
     # stylix.url = "github:danth/stylix";
   };
 
-  outputs = { self, nixpkgs, home-manager, catppuccin, zen-browser, walker, hyprland, hyprlock, Hyprspace, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, catppuccin, zen-browser, walker, hyprland, hyprlock, hyprspace, split-monitor-workspaces, ... } @ inputs:
     {
       overlays = import ./overlays { inherit inputs; };
 

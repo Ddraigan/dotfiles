@@ -1,16 +1,15 @@
-{
-  pkgs,
-  inputs,
-  lib,
-  config,
-  ...
+{ pkgs
+, inputs
+, lib
+, config
+, ...
 }: {
   options.modules.desktop.hypr.hyprland.enable = lib.mkEnableOption "Enable Hyprland";
 
   config = lib.mkIf config.modules.desktop.hypr.hyprland.enable {
     home.packages = with pkgs; [
       # File Manager
-      nautilus
+      # nautilus
 
       # Clipboard
       wl-clipboard
@@ -43,6 +42,8 @@
       plugins = [
         # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
         inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+        split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+        inputs.hyprspace.packages.${pkgs.system}.hyprspace
       ];
       settings =
         {
@@ -57,6 +58,13 @@
             gesture_distance = 300; # how far is the "max"
             gesture_positive = true; # positive = swipe down. Negative = swipe up.
           };
+          "plugin:split-monitor-workspaces" = {
+            count = 9;
+            keep_focused = 0;
+            enable_notifications = 0;
+            enable_persistent_workspaces = 0;
+          };
+          "plugin:overview" = { };
 
           "$terminal" = "wezterm";
           # "$fileManager" = "nautilus";
@@ -82,7 +90,15 @@
             "wl-paste -p --watch wl-copy"
           ];
 
-          windowrulev2 = "suppressevent maximize, class:.*";
+          windowrulev2 = [
+            "suppressevent maximize, class:.*"
+            "opacity 0.0 override, class:^(xwaylandvideobridge)$"
+            "noanim, class:^(xwaylandvideobridge)$"
+            "noinitialfocus, class:^(xwaylandvideobridge)$"
+            "maxsize 1 1, class:^(xwaylandvideobridge)$"
+            "noblur, class:^(xwaylandvideobridge)$"
+            "nofocus, class:^(xwaylandvideobridge)$"
+          ];
 
           general = {
             border_size = 2;
@@ -185,9 +201,8 @@
             "ALT, $LMB, resizewindow"
           ];
           bind = [
-            # Plugins
-            # "$mod, TAB, overview:toggle"
-            "$mod, Tab, hyprexpo:expo, toggle"
+            "$mod, TAB, overview:toggle"
+            # "$mod, Tab, hyprexpo:expo, toggle"
 
             "$mod, escape, exec, uwsm app -- hyprlock"
 
@@ -234,35 +249,59 @@
             "$mod ALT, K, resizeactive, 0 -10"
             "$mod ALT, J, resizeactive, 0 10"
 
-            "$mod, 1, workspace, 1"
-            "$mod, 2, workspace, 2"
-            "$mod, 3, workspace, 3"
-            "$mod, 4, workspace, 4"
-            "$mod, 5, workspace, 5"
-            "$mod, 6, workspace, 6"
-            "$mod, 7, workspace, 7"
-            "$mod, 8, workspace, 8"
-            "$mod, 9, workspace, 9"
-            "$mod, 10, workspace, 0"
+            # "$mod, 1, workspace, 1"
+            # "$mod, 2, workspace, 2"
+            # "$mod, 3, workspace, 3"
+            # "$mod, 4, workspace, 4"
+            # "$mod, 5, workspace, 5"
+            # "$mod, 6, workspace, 6"
+            # "$mod, 7, workspace, 7"
+            # "$mod, 8, workspace, 8"
+            # "$mod, 9, workspace, 9"
+            # "$mod, 10, workspace, 0"
 
-            "$mod SHIFT, 1, movetoworkspace, 1"
-            "$mod SHIFT, 2, movetoworkspace, 2"
-            "$mod SHIFT, 3, movetoworkspace, 3"
-            "$mod SHIFT, 4, movetoworkspace, 4"
-            "$mod SHIFT, 5, movetoworkspace, 5"
-            "$mod SHIFT, 6, movetoworkspace, 6"
-            "$mod SHIFT, 7, movetoworkspace, 7"
-            "$mod SHIFT, 8, movetoworkspace, 8"
-            "$mod SHIFT, 9, movetoworkspace, 9"
-            "$mod SHIFT, 0, movetoworkspace, 0"
+            # "$mod SHIFT, 1, movetoworkspace, 1"
+            # "$mod SHIFT, 2, movetoworkspace, 2"
+            # "$mod SHIFT, 3, movetoworkspace, 3"
+            # "$mod SHIFT, 4, movetoworkspace, 4"
+            # "$mod SHIFT, 5, movetoworkspace, 5"
+            # "$mod SHIFT, 6, movetoworkspace, 6"
+            # "$mod SHIFT, 7, movetoworkspace, 7"
+            # "$mod SHIFT, 8, movetoworkspace, 8"
+            # "$mod SHIFT, 9, movetoworkspace, 9"
+            # "$mod SHIFT, 0, movetoworkspace, 0"
+
+            "$mod, 1, split-workspace, 1"
+            "$mod, 2, split-workspace, 2"
+            "$mod, 3, split-workspace, 3"
+            "$mod, 4, split-workspace, 4"
+            "$mod, 5, split-workspace, 5"
+            "$mod, 6, split-workspace, 6"
+            "$mod, 7, split-workspace, 7"
+            "$mod, 8, split-workspace, 8"
+            "$mod, 9, split-workspace, 9"
+
+            "$mod SHIFT, 1, split-movetoworkspace, 1"
+            "$mod SHIFT, 2, split-movetoworkspace, 2"
+            "$mod SHIFT, 3, split-movetoworkspace, 3"
+            "$mod SHIFT, 4, split-movetoworkspace, 4"
+            "$mod SHIFT, 5, split-movetoworkspace, 5"
+            "$mod SHIFT, 6, split-movetoworkspace, 6"
+            "$mod SHIFT, 7, split-movetoworkspace, 7"
+            "$mod SHIFT, 8, split-movetoworkspace, 8"
+            "$mod SHIFT, 9, split-movetoworkspace, 9"
+            "$mod SHIFT, 0, split-movetoworkspace, 0"
+
+            "$mod, n, split-changemonitor, next"
 
             "$mod, W, togglespecialworkspace, magic"
-            "$mod SHIFT, W, movetoworkspace, special:magic"
+            # "$mod SHIFT, W, movetoworkspace, special:magic"
+            "$mod SHIFT, W, split-movetoworkspace, special:magic"
           ];
         }
         // import
-        ./mocha.nix
-        {};
+          ./mocha.nix
+          { };
     };
   };
 }
