@@ -26,48 +26,65 @@
       url = "github:KZDKM/Hyprspace";
       inputs.hyprland.follows = "hyprland";
     };
-    split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces";
+    hyprsplit = {
+      url = "github:shezdy/hyprsplit";
       inputs.hyprland.follows = "hyprland";
     };
+    # split-monitor-workspaces = {
+    #   url = "github:Duckonaut/split-monitor-workspaces";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
     # stylix.url = "github:danth/stylix";
   };
 
-  outputs = { self, nixpkgs, home-manager, catppuccin, zen-browser, walker, hyprland, hyprlock, Hyprspace, split-monitor-workspaces, ... } @ inputs:
-    {
-      overlays = import ./overlays { inherit inputs; };
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    catppuccin,
+    zen-browser,
+    walker,
+    hyprland,
+    hyprlock,
+    Hyprspace,
+    hyprsplit,
+    ...
+  } @ inputs: {
+    overlays = import ./overlays {inherit inputs;};
 
-      nixosConfigurations = {
-        leon-laptop = nixpkgs.lib.nixosSystem
-          {
-            specialArgs = { inherit inputs; };
-            modules = [ ./machines/leon-laptop/configuration.nix ];
-          };
-        leon-pc = nixpkgs.lib.nixosSystem
-          {
-            specialArgs = { inherit inputs; };
-            modules = [
-              ./machines/leon-pc/configuration.nix
-              ./modules/nixos
-              # inputs.stylix.nixosModules.stylix
-            ];
-          };
-      };
-
-      homeConfigurations = {
-        leon = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-          };
-          extraSpecialArgs = { inherit inputs; };
+    nixosConfigurations = {
+      leon-laptop =
+        nixpkgs.lib.nixosSystem
+        {
+          specialArgs = {inherit inputs;};
+          modules = [./machines/leon-laptop/configuration.nix];
+        };
+      leon-pc =
+        nixpkgs.lib.nixosSystem
+        {
+          specialArgs = {inherit inputs;};
           modules = [
-            ./home-manager/home.nix
-            ./modules/home-manager
-            # hyprland.homeManagerModules.default
-            catppuccin.homeManagerModules.catppuccin
-            walker.homeManagerModules.walker
+            ./machines/leon-pc/configuration.nix
+            ./modules/nixos
+            # inputs.stylix.nixosModules.stylix
           ];
         };
+    };
+
+    homeConfigurations = {
+      leon = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+        };
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./home-manager/home.nix
+          ./modules/home-manager
+          # hyprland.homeManagerModules.default
+          catppuccin.homeManagerModules.catppuccin
+          walker.homeManagerModules.walker
+        ];
       };
     };
+  };
 }

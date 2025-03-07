@@ -1,8 +1,9 @@
-{ pkgs
-, inputs
-, lib
-, config
-, ...
+{
+  pkgs,
+  inputs,
+  lib,
+  config,
+  ...
 }: {
   options.modules.desktop.hypr.hyprland.enable = lib.mkEnableOption "Enable Hyprland";
 
@@ -41,30 +42,34 @@
       };
       plugins = [
         # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
-        inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-        split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+        # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+        # inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+        inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
         inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
       ];
       settings =
         {
-          "plugin:hyprexpo" = {
-            columns = 3;
-            gap_size = 5;
-            bg_col = "rgb(111111)";
-            workspace_method = "center current"; # [center/first] [workspace] e.g. first 1 or center m+1
-
-            enable_gesture = true; # laptop touchpad
-            gesture_fingers = 3; # 3 or 4
-            gesture_distance = 300; # how far is the "max"
-            gesture_positive = true; # positive = swipe down. Negative = swipe up.
-          };
+          # "plugin:hyprexpo" = {
+          #   columns = 3;
+          #   gap_size = 5;
+          #   bg_col = "rgb(111111)";
+          #   workspace_method = "center current"; # [center/first] [workspace] e.g. first 1 or center m+1
+          #
+          #   enable_gesture = true; # laptop touchpad
+          #   gesture_fingers = 3; # 3 or 4
+          #   gesture_distance = 300; # how far is the "max"
+          #   gesture_positive = true; # positive = swipe down. Negative = swipe up.
+          # };
           "plugin:split-monitor-workspaces" = {
             count = 9;
             keep_focused = 0;
             enable_notifications = 0;
             enable_persistent_workspaces = 0;
           };
-          "plugin:overview" = { };
+          "plugin:overview" = {};
+          "plugin:hyprsplit" = {
+            num_workspaces = 9;
+          };
 
           "$terminal" = "wezterm";
           # "$fileManager" = "nautilus";
@@ -92,6 +97,8 @@
 
           windowrulev2 = [
             "suppressevent maximize, class:.*"
+
+            # All this stuff hides the xwaylandbridge window
             "opacity 0.0 override, class:^(xwaylandvideobridge)$"
             "noanim, class:^(xwaylandvideobridge)$"
             "noinitialfocus, class:^(xwaylandvideobridge)$"
@@ -271,28 +278,28 @@
             # "$mod SHIFT, 9, movetoworkspace, 9"
             # "$mod SHIFT, 0, movetoworkspace, 0"
 
-            "$mod, 1, split-workspace, 1"
-            "$mod, 2, split-workspace, 2"
-            "$mod, 3, split-workspace, 3"
-            "$mod, 4, split-workspace, 4"
-            "$mod, 5, split-workspace, 5"
-            "$mod, 6, split-workspace, 6"
-            "$mod, 7, split-workspace, 7"
-            "$mod, 8, split-workspace, 8"
-            "$mod, 9, split-workspace, 9"
+            "$mod, 1, split:workspace, 1"
+            "$mod, 2, split:workspace, 2"
+            "$mod, 3, split:workspace, 3"
+            "$mod, 4, split:workspace, 4"
+            "$mod, 5, split:workspace, 5"
+            "$mod, 6, split:workspace, 6"
+            "$mod, 7, split:workspace, 7"
+            "$mod, 8, split:workspace, 8"
+            "$mod, 9, split:workspace, 9"
 
-            "$mod SHIFT, 1, split-movetoworkspace, 1"
-            "$mod SHIFT, 2, split-movetoworkspace, 2"
-            "$mod SHIFT, 3, split-movetoworkspace, 3"
-            "$mod SHIFT, 4, split-movetoworkspace, 4"
-            "$mod SHIFT, 5, split-movetoworkspace, 5"
-            "$mod SHIFT, 6, split-movetoworkspace, 6"
-            "$mod SHIFT, 7, split-movetoworkspace, 7"
-            "$mod SHIFT, 8, split-movetoworkspace, 8"
-            "$mod SHIFT, 9, split-movetoworkspace, 9"
-            "$mod SHIFT, 0, split-movetoworkspace, 0"
+            "$mod SHIFT, 1, split:movetoworkspace, 1"
+            "$mod SHIFT, 2, split:movetoworkspace, 2"
+            "$mod SHIFT, 3, split:movetoworkspace, 3"
+            "$mod SHIFT, 4, split:movetoworkspace, 4"
+            "$mod SHIFT, 5, split:movetoworkspace, 5"
+            "$mod SHIFT, 6, split:movetoworkspace, 6"
+            "$mod SHIFT, 7, split:movetoworkspace, 7"
+            "$mod SHIFT, 8, split:movetoworkspace, 8"
+            "$mod SHIFT, 9, split:movetoworkspace, 9"
+            "$mod SHIFT, 0, split:movetoworkspace, 0"
 
-            "$mod, n, split-changemonitor, next"
+            "$mod, n, split:swapactiveworkspace, c"
 
             "$mod, W, togglespecialworkspace, magic"
             # "$mod SHIFT, W, movetoworkspace, special:magic"
@@ -300,8 +307,8 @@
           ];
         }
         // import
-          ./mocha.nix
-          { };
+        ./mocha.nix
+        {};
     };
   };
 }
