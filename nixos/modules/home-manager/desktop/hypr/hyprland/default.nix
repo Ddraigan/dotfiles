@@ -43,7 +43,7 @@
         # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
         inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
         split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
-        inputs.hyprspace.packages.${pkgs.system}.hyprspace
+        inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
       ];
       settings =
         {

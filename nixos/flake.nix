@@ -22,7 +22,7 @@
       # Doesn't have this sadly
       # inputs.hyprland.follows = "hyprland";
     };
-    hyprspace = {
+    Hyprspace = {
       url = "github:KZDKM/Hyprspace";
       inputs.hyprland.follows = "hyprland";
     };
@@ -33,7 +33,7 @@
     # stylix.url = "github:danth/stylix";
   };
 
-  outputs = { self, nixpkgs, home-manager, catppuccin, zen-browser, walker, hyprland, hyprlock, hyprspace, split-monitor-workspaces, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, catppuccin, zen-browser, walker, hyprland, hyprlock, Hyprspace, split-monitor-workspaces, ... } @ inputs:
     {
       overlays = import ./overlays { inherit inputs; };
 
