@@ -4,7 +4,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  wezterm-cwd = import ./scripts/wezterm-cwd.nix {inherit pkgs;};
+in {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -103,6 +105,7 @@
 
   environment = {
     systemPackages = [
+      wezterm-cwd
       pkgs.upower
       pkgs.home-manager
       pkgs.mangohud

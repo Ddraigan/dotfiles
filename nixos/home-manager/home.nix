@@ -26,7 +26,7 @@
   dconf = {
     settings = {
       "org/cinnamon/desktop/applications/terminal" = {
-        exec = "uwsm app -- wezterm";
+        exec = "/run/current-system/sw/bin/wezterm-cwd";
         # exec-arg = ""; # argument
       };
     };
