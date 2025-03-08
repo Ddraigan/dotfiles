@@ -30,6 +30,10 @@
       url = "github:shezdy/hyprsplit";
       inputs.hyprland.follows = "hyprland";
     };
+    # hyprpicker = {
+    #   url = "github:hyprwm/hyprpicker";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
     # split-monitor-workspaces = {
     #   url = "github:Duckonaut/split-monitor-workspaces";
     #   inputs.hyprland.follows = "hyprland";

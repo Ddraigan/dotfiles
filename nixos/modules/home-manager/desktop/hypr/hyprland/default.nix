@@ -12,6 +12,7 @@
       # File Manager
       # nautilus
 
+      hyprpicker
       # Clipboard
       wl-clipboard
 
@@ -210,6 +211,7 @@
           bind = [
             "$mod, TAB, overview:toggle"
             # "$mod, Tab, hyprexpo:expo, toggle"
+            "$mod, p, exec, uwsm app -- hyprpicker -a"
 
             "$mod, escape, exec, uwsm app -- hyprlock"
 
@@ -299,7 +301,7 @@
             "$mod SHIFT, 9, split:movetoworkspace, 9"
             "$mod SHIFT, 0, split:movetoworkspace, 0"
 
-            "$mod, n, split:swapactiveworkspaces, current +1"
+            "$mod SHIFT, n, split:swapactiveworkspaces, current +1"
 
             "$mod, W, togglespecialworkspace, magic"
             "$mod SHIFT, W, split:movetoworkspace, special:magic"
