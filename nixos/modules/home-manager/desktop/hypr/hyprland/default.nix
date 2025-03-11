@@ -91,7 +91,8 @@
             "systemctl --user enable --now hypridle.service" # To start hypridle at launch with uwsm
             "systemctl --user enable --now hyprpaper.service"
             "systemctl --user enable --now waybar.service"
-            "systemctl --user enable --now walker.service"
+            # "systemctl --user enable --now walker.service"
+            "walker --gapplication-service"
             "nm-applet --indicator"
             "wl-paste -p --watch wl-copy"
           ];

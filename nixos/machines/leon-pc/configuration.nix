@@ -116,7 +116,7 @@ in {
       pkgs.helvum
       pkgs.spotify
       pkgs.nemo-with-extensions
-      # pkgs.bitwarden
+      pkgs.bitwarden
       (pkgs.discord-canary.override
         {
           withVencord = true;
