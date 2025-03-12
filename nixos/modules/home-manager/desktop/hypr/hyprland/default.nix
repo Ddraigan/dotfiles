@@ -197,13 +197,11 @@
           # t -> transparent, cannot be shadowed by other binds.
           # i -> ignore mods, will ignore modifiers.
           bindel = [
-            # Doesn't exist?
-            # "XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"
-            # "XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
+            ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%+"
+            ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%-"
           ];
           binde = [
-            # Doesn't exist?
-            # "XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+            ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
           ];
           bindm = [
             "SHIFT, $LMB, movewindow"
@@ -228,7 +226,8 @@
             "$mod, T, exec, uwsm app -- $terminal"
             "$mod, F, exec, uwsm app -- $fileManager"
 
-            "$mod SHIFT, X, exit"
+            # "$mod SHIFT, X, exit"
+            "$mod SHIFT, X, exec, uwsm stop"
             "$mod SHIFT, Q, killactive"
             "$mod SHIFT, F, fullscreen"
             "$mod SHIFT, Z, togglefloating"
