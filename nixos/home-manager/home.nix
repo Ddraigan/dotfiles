@@ -66,6 +66,7 @@
 
   programs = {
     home-manager.enable = true;
+    element-desktop.enable = true;
     spotify-player.enable = true;
     git = {
       enable = true;
@@ -103,10 +104,11 @@
       pkgs.ripgrep
       pkgs.fzf
       inputs.zen-browser.packages."${pkgs.system}".default
+      pkgs.nerd-fonts.hack
 
-      (pkgs.nerdfonts.override {
-        fonts = ["Hack"];
-      })
+      # (pkgs.nerdfonts.override {
+      #   fonts = ["Hack"];
+      # })
     ];
     pointerCursor = {
       gtk.enable = true;

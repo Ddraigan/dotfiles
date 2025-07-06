@@ -52,10 +52,6 @@ in {
   };
 
   hardware = {
-    pulseaudio = {
-      enable = false;
-      # package = pkgs.pulseaudioFull;
-    };
     bluetooth = {
       enable = false;
       powerOnBoot = false;
@@ -112,7 +108,7 @@ in {
       pkgs.protonup
       pkgs.hyprpolkitagent
       pkgs.pulseaudio
-      pkgs.xwaylandvideobridge
+      pkgs.kdePackages.xwaylandvideobridge
       pkgs.helvum
       pkgs.spotify
       pkgs.nemo-with-extensions
