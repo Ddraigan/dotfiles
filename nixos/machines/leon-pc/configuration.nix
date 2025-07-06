@@ -117,6 +117,7 @@ in {
       pkgs.spotify
       pkgs.nemo-with-extensions
       pkgs.bitwarden
+      pkgs.rustup
       (pkgs.discord-canary.override
         {
           withVencord = true;
