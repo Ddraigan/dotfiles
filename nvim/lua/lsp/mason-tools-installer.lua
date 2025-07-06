@@ -6,12 +6,12 @@ return {
       { "astro-language-server" },
       { "nil" },
       { "alejandra" },
-      { "lua-language-server" },
+      -- { "lua-language-server" }, -- doesn't work on nix, install via nixpkgs
       { "yaml-language-server" },
       { "stylua" },
       { "html-lsp" },
       { "emmet-ls" },
-      -- { "rust_analyzer" }, -- doesn't work on nix, use rustup instead
+      -- { "rust_analyzer" }, -- doesn't work on nix, use rustup on nixpkgs
       { "css-lsp" },
       { "json-lsp" },
       { "prettierd" },

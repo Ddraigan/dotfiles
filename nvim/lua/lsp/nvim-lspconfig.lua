@@ -16,7 +16,7 @@ return {
     local installed_servers = mason_lspconfig.get_installed_servers()
     local unconfigured_servers = {}
     for _, server in ipairs(installed_servers) do
-      if not string.find(server, "tsserver") and not string.find(server, "rust_analyzer") then
+      if not string.find(server, "ts_ls") and not string.find(server, "rust_analyzer") then
         table.insert(unconfigured_servers, server)
       end
     end
@@ -67,7 +67,7 @@ return {
             },
           })
 
-        client.notify("workspace/didChangeConfiguration",
+        client:notify("workspace/didChangeConfiguration",
           { settings = client.config.settings })
       end,
       settings = {
