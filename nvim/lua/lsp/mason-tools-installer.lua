@@ -11,7 +11,7 @@ return {
       { "stylua" },
       { "html-lsp" },
       { "emmet-ls" },
-      { "rust_analyzer" },
+      -- { "rust_analyzer" }, -- doesn't work on nix, use rustup instead
       { "css-lsp" },
       { "json-lsp" },
       { "prettierd" },
@@ -19,7 +19,7 @@ return {
       -- { "eslint_d" },
       -- { "eslint-lsp" },
       { "codelldb" },
-      { "tsserver" },
+      { "ts_ls" },
       { "tailwindcss-language-server" },
     },
     auto_update = true,
