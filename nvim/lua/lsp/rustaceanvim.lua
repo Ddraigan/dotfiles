@@ -15,7 +15,7 @@ return {
     if has_mason then -- OBSELETE
       -- Dap Binarys
       local extension_path = vim.fn.expand("$MASON/packages/codelldb/extension")
-      local codelldb_path ---@type string
+      local codelldb_path = extension_path .. 'adapter/codelldb'
       local liblldb_path ---@type string
 
       if vim.fn.has("win32") == 1 then
