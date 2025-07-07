@@ -99,6 +99,7 @@
     };
     packages = [
       pkgs.firefox
+      pkgs.lua-language-server
       pkgs.unzip
       pkgs.zip
       pkgs.ripgrep
