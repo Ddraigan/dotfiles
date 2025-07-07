@@ -1,17 +1,15 @@
 return {
   "WhoIsSethDaniel/mason-tool-installer.nvim",
-  opts = {
-    ensure_installed = {
+  opts = function()
+    local nix_friendly_lsp = {
       -- you can turn off/on auto_update per tool
       { "astro-language-server" },
       { "nil" },
       { "alejandra" },
-      -- { "lua-language-server" }, -- doesn't work on nix, install via nixpkgs
       { "yaml-language-server" },
       { "stylua" },
       { "html-lsp" },
       { "emmet-ls" },
-      -- { "rust_analyzer" }, -- doesn't work on nix, use rustup on nixpkgs
       { "css-lsp" },
       { "json-lsp" },
       { "prettierd" },
@@ -21,9 +19,24 @@ return {
       { "codelldb" },
       { "ts_ls" },
       { "tailwindcss-language-server" },
-    },
-    auto_update = true,
-  },
+    }
+
+    local nix_enemy_lsp = {
+      { "lua-language-server" },
+      { "rust_analyzer" },
+    }
+
+    if vim.fn.has("win32") == 1 then
+      for _, lsp in ipairs(nix_enemy_lsp) do
+        table.insert(nix_friendly_lsp, lsp)
+      end
+    end
+
+    return {
+      ensure_installed = nix_friendly_lsp,
+      auto_update = true,
+    }
+  end,
   config = function(_, opts)
     local mason_tool_installer = require("mason-tool-installer")
     mason_tool_installer.setup(opts)
