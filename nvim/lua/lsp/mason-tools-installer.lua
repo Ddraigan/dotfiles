@@ -3,22 +3,28 @@ return {
   opts = function()
     local nix_friendly_lsp = {
       -- you can turn off/on auto_update per tool
+
+      -- LSPs
       { "astro-language-server" },
       { "nil" },
-      { "alejandra" },
       { "yaml-language-server" },
-      { "stylua" },
       { "html-lsp" },
       { "emmet-ls" },
       { "css-lsp" },
       { "json-lsp" },
-      { "prettierd" },
       { "clangd" },
-      -- { "eslint_d" },
-      -- { "eslint-lsp" },
-      { "codelldb" },
       { "ts_ls" },
       { "tailwindcss-language-server" },
+      -- { "eslint-lsp" },
+
+      -- Formatters
+      { "stylua" },
+      { "prettierd" },
+      { "alejandra" },
+      -- { "eslint_d" },
+
+      -- DAPs
+      { "codelldb" },
     }
 
     local nix_enemy_lsp = {

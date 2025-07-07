@@ -103,6 +103,7 @@ in {
     systemPackages = [
       wezterm-cwd
       pkgs.upower
+      pkgs.lua-language-server
       pkgs.home-manager
       pkgs.mangohud
       pkgs.protonup
