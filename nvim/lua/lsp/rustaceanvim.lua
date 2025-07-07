@@ -1,36 +1,30 @@
 return {
   "mrcjkb/rustaceanvim",
-  event = "BufReadPost",
+  -- event = "BufReadPost",
+  lazy = false, -- Lazy plugin naturally
   dependencies = {
     "nvim-lua/plenary.nvim",
     "mfussenegger/nvim-dap",
   },
-  ft = { "rust" },
+  -- ft = { "rust" },
   opts = function()
-    local has_mason, mason_registry = pcall(require, "mason-registry")
+    local has_mason = pcall(require, "mason-registry")
     local adapter ---@type any
-    local rust_analyzer_binary ---@type table
 
     -- Figure out where to get adapter from and which one to use
-    if has_mason then
+    if has_mason then -- OBSELETE
       -- Dap Binarys
-      local codelldb = mason_registry.get_package("codelldb")
-      local extension_path = codelldb:get_install_path() .. "/extension/"
-      local codelldb_path = extension_path .. "adapter/codelldb"
-      local liblldb_path = ""
-
-      -- Find RustAnalyzer binary path in mason registry
-      local ra_package = mason_registry.get_package("rust-analyzer")
-      local install_dir = ra_package:get_install_path()
+      local extension_path = vim.fn.expand("$MASON/packages/codelldb/extension")
+      local codelldb_path ---@type string
+      local liblldb_path ---@type string
 
       if vim.fn.has("win32") == 1 then
+        codelldb_path = extension_path .. "adapter\\codelldb.exe"
         liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
-        rust_analyzer_binary = { install_dir .. "/" .. "rust-analyzer" }
       elseif vim.fn.has("mac") == 1 then
         liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
       else
         liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-        rust_analyzer_binary = { install_dir .. "/" .. "rust-analyzer-x86_64-unknown-linux-gnu" }
       end
       adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path)
     end
@@ -39,9 +33,8 @@ return {
       capabilities = function()
         require("config.utils").capabilities()
       end,
-      ---@type RustaceanLspClientOpts
       server = {
-        cmd = rust_analyzer_binary,
+        cmd = { vim.fn.exepath("rust-analyzer") },
         auto_attach = true,
         on_attach = function(_, bufnr)
           vim.keymap.set(
@@ -84,7 +77,6 @@ return {
           },
         },
       },
-      ---@type RustaceanToolsOpts
       tools = {
         inlay_hints = {
           auto = true,
@@ -94,7 +86,6 @@ return {
           other_hints_prefix = "  --> ",
         },
       },
-      ---@type RustaceanDapOpts
       dap = {
         adapter = adapter,
       },
