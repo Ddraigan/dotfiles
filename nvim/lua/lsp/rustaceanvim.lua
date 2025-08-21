@@ -12,8 +12,7 @@ return {
     local adapter ---@type any
 
     -- Figure out where to get adapter from and which one to use
-    if has_mason then -- OBSELETE
-      -- Dap Binarys
+    if has_mason then
       local extension_path = vim.fn.expand("$MASON/packages/codelldb/extension")
       local codelldb_path = extension_path .. 'adapter/codelldb'
       local liblldb_path ---@type string

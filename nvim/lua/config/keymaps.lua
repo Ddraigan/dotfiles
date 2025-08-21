@@ -255,7 +255,7 @@ autocommand("LspAttach", {
     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts("Signature Documentation", buffer))
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go To Implementation", buffer))
     vim.keymap.set("n", "gr", "<cmd> Telescope lsp_references <CR>", opts("Go To References", buffer))
-    vim.keymap.set("n", "<leader>lr", ":IncRename ", opts("Rename", buffer))
+    -- vim.keymap.set("n", "<leader>lr", ":IncRename ", opts("Rename", buffer)) -- Obeselete
     vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts("Code Actions", buffer))
     vim.keymap.set("n", "<Leader>lf", function()
       require("conform").format({ buffer, lsp_fallback = true })
