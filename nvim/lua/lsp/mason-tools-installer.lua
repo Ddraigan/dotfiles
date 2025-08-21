@@ -18,8 +18,8 @@ return {
       -- { "eslint-lsp" },
 
       -- Formatters
-      { "stylua" },
       { "prettierd" },
+      { "prettier" },
       { "alejandra" },
       -- { "eslint_d" },
 
@@ -30,6 +30,7 @@ return {
     local nix_enemy_lsp = {
       { "lua-language-server" },
       { "rust_analyzer" },
+      { "stylua" },
     }
 
     if vim.fn.has("win32") == 1 then
