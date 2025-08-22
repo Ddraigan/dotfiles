@@ -1,5 +1,4 @@
 return {
-  -- Toml support
   {
     "Saecki/crates.nvim",
     event = { "BufRead Cargo.toml" },
@@ -7,9 +6,34 @@ return {
     -- ft = "toml",
     config = function()
       require("crates").setup({
+        popup = {
+          keys = {
+            hide = { "q", "<esc>" },
+            open_url = { "<cr>" },
+            select = { "<cr>" },
+            select_alt = { "s" },
+            toggle_feature = { "<cr>" },
+            copy_value = { "yy" },
+            goto_item = { "gd", "K", "<C-LeftMouse>" },
+            jump_forward = { "<c-i>" },
+            jump_back = { "<c-o>", "<C-RightMouse>" },
+          },
+        },
         completion = {
-          cmp = {
-            enabled = true,
+          blink = {
+            use_custom_kind = true,
+            kind_text = {
+              version = "Version",
+              feature = "Feature",
+            },
+            kind_highlight = {
+              version = "BlinkCmpKindVersion",
+              feature = "BlinkCmpKindFeature",
+            },
+            kind_icon = {
+              version = " ",
+              feature = " ",
+            },
           },
           crates = {
             enabled = true,
