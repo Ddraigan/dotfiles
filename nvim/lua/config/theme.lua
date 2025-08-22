@@ -126,6 +126,12 @@ M.icons = {
     File = " ",
     Folder = " ",
     Color = " ",
+
+    -- New ones in blink, not in cmp
+    Reference = "󰬲",
+    Event = "󱐋",
+    Operator = "󰪚",
+    TypeParameter = "󰬛",
   },
   mason = {
     package_installed = "✓",

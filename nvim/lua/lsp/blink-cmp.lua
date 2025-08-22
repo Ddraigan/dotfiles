@@ -38,15 +38,41 @@ return {
       -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
       -- Adjusts spacing to ensure icons are aligned
       nerd_font_variant = "mono",
+      kind_icons = require("config.theme").icons.cmp,
+    },
+
+    cmdline = {
+      enabled = true,
+      -- use 'inherit' to inherit mappings from top level `keymap` config
+      keymap = { preset = "cmdline" },
+      sources = { "buffer", "cmdline" },
+
+      completion = {
+        -- Whether to automatically show the window when new completion items are available
+        -- Default is false for cmdline, true for cmdwin (command-line window)
+        menu = {
+          auto_show = true,
+        },
+        -- Displays a preview of the selected item on the current line
+        ghost_text = { enabled = true },
+      },
     },
 
     -- (Default) Only show the documentation popup when manually triggered
     completion = {
       documentation = { auto_show = true },
       ghost_text = { enabled = true },
+      menu = {
+        min_width = 30,
+        max_height = 15,
+        border = "shadow",
+        draw = {
+          columns = { { "kind_icon" }, { "label", "label_description", gap = 1 } },
+        },
+      },
     },
 
-    signature = {enable = true },
+    signature = { enable = true },
 
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
