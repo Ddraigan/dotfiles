@@ -8,9 +8,15 @@ vim.filetype.add({
   },
 })
 
+  -- Blink seems to handle this well enough
+-- vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
 -- disable netrw at the very start of your init.lua
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
+
+-- Gotta fuck with telescope first, new vim feature
+-- vim.o.winborder = "rounded"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true -- Relative line numbers

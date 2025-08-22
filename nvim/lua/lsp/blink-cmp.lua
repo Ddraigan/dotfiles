@@ -5,6 +5,7 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "moyiz/blink-emoji.nvim",
+    { "L3MON4D3/LuaSnip", version = "v2.*" },
   },
 
   -- use a release tag to download pre-built binaries
@@ -21,9 +22,7 @@ return {
     -- 'super-tab' for mappings similar to vscode (tab to accept)
     -- 'enter' for enter to accept
     -- 'none' for no mappings
-    --
-    -- All presets have the following mappings:
-    -- C-space: Open menu or open docs if already open
+    -- Preset bindings -
     -- C-n/C-p or Up/Down: Select next/previous item
     -- C-e: Hide menu
     -- C-k: Toggle signature help (if signature.enabled = true)
@@ -58,22 +57,33 @@ return {
       },
     },
 
-    -- (Default) Only show the documentation popup when manually triggered
     completion = {
       documentation = { auto_show = true },
       ghost_text = { enabled = true },
       menu = {
         min_width = 30,
         max_height = 15,
-        border = "shadow",
+        border = "rounded",
         draw = {
-          columns = { { "kind_icon" }, { "label", "label_description", gap = 1 } },
+          columns = {
+            { "kind_icon" },
+            { "label", "label_description", gap = 1 },
+            { "source_name", width = { fill = true } },
+          },
+          components = {
+            source_name = {
+              text = function(ctx)
+                return string.format("[%s]", ctx.source_name)
+              end,
+            },
+          },
         },
       },
     },
 
-    signature = { enable = true },
+    signature = { enabled = true },
 
+    snippets = { preset = "luasnip" },
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
