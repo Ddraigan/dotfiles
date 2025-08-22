@@ -8,7 +8,7 @@ vim.filetype.add({
   },
 })
 
-  -- Blink seems to handle this well enough
+-- Blink seems to handle this well enough
 -- vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- disable netrw at the very start of your init.lua
@@ -48,7 +48,6 @@ vim.opt.scrolloff = 8
 -- Syncs clipboard between os and nvim
 vim.o.clipboard = "unnamedplus"
 
-
 -- Diagnostics
 local signs = require("config.theme").icons.diagnostics
 
@@ -56,14 +55,30 @@ vim.diagnostic.config({
   virtual_text = {
     prefix = signs.prefix,
   },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = signs.error,
+      [vim.diagnostic.severity.WARN] = signs.warn,
+      [vim.diagnostic.severity.INFO] = signs.info,
+      [vim.diagnostic.severity.HINT] = signs.hint,
+    },
+    linehl = {
+      [vim.diagnostic.severity.ERROR] = signs.error,
+      [vim.diagnostic.severity.WARN] = signs.warn,
+      [vim.diagnostic.severity.INFO] = signs.info,
+      [vim.diagnostic.severity.HINT] = signs.hint
+    },
+  },
   severity_sort = true,
 })
 
-local firstToUpper = function (str)
-  return (str:gsub("^%l", string.upper))
-end
+-- Old way of changing diagnostics signs
+-- local firstToUpper = function(str)
+--   return (str:gsub("^%l", string.upper))
+-- end
+--
+-- for type, icon in pairs(signs) do
+--   local hl = "DiagnosticSign" .. firstToUpper(type)
+--   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+-- end
 
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. firstToUpper(type)
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
