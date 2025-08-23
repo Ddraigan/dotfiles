@@ -81,14 +81,26 @@ end
 ---@param t2 table
 ---@return table
 M.merge_tables = function(t1, t2)
-  for _, v in ipairs(t2) do
-    table.insert(t1, v)
+  local result = {}
+  for _, v in ipairs(t1) do
+    table.insert(result, v)
   end
-  return t1
+  for _, v in ipairs(t2) do
+    table.insert(result, v)
+  end
+  return result
 end
 
 M.firstToUpper = function(str)
   return (str:gsub("^%l", string.upper))
+end
+
+---@return boolean
+M.is_nixos = function()
+  if os.getenv("NIX_PATH") then
+    return true
+  end
+  return false
 end
 
 return M
