@@ -1,0 +1,26 @@
+---@type vim.lsp.Config
+return {
+  -- settings = {
+  --   Lua = {
+  --     diagnostics = {
+  --       globals = { "use", "vim", "require", "merge" },
+  --       disable = { "missing-fields" },
+  --     },
+  --     hint = {
+  --       enable = true,
+  --       arrayIndex = "Disable", -- "Enable", "Auto", "Disable"
+  --       await = true,
+  --       paramName = "Disable", -- "All", "Literal", "Disable"
+  --       paramType = false,
+  --       semicolon = "Disable", -- "All", "SameLine", "Disable"
+  --       setType = true,
+  --     },
+  --     format = {
+  --       enable = false,
+  --     },
+  --     completion = {
+  --       callSnipet = "Replace",
+  --     },
+  --   },
+  -- },
+}

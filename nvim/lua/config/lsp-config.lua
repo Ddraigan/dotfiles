@@ -45,11 +45,10 @@ M.mason = {
 --- Gets list of lsps for mason to install
 ---@return table
 M.get_lsps_for_mason = function()
-  local mason_lsps = M.mason
   if vim.fn.has("win32") == 1 then
-    M.merge_tables(mason_lsps.base, mason_lsps.windows)
+    return vim.tbl_extend('keep', M.mason.base, M.mason.windows)
   end
-  return mason_lsps.base
+  return M.mason.base
 end
 
 local signs = require("config.theme").icons.diagnostics
