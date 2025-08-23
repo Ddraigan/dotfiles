@@ -71,9 +71,24 @@ M.toggle_virtual_lines = function()
   else
     vim.diagnostic.config({
       virtual_lines = false,
-      virtual_text = require("config.lsp").diagnostic_config.virtual_text
+      virtual_text = require("config.lsp").diagnostic_config.virtual_text,
     })
   end
+end
+
+--- Merges two tables
+---@param t1 table
+---@param t2 table
+---@return table
+M.merge_tables = function(t1, t2)
+  for _, v in ipairs(t2) do
+    table.insert(t1, v)
+  end
+  return t1
+end
+
+M.firstToUpper = function(str)
+  return (str:gsub("^%l", string.upper))
 end
 
 return M
