@@ -43,9 +43,9 @@
         bind h split-window -v -c "#{pane_current_path}"
       '';
 
-      plugins = [
+      plugins = with pkgs; [
         {
-          plugin = pkgs.tmuxPlugins.catppuccin;
+          plugin = tmuxPlugins.catppuccin;
           extraConfig = ''
             set -g @catppuccin_window_left_separator ""
             set -g @catppuccin_window_right_separator ""
@@ -76,7 +76,7 @@
           '';
         }
         {
-          plugin = pkgs.tmuxPlugins.vim-tmux-navigator;
+          plugin = tmuxPlugins.vim-tmux-navigator;
           extraConfig =
             ''
               # set vi-mode
@@ -84,7 +84,7 @@
             '';
         }
         {
-          plugin = pkgs.tmuxPlugins.yank;
+          plugin = tmuxPlugins.yank;
           extraConfig =
             ''
               # keybindings
@@ -93,7 +93,7 @@
               bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
             '';
         }
-        pkgs.tmuxPlugins.sensible
+        tmuxPlugins.sensible
       ];
     };
   };

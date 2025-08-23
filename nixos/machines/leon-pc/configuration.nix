@@ -114,6 +114,7 @@ in {
       pkgs.nemo-with-extensions
       pkgs.bitwarden
       pkgs.rustup
+      pkgs.nixd
       (pkgs.discord-canary.override
         {
           withVencord = true;
@@ -261,7 +262,7 @@ in {
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [57621];
+  networking.firewall.allowedTCPPorts = [57621 4321];
   networking.firewall.allowedUDPPorts = [5353];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
