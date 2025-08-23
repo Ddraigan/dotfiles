@@ -52,4 +52,31 @@ M.get_lsps_for_mason = function()
   return mason_lsps.base
 end
 
+local signs = require("config.theme").icons.diagnostics
+
+M.get_diagnostic_highlights = function ()
+  local hl
+  for type, _ in pairs(signs) do
+    hl = "DiagnosticSign" .. require("config.utils").firstToUpper(type)
+  end
+  return hl
+end
+
+M.diagnostic_config = {
+  virtual_text = {
+    prefix = signs.prefix,
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = signs.error,
+      [vim.diagnostic.severity.WARN] = signs.warn,
+      [vim.diagnostic.severity.INFO] = signs.info,
+      [vim.diagnostic.severity.HINT] = signs.hint,
+    },
+    linehl = M.get_diagnostic_highlights(),
+    numhl = M.get_diagnostic_highlights(),
+  },
+  severity_sort = true,
+}
+
 return M
