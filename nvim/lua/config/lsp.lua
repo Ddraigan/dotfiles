@@ -9,7 +9,6 @@ M.get_lsps_for_mason = function()
   if vim.fn.has("win32") == 1 then
     return require("config.utils").merge_tables(mason_lsps.base, mason_lsps.windows)
   end
-  print(M.get_lsps_for_mason())
   return mason_lsps.base
 end
 
