@@ -6,7 +6,6 @@ return {
 
       -- LSPs
       { "astro-language-server" },
-      { "nil" },
       { "yaml-language-server" },
       { "html-lsp" },
       { "emmet-ls" },
@@ -31,6 +30,7 @@ return {
       { "lua-language-server" },
       { "rust_analyzer" },
       { "stylua" },
+      { "nil" }, -- Not actual enemy but I use nixd on nix system
     }
 
     if vim.fn.has("win32") == 1 then
