@@ -29,6 +29,9 @@ M.diagnostic_config = {
   severity_sort = true,
 }
 
+-- Diagnostic Config
+vim.diagnostic.config(M.diagnostic_config)
+
 -- LSP Config
 local mason_servers = mason_lspconfig.get_installed_servers()
 local nix_servers = lsps.system.nix
@@ -43,8 +46,5 @@ for _, server in ipairs(all_servers) do
 end
 
 vim.lsp.enable(servers)
-
--- Diagnostic Config
-vim.diagnostic.config(M.diagnostic_config)
 
 return M

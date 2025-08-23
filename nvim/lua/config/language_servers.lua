@@ -8,7 +8,7 @@ M.exclude_configs = {
 M.system = {
   nix = {
     "nixd",
-    "lua-ls",
+    "lua_ls",
   },
 }
 
@@ -35,7 +35,7 @@ M.mason = {
     "codelldb",
   },
   windows = {
-    "lua-language-server",
+    "lua_ls",
     "rust_analyzer",
     "stylua",
     "nil",
