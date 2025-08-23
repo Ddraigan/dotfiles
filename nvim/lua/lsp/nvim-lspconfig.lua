@@ -4,7 +4,7 @@ return {
   lazy = false,
   dependencies = {
     { "williamboman/mason.nvim", config = true },
-    { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
+    -- { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
   },
   -- config = function()
   --   local lspconfig = require("lspconfig")

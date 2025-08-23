@@ -120,11 +120,14 @@ M.general = {
     -- Lsp_Lines
     ["<leader>ll"] = {
       function()
-        require("lsp_lines").toggle()
-        if vim.diagnostic.config().virtual_text then
-          vim.diagnostic.config({ virtual_text = false })
+        if not vim.diagnostic.config().virtual_lines then
+          vim.diagnostic.config({
+            virtual_lines = true,
+            virtual_text = false,
+          })
         else
           vim.diagnostic.config({
+            virtual_lines = false,
             virtual_text = {
               prefix = require("config.theme").icons.diagnostics.prefix,
             },
