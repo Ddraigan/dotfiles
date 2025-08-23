@@ -51,6 +51,18 @@ vim.o.clipboard = "unnamedplus"
 -- Diagnostics
 local signs = require("config.theme").icons.diagnostics
 
+local firstToUpper = function(str)
+  return (str:gsub("^%l", string.upper))
+end
+
+local linehls = function ()
+  local hl
+for type, _ in pairs(signs) do
+   hl = "DiagnosticSign" .. firstToUpper(type)
+end
+  return hl
+end
+
 vim.diagnostic.config({
   virtual_text = {
     prefix = signs.prefix,
@@ -62,23 +74,13 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.INFO] = signs.info,
       [vim.diagnostic.severity.HINT] = signs.hint,
     },
-    linehl = {
-      [vim.diagnostic.severity.ERROR] = signs.error,
-      [vim.diagnostic.severity.WARN] = signs.warn,
-      [vim.diagnostic.severity.INFO] = signs.info,
-      [vim.diagnostic.severity.HINT] = signs.hint
-    },
+    linehl = linehls(),
   },
   severity_sort = true,
 })
 
 -- Old way of changing diagnostics signs
--- local firstToUpper = function(str)
---   return (str:gsub("^%l", string.upper))
--- end
---
 -- for type, icon in pairs(signs) do
 --   local hl = "DiagnosticSign" .. firstToUpper(type)
 --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 -- end
-

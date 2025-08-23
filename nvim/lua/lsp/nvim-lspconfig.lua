@@ -2,19 +2,19 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    { "williamboman/mason.nvim",                     config = true },
+    { "williamboman/mason.nvim", config = true },
     -- { "hrsh7th/nvim-cmp" },
     -- { "hrsh7th/cmp-nvim-lsp" },
     { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
     -- { "folke/neodev.nvim" },
   },
-  config = function ()
+  config = function()
     local lspconfig = require("lspconfig")
     local mason_lspconfig = require("mason-lspconfig")
     local capabilities = require("config.utils").capabilities()
 
     local installed_servers = mason_lspconfig.get_installed_servers()
-    local unconfigured_servers = {}
+    local unconfigured_servers = { "nixd" }
     for _, server in ipairs(installed_servers) do
       if not string.find(server, "ts_ls") and not string.find(server, "rust_analyzer") then
         table.insert(unconfigured_servers, server)
@@ -39,49 +39,50 @@ return {
 
     lspconfig.lua_ls.setup({
       capabilities = capabilities,
-      on_init = function (client)
+      on_init = function(client)
         local path = client.workspace_folders[1].name
         if not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc") then
           return
         end
 
-        client.config.settings = vim.tbl_deep_extend("force",
-          client.config.settings, {
-            Lua = {
-              runtime = {
-                -- Tell the language server which version of Lua you're using
-                -- (most likely LuaJIT in the case of Neovim)
-                version = "LuaJIT",
-              },
-              -- Make the server aware of Neovim runtime files
-              workspace = {
-                checkThirdParty = false,
-                library = {
-                  vim.env.VIMRUNTIME,
-                  -- "${3rd}/luv/library"
-                  -- "${3rd}/busted/library",
-                },
-                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-                -- library = vim.api.nvim_get_runtime_file("", true)
-              },
+        client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
+          Lua = {
+            runtime = {
+              -- Tell the language server which version of Lua you're using
+              -- (most likely LuaJIT in the case of Neovim)
+              version = "LuaJIT",
             },
-          })
+            -- Make the server aware of Neovim runtime files
+            workspace = {
+              -- checkThirdParty = false,
+              -- library = {
+              --   vim.env.VIMRUNTIME,
+              --   -- "${3rd}/luv/library"
+              --   -- "${3rd}/busted/library",
+              -- },
+              -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+            telemetry = {
+              enable = false,
+            },
+          },
+        })
 
-        client:notify("workspace/didChangeConfiguration",
-          { settings = client.config.settings })
+        client:notify("workspace/didChangeConfiguration", { settings = client.config.settings })
       end,
       settings = {
         diagnostics = {
           globals = { "use", "vim", "require", "merge" },
-          disable = { 'missing-fields' },
+          disable = { "missing-fields" },
         },
         hint = {
           enable = true,
           arrayIndex = "Disable", -- "Enable", "Auto", "Disable"
           await = true,
-          paramName = "Disable",  -- "All", "Literal", "Disable"
+          paramName = "Disable", -- "All", "Literal", "Disable"
           paramType = false,
-          semicolon = "Disable",  -- "All", "SameLine", "Disable"
+          semicolon = "Disable", -- "All", "SameLine", "Disable"
           setType = true,
         },
         format = {
@@ -93,6 +94,51 @@ return {
       },
     })
 
+    -- vim.lsp.config("lua_ls", {
+    --   settings = {
+    --     Lua = {
+    --       runtime = {
+    --         -- Tell the language server which version of Lua you're using
+    --         -- (most likely LuaJIT in the case of Neovim)
+    --         version = "LuaJIT",
+    --       },
+    --       -- Make the server aware of Neovim runtime files
+    --       workspace = {
+    --         -- checkThirdParty = false,
+    --         -- library = {
+    --         --   vim.env.VIMRUNTIME,
+    --         --   -- "${3rd}/luv/library"
+    --         --   -- "${3rd}/busted/library",
+    --         -- },
+    --         -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+    --         library = vim.api.nvim_get_runtime_file("", true),
+    --       },
+    --       telemetry = {
+    --         enable = false,
+    --       },
+    --       diagnostics = {
+    --         globals = { "use", "vim", "require", "merge" },
+    --         disable = { "missing-fields" },
+    --       },
+    --       hint = {
+    --         enable = true,
+    --         arrayIndex = "Disable", -- "Enable", "Auto", "Disable"
+    --         await = true,
+    --         paramName = "Disable", -- "All", "Literal", "Disable"
+    --         paramType = false,
+    --         semicolon = "Disable", -- "All", "SameLine", "Disable"
+    --         setType = true,
+    --       },
+    --       format = {
+    --         enable = false,
+    --       },
+    --       completion = {
+    --         callSnipet = "Replace",
+    --       },
+    --     },
+    --   },
+    -- })
+    
     -- configure emmet language server
     lspconfig.emmet_ls.setup({
       filetypes = {

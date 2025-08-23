@@ -1,7 +1,7 @@
 return {
   "WhoIsSethDaniel/mason-tool-installer.nvim",
   opts = function()
-    local nix_friendly_lsp = {
+    local all_os = {
       -- you can turn off/on auto_update per tool
 
       -- LSPs
@@ -26,7 +26,7 @@ return {
       { "codelldb" },
     }
 
-    local nix_enemy_lsp = {
+    local windows_only = {
       { "lua-language-server" },
       { "rust_analyzer" },
       { "stylua" },
@@ -34,13 +34,13 @@ return {
     }
 
     if vim.fn.has("win32") == 1 then
-      for _, lsp in ipairs(nix_enemy_lsp) do
-        table.insert(nix_friendly_lsp, lsp)
+      for _, lsp in ipairs(windows_only) do
+        table.insert(all_os, lsp)
       end
     end
 
     return {
-      ensure_installed = nix_friendly_lsp,
+      ensure_installed = all_os,
       auto_update = true,
     }
   end,
