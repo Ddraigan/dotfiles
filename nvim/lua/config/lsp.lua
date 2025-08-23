@@ -44,8 +44,6 @@ M.diagnostic_config = {
   severity_sort = true,
 }
 
-vim.diagnostic.config({
-  M.diagnostic_config
-})
+vim.diagnostic.config(M.diagnostic_config)
 
 return M
