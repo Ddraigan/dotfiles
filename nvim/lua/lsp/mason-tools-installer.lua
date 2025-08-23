@@ -5,32 +5,32 @@ return {
       -- you can turn off/on auto_update per tool
 
       -- LSPs
-      { "astro-language-server" },
-      { "yaml-language-server" },
-      { "html-lsp" },
-      { "emmet-ls" },
-      { "css-lsp" },
-      { "json-lsp" },
-      { "clangd" },
-      { "ts_ls" },
-      { "tailwindcss-language-server" },
+      "astro-language-server",
+      "yaml-language-server",
+      "html-lsp",
+      "emmet-ls",
+      "css-lsp",
+      "json-lsp",
+      "clangd",
+      "ts_ls",
+      "tailwindcss-language-server",
       -- { "eslint-lsp" },
 
       -- Formatters
-      { "prettierd" },
-      { "prettier" },
-      { "alejandra" },
+      "prettierd",
+      "prettier",
+      "alejandra",
       -- { "eslint_d" },
 
       -- DAPs
-      { "codelldb" },
+      "codelldb",
     }
 
     local windows_only = {
-      { "lua-language-server" },
-      { "rust_analyzer" },
-      { "stylua" },
-      { "nil" }, -- Not actual enemy but I use nixd on nix system
+      "lua-language-server",
+      "rust_analyzer",
+      "stylua",
+      "nil", -- Not actual enemy but I use nixd on nix system
     }
 
     if vim.fn.has("win32") == 1 then

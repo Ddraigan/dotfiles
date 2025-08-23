@@ -1,12 +1,12 @@
 return {
   "mrcjkb/rustaceanvim",
   -- event = "BufReadPost",
-  lazy = false, -- Lazy plugin naturally
+  -- lazy = false, -- Lazy plugin naturally
   dependencies = {
     "nvim-lua/plenary.nvim",
     "mfussenegger/nvim-dap",
   },
-  -- ft = { "rust" },
+  ft = { "rust" },
   opts = function()
     local has_mason = pcall(require, "mason-registry")
     local adapter ---@type any

@@ -1,5 +1,5 @@
 return {
   "carbon-steel/detour.nvim",
-  event = "VeryLazy",
+  cmd = { "Detour" },
   config = function() end,
 }
