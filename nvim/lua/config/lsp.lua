@@ -1,7 +1,9 @@
+local M = {}
 local mason_lspconfig = require("mason-lspconfig")
 
 local installed_servers = mason_lspconfig.get_installed_servers()
 local unconfigured_servers = { "nixd", "lua_ls" }
+
 for _, server in ipairs(installed_servers) do
   if not string.find(server, "ts_ls") and not string.find(server, "rust_analyzer") then
     table.insert(unconfigured_servers, server)
@@ -17,15 +19,15 @@ local firstToUpper = function(str)
   return (str:gsub("^%l", string.upper))
 end
 
-local highlights = function ()
+local highlights = function()
   local hl
-for type, _ in pairs(signs) do
-   hl = "DiagnosticSign" .. firstToUpper(type)
-end
+  for type, _ in pairs(signs) do
+    hl = "DiagnosticSign" .. firstToUpper(type)
+  end
   return hl
 end
 
-vim.diagnostic.config({
+M.diagnostic_config = {
   virtual_text = {
     prefix = signs.prefix,
   },
@@ -40,4 +42,10 @@ vim.diagnostic.config({
     numhl = highlights(),
   },
   severity_sort = true,
+}
+
+vim.diagnostic.config({
+  M.diagnostic_config
 })
+
+return M

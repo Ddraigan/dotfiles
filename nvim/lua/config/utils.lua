@@ -1,6 +1,6 @@
 local M = {}
 
-M.dump = function (o)
+M.dump = function(o)
   if type(o) == "table" then
     local s = "{ "
     for k, v in pairs(o) do
@@ -38,7 +38,7 @@ end
 --   return capabilities
 -- end
 
-M.capabilities = function ()
+M.capabilities = function()
   local nvim_capabilites = vim.lsp.protocol.make_client_capabilities()
   local capabilities = require("blink.cmp").get_lsp_capabilities(nvim_capabilites)
   capabilities.textDocument.completion.completionItem = {
@@ -60,6 +60,20 @@ M.capabilities = function ()
   }
 
   return capabilities
+end
+
+M.toggle_virtual_lines = function()
+  if not vim.diagnostic.config().virtual_lines then
+    vim.diagnostic.config({
+      virtual_lines = true,
+      virtual_text = false,
+    })
+  else
+    vim.diagnostic.config({
+      virtual_lines = false,
+      virtual_text = require("config.lsp").diagnostic_config.virtual_text
+    })
+  end
 end
 
 return M
