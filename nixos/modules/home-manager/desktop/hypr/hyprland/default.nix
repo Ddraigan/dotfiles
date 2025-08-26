@@ -100,6 +100,10 @@
           windowrulev2 = [
             "suppressevent maximize, class:.*"
 
+            "opacity 0.60 0.60,class:^(firefox)$"
+            "opacity 0.60 0.60,class:^(zen)$"
+            "opacity 0.66 0.66,class:^(Spotify)$"
+
             # All this stuff hides the xwaylandbridge window
             "opacity 0.0 override, class:^(xwaylandvideobridge)$"
             "noanim, class:^(xwaylandvideobridge)$"
