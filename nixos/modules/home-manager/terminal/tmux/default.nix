@@ -63,6 +63,7 @@
       extraConfig = ''
         set-option -g status-interval 5
         set-option -g automatic-rename on
+        set -g automatic-rename-format "#{s|/home/user/||:pane_current_path}"
         # set-option -g automatic-rename-format '#{b:pane_current_path}'
 
         # Transparent Background
