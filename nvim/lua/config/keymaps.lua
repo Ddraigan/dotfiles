@@ -255,7 +255,6 @@ autocommand("LspAttach", {
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go To Declaration", buffer))
     vim.keymap.set("n", "gd", "<cmd> Telescope lsp_definitions <CR>", opts("Go To Definition", buffer))
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover Documentation", buffer))
-    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts("Signature Documentation", buffer))
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go To Implementation", buffer))
     vim.keymap.set("n", "gr", "<cmd> Telescope lsp_references <CR>", opts("Go To References", buffer))
     -- vim.keymap.set("n", "<leader>lr", ":IncRename ", opts("Rename", buffer)) -- Obeselete
