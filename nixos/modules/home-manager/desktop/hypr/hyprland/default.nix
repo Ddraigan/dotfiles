@@ -9,9 +9,7 @@
 
   config = lib.mkIf config.modules.desktop.hypr.hyprland.enable {
     home.packages = with pkgs; [
-      # File Manager
-      # nautilus
-
+      # Colour Picker
       hyprpicker
       # Clipboard
       wl-clipboard
@@ -19,6 +17,9 @@
       # Notifications
       # dunst (has its own config)
       # libnotify (with dunst)
+
+      # For media keys
+      playerctl
 
       # Screenshot Utils
       hyprshot
@@ -47,6 +48,7 @@
         # inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
         inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
         inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+        inputs.hypr-darkwindow.packages.${pkgs.system}.Hypr-DarkWindow
       ];
       settings =
         {
@@ -73,10 +75,7 @@
           };
 
           "$terminal" = "wezterm";
-          # "$fileManager" = "nautilus";
-          # "$fileManager" = "thunar";
           "$fileManager" = "nemo";
-          # "$menu" = "rofi -show drun -show-icons";
           "$menu" = "walker";
           "$browser" = "zen";
 
@@ -100,9 +99,14 @@
           windowrulev2 = [
             "suppressevent maximize, class:.*"
 
-            "opacity 0.60 0.60,class:^(firefox)$"
-            "opacity 0.60 0.60,class:^(zen)$"
-            "opacity 0.66 0.66,class:^(Spotify)$"
+            # "opacity 0.60 0.60,class:^(zen-beta)$"
+            # "opacity 0.66 0.66,class:^(spotify)$"
+            # "opacity 0.60 0.60,class:^(zen-beta)$"
+            # "opacity 0.66 0.66,class:^(spotify)$"
+
+            "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(zen-beta)$"
+            "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(spotify)$"
+            "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(nemo)$"
 
             # All this stuff hides the xwaylandbridge window
             "opacity 0.0 override, class:^(xwaylandvideobridge)$"

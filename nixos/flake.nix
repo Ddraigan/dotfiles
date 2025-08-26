@@ -30,10 +30,10 @@
       url = "github:shezdy/hyprsplit";
       inputs.hyprland.follows = "hyprland";
     };
-    # hyprpicker = {
-    #   url = "github:hyprwm/hyprpicker";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
+    hypr-darkwindow = {
+      url = "github:micha4w/Hypr-DarkWindow";
+      inputs.hyprland.follows = "hyprland";
+    };
     # split-monitor-workspaces = {
     #   url = "github:Duckonaut/split-monitor-workspaces";
     #   inputs.hyprland.follows = "hyprland";
@@ -44,14 +44,8 @@
   outputs = {
     self,
     nixpkgs,
-    home-manager,
     catppuccin,
-    zen-browser,
     walker,
-    hyprland,
-    hyprlock,
-    Hyprspace,
-    hyprsplit,
     ...
   } @ inputs: {
     overlays = import ./overlays {inherit inputs;};
