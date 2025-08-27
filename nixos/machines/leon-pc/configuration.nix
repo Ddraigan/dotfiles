@@ -26,7 +26,27 @@ in {
   # };
   stylix = {
     enable = true;
-
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+    };
+    fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.hack;
+        name = "Hack Nerd Font";
+      };
+      sansSerif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans";
+      };
+      serif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Serif";
+      };
+    };
+    opacity = {
+      applications = 0.5;
+    };
     base16Scheme = {
       base00 = "1e1e2e"; # base
       base01 = "181825"; # mantle
