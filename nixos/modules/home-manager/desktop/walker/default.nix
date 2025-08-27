@@ -8,7 +8,7 @@
   config = lib.mkIf config.modules.desktop.walker.enable {
     programs.walker = {
       enable = true;
-      runAsService = false;
+      runAsService = true;
       config = {
         search.placeholder = "Search";
         app_launch_prefix = "uwsm app -- ";

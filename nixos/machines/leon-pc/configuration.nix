@@ -31,6 +31,7 @@ in {
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
+      size = 16;
     };
     fonts = {
       monospace = {
@@ -49,11 +50,6 @@ in {
     opacity = {
       applications = 0.5;
     };
-    iconTheme = {
-      enable = true;
-      package = pkgs.candy-icons;
-      name = "candy-icons";
-    };
     base16Scheme = {
       base00 = "1e1e2e"; # base
       base01 = "181825"; # mantle
@@ -71,18 +67,6 @@ in {
       base0D = "89b4fa"; # blue
       base0E = "cba6f7"; # mauve
       base0F = "f2cdcd"; # flamingo
-    };
-    targets = {
-      hyprland = {
-        enable = false;
-      };
-      waybar.enable = false;
-      tmux.enable = false;
-      zen-browser = {
-        enable = true;
-        profileNames = [ "default" ];
-      };
-      wezterm.enable = false;
     };
   };
 
@@ -171,7 +155,7 @@ in {
       pkgs.pulseaudio
       pkgs.kdePackages.xwaylandvideobridge
       pkgs.helvum
-      pkgs.spotify
+      # pkgs.spotify
       pkgs.nemo-with-extensions
       pkgs.bitwarden
       pkgs.rustup

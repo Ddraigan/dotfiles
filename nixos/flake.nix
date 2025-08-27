@@ -10,14 +10,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
-      url = "github:nix-community/stylix";
+      url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # spicetify-nix.url = "github:gerg-l/spicetify-nix";
-    catppuccin.url = "github:catppuccin/nix";
+    # catppuccin.url = "github:catppuccin/nix";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     hyprland.url = "github:hyprwm/Hyprland";
-    walker.url = "github:abenz1267/walker";
+    walker.url = "github:umbrageodotus/walker";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -81,9 +82,10 @@
           ./home-manager/home.nix
           ./modules/home-manager
           # hyprland.homeManagerModules.default
-          inputs.catppuccin.homeModules.catppuccin
+          # inputs.catppuccin.homeModules.catppuccin
           inputs.walker.homeManagerModules.walker
           inputs.stylix.homeModules.stylix
+          inputs.spicetify-nix.homeManagerModules.spicetify
         ];
       };
     };

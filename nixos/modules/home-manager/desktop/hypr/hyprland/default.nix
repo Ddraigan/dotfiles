@@ -13,6 +13,7 @@
       hyprpicker
       # Clipboard
       wl-clipboard
+      # walker
 
       # Notifications
       # dunst (has its own config)
@@ -76,7 +77,8 @@
 
           "$terminal" = "wezterm";
           "$fileManager" = "nemo";
-          "$menu" = "walker";
+          # "$menu" = "walker";
+          "$menu" = "rofi -show drun";
           "$browser" = "zen";
 
           env = [
@@ -91,7 +93,7 @@
             "systemctl --user enable --now hyprpaper.service"
             "systemctl --user enable --now waybar.service"
             # "systemctl --user enable --now walker.service"
-            "walker --gapplication-service"
+            # "walker --gapplication-service"
             "nm-applet --indicator"
             "wl-paste -p --watch wl-copy"
           ];

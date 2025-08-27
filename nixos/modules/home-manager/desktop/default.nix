@@ -10,5 +10,6 @@
     ./rofi
     ./walker
     ./dunst
+    ./spotify
   ];
 }

@@ -5,31 +5,31 @@
   pkgs,
   ...
 }: {
-  catppuccin = {
-    enable = false;
-    flavor = "mocha";
-    accent = "pink";
-    cursors = {
-      enable = true;
-      flavor = "mocha";
-      accent = "sapphire";
-    };
-    gtk = {
-      enable = false;
-      flavor = "mocha";
-      accent = "pink";
-      size = "standard";
-      tweaks = ["normal"];
-    };
-  };
+  # catppuccin = {
+  #   enable = false;
+  #   flavor = "mocha";
+  #   accent = "pink";
+  #   # cursors = {
+  #   #   enable = true;
+  #   #   flavor = "mocha";
+  #   #   accent = "sapphire";
+  #   # };
+  #   gtk = {
+  #     enable = false;
+  #     flavor = "mocha";
+  #     accent = "pink";
+  #     size = "standard";
+  #     tweaks = ["normal"];
+  #   };
+  # };
 
   stylix = {
     enable = true;
     autoEnable = true;
-    homeManagerIntegration.autoImport = false;
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
+      size = 16;
     };
     fonts = {
       monospace = {
@@ -47,11 +47,14 @@
     };
     opacity = {
       applications = 0.5;
+      popups = 0.5;
+      desktop = 0.5;
     };
-    iconTheme = {
+    icons = {
       enable = true;
       package = pkgs.candy-icons;
-      name = "candy-icons";
+      light = "candy-icons";
+      dark = "candy-icons";
     };
     base16Scheme = {
       base00 = "1e1e2e"; # base
@@ -72,15 +75,19 @@
       base0F = "f2cdcd"; # flamingo
     };
     targets = {
+      dunst.enable = false;
       hyprland = {
         enable = false;
       };
+      hyprlock.enable = false;
+      starship.enable = false;
+      spicetify.enable = false;
       waybar.enable = false;
       tmux.enable = false;
-      zen-browser = {
-        enable = true;
-        profileNames = ["default"];
-      };
+      # zen-browser = {
+      #   enable = true;
+      #   profileNames = ["default"];
+      # };
       wezterm.enable = false;
     };
   };
@@ -101,10 +108,11 @@
         hyprpaper.enable = true;
         hyprlock.enable = true;
       };
-      rofi.enable = false;
-      walker.enable = true;
+      rofi.enable = true;
+      walker.enable = false;
       waybar.enable = true;
       dunst.enable = true;
+      spicetify.enable =true;
     };
     terminal = {
       nvim.enable = true;
@@ -129,7 +137,7 @@
   programs = {
     home-manager.enable = true;
     element-desktop.enable = true;
-    spotify-player.enable = true;
+    # spotify-player.enable = true;
     git = {
       enable = true;
       userName = "Ddraigan";
@@ -170,21 +178,21 @@
       pkgs.nerd-fonts.hack
       pkgs.stylua
     ];
-    pointerCursor = {
-      gtk.enable = true;
-      size = 16;
-    };
+    # pointerCursor = {
+    #   gtk.enable = true;
+    #   size = 16;
+    # };
   };
 
-  gtk = {
-    enable = true;
+  # gtk = {
+    # enable = true;
     # iconTheme = {
     #   package = pkgs.morewaita-icon-theme;
     #   name = "MoreWaita";
     # };
-    iconTheme = {
-      package = pkgs.candy-icons;
-      name = "candy-icons";
-    };
-  };
+    # iconTheme = {
+    #   package = pkgs.candy-icons;
+    #   name = "candy-icons";
+    # };
+  # };
 }

@@ -9,7 +9,7 @@
     home.packages = [
       pkgs.tmux
     ];
-    catppuccin.tmux.enable = false; # Already in config
+    # catppuccin.tmux.enable = false; # Already in config
     programs.tmux = {
       enable = true;
       prefix = "C-Space";

@@ -147,7 +147,7 @@
 
           ### Text ###
 
-          font = "Hack Nerd Font, Hack NF";
+          # font = "Hack Nerd Font, Hack NF";
 
           # The spacing between lines.  If the height is smaller than the
           # font height, it will get raised to the font height.

@@ -6,7 +6,7 @@
     home.packages = [
       pkgs.starship
     ];
-    catppuccin.starship.enable = true;
+    # catppuccin.starship.enable = true;
     programs.starship = {
       enable = true;
       settings = {
