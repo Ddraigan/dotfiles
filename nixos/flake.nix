@@ -9,6 +9,10 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     catppuccin.url = "github:catppuccin/nix";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     hyprland.url = "github:hyprwm/Hyprland";
@@ -38,14 +42,11 @@
     #   url = "github:Duckonaut/split-monitor-workspaces";
     #   inputs.hyprland.follows = "hyprland";
     # };
-    # stylix.url = "github:danth/stylix";
   };
 
   outputs = {
     self,
     nixpkgs,
-    catppuccin,
-    walker,
     ...
   } @ inputs: {
     overlays = import ./overlays {inherit inputs;};
@@ -64,7 +65,7 @@
           modules = [
             ./machines/leon-pc/configuration.nix
             ./modules/nixos
-            # inputs.stylix.nixosModules.stylix
+            inputs.stylix.nixosModules.stylix
           ];
         };
     };
@@ -79,8 +80,8 @@
           ./home-manager/home.nix
           ./modules/home-manager
           # hyprland.homeManagerModules.default
-          catppuccin.homeModules.catppuccin
-          walker.homeManagerModules.walker
+          inputs.catppuccin.homeModules.catppuccin
+          inputs.walker.homeManagerModules.walker
         ];
       };
     };
