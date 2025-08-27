@@ -82,6 +82,7 @@ in {
         enable = true;
         profileNames = [ "default" ];
       };
+      wezterm.enable = false;
     };
   };
 
