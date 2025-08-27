@@ -107,10 +107,6 @@
       inputs.zen-browser.packages."${pkgs.system}".default
       pkgs.nerd-fonts.hack
       pkgs.stylua
-
-      # (pkgs.nerdfonts.override {
-      #   fonts = ["Hack"];
-      # })
     ];
     pointerCursor = {
       gtk.enable = true;
