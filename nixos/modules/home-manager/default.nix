@@ -7,6 +7,5 @@
   imports = [
     ./desktop
     ./terminal
-    ./theme
   ];
 }
