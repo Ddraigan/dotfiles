@@ -15,7 +15,7 @@
       accent = "sapphire";
     };
     gtk = {
-      enable = true;
+      enable = false;
       flavor = "mocha";
       accent = "pink";
       size = "standard";
