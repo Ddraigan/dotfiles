@@ -83,6 +83,7 @@
           # hyprland.homeManagerModules.default
           inputs.catppuccin.homeModules.catppuccin
           inputs.walker.homeManagerModules.walker
+          inputs.stylix.homeModules.stylix
         ];
       };
     };

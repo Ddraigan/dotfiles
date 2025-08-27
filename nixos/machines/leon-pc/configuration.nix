@@ -27,7 +27,7 @@ in {
   stylix = {
     enable = true;
     autoEnable = true;
-    homeManagerIntegration.autoImport = true;
+    homeManagerIntegration.autoImport = false;
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
