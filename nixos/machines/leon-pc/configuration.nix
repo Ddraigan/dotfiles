@@ -109,6 +109,12 @@ in {
 
   # Configure keymap in X11
   services = {
+    ollama = {
+      enable = true;
+      # Optional: preload models, see https://ollama.com/library
+      loadModels = ["llama3"];
+      acceleration = "cuda";
+    };
     upower.enable = true;
     xserver = {
       enable = false;
@@ -138,7 +144,7 @@ in {
 
   environment = {
     systemPackages = [
-      inputs.nixai.packages.${system}.default
+      inputs.nixai.packages.${pkgs.system}.default
       wezterm-cwd
       pkgs.upower
       pkgs.mangohud
@@ -148,7 +154,6 @@ in {
       pkgs.kdePackages.xwaylandvideobridge
       pkgs.helvum
       # pkgs.spotify
-      pkgs.nemo-with-extensions
       pkgs.bitwarden
       pkgs.rustup
       pkgs.nixd

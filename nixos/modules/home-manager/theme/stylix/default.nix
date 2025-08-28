@@ -13,7 +13,7 @@
       cursor = {
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Ice";
-        size = 16;
+        size = 20;
       };
       fonts = {
         monospace = {
@@ -29,11 +29,11 @@
           name = "DejaVu Serif";
         };
       };
-      opacity = {
-        applications = 0.5;
-        popups = 0.5;
-        desktop = 0.2;
-      };
+      # opacity = {
+      #   applications = 0.2;
+      #   popups = 0.2;
+      #   desktop = 0.2;
+      # };
       icons = {
         enable = true;
         package = pkgs.candy-icons;
@@ -59,7 +59,7 @@
         base0F = "f2cdcd"; # flamingo
       };
       targets = {
-        dunst.enable = false;
+        dunst.enable = true;
         hyprland = {
           enable = false;
         };

@@ -24,10 +24,15 @@
   # };
 
   dconf = {
+    # settings = {
+    #   "org/cinnamon/desktop/applications/terminal" = {
+    #     exec = "/run/current-system/sw/bin/wezterm-cwd";
+    #     # exec-arg = ""; # argument
+    #   };
+    # };
     settings = {
-      "org/cinnamon/desktop/applications/terminal" = {
-        exec = "/run/current-system/sw/bin/wezterm-cwd";
-        # exec-arg = ""; # argument
+      "org/cinnamon/desktop/interface" = {
+        can-change-accels = true;
       };
     };
   };
@@ -46,7 +51,7 @@
       walker.enable = false;
       waybar.enable = true;
       dunst.enable = true;
-      spicetify.enable =true;
+      spicetify.enable = true;
     };
     terminal = {
       nvim.enable = true;
@@ -71,7 +76,25 @@
   programs = {
     home-manager.enable = true;
     element-desktop.enable = true;
-    # spotify-player.enable = true;
+    zen-browser = {
+      enable = true;
+      nativeMessagingHosts = [pkgs.firefoxpwa];
+      profiles."default" = {
+        userChrome = '''';
+        spaces = {
+          "First" = {
+            id = "bf0810f0-8216-458e-946b-d8e401616107";
+            theme.opacity = 0.0;
+            position = 1000;
+          };
+          "Second" = {
+            id = "c0b6972d-e68f-4fd8-a60f-f3c0df9e4ca8";
+            theme.opacity = 0.0;
+            position = 2000;
+          };
+        };
+      };
+    };
     git = {
       enable = true;
       userName = "Ddraigan";
@@ -106,9 +129,9 @@
       pkgs.lua-language-server
       pkgs.unzip
       pkgs.zip
+      pkgs.nemo-with-extensions
       pkgs.ripgrep
       pkgs.fzf
-      inputs.zen-browser.packages."${pkgs.system}".default
       pkgs.nerd-fonts.hack
       pkgs.stylua
     ];
@@ -118,15 +141,29 @@
     # };
   };
 
+  xdg = {
+    desktopEntries.nemo = {
+      name = "Nemo";
+      exec = "${pkgs.nemo-with-extensions}/bin/nemo";
+    };
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "inode/directory" = ["nemo.desktop"];
+        "application/x-gnome-saved-search" = ["nemo.desktop"];
+      };
+    };
+  };
+
   # gtk = {
-    # enable = true;
-    # iconTheme = {
-    #   package = pkgs.morewaita-icon-theme;
-    #   name = "MoreWaita";
-    # };
-    # iconTheme = {
-    #   package = pkgs.candy-icons;
-    #   name = "candy-icons";
-    # };
+  # enable = true;
+  # iconTheme = {
+  #   package = pkgs.morewaita-icon-theme;
+  #   name = "MoreWaita";
+  # };
+  # iconTheme = {
+  #   package = pkgs.candy-icons;
+  #   name = "candy-icons";
+  # };
   # };
 }

@@ -89,6 +89,7 @@
           # inputs.catppuccin.homeModules.catppuccin
           inputs.walker.homeManagerModules.walker
           inputs.stylix.homeModules.stylix
+          inputs.zen-browser.homeModules.beta
           inputs.spicetify-nix.homeManagerModules.spicetify
         ];
       };

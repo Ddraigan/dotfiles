@@ -101,14 +101,14 @@
           windowrulev2 = [
             "suppressevent maximize, class:.*"
 
-            # "opacity 0.60 0.60,class:^(zen-beta)$"
-            # "opacity 0.66 0.66,class:^(spotify)$"
+            "opacity 0.9 0.9,class:^(zen-beta)$"
+            "opacity 0.9 0.9,class:^(spotify)$"
             # "opacity 0.60 0.60,class:^(zen-beta)$"
             # "opacity 0.66 0.66,class:^(spotify)$"
 
-            "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(zen-beta)$"
-            "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(spotify)$"
-            "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(nemo)$"
+            # "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(zen-beta)$"
+            # "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(spotify)$"
+            # "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(nemo)$"
 
             # All this stuff hides the xwaylandbridge window
             "opacity 0.0 override, class:^(xwaylandvideobridge)$"
