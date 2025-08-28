@@ -1,5 +1,7 @@
 :root .Root__main-view .UyzJidwrGk3awngSGIwv {
   color: var(--spice-subtext);
+  background-color: rgba(var(--spice-base), 0.0);
+  opacity: 0.0 !important;
 }
 :root .Root__main-view .main-home-content > section:first-child > .main-gridContainer-gridContainer > div span[aria-label],
 :root .Root__main-view span[aria-label="New episode"],
@@ -12,11 +14,11 @@
   border: 1px solid var(--spice-overlay1);
 }
 :root .Root__main-view .Button-sm-buttonSecondary-useBrowserDefaultFocusStyle:hover {
-  border-color: var(--essential-base, #000000);
+  background-color: rgba(var(--spice-base), 0.0);
 }
 
 :root .Root__nav-bar .main-rootlist-wrapper div:nth-child(2) > li > div:active::after {
-  background-color: var(--background-tinted-base, rgba(0, 0, 0, 0.08));
+  background-color: rgba(var(--spice-base), 0.0);
 }
 :root .Root__nav-bar .main-rootlist-wrapper div:nth-child(2) > li > div p {
   color: var(--spice-subtext) !important;
@@ -27,7 +29,7 @@
 :root .Root__nav-bar .main-navBar-navBar li:hover > div,
 :root .Root__nav-bar .main-navBar-navBar li:hover > a:not(.main-navBar-navBarLinkActive),
 :root .Root__nav-bar .spicetify-playlist-list li:hover {
-  background-color: var(--spice-main);
+  background-color: rgba(var(--spice-base), 0.0);
 }
 :root .Root__nav-bar .main-navBar-navBarLink {
   color: var(--spice-text);
@@ -39,7 +41,7 @@
   color: var(--spice-text);
 }
 :root .Root__nav-bar .main-navBar-navBarLinkActive {
-  background-color: var(--spice-tab-active);
+  background-color: rgba(var(--spice-base), 0.0);
 }
 
 :root .Root__now-playing-bar .main-shuffleButton-button:focus:not(:focus-visible, :hover) {
@@ -55,12 +57,12 @@
   color: var(--spice-player);
 }
 :root .Root__now-playing-bar .main-button-primary {
-  background-color: var(--spice-main);
+  background-color: rgba(var(--spice-base), 0.0);
 }
 :root .Root__now-playing-bar .main-button-primary:active,
 :root .Root__now-playing-bar .main-button-primary:focus,
 :root .Root__now-playing-bar .main-button-primary:hover {
-  background-color: var(--spice-sidebar);
+  background-color: rgba(var(--spice-base), 0.0);
 }
 :root .Root__now-playing-bar .Button-sm-16-buttonTertiary-iconOnly-isUsingKeyboard-useBrowserDefaultFocusStyle,
 :root .Root__now-playing-bar .control-button,
@@ -110,11 +112,11 @@
 :root .main-topBar-container button:not(.x-searchInput-searchInputClearButton),
 :root .main-topBar-container .main-topBar-button {
   color: var(--spice-subtext) !important;
-  background-color: var(--spice-main-elevated) !important;
+  background-color: rgba(var(--spice-base), 0.0) !important;
 }
 :root .Root__top-bar header .main-topBar-background,
 :root .main-topBar-container .main-topBar-background {
-  background-color: var(--spice-mantle) !important;
+  background-color: rgba(var(--spice-base), 0.0) !important;
 }
 :root .Root__top-bar header .Svg-img-24-icon.home-active-icon,
 :root .main-topBar-container .Svg-img-24-icon.home-active-icon {
@@ -122,7 +124,7 @@
 }
 :root .Root__top-bar header .x-searchInput-searchInputInput,
 :root .main-topBar-container .x-searchInput-searchInputInput {
-  background-color: var(--spice-overlay0);
+  background-color: rgba(var(--spice-base), 0.0);
   color: var(--spice-subtext) !important;
 }
 :root .Root__top-bar header .x-searchInput-searchInputInput::placeholder,
@@ -131,7 +133,7 @@
 }
 :root .Root__top-bar header .main-topBar-background,
 :root .main-topBar-container .main-topBar-background {
-  background-color: var(--spice-main) !important;
+  background-color: rgba(var(--spice-base), 0.0) !important;
 }
 :root .Root__top-bar header .main-entityHeader-withBackgroundImage,
 :root .main-topBar-container .main-entityHeader-withBackgroundImage {
@@ -146,28 +148,28 @@
   color: var(--spice-subtext);
 }
 :root .x-filterBox-filterInput {
-  background-color: var(--spice-surface0);
+  background-color: rgba(var(--spice-base), 0.0);
   color: var(--spice-subtext);
 }
 :root .main-dropDown-dropDown {
   color: var(--spice-text);
-  background-color: var(--spice-surface0);
+  background-color: rgba(var(--spice-base), 0.0);
 }
 :root .main-dropDown-dropDown:disabled {
   color: var(--spice-button-disabled);
 }
 :root .x-toggle-indicatorWrapper {
-  background-color: var(--spice-surface0);
+  background-color: rgba(var(--spice-base), 0.0);
 }
 :root .x-toggle-indicatorWrapper .x-toggle-indicator {
-  background-color: var(--spice-text);
+  background-color: rgba(var(--spice-base), 0.0);
 }
 :root input:checked ~ .x-toggle-indicatorWrapper,
 :root input:hover:not([disabled], :active) ~ .x-toggle-indicatorWrapper {
-  background-color: var(--spice-surface1);
+  background-color: rgba(var(--spice-base), 0.0);
 }
 :root input:checked:hover:not([disabled], :active) ~ .x-toggle-indicatorWrapper {
-  background-color: var(--spice-overlay0);
+  background-color: rgba(var(--spice-base), 0.0);
 }
 :root select option:checked {
   color: var(--spice-text);
@@ -196,7 +198,7 @@
   border-radius: 6px;
 }
 :root .GenericModal .main-duplicateTrackModal-container {
-  background-color: var(--spice-card);
+  background-color: rgba(var(--spice-base), 0.0);
   color: var(--spice-subtext);
 }
 :root .GenericModal .main-duplicateTrackModal-container button:first-child {

@@ -119,6 +119,17 @@
             "nofocus, class:^(xwaylandvideobridge)$"
           ];
 
+          layerrule = [
+            "blur, ^(gtk-layer-shell)$"
+            "blur, ^(launcher)$"
+            "ignorezero, ^(gtk-layer-shell)$"
+            "ignorezero, ^(launcher)$"
+            "blur, notifications"
+            "ignorezero, notifications"
+            "blur, bar"
+            "ignorezero, bar"
+          ];
+
           general = {
             border_size = 2;
             gaps_in = 5;

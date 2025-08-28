@@ -17,7 +17,7 @@ in {
       #   shuffle # shuffle+ (special characters are sanitized out of extension names)
       # ];
       theme = {
-        name = "catppuccin";
+        name = "catppuccin-custom";
         src = ./catppuccin;
         injectCss = true;
         injectThemeJs = false;
