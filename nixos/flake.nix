@@ -13,9 +13,9 @@
       url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-rice = {
-      url = "github:bertof/nix-rice";
-    };
+    # nix-rice = {
+    #   url = "github:bertof/nix-rice";
+    # };
     # spicetify-nix.url = "github:gerg-l/spicetify-nix";
     # catppuccin.url = "github:catppuccin/nix";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";

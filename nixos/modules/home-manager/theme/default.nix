@@ -5,8 +5,6 @@
   ...
 }: {
   imports = [
-    ./desktop
-    ./terminal
-    ./theme
+    /stylix.nix
   ];
 }
