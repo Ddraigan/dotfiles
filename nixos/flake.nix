@@ -18,6 +18,7 @@
     # };
     # spicetify-nix.url = "github:gerg-l/spicetify-nix";
     # catppuccin.url = "github:catppuccin/nix";
+    nixai.url = "github:olafkfreund/nix-ai-help";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     hyprland.url = "github:hyprwm/Hyprland";

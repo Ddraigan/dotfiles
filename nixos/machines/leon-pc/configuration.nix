@@ -138,6 +138,7 @@ in {
 
   environment = {
     systemPackages = [
+      inputs.nixai.packages.${system}.default
       wezterm-cwd
       pkgs.upower
       pkgs.mangohud
