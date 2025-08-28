@@ -140,7 +140,6 @@ in {
     systemPackages = [
       wezterm-cwd
       pkgs.upower
-      pkgs.home-manager
       pkgs.mangohud
       pkgs.protonup
       pkgs.hyprpolkitagent
