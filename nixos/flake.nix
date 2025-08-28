@@ -70,7 +70,7 @@
           modules = [
             ./machines/leon-pc/configuration.nix
             ./modules/nixos
-            inputs.stylix.nixosModules.stylix
+            # inputs.stylix.nixosModules.stylix
           ];
         };
     };
