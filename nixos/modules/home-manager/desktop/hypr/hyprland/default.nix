@@ -64,12 +64,12 @@
           #   gesture_distance = 300; # how far is the "max"
           #   gesture_positive = true; # positive = swipe down. Negative = swipe up.
           # };
-          "plugin:split-monitor-workspaces" = {
-            count = 9;
-            keep_focused = 0;
-            enable_notifications = 0;
-            enable_persistent_workspaces = 0;
-          };
+          # "plugin:split-monitor-workspaces" = {
+          #   count = 9;
+          #   keep_focused = 0;
+          #   enable_notifications = 0;
+          #   enable_persistent_workspaces = 0;
+          # };
           "plugin:overview" = {};
           "plugin:hyprsplit" = {
             num_workspaces = 9;
@@ -98,6 +98,8 @@
             "wl-paste -p --watch wl-copy"
           ];
 
+          chromakey_background = [7 8 17];
+
           windowrulev2 = [
             "suppressevent maximize, class:.*"
 
@@ -109,6 +111,8 @@
             # "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(zen-beta)$"
             # "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(spotify)$"
             # "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(nemo)$"
+            "plugin:chromakey, class:^(zen-beta)$"
+            "plugin:chromakey, class:^(spotify)$"
 
             # All this stuff hides the xwaylandbridge window
             "opacity 0.0 override, class:^(xwaylandvideobridge)$"
