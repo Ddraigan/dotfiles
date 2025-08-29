@@ -73,6 +73,26 @@
         #   profileNames = ["default"];
         # };
         wezterm.enable = false;
+        gtk = {
+          enable = true;
+          extraCss = ''
+            * {
+                background-color: rgba(0, 0, 0, 0.0);  /* Semi-transparent black background */
+            }
+
+            window {
+                background-color: rgba(0, 0, 0, 0.0);  /* More transparent window background */
+            }
+
+            .button {
+                background-color: rgba(242, 205, 205, 0.5); /* Transparent button background */
+            }
+
+            .panel {
+                background-color: rgba(0, 0, 0, 0.0);  /* Transparent panel */
+            }
+          '';
+        };
       };
     };
   };

@@ -109,6 +109,16 @@ in {
 
   # Configure keymap in X11
   services = {
+    # greetd = {
+    #   enable = true;
+    #   settings = rec {
+    #     initial_session = {
+    #       command = "uwsm start -- hyprland.desktop";
+    #       user = "leon";
+    #     };
+    #     default_session = initial_session;
+    #   };
+    # };
     ollama = {
       enable = true;
       # Optional: preload models, see https://ollama.com/library
@@ -201,6 +211,7 @@ in {
   };
 
   programs = {
+    # regreet.enable = true;
     dconf.enable = true;
     zsh.enable = true;
     uwsm = {

@@ -1,35 +1,56 @@
 :root .Root__main-view .UyzJidwrGk3awngSGIwv {
   color: var(--spice-subtext);
-  background-color: rgba(var(--spice-base), 0.0);
-  opacity: 0.0 !important;
 }
-:root .Root__main-view .main-home-content > section:first-child > .main-gridContainer-gridContainer > div span[aria-label],
+:root
+  .Root__main-view
+  .main-home-content
+  > section:first-child
+  > .main-gridContainer-gridContainer
+  > div
+  span[aria-label],
 :root .Root__main-view span[aria-label="New episode"],
 :root .Root__main-view span[aria-label="New Podcast Episode"] {
   background: var(--spice-text);
 }
 :root .Root__main-view .Button-sm-buttonSecondary-useBrowserDefaultFocusStyle {
-  background-color: rgba(var(--spice-base), 0.0);
+  background-color: rgba(0, 0, 0, 0);
   color: var(--spice-text);
   border: 1px solid var(--spice-overlay1);
 }
-:root .Root__main-view .Button-sm-buttonSecondary-useBrowserDefaultFocusStyle:hover {
-  background-color: rgba(var(--spice-base), 0.0);
+:root
+  .Root__main-view
+  .Button-sm-buttonSecondary-useBrowserDefaultFocusStyle:hover {
+  border-color: var(--essential-base, #000000);
 }
 
-:root .Root__nav-bar .main-rootlist-wrapper div:nth-child(2) > li > div:active::after {
-  background-color: rgba(var(--spice-base), 0.0);
+:root
+  .Root__nav-bar
+  .main-rootlist-wrapper
+  div:nth-child(2)
+  > li
+  > div:active::after {
+  background-color: rgba(0, 0, 0, 0);
 }
 :root .Root__nav-bar .main-rootlist-wrapper div:nth-child(2) > li > div p {
   color: var(--spice-subtext) !important;
 }
-:root .Root__nav-bar .main-rootlist-wrapper div:nth-child(2) > li > div p.TypeElement-ballad-textBrightAccent-type {
+:root
+  .Root__nav-bar
+  .main-rootlist-wrapper
+  div:nth-child(2)
+  > li
+  > div
+  p.TypeElement-ballad-textBrightAccent-type {
   color: var(--spice-text) !important;
 }
 :root .Root__nav-bar .main-navBar-navBar li:hover > div,
-:root .Root__nav-bar .main-navBar-navBar li:hover > a:not(.main-navBar-navBarLinkActive),
+:root
+  .Root__nav-bar
+  .main-navBar-navBar
+  li:hover
+  > a:not(.main-navBar-navBarLinkActive),
 :root .Root__nav-bar .spicetify-playlist-list li:hover {
-  background-color: rgba(var(--spice-base), 0.0);
+  background-color: rgba(0, 0, 0, 0);
 }
 :root .Root__nav-bar .main-navBar-navBarLink {
   color: var(--spice-text);
@@ -41,69 +62,110 @@
   color: var(--spice-text);
 }
 :root .Root__nav-bar .main-navBar-navBarLinkActive {
-  background-color: rgba(var(--spice-base), 0.0);
+  background-color: rgba(0, 0, 0, 0);
 }
 
-:root .Root__now-playing-bar .main-shuffleButton-button:focus:not(:focus-visible, :hover) {
+:root
+  .Root__now-playing-bar
+  .main-shuffleButton-button:focus:not(:focus-visible, :hover) {
   color: var(--spice-spice-surface1);
 }
 :root .Root__now-playing-bar .main-shuffleButton-button:hover {
   color: var(--spice-text);
 }
-:root .Root__now-playing-bar .main-shuffleButton-button.main-shuffleButton-active {
+:root
+  .Root__now-playing-bar
+  .main-shuffleButton-button.main-shuffleButton-active {
   color: var(--spice-text);
 }
-:root .Root__now-playing-bar .main-playButton-PlayButton.main-playButton-primary {
+:root
+  .Root__now-playing-bar
+  .main-playButton-PlayButton.main-playButton-primary {
   color: var(--spice-player);
 }
 :root .Root__now-playing-bar .main-button-primary {
-  background-color: rgba(var(--spice-base), 0.0);
+  background-color: rgba(0, 0, 0, 0);
 }
 :root .Root__now-playing-bar .main-button-primary:active,
 :root .Root__now-playing-bar .main-button-primary:focus,
 :root .Root__now-playing-bar .main-button-primary:hover {
-  background-color: rgba(var(--spice-base), 0.0);
+  background-color: rgba(0, 0, 0, 0);
 }
-:root .Root__now-playing-bar .Button-sm-16-buttonTertiary-iconOnly-isUsingKeyboard-useBrowserDefaultFocusStyle,
+:root
+  .Root__now-playing-bar
+  .Button-sm-16-buttonTertiary-iconOnly-isUsingKeyboard-useBrowserDefaultFocusStyle,
 :root .Root__now-playing-bar .control-button,
-:root .Root__now-playing-bar .main-view-container button:hover > div[class^=ButtonInner-sc-],
+:root
+  .Root__now-playing-bar
+  .main-view-container
+  button:hover
+  > div[class^="ButtonInner-sc-"],
 :root .Root__now-playing-bar .main-skipForwardButton-button,
 :root .Root__now-playing-bar .main-skipBackButton-button {
   color: var(--spice-subtext) !important;
 }
-:root .Root__now-playing-bar .Button-sm-16-buttonTertiary-iconOnly-isUsingKeyboard-useBrowserDefaultFocusStyle:hover,
+:root
+  .Root__now-playing-bar
+  .Button-sm-16-buttonTertiary-iconOnly-isUsingKeyboard-useBrowserDefaultFocusStyle:hover,
 :root .Root__now-playing-bar .control-button:hover,
-:root .Root__now-playing-bar .main-view-container button:hover > div[class^=ButtonInner-sc-]:hover,
+:root
+  .Root__now-playing-bar
+  .main-view-container
+  button:hover
+  > div[class^="ButtonInner-sc-"]:hover,
 :root .Root__now-playing-bar .main-skipForwardButton-button:hover,
 :root .Root__now-playing-bar .main-skipBackButton-button:hover {
   color: var(--spice-text) !important;
 }
-:root .Root__now-playing-bar .control-button-heart[aria-checked=true],
+:root .Root__now-playing-bar .control-button-heart[aria-checked="true"],
 :root .Root__now-playing-bar .main-addButton-active,
 :root .Root__now-playing-bar .main-addButton-active:focus,
 :root .Root__now-playing-bar .main-addButton-active:hover {
   color: var(--spice-red);
 }
 :root .Root__now-playing-bar .x-progressBar-progressBarBg > div > div {
-  background-color: var(--spice-text);
+  background-color: rgba(0, 0, 0, 0);
 }
 
-:root .Root__right-sidebar .Button-textSubdued-sm-16-buttonTertiary-condensed-useBrowserDefaultFocusStyle {
+:root
+  .Root__right-sidebar
+  .Button-textSubdued-sm-16-buttonTertiary-condensed-useBrowserDefaultFocusStyle {
   color: var(--spice-text) !important;
 }
-:root .Root__right-sidebar .artist-artistOnTour-timeAndVenue.artist-artistOnTour-condensed {
+:root
+  .Root__right-sidebar
+  .artist-artistOnTour-timeAndVenue.artist-artistOnTour-condensed {
   color: var(--spice-text);
 }
-:root .Root__right-sidebar .Button-textSubdued-sm-16-buttonTertiary-condensed-isUsingKeyboard-useBrowserDefaultFocusStyle {
+:root
+  .Root__right-sidebar
+  .Button-textSubdued-sm-16-buttonTertiary-condensed-isUsingKeyboard-useBrowserDefaultFocusStyle {
   color: var(--spice-text);
 }
-:root .Root__right-sidebar .main-buddyFeed-activityMetadata .main-buddyFeed-username a,
-:root .Root__right-sidebar .main-buddyFeed-activityMetadata .main-buddyFeed-usernameAndTimestamp {
+:root
+  .Root__right-sidebar
+  .main-buddyFeed-activityMetadata
+  .main-buddyFeed-username
+  a,
+:root
+  .Root__right-sidebar
+  .main-buddyFeed-activityMetadata
+  .main-buddyFeed-usernameAndTimestamp {
   color: rgba(var(--text), 0.2);
 }
-:root .Root__right-sidebar .main-buddyFeed-activityMetadata .main-buddyFeed-artistAndTrackName a,
-:root .Root__right-sidebar .main-buddyFeed-activityMetadata .main-buddyFeed-playbackContextLink,
-:root .Root__right-sidebar .main-buddyFeed-activityMetadata .main-buddyFeed-timestamp {
+:root
+  .Root__right-sidebar
+  .main-buddyFeed-activityMetadata
+  .main-buddyFeed-artistAndTrackName
+  a,
+:root
+  .Root__right-sidebar
+  .main-buddyFeed-activityMetadata
+  .main-buddyFeed-playbackContextLink,
+:root
+  .Root__right-sidebar
+  .main-buddyFeed-activityMetadata
+  .main-buddyFeed-timestamp {
   color: rgba(var(--spice-rgb-sidebar-text), 0.8);
 }
 
@@ -112,11 +174,12 @@
 :root .main-topBar-container button:not(.x-searchInput-searchInputClearButton),
 :root .main-topBar-container .main-topBar-button {
   color: var(--spice-subtext) !important;
-  background-color: rgba(var(--spice-base), 0.0) !important;
+
+  background-color: rgba(0, 0, 0, 0) !important;
 }
 :root .Root__top-bar header .main-topBar-background,
 :root .main-topBar-container .main-topBar-background {
-  background-color: rgba(var(--spice-base), 0.0) !important;
+  background-color: rgba(0, 0, 0, 0) !important;
 }
 :root .Root__top-bar header .Svg-img-24-icon.home-active-icon,
 :root .main-topBar-container .Svg-img-24-icon.home-active-icon {
@@ -124,7 +187,7 @@
 }
 :root .Root__top-bar header .x-searchInput-searchInputInput,
 :root .main-topBar-container .x-searchInput-searchInputInput {
-  background-color: rgba(var(--spice-base), 0.0);
+  background-color: rgba(0, 0, 0, 0);
   color: var(--spice-subtext) !important;
 }
 :root .Root__top-bar header .x-searchInput-searchInputInput::placeholder,
@@ -133,11 +196,11 @@
 }
 :root .Root__top-bar header .main-topBar-background,
 :root .main-topBar-container .main-topBar-background {
-  background-color: rgba(var(--spice-base), 0.0) !important;
+  background-color: rgba(0, 0, 0, 0) !important;
 }
 :root .Root__top-bar header .main-entityHeader-withBackgroundImage,
 :root .main-topBar-container .main-entityHeader-withBackgroundImage {
-  background-color: rgba(var(--spice-rgb-player), 0.2);
+  background-color: rgba(0, 0, 0, 0);
 }
 
 :root .encore-dark-theme .encore-inverted-light-set {
@@ -148,28 +211,30 @@
   color: var(--spice-subtext);
 }
 :root .x-filterBox-filterInput {
-  background-color: rgba(var(--spice-base), 0.0);
+  background-color: rgba(0, 0, 0, 0);
   color: var(--spice-subtext);
 }
 :root .main-dropDown-dropDown {
   color: var(--spice-text);
-  background-color: rgba(var(--spice-base), 0.0);
+  background-color: rgba(0, 0, 0, 0);
 }
 :root .main-dropDown-dropDown:disabled {
   color: var(--spice-button-disabled);
 }
 :root .x-toggle-indicatorWrapper {
-  background-color: rgba(var(--spice-base), 0.0);
+  background-color: rgba(0, 0, 0, 0);
 }
 :root .x-toggle-indicatorWrapper .x-toggle-indicator {
-  background-color: rgba(var(--spice-base), 0.0);
+  background-color: rgba(0, 0, 0, 0);
 }
 :root input:checked ~ .x-toggle-indicatorWrapper,
 :root input:hover:not([disabled], :active) ~ .x-toggle-indicatorWrapper {
-  background-color: rgba(var(--spice-base), 0.0);
+  background-color: rgba(0, 0, 0, 0);
 }
-:root input:checked:hover:not([disabled], :active) ~ .x-toggle-indicatorWrapper {
-  background-color: rgba(var(--spice-base), 0.0);
+:root
+  input:checked:hover:not([disabled], :active)
+  ~ .x-toggle-indicatorWrapper {
+  background-color: rgba(0, 0, 0, 0);
 }
 :root select option:checked {
   color: var(--spice-text);
@@ -194,23 +259,30 @@
 }
 :root .os-scrollbar-handle,
 :root ::-webkit-scrollbar-thumb {
-  background-color: var(--spice-text) !important;
+  background-color: rgba(0, 0, 0, 0) !important;
   border-radius: 6px;
 }
 :root .GenericModal .main-duplicateTrackModal-container {
-  background-color: rgba(var(--spice-base), 0.0);
+  background-color: rgba(0, 0, 0, 0);
   color: var(--spice-subtext);
 }
 :root .GenericModal .main-duplicateTrackModal-container button:first-child {
   color: var(--spice-button-active);
 }
-:root .GenericModal .main-duplicateTrackModal-container button:first-child:hover {
+:root
+  .GenericModal
+  .main-duplicateTrackModal-container
+  button:first-child:hover {
   color: var(--spice-notification-error);
 }
-:root .GenericModal .main-duplicateTrackModal-container button:last-child > div {
-  background-color: var(--spice-button);
+:root
+  .GenericModal
+  .main-duplicateTrackModal-container
+  button:last-child
+  > div {
+  background-color: rgba(0, 0, 0, 0);
 }
 :root .main-contextMenu-menuItemButton:hover,
-:root .main-contextMenu-menuItemButton:not([aria-checked=true]):focus {
+:root .main-contextMenu-menuItemButton:not([aria-checked="true"]):focus {
   color: var(--spice-subtext);
 }

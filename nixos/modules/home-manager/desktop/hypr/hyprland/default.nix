@@ -98,21 +98,18 @@
             "wl-paste -p --watch wl-copy"
           ];
 
-          chromakey_background = [7 8 17];
-
           windowrulev2 = [
             "suppressevent maximize, class:.*"
 
-            "opacity 0.9 0.9,class:^(zen-beta)$"
-            "opacity 0.9 0.9,class:^(spotify)$"
+            # "opacity 0.9 0.9,class:^(zen-beta)$"
+            # "opacity 0.9 0.9,class:^(spotify)$"
             # "opacity 0.60 0.60,class:^(zen-beta)$"
             # "opacity 0.66 0.66,class:^(spotify)$"
+            # "opacity 0.66 0.66,class:^(nemo)$"
 
-            # "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(zen-beta)$"
-            # "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(spotify)$"
-            # "plugin:shadewindow chromakey bkg=[24 24 37] similarity=0.8 targetOpacity=0.0 amount=1.8,class:^(nemo)$"
-            "plugin:chromakey, class:^(zen-beta)$"
-            "plugin:chromakey, class:^(spotify)$"
+            # "plugin:shadewindow chromakey bkg=[0.75 0.75 0.75] similarity=0.1 targetOpacity=0.1, class:zen-beta"
+            # "plugin:shadewindow chromakey bkg=[0.75 0.75 0.75] similarity=0.1 targetOpacity=0.1, class:spotify"
+            # "plugin:shadewindow chromakey bkg=[0.30 0.30 0.46] similarity=0.1 targetOpacity=0.1, class:nemo"
 
             # All this stuff hides the xwaylandbridge window
             "opacity 0.0 override, class:^(xwaylandvideobridge)$"

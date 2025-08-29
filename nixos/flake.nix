@@ -41,7 +41,7 @@
       inputs.hyprland.follows = "hyprland";
     };
     hypr-darkwindow = {
-      url = "github:alexhulbert/Hyprchroma";
+      url = "github:micha4w/Hypr-DarkWindow";
       inputs.hyprland.follows = "hyprland";
     };
     # split-monitor-workspaces = {

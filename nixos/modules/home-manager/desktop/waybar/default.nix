@@ -7,7 +7,6 @@
   options.modules.desktop.waybar.enable = lib.mkEnableOption "Enable Waybar";
   config = lib.mkIf config.modules.desktop.waybar.enable {
     home.packages = with pkgs; [
-      waybar
       rofi-bluetooth
       btop
       pavucontrol
@@ -80,13 +79,13 @@
             return-type = "json";
             exec = "~/.config/waybar/scripts/weather.sh";
             interval = 10;
-            on-click = "firefox https://wttr.in";
+            on-click = "zen https://wttr.in";
           };
 
           "custom/clipboard" = {
             format = "󰅍";
-            on-click = "walker --modules clipboard";
-            # on-click = "cliphist list | rofi -dmenu | cliphist decode | wl-copy";
+            # on-click = "walker --modules clipboard";
+            on-click = "cliphist list | rofi -dmenu | cliphist decode | wl-copy";
             interval = 86400;
           };
 
