@@ -224,6 +224,8 @@ in {
       enable = true;
       gamescopeSession.enable = true;
       localNetworkGameTransfers.openFirewall = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
     };
     gamemode.enable = true;
   };
