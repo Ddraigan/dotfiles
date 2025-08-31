@@ -228,6 +228,13 @@
             ", XF86AudioPrev, exec, playerctl previous"
             ", XF86AudioNext, exec, playerctl next"
           ];
+          binde = [
+            # Vim Window Resize
+            "$mod ALT, H, resizeactive, -10 0"
+            "$mod ALT, L, resizeactive, 10 0"
+            "$mod ALT, K, resizeactive, 0 -10"
+            "$mod ALT, J, resizeactive, 0 10"
+          ];
           bindm = [
             "SHIFT, $LMB, movewindow"
             "ALT, $LMB, resizewindow"
@@ -276,12 +283,6 @@
             "$mod SHIFT, L, movewindow, r"
             "$mod SHIFT, K, movewindow, u"
             "$mod SHIFT, J, movewindow, d"
-
-            # Vim Window Resize
-            "$mod ALT, H, resizeactive, -10 0"
-            "$mod ALT, L, resizeactive, 10 0"
-            "$mod ALT, K, resizeactive, 0 -10"
-            "$mod ALT, J, resizeactive, 0 10"
 
             # "$mod, 1, workspace, 1"
             # "$mod, 2, workspace, 2"
