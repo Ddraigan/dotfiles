@@ -125,6 +125,7 @@
       '';
     };
     packages = [
+      pkgs.gimp
       pkgs.loupe
       pkgs.firefox
       pkgs.lua-language-server
