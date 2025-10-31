@@ -45,11 +45,11 @@ return {
             detail = not detail
             if detail then
               require("oil").set_columns({
-                { "icon" },
                 { "permissions", highlight = "Special" },
                 { "size", highlight = "Comment" },
                 { "mtime", highlight = "Special" },
                 { "birthtime", highlight = "Comment" },
+                { "icon" },
               })
             else
               require("oil").set_columns({ "icon" })
