@@ -4,6 +4,7 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "moyiz/blink-emoji.nvim",
+    "saghen/blink.pairs",
     { "L3MON4D3/LuaSnip", version = "v2.*" },
   },
   -- use a release tag to download pre-built binaries
@@ -13,7 +14,7 @@ return {
   -- If you use nix, you can build from source using latest nightly rust with:
   -- build = 'nix run .#build-plugin',
 
-  ---@module 'blink.cmp'
+  ---@module "blink.cmp"
   ---@type blink.cmp.Config
   opts = {
     -- Preset bindings -
