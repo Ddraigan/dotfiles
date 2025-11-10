@@ -5,6 +5,7 @@ return {
     "rafamadriz/friendly-snippets",
     "moyiz/blink-emoji.nvim",
     "saghen/blink.pairs",
+    "Kaiser-Yang/blink-cmp-avante",
     { "L3MON4D3/LuaSnip", version = "v2.*" },
   },
   -- use a release tag to download pre-built binaries
@@ -76,8 +77,19 @@ return {
     signature = { enabled = true },
     snippets = { preset = "luasnip" },
     sources = {
-      default = { "lazydev", "lsp", "path", "snippets", "buffer", "emoji" },
+      default = { "lazydev", "avante", "lsp", "path", "snippets", "buffer", "emoji" },
       providers = {
+        avante = {
+          module = "blink-cmp-avante",
+          name = "Avante",
+          opts = {},
+        },
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          -- make lazydev completions top priority (see `:h blink.cmp`)
+          score_offset = 100,
+        },
         emoji = {
           module = "blink-emoji",
           name = "Emoji",
@@ -96,12 +108,6 @@ return {
               vim.o.filetype
             )
           end,
-        },
-        lazydev = {
-          name = "LazyDev",
-          module = "lazydev.integrations.blink",
-          -- make lazydev completions top priority (see `:h blink.cmp`)
-          score_offset = 100,
         },
       },
     },
