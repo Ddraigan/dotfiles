@@ -69,10 +69,10 @@ return {
         end,
         settings = {
           ["rust-analyzer"] = {
-            -- cargo = { features = "all" },
-            -- checkOnSave = true,
-            -- check = { command = "clippy", features = "all" },
-            -- procMacro = { enable = true },
+            cargo = { features = "all" },
+            checkOnSave = true,
+            check = { command = "clippy", features = "all" },
+            procMacro = { enable = true },
           },
         },
       },

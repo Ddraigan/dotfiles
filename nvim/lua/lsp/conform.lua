@@ -2,10 +2,13 @@ return {
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
+  ---@module "conform"
+  ---@type conform.setupOpts
   opts = {
     notify_on_error = true,
     formatters_by_ft = {
       lua = { "stylua" },
+      rust = { "rustfmt", lsp_format = "fallback" },
       javascript = { "prettierd", "prettier", stop_after_first = true },
       typescript = { "prettierd", "prettier", stop_after_first = true },
       astro = { "prettierd", "prettier", stop_after_first = true },
