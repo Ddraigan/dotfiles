@@ -91,7 +91,7 @@
         set -g status-right-length 100
         set -g status-right "#{E:@catppuccin_status_application}"
         set -ag status-right "#{E:@catppuccin_status_session}"
-        set -ag status-right "#{E:@catppuccin_status_uptime}"
+        # set -ag status-right "#{E:@catppuccin_status_uptime}"
         set -ag status-right "#{E:@catppuccin_status_date_time}"
       '';
     };

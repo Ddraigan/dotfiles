@@ -23,35 +23,38 @@
       settings = [
         {
           layer = "top";
+          position = "top";
+          mode = "dock";
+          height = 32;
+          exclusive = true;
+          passthrough = false;
+          # gtk-layer-shell = true;
+          fixed-centre = true;
+          margin-top = 10;
+          margin-left = 10;
+          margin-right = 10;
+          margin-bottom = 10;
+
           modules-left = [
-            # "custom/logo"
-            "clock"
-            # "custom/weather"
-            "disk"
-            "memory"
-            "cpu"
-            "temperature"
-            # "custom/powerDraw"
-            "hyprland/window"
+            "hyprland/workspaces"
+            "cava"
           ];
           modules-center = [
-            "hyprland/workspaces"
+            "clock"
           ];
           modules-right = [
+            "cpu"
+            "memory"
+            "temperature"
+            "backlight"
+            "wireplumber"
+            "bluetooth"
+            "network"
             "tray"
             "custom/clipboard"
-            "backlight"
-            # "bluetooth"
-            # "pulseaudio"
-            "wireplumber"
             "network"
             "battery"
           ];
-
-          # "custom/logo" = {
-          #   format = "  ";
-          #   tooltip = false;
-          # };
 
           # "custom/powerDraw" = {
           #   format = "{}";

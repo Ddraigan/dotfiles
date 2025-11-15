@@ -48,7 +48,7 @@
         # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
         # inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
         inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
-        inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+        # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
         inputs.hypr-darkwindow.packages.${pkgs.system}.Hypr-DarkWindow
       ];
       settings =
@@ -165,8 +165,8 @@
           };
 
           monitor = [
-            "DP-2, preferred, 0x0, 1"
-            ", preferred, auto-left, auto"
+            "DP-1, preferred, 0x0, 1"
+            "DP-2, preferred, auto-left, auto"
           ];
 
           animations = {
@@ -204,7 +204,7 @@
           };
 
           gestures = {
-            workspace_swipe = true;
+            workspace = true;
           };
 
           "$mod" = "SUPER";
@@ -240,7 +240,7 @@
             "ALT, $LMB, resizewindow"
           ];
           bind = [
-            "$mod, TAB, overview:toggle"
+            # "$mod, TAB, overview:toggle"
             # "$mod, Tab, hyprexpo:expo, toggle"
             "$mod, p, exec, uwsm app -- hyprpicker -a"
 
