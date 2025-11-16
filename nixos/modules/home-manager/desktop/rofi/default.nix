@@ -24,9 +24,9 @@
         disable-history = false;
         hide-scrollbar = false;
 
-        showIcons = true;
+        show-icons = true;
 
-        sidebarMode = true;
+        sidebar-mode = true;
 
         display-drun = " Apps";
         display-run = " Run";
@@ -50,13 +50,13 @@
         "window" = {
           fullscreen = false;
           transparency = "real";
-          # "background-color" = mkLiteral "@bg";
+          "background-color" = lib.mkForce (mkLiteral "transparent");
           padding = mkLiteral "10px 20px";
         };
 
         "mainbox" = {
           padding = mkLiteral "20px";
-          # "background-color" = mkLiteral "transparent";
+          "background-color" = lib.mkForce (mkLiteral "transparent");
         };
 
         "inputbar" = {
@@ -68,7 +68,7 @@
         };
 
         "entry" = {
-          # "background-color" = mkLiteral "transparent";
+          "background-color" = lib.mkForce (mkLiteral "transparent");
           # "text-color" = mkLiteral "@fg";
           # "placeholder-color" = mkLiteral "@fg-alt";
           placeholder = "Type to search...";
@@ -76,7 +76,7 @@
         };
 
         "prompt" = {
-          # "background-color" = mkLiteral "transparent";
+          "background-color" = lib.mkForce (mkLiteral "transparent");
           # "text-color" = mkLiteral "@fg";
           padding = mkLiteral "4px";
           margin = mkLiteral "0px 8px 0px 0px";
@@ -87,7 +87,7 @@
           columns = 5;
           spacing = mkLiteral "20px";
           "fixed-columns" = true;
-          # "background-color" = mkLiteral "transparent";
+          "background-color" = lib.mkForce (mkLiteral "transparent");
         };
 
         "element" = {
@@ -98,16 +98,16 @@
             "element-text"
           ];
           "border-radius" = mkLiteral "8px";
-          # "background-color" = mkLiteral "transparent";
+          "background-color" = lib.mkForce (mkLiteral "transparent");
         };
 
         "element normal.normal" = {
-          # "background-color" = mkLiteral "transparent";
+          "background-color" = lib.mkForce (mkLiteral "transparent");
           # "text-color" = mkLiteral "@fg";
         };
 
         "element alternate.normal" = {
-          # "background-color" = mkLiteral "transparent";
+          "background-color" = lib.mkForce (mkLiteral "transparent");
           # "text-color" = mkLiteral "@fg";
         };
 
@@ -119,20 +119,20 @@
         "element-icon" = {
           size = mkLiteral "64px";
           "horizontal-align" = mkLiteral "0.5";
-          # "background-color" = mkLiteral "transparent";
+          "background-color" = lib.mkForce (mkLiteral "transparent");
         };
 
         "element-text" = {
           "horizontal-align" = mkLiteral "0.5";
           "vertical-align" = mkLiteral "0.5";
-          # "background-color" = mkLiteral "transparent";
+          "background-color" = lib.mkForce (mkLiteral "transparent");
           # "text-color" = mkLiteral "inherit";
           margin = mkLiteral "8px 0px 0px 0px";
         };
 
         "mode-switcher" = {
           spacing = mkLiteral "20px";
-          # "background-color" = mkLiteral "transparent";
+          "background-color" = lib.mkForce (mkLiteral "transparent");
           margin = mkLiteral "20px 0px 0px 0px";
         };
 
