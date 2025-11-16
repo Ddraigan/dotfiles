@@ -7,6 +7,9 @@
   options.modules.theme.stylix.enable = lib.mkEnableOption "enable stylix";
 
   config = lib.mkIf config.modules.theme.stylix.enable {
+    # home.packages = [
+    #   pkgs.catppuccin-papirus-folders
+    # ];
     stylix = {
       enable = true;
       autoEnable = true;
@@ -34,11 +37,20 @@
       #   popups = 0.2;
       #   desktop = 0.2;
       # };
+      # icons = {
+      #   enable = true;
+      #   package = pkgs.candy-icons;
+      #   light = "candy-icons";
+      #   dark = "candy-icons";
+      # };
       icons = {
         enable = true;
-        package = pkgs.candy-icons;
-        light = "candy-icons";
-        dark = "candy-icons";
+        package = pkgs.catppuccin-papirus-folders.override {
+          flavor = "mocha";
+          accent = "mauve";
+        };
+        light = "Papirus-Light";
+        dark = "Papirus-Dark";
       };
       base16Scheme = {
         base00 = "1e1e2e"; # base
@@ -64,7 +76,7 @@
           enable = false;
         };
         hyprlock.enable = false;
-        rofi.enable = false;
+        rofi.enable = true;
         starship.enable = false;
         spicetify.enable = false;
         waybar.enable = false;
