@@ -9,6 +9,7 @@
 in {
   imports = [
     ./hardware-configuration.nix
+    inputs.lanzaboote.nixosModules.lanzaboote
   ];
   # modules = {
   #   desktop = {
@@ -155,6 +156,7 @@ in {
   environment = {
     systemPackages = [
       inputs.nixai.packages.${pkgs.system}.default
+      pkgs.sbctl
       wezterm-cwd
       pkgs.upower
       pkgs.mangohud
@@ -269,8 +271,17 @@ in {
   };
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot = {
+    loader = {
+      systemd-boot.enable = lib.mkForce false;
+      efi.canTouchEfiVariables = true;
+    };
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/var/lib/sbctl";
+    };
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

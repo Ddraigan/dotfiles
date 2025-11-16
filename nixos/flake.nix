@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.3";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       # url = "github:nix-community/home-manager";
       url = "github:nix-community/home-manager/release-25.05";
@@ -62,7 +66,9 @@
         nixpkgs.lib.nixosSystem
         {
           specialArgs = {inherit inputs;};
-          modules = [./machines/leon-laptop/configuration.nix];
+          modules = [
+              ./machines/leon-laptop/configuration.nix
+            ];
         };
       leon-pc =
         nixpkgs.lib.nixosSystem

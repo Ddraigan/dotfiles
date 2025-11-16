@@ -33,7 +33,7 @@
           margin-top = 10;
           margin-left = 10;
           margin-right = 10;
-          margin-bottom = 10;
+          margin-bottom = 0;
 
           modules-left = [
             "hyprland/workspaces"

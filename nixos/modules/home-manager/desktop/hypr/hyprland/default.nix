@@ -46,9 +46,8 @@
       plugins = [
         # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
         # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-        # inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
-        inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
         # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+        inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
         inputs.hypr-darkwindow.packages.${pkgs.system}.Hypr-DarkWindow
       ];
       settings =

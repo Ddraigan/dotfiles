@@ -148,6 +148,7 @@
       name = "Nemo";
       exec = "${pkgs.nemo-with-extensions}/bin/nemo";
     };
+    configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
     mimeApps = {
       enable = true;
       defaultApplications = {
