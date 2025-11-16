@@ -101,9 +101,9 @@
                 background-color: rgba(242, 205, 205, 0.5); /* Transparent button background */
             }
 
-            .panel {
-                background-color: rgba(0, 0, 0, 0.0);  /* Transparent panel */
-            }
+            # .panel {
+            #     background-color: rgba(0, 0, 0, 0.0);  /* Transparent panel */
+            # }
           '';
         };
       };

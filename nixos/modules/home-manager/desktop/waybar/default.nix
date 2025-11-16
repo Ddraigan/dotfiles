@@ -7,7 +7,8 @@
   options.modules.desktop.waybar.enable = lib.mkEnableOption "Enable Waybar";
   config = lib.mkIf config.modules.desktop.waybar.enable {
     home.packages = with pkgs; [
-      rofi-bluetooth
+      # rofi-bluetooth
+      blueman
       btop
       pavucontrol
       networkmanagerapplet
@@ -30,64 +31,54 @@
           passthrough = false;
           # gtk-layer-shell = true;
           fixed-centre = true;
-          margin-top = 10;
-          margin-left = 10;
-          margin-right = 10;
-          margin-bottom = 0;
+          # margin-top = 10;
+          # margin-left = 10;
+          # margin-right = 10;
+          margin-bottom = -10;
 
           modules-left = [
-            "hyprland/workspaces"
-            "cava"
-          ];
-          modules-center = [
             "clock"
-          ];
-          modules-right = [
+            "custom/uptime"
             "cpu"
             "memory"
             "temperature"
+          ];
+          modules-center = [
+            "hyprland/workspaces"
+          ];
+          modules-right = [
+            "custom/music"
             "backlight"
-            "wireplumber"
             "bluetooth"
             "network"
+            "wireplumber"
+            "wireplumber#source"
             "tray"
             "custom/clipboard"
             "network"
             "battery"
           ];
 
-          # "custom/powerDraw" = {
-          #   format = "{}";
-          #   interval = 1;
-          #   exec = "./scripts/powerdraw.sh";
-          #   return-type = "json";
-          # };
-
           "hyprland/workspaces" = {
-            format = "{icon}";
+            format = "{name}:{icon}";
             format-icons = {
-              "1" = "";
-              "2" = "";
-              "3" = "";
-              "4" = "";
-              "5" = "";
-              "6" = "";
-              "active" = "";
-              "default" = "";
+              active = "";
+              default = "";
             };
           };
 
-          "custom/weather" = {
-            format = "{}";
-            return-type = "json";
-            exec = "~/.config/waybar/scripts/weather.sh";
-            interval = 10;
-            on-click = "zen https://wttr.in";
+          "custom/music" = {
+            format = "  {}";
+            escape = true;
+            interval = 5;
+            tooltip = false;
+            exec = "playerctl metadata --format='{{ artist }} - {{ title }}'";
+            on-click = "playerctl play-pause";
+            max-length = 50;
           };
 
           "custom/clipboard" = {
             format = "󰅍";
-            # on-click = "walker --modules clipboard";
             on-click = "cliphist list | rofi -dmenu | cliphist decode | wl-copy";
             interval = 86400;
           };
@@ -103,19 +94,20 @@
             format-calendar-weekdays = "<span color='#aeaeae'><b>{}</b></span>";
           };
 
-          # bluetooth = {
-          #   format-on = "";
-          #   format-off = "";
-          #   format-disabled = "󰂲";
-          #   format-connected = "󰂴";
-          #   format-connected-battery = "{device_battery_percentage}% 󰂴";
-          #   tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
-          #   tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
-          #   tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
-          #   tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
-          #   on-click = "rofi-bluetooth";
-          # };
-          #
+          bluetooth = {
+            format-on = "";
+            format-off = "󰂲";
+            format-no-controller = "";
+            format-disabled = "󰂲";
+            format-connected = "󰂴";
+            format-connected-battery = "{device_battery_percentage}% 󰂴";
+            tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
+            tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
+            tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+            tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
+            on-click = "blueman-manager";
+          };
+
           network = {
             format-wifi = " ";
             format-ethernet = "󰈁";
@@ -123,7 +115,6 @@
             tooltip-format = "{ipaddr}";
             tooltip-format-wifi = "{essid} ({signalStrength}%)  | {ipaddr}";
             tooltip-format-ethernet = "{ifname} | {ipaddr}";
-            # TODO:
             on-click = "networkmanager_dmenu";
           };
 
@@ -138,31 +129,13 @@
             format-charging = "{capacity}% 󰂄 ";
             format-plugged = "{capacity}% 󰂄 ";
             format-alt = "{time} {icon}";
-            format-icons = [
-              "󰁻"
-              "󰁼"
-              "󰁾"
-              "󰂀"
-              "󰂂"
-              "󰁹"
-            ];
+            format-icons = ["󰁻" "󰁼" "󰁾" "󰂀" "󰂂" "󰁹"];
           };
 
           backlight = {
             device = "intel_backlight";
             format = "<span font='12'>{icon}</span>";
-            format-icons = [
-              ""
-              ""
-              ""
-              ""
-              ""
-              ""
-              ""
-              ""
-              ""
-              ""
-            ];
+            format-icons = ["" "" "" "" "" "" "" "" "" ""];
             on-scroll-down = "light -A 10";
             on-scroll-up = "light -U 10";
             smooth-scrolling-threshold = 1;
@@ -176,14 +149,17 @@
 
           cpu = {
             interval = 1;
-            format = " {usage}%";
-            min-length = 6;
-            max-length = 6;
+            # format = " {usage}%";
+            format = "  {icon0}{icon1}{icon2}{icon3} {usage:>2}%";
             format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+            on-click = "btop";
           };
 
           memory = {
-            format = " {percentage}%";
+            interval = 30;
+            # format = " {percentage}%";
+            format = "  {used:0.1f}G/{total:0.1f}G";
+            tooltip-format = "Memory";
           };
 
           "hyprland/window" = {
@@ -201,28 +177,31 @@
             format-critical = " {temperatureC}°C";
             interval = 1;
             critical-threshold = 80;
-            on-click = "btop -lc";
+            on-click = "btop -l";
           };
 
           wireplumber = {
             # on-scroll-up = "pw-volume change +2.0%";
             # on-scroll-down = "pw-volume change -2.0%";
-            format = "{volume}% {icon}";
-            format-muted = "<span font='12'></span>";
+            format = "{icon} {volume}%";
+            format-muted = "";
             format-icons = {
-              headphones = "";
-              bluetooth = "󰥰";
-              handsfree = "";
-              headset = "󱡬";
-              phone = "";
-              portable = "";
-              car = "";
               default = ["" "" ""];
             };
             justify = "center";
-            on-click = "helvum";
+            # on-click = "TODO: mute"
+            on-click-middle = "helvum";
             on-click-right = "pavucontrol";
-            tooltip-format = "{icon}  {volume}%";
+            tooltip = true;
+            tooltip-format = "{source_desc}";
+          };
+
+          "wireplumber#source" = {
+            node-type = "Audio/Source";
+            format = "󰍬 {volume}%";
+            format-muted = "󰍭";
+            on-click-right = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+            scroll-step = 5;
           };
 
           # pulseaudio = {
@@ -246,8 +225,8 @@
           # };
           #
           tray = {
-            icon-size = 14;
-            spacing = 10;
+            icon-size = 16;
+            spacing = 8;
           };
 
           upower = {
