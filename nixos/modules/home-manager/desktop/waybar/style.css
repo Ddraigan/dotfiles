@@ -25,43 +25,42 @@
 @define-color mantle #181825;
 @define-color crust #11111b;
 
-
 * {
-	border: none;
-	font-size: 16;
-	font-family: "Hack Nerd Font, Hack NF";
-	min-height: 25px;
+  border: none;
+  font-size: 16;
+  font-family: "Hack Nerd Font, Hack NF";
+  min-height: 25px;
 }
 
 window#waybar {
-	background: transparent;
-	margin: 5px;
+  background: transparent;
+  margin: 5px;
 }
 
 #custom-logo {
   background-image: url("./nixos-icon.svg");
   background: @sapphire;
-	padding: 0 10px;
+  padding: 0 10px;
 }
 
 .modules-right {
-	padding-left: 5px;
-	border-radius: 15px 0 0 15px;
-	margin-top: 4px;
-	background: @crust;
+  padding-left: 5px;
+  border-radius: 15px 0 0 15px;
+  margin-top: 4px;
+  background: @crust;
 }
 
 .modules-center {
-	padding: 0 15px;
-	margin-top: 4px;
-	border-radius: 15px 15px 15px 15px;
-	background: @crust;
+  padding: 0 15px;
+  margin-top: 4px;
+  border-radius: 15px 15px 15px 15px;
+  background: @crust;
 }
 
 .modules-left {
-	border-radius: 0 15px 15px 0;
-	margin-top: 4px;
-	background: @crust;
+  border-radius: 0 15px 15px 0;
+  margin-top: 4px;
+  background: @crust;
 }
 
 #battery,
@@ -82,7 +81,7 @@ window#waybar {
 #tray,
 #window,
 #clock {
-	padding: 0 10px;
+  padding: 0 10px;
 }
 
 #workspaces {
@@ -90,43 +89,43 @@ window#waybar {
 }
 
 #workspaces button.active {
-	color: @pink;
+  color: @pink;
 }
 
 #pulseaudio {
-	padding-top: 3px;
+  padding-top: 3px;
 }
 
 #temperature.critical,
 #pulseaudio.muted {
-	color: @red;
-	padding-top: 0;
+  color: @red;
+  padding-top: 0;
 }
 
 #clock {
-	color: @blue;
+  color: @blue;
 }
 
 #battery.charging {
-	color: @green;
+  color: @green;
 }
 
 #battery.warning:not(.charging) {
-	color: @peach;
+  color: @peach;
 }
 
 #battery.critical:not(.charging) {
-	color: @red;
-	animation-name: blink;
-	animation-duration: 0.5s;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	animation-direction: alternate;
+  color: @red;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 @keyframes blink {
-	to {
-		background-color: @text;
-		color: @crust;
-	}
+  to {
+    background-color: @text;
+    color: @crust;
+  }
 }

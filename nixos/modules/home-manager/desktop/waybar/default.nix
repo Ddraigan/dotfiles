@@ -19,7 +19,7 @@
       enable = true;
       systemd.enable = false;
       style = ''
-        ${builtins.readFile ./style.css}
+        ${builtins.readFile ./style_new.css}
       '';
       settings = [
         {
@@ -48,14 +48,13 @@
           ];
           modules-right = [
             "custom/music"
-            "backlight"
             "bluetooth"
             "network"
             "wireplumber"
             "wireplumber#source"
             "tray"
             "custom/clipboard"
-            "network"
+            "backlight"
             "battery"
           ];
 
@@ -150,7 +149,7 @@
           cpu = {
             interval = 1;
             # format = " {usage}%";
-            format = "  {icon0}{icon1}{icon2}{icon3} {usage:>2}%";
+            format = "  {icon0}{icon1}{icon2}{icon3}{usage:>2}%";
             format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
             on-click = "btop";
           };
@@ -204,26 +203,6 @@
             scroll-step = 5;
           };
 
-          # pulseaudio = {
-          #   format = "{volume}% {icon}";
-          #   format-bluetooth = "󰂰";
-          #   format-muted = "<span font='12'></span>";
-          #   format-icons = {
-          #     headphones = "";
-          #     bluetooth = "󰥰";
-          #     handsfree = "";
-          #     headset = "󱡬";
-          #     phone = "";
-          #     portable = "";
-          #     car = "";
-          #     default = [ "" "" "" ];
-          #   };
-          #   justify = "center";
-          #   on-click = "amixer sset Master toggle";
-          #   on-click-right = "pavucontrol";
-          #   tooltip-format = "{icon}  {volume}%";
-          # };
-          #
           tray = {
             icon-size = 16;
             spacing = 8;
