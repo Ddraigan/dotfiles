@@ -64,6 +64,7 @@
           enable = false;
         };
         hyprlock.enable = false;
+        rofi.enable = false;
         starship.enable = false;
         spicetify.enable = false;
         waybar.enable = false;
