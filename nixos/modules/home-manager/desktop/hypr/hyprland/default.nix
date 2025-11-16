@@ -112,11 +112,11 @@
 
             # All this stuff hides the xwaylandbridge window
             "opacity 0.0 override, class:^(xwaylandvideobridge)$"
-            "noanim, class:^(xwaylandvideobridge)$"
+            "prop noanim, class:^(xwaylandvideobridge)$"
             "noinitialfocus, class:^(xwaylandvideobridge)$"
             "maxsize 1 1, class:^(xwaylandvideobridge)$"
-            "noblur, class:^(xwaylandvideobridge)$"
-            "nofocus, class:^(xwaylandvideobridge)$"
+            "prop noblur, class:^(xwaylandvideobridge)$"
+            "prop nofocus, class:^(xwaylandvideobridge)$"
           ];
 
           layerrule = [
