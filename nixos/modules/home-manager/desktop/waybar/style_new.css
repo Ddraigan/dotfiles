@@ -62,8 +62,9 @@
 /* Right Modules */
 #bluetooth,
 #network,
+/* #wireplumber-sink, */
+/* #wireplumber-source, */
 #wireplumber,
-#wireplumber-source,
 #tray,
 #custom-clipboard,
 #backlight,
@@ -71,7 +72,7 @@
 #battery {
   background-color: @crust;
   padding: 0.3rem 0.7rem;
-  margin: 5px;
+  margin: 5px 0px;
   border-radius: 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   min-width: 0;
@@ -81,12 +82,25 @@
     color 0.2s ease-in-out;
 }
 
-#tray,
-#custom-clipboard,
-#backlight,
-#custom-lock,
-#battery {
-  margin: 5px 0px;
+/* #tray, */
+/* #custom-clipboard, */
+/* #backlight, */
+/* #custom-lock, */
+/* #battery { */
+/*   margin: 5px 0px; */
+/* } */
+
+#wireplumber {
+  margin: 5px;
+}
+
+/* #wireplumber-sync, */
+#bluetooth {
+  margin-left: 5px;
+}
+/* #wireplumber-source, */
+#network {
+  margin-right: 5px;
 }
 
 #cpu:hover,
@@ -94,8 +108,9 @@
 #temperature:hover,
 #bluetooth:hover,
 #network:hover,
+/* #wireplumber-sync:hover, */
+/* #wireplumber-source:hover, */
 #wireplumber:hover,
-#wireplumber-source:hover,
 #tray:hover,
 #custom-clipboard:hover,
 #backlight:hover,

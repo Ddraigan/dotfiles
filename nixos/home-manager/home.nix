@@ -71,7 +71,7 @@
     };
   };
 
-  services.easyeffects.enable = true;
+  services.easyeffects.enable = false;
 
   programs = {
     home-manager.enable = true;

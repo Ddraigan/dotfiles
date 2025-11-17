@@ -112,7 +112,7 @@ in {
       pkgs.mangohud
       pkgs.protonup
       pkgs.hyprpolkitagent
-      pkgs.pulseaudio
+      # pkgs.pulseaudio
       pkgs.kdePackages.xwaylandvideobridge
       pkgs.helvum
       # pkgs.spotify

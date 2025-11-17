@@ -12,12 +12,8 @@
       # Colour Picker
       hyprpicker
       # Clipboard
+      cliphist
       wl-clipboard
-      # walker
-
-      # Notifications
-      # dunst (has its own config)
-      # libnotify (with dunst)
 
       # For media keys
       playerctl
@@ -94,7 +90,8 @@
             # "systemctl --user enable --now walker.service"
             # "walker --gapplication-service"
             "nm-applet --indicator"
-            "wl-paste -p --watch wl-copy"
+            # "wl-paste -p --watch wl-copy"
+            "wl-paste --watch cliphist store"
           ];
 
           windowrulev2 = [

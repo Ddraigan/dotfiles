@@ -7,14 +7,11 @@
   options.modules.desktop.waybar.enable = lib.mkEnableOption "Enable Waybar";
   config = lib.mkIf config.modules.desktop.waybar.enable {
     home.packages = with pkgs; [
-      # rofi-bluetooth
       blueman
       btop
       pavucontrol
       networkmanagerapplet
     ];
-    # user.services.waybar.wantedBy = [ "graphical-session.target" ];
-    # catppuccin.waybar.enable = false; # Already in config
     programs.waybar = {
       enable = true;
       systemd.enable = false;
@@ -29,11 +26,7 @@
           height = 32;
           exclusive = true;
           passthrough = false;
-          # gtk-layer-shell = true;
           fixed-centre = true;
-          # margin-top = 10;
-          # margin-left = 10;
-          # margin-right = 10;
           margin-bottom = -10;
 
           modules-left = [
@@ -50,8 +43,9 @@
             "custom/music"
             "bluetooth"
             "network"
+            # "wireplumber#sink"
+            # "wireplumber#source"
             "wireplumber"
-            "wireplumber#source"
             "tray"
             "custom/clipboard"
             "backlight"
@@ -65,6 +59,17 @@
               default = "";
             };
           };
+
+          # cava = {
+          #   framerate = 15;
+          #   method = "pipewire";
+          #   bars = 16;
+          #   format = "♪ {}";
+          #   on-click-middle = "playerctl play-pause";
+          #   on-click-right = "playerctl next";
+          #   on-click-left = "playerctl previous";
+          #   format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+          # };
 
           "custom/music" = {
             format = "  {}";
@@ -85,12 +90,29 @@
           clock = {
             format = "{:%I:%M:%S %p}";
             interval = 1;
-            tooltip-format = "\n<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-            calendar-weeks-pos = "right";
-            today-format = "<span color='#7645AD'><b><u>{}</u></b></span>";
-            format-calendar = "<span color='#aeaeae'><b>{}</b></span>";
-            format-calendar-weeks = "<span color='#aeaeae'><b>W{:%V}</b></span>";
-            format-calendar-weekdays = "<span color='#aeaeae'><b>{}</b></span>";
+            tooltip-format = "<tt><small>{calendar}</small></tt>";
+            calendar = {
+              mode = "year";
+              mode-mon-col = 3;
+              weeks-pos = "right";
+              on-scroll = 1;
+              format = {
+                months = "<span color='#f2cdcd'><b>{}</b></span>";
+                days = "<span color='#f5e0dc'><b>{}</b></span>";
+                weeks = "<span color='#a6e3a1'><b>W{}</b></span>";
+                weekdays = "<span color='#f9e2af'><b>{}</b></span>";
+                today = "<span color='#f38ba8'><b><u>{}</u></b></span>";
+              };
+            };
+            actions = {
+              on-click-right = "mode";
+            };
+            # tooltip-format = "\n<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+            # calendar-weeks-pos = "right";
+            # today-format = "<span color='#cba6f7'><b><u>{}</u></b></span>";
+            # format-calendar = "<span color='#aeaeae'><b>{}</b></span>";
+            # format-calendar-weeks = "<span color='#aeaeae'><b>W{:%V}</b></span>";
+            # format-calendar-weekdays = "<span color='#aeaeae'><b>{}</b></span>";
           };
 
           bluetooth = {
@@ -113,8 +135,8 @@
             format-disconnected = "";
             tooltip-format = "{ipaddr}";
             tooltip-format-wifi = "{essid} ({signalStrength}%)  | {ipaddr}";
-            tooltip-format-ethernet = "{ifname} | {ipaddr}";
-            on-click = "networkmanager_dmenu";
+            tooltip-format-ethernet = "{essid}\n{ifname} | {ipaddr}";
+            on-click = "nm-connection-editor";
           };
 
           battery = {
@@ -179,41 +201,61 @@
             on-click = "btop -l";
           };
 
-          wireplumber = {
-            # on-scroll-up = "pw-volume change +2.0%";
-            # on-scroll-down = "pw-volume change -2.0%";
+          "wireplumber" = {
             format = "{icon} {volume}%";
             format-muted = "";
             format-icons = {
               default = ["" "" ""];
             };
             justify = "center";
-            # on-click = "TODO: mute"
+            max-volume = 150;
+            on-click = "wpctl set-mute @DEFAULT_SINK@ toggle";
             on-click-middle = "helvum";
             on-click-right = "pavucontrol";
             tooltip = true;
-            tooltip-format = "{source_desc}";
+            tooltip-format = "{node_name}";
+
+            format-source = "󰍬 {source_volume}%";
+            format-source-muted = "󰍭";
           };
 
-          "wireplumber#source" = {
-            node-type = "Audio/Source";
-            format = "󰍬 {volume}%";
-            format-muted = "󰍭";
-            on-click-right = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
-            scroll-step = 5;
-          };
+          # "wireplumber#sink" = {
+          #   format = "{icon} {volume}%";
+          #   format-muted = "";
+          #   format-icons = {
+          #     default = ["" "" ""];
+          #   };
+          #   justify = "center";
+          #   max-volume = 150;
+          #   on-click = "wpctl set-mute @DEFAULT_SINK@ toggle";
+          #   on-click-middle = "helvum";
+          #   on-click-right = "pavucontrol";
+          #   tooltip = true;
+          #   tooltip-format = "{source_desc}";
+          # };
+          #
+          # "wireplumber#source" = {
+          #   node-type = "Audio/Source";
+          #   format = "󰍬 {volume}%";
+          #   format-muted = "󰍭";
+          #   on-click-right = "pwvucontrol";
+          #   on-click = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+          #   on-scroll-down = "wpctl set-volume @DEFAULT_SOURCE@ 1%-";
+          #   on-scroll-up = "wpctl set-volume @DEFAULT_SOURCE@ 1%+";
+          #   scroll-step = 1;
+          # };
 
           tray = {
             icon-size = 16;
             spacing = 8;
           };
 
-          upower = {
-            show-icon = false;
-            hide-if-empty = true;
-            tooltip = true;
-            tooltip-spacing = 20;
-          };
+          # upower = {
+          #   show-icon = false;
+          #   hide-if-empty = true;
+          #   tooltip = true;
+          #   tooltip-spacing = 20;
+          # };
         }
       ];
     };
