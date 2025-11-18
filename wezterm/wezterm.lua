@@ -18,6 +18,7 @@ config.window_background_image_hsb = {
 	saturation = 1.0,
 	brightness = 0.25,
 }
+config.use_dead_keys = false;
 config.font = wezterm.font("Hack Nerd Font")
 
 return config
