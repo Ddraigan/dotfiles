@@ -82,6 +82,10 @@
     color 0.2s ease-in-out;
 }
 
+#custom-clipboard {
+  text-align: center;
+}
+
 /* #tray, */
 /* #custom-clipboard, */
 /* #backlight, */

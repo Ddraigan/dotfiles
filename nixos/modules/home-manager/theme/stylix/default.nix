@@ -49,7 +49,7 @@
           flavor = "mocha";
           accent = "mauve";
         };
-        light = "Papirus-Light";
+        light = "Papirus-Dark";
         dark = "Papirus-Dark";
       };
       base16Scheme = {
@@ -71,7 +71,7 @@
         base0F = "f2cdcd"; # flamingo
       };
       targets = {
-        dunst.enable = true;
+        dunst.enable = false;
         hyprland = {
           enable = false;
         };

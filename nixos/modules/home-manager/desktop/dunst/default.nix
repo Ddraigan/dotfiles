@@ -1,8 +1,9 @@
-{ pkgs
-, inputs
-, lib
-, config
-, ...
+{
+  pkgs,
+  inputs,
+  lib,
+  config,
+  ...
 }: {
   options.modules.desktop.dunst.enable = lib.mkEnableOption "Enable Dunst";
 
@@ -12,6 +13,14 @@
     ];
     services.dunst = {
       enable = true;
+      iconTheme = {
+        name = "Papirus-Dark";
+        package = pkgs.catppuccin-papirus-folders.override {
+          flavor = "mocha";
+          accent = "mauve";
+        };
+        size = "32x32";
+      };
       settings = {
         global = {
           # Display
@@ -38,7 +47,7 @@
           highlight = "#a6e3a1, #94e2d5";
 
           # Text
-          font = "Noto Sans CJK JP 10";
+          font = "DejaVu Sans 10";
           markup = "full";
           format = "<small>%a</small>\n<big><b>%s</b></big>\n%b";
           alignment = "left";
@@ -50,7 +59,7 @@
           icon_position = "left";
           min_icon_size = 54;
           max_icon_size = 80;
-          icon_path = "#TODO";
+          # icon_path = "#TODO";
           icon_corner_radius = 4;
 
           # Misc/Advanced
@@ -61,28 +70,24 @@
           mouse_left_click = "close_current";
           mouse_middle_click = "do_action, close_current";
           mouse_right_click = "close_all";
-
-          urgency_low = {
-            background = "#313244";
-            timeout = 3;
-          };
-
-          urgency_normal = {
-            background = "#313244";
-            timeout = 8;
-          };
-
-          urgency_critical = {
-            background = "#f38ba8";
-            frame_color = "#cba6f7";
-            highlight = "#f5c2e7, #eba0ac";
-            timeout = 0;
-          };
-
-          # Rules
-          fullscreen_delay_everything = {
-            fullscreen = delay;
-          };
+        };
+        urgency_low = {
+          background = "#313244";
+          timeout = 3;
+        };
+        urgency_normal = {
+          background = "#313244";
+          timeout = 8;
+        };
+        urgency_critical = {
+          background = "#f38ba8";
+          frame_color = "#cba6f7";
+          highlight = "#f5c2e7, #eba0ac";
+          timeout = 0;
+        };
+        # Rules
+        fullscreen_delay_everything = {
+          fullscreen = "delay";
         };
       };
     };
