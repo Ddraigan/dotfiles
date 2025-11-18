@@ -5,24 +5,6 @@
   pkgs,
   ...
 }: {
-  # catppuccin = {
-  #   enable = false;
-  #   flavor = "mocha";
-  #   accent = "pink";
-  #   # cursors = {
-  #   #   enable = true;
-  #   #   flavor = "mocha";
-  #   #   accent = "sapphire";
-  #   # };
-  #   gtk = {
-  #     enable = false;
-  #     flavor = "mocha";
-  #     accent = "pink";
-  #     size = "standard";
-  #     tweaks = ["normal"];
-  #   };
-  # };
-
   dconf = {
     # settings = {
     #   "org/cinnamon/desktop/applications/terminal" = {
@@ -137,10 +119,6 @@
       pkgs.nerd-fonts.hack
       pkgs.stylua
     ];
-    # pointerCursor = {
-    #   gtk.enable = true;
-    #   size = 16;
-    # };
   };
 
   xdg = {
@@ -157,16 +135,4 @@
       };
     };
   };
-
-  # gtk = {
-  # enable = true;
-  # iconTheme = {
-  #   package = pkgs.morewaita-icon-theme;
-  #   name = "MoreWaita";
-  # };
-  # iconTheme = {
-  #   package = pkgs.candy-icons;
-  #   name = "candy-icons";
-  # };
-  # };
 }

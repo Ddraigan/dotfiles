@@ -52,6 +52,4 @@ in
   "$base" = "${base}";
   "$mantle" = "${mantle}";
   "$crust" = "${crust}";
-
-  "$border" = "${pink}";
 }

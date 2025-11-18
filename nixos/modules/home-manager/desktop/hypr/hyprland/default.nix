@@ -97,16 +97,6 @@
           windowrulev2 = [
             "suppressevent maximize, class:.*"
 
-            # "opacity 0.9 0.9,class:^(zen-beta)$"
-            # "opacity 0.9 0.9,class:^(spotify)$"
-            # "opacity 0.60 0.60,class:^(zen-beta)$"
-            # "opacity 0.66 0.66,class:^(spotify)$"
-            # "opacity 0.66 0.66,class:^(nemo)$"
-
-            # "plugin:shadewindow chromakey bkg=[0.75 0.75 0.75] similarity=0.1 targetOpacity=0.1, class:zen-beta"
-            # "plugin:shadewindow chromakey bkg=[0.75 0.75 0.75] similarity=0.1 targetOpacity=0.1, class:spotify"
-            # "plugin:shadewindow chromakey bkg=[0.30 0.30 0.46] similarity=0.1 targetOpacity=0.1, class:nemo"
-
             # All this stuff hides the xwaylandbridge window
             "opacity 0.0 override, class:^(xwaylandvideobridge)$"
             "prop noanim, class:^(xwaylandvideobridge)$"
@@ -136,7 +126,7 @@
             layout = "dwindle";
 
             "col.inactive_border" = "$mantle";
-            "col.active_border" = "$border";
+            "col.active_border" = "$pink";
           };
 
           decoration = {
