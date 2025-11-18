@@ -11,5 +11,6 @@
     ./walker
     ./dunst
     ./spotify
+    ./wlogout
   ];
 }
