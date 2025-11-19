@@ -13,38 +13,42 @@
 
   numPrimaryCandidates = builtins.length (builtins.attrNames primaryCandidates);
 in {
-  assertions = [
-    {
-      assertion = numPrimaryCandidates <= 1;
-      message = ''
-        More than one terminal is marked as `primary-terminal = true` (modules.terminal):
+  options = {
+    global.primaryTerminalCommand = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      description = "Launch command of the chosen default terminal.";
 
-        ${builtins.toString (builtins.attrNames primaryCandidates)}
+      default =
+        if numPrimaryCandidates == 1
+        then builtins.head (builtins.attrNames primaryCandidates)
+        else if enabledTerminals != {}
+        then builtins.head (builtins.attrNames enabledTerminals)
+        else null;
+    };
+  };
 
-        Only one terminal may be primary.
-      '';
-    }
-  ];
+  config = {
+    assertions = [
+      {
+        assertion = numPrimaryCandidates <= 1;
+        message = ''
+          More than one terminal is marked as `primary-terminal = true` (modules.terminal):
 
-  warnings =
-    lib.optional
-    (numPrimaryCandidates == 0 && enabledTerminals != {})
-    ''
-      No terminal is marked as primary (primary-terminal = true) in modules.terminal.
-      The first enabled terminal will be chosen automatically: ${
-        builtins.head (builtins.attrNames enabledTerminals)
+          ${builtins.toString (builtins.attrNames primaryCandidates)}
+
+          Only one terminal may be primary.
+        '';
       }
-    '';
+    ];
 
-  options.global.primaryTerminalCommand = lib.mkOption {
-    type = lib.types.nullOr lib.types.str;
-    description = "Launch command of the chosen default terminal.";
-
-    default =
-      if numPrimaryCandidates == 1
-      then builtins.head (builtins.attrNames primaryCandidates)
-      else if enabledTerminals != {}
-      then builtins.head (builtins.attrNames enabledTerminals)
-      else null;
+    warnings =
+      lib.optional
+      (numPrimaryCandidates == 0 && enabledTerminals != {})
+      ''
+        No terminal is marked as primary (primary-terminal = true) in modules.terminal.
+        The first enabled terminal will be chosen automatically: ${
+          builtins.head (builtins.attrNames enabledTerminals)
+        }
+      '';
   };
 }

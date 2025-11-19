@@ -40,7 +40,6 @@
     };
     hyprqt6engine = {
       url = "github:hyprwm/hyprqt6engine";
-      inputs.hyprland.follows = "hyprland";
     };
   };
 

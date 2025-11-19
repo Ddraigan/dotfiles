@@ -20,12 +20,13 @@
   };
 
   modules = {
-    theme = {
-      stylix.enable = true;
-    };
+    theme.stylix.enable = true;
     desktop = {
       hypr = {
-        hyprland.enable = true;
+        hyprland = {
+          enable = true;
+          withUWSM = true;
+        };
         hyprpaper.enable = true;
         hyprlock.enable = true;
       };
