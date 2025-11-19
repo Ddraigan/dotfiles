@@ -25,7 +25,7 @@
       hypr = {
         hyprland = {
           enable = true;
-          withUWSM = true;
+          uwsm = true;
         };
         hyprpaper.enable = true;
         hyprlock.enable = true;
@@ -35,8 +35,8 @@
       nemo = {
         enable = true;
         openInTerminal = {
-          exec = config.global.primaryTerminalCommand;
-          exec-arg = "--cwd=%d";
+          exec = "${config.global.primaryTerminal} start";
+          execArg = "--cwd";
         };
         extensions = [];
       };
@@ -51,7 +51,7 @@
       tmux.enable = true;
       wezterm = {
         enable = true;
-        primary-terminal = true;
+        primaryTerminal = true;
       };
       zoxide.enable = true;
       zsh.enable = true;

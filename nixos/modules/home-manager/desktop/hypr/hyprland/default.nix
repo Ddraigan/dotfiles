@@ -10,7 +10,7 @@ in {
   options = {
     modules.desktop.hypr.hyprland = {
       enable = lib.mkEnableOption "Enable Hyprland";
-      withUSWM = lib.mkEnableOption "Use UWSM?";
+      uwsm = lib.mkEnableOption "Use UWSM?";
     };
   };
 
@@ -18,12 +18,12 @@ in {
     lib.mkIf cfg.enable
     (let
       maybeWrapUWSMApp = cmd:
-        if cfg.withUSWM
+        if cfg.uwsm
         then "uwsm app -- ${cmd}"
         else cmd;
 
       maybeUWSMExit =
-        if cfg.withUSWM
+        if cfg.uwsm
         then "uwsm stop"
         else "exit";
     in {

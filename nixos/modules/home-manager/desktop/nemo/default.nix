@@ -52,7 +52,7 @@
       };
       dconf.settings."org/cinnamon/desktop/applications/terminal" = {
         exec = cfg.openInTerminal.exec;
-        exec-arg = cfg.openInTerminal.execArg;
+        exec-arg = "${cfg.openInTerminal.execArg} %d";
       };
     }
   );

@@ -65,8 +65,8 @@
           specialArgs = {inherit inputs;};
           modules = [
             ./machines/leon-pc/configuration.nix
-            ./modules/nixos
             ./modules/shared
+            ./modules/nixos
           ];
         };
     };
@@ -79,8 +79,8 @@
         extraSpecialArgs = {inherit inputs;};
         modules = [
           ./home-manager/home.nix
-          ./modules/home-manager
           ./modules/shared
+          ./modules/home-manager
           inputs.walker.homeManagerModules.walker
           inputs.stylix.homeModules.stylix
           inputs.zen-browser.homeModules.beta

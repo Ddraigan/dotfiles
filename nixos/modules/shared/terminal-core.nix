@@ -9,12 +9,12 @@
     lib.filterAttrs (_: term: term.enable or false) terminals;
 
   primaryCandidates =
-    lib.filterAttrs (_: term: term.primary_terminal or false) enabledTerminals;
+    lib.filterAttrs (_: term: term.primaryTerminal or false) enabledTerminals;
 
   numPrimaryCandidates = builtins.length (builtins.attrNames primaryCandidates);
 in {
   options = {
-    global.primaryTerminalCommand = lib.mkOption {
+    global.primaryTerminal = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       description = "Launch command of the chosen default terminal.";
 
@@ -32,7 +32,7 @@ in {
       {
         assertion = numPrimaryCandidates <= 1;
         message = ''
-          More than one terminal is marked as `primary-terminal = true` (modules.terminal):
+          More than one terminal is marked as `primaryTerminal = true` (modules.terminal):
 
           ${builtins.toString (builtins.attrNames primaryCandidates)}
 
@@ -45,7 +45,7 @@ in {
       lib.optional
       (numPrimaryCandidates == 0 && enabledTerminals != {})
       ''
-        No terminal is marked as primary (primary-terminal = true) in modules.terminal.
+        No terminal is marked as primary (primaryTerminal = true) in modules.terminal.
         The first enabled terminal will be chosen automatically: ${
           builtins.head (builtins.attrNames enabledTerminals)
         }
