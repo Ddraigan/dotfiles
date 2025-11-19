@@ -28,6 +28,9 @@ in {
       # For media keys
       playerctl
 
+      # QT
+      hyprland-qt-support
+
       # Screenshot Utils
       hyprshot
       grim
@@ -40,7 +43,7 @@ in {
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       # portalPackage = "";
       systemd = {
-        enable = false; # Being true would conflict with UWSM
+        enable = false; # Being enabled would conflict with UWSM
         variables = [
           "--all"
           # "DISPLAY"
@@ -51,9 +54,6 @@ in {
         ];
       };
       plugins = [
-        # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
-        # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-        # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
         inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
         inputs.hypr-darkwindow.packages.${pkgs.system}.Hypr-DarkWindow
       ];
@@ -87,7 +87,7 @@ in {
             "HYPRSHOT_DIR,$HOME/Pictures/screenshots"
 
             # When using hyprqt6engine over qt6ct
-            "QT_QPA_PLATFORMTHEME=hyprqt6engine"
+            # "QT_QPA_PLATFORMTHEME=hyprqt6engine"
           ];
 
           exec-once = [
@@ -236,7 +236,8 @@ in {
             # "$mod, Tab, hyprexpo:expo, toggle"
             "$mod, p, exec, $colourPicker"
 
-            "$mod, escape, exec, $lockscreen"
+            # "$mod, escape, exec, $lockscreen" # Change this to wlogout menu
+            "$mod, l, exec, $lockscreen"
 
             # Clipboard
             "$mod, i, exec, $screenshotRegion"
