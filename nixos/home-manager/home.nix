@@ -31,6 +31,14 @@
       };
       rofi.enable = true;
       walker.enable = false;
+      nemo = {
+        enable = true;
+        openInTerminal = {
+          exec = config.global.primaryTerminalCommand;
+          exec-arg = "--cwd=%d";
+        };
+        extensions = [];
+      };
       waybar.enable = true;
       dunst.enable = true;
       spicetify.enable = true;
@@ -39,7 +47,10 @@
       nvim.enable = true;
       starship.enable = true;
       tmux.enable = true;
-      wezterm.enable = true;
+      wezterm = {
+        enable = true;
+        primary-terminal = true;
+      };
       zoxide.enable = true;
       zsh.enable = true;
     };
@@ -101,11 +112,6 @@
     shellAliases = {
       cd = "z";
     };
-    file = {
-      ".gnome2/accels/nemo".text = ''
-        (gtk_accel_path "<Actions>/DirViewActions/OpenInTerminal" "F4")
-      '';
-    };
     packages = [
       pkgs.gimp
       pkgs.loupe
@@ -113,7 +119,6 @@
       pkgs.lua-language-server
       pkgs.unzip
       pkgs.zip
-      pkgs.nemo-with-extensions
       pkgs.ripgrep
       pkgs.fzf
       pkgs.nerd-fonts.hack
@@ -122,17 +127,6 @@
   };
 
   xdg = {
-    desktopEntries.nemo = {
-      name = "Nemo";
-      exec = "${pkgs.nemo-with-extensions}/bin/nemo";
-    };
     configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "inode/directory" = ["nemo.desktop"];
-        "application/x-gnome-saved-search" = ["nemo.desktop"];
-      };
-    };
   };
 }

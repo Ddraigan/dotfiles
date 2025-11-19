@@ -9,7 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      # url = "github:nix-community/home-manager";
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -17,11 +16,6 @@
       url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # nix-rice = {
-    #   url = "github:bertof/nix-rice";
-    # };
-    # spicetify-nix.url = "github:gerg-l/spicetify-nix";
-    # catppuccin.url = "github:catppuccin/nix";
     nixai.url = "github:olafkfreund/nix-ai-help";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
@@ -36,10 +30,6 @@
       # Doesn't have this sadly
       # inputs.hyprland.follows = "hyprland";
     };
-    # Hyprspace = {
-    #   url = "github:KZDKM/Hyprspace";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
     hyprsplit = {
       url = "github:shezdy/hyprsplit";
       inputs.hyprland.follows = "hyprland";
@@ -48,10 +38,10 @@
       url = "github:micha4w/Hypr-DarkWindow";
       inputs.hyprland.follows = "hyprland";
     };
-    # split-monitor-workspaces = {
-    #   url = "github:Duckonaut/split-monitor-workspaces";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
+    hyprqt6engine = {
+      url = "github:hyprwm/hyprqt6engine";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
   outputs = {
@@ -67,8 +57,8 @@
         {
           specialArgs = {inherit inputs;};
           modules = [
-              ./machines/leon-laptop/configuration.nix
-            ];
+            ./machines/leon-laptop/configuration.nix
+          ];
         };
       leon-pc =
         nixpkgs.lib.nixosSystem
@@ -77,7 +67,7 @@
           modules = [
             ./machines/leon-pc/configuration.nix
             ./modules/nixos
-            # inputs.stylix.nixosModules.stylix
+            ./modules/shared
           ];
         };
     };
@@ -91,8 +81,7 @@
         modules = [
           ./home-manager/home.nix
           ./modules/home-manager
-          # hyprland.homeManagerModules.default
-          # inputs.catppuccin.homeModules.catppuccin
+          ./modules/shared
           inputs.walker.homeManagerModules.walker
           inputs.stylix.homeModules.stylix
           inputs.zen-browser.homeModules.beta
