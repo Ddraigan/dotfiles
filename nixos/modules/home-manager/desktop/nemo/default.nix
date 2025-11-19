@@ -51,6 +51,7 @@
         };
       };
       dconf.settings."org/cinnamon/desktop/applications/terminal" = {
+        # Doesn't fking work apparantly #TODO:
         exec = cfg.openInTerminal.exec;
         exec-arg = "${cfg.openInTerminal.execArg} %d";
       };
