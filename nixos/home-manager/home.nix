@@ -42,6 +42,7 @@
       waybar.enable = true;
       dunst.enable = true;
       spicetify.enable = true;
+      wlogout.enable = true;
     };
     terminal = {
       nvim.enable = true;

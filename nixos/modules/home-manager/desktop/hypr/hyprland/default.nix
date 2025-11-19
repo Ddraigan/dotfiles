@@ -236,7 +236,7 @@ in {
             # "$mod, Tab, hyprexpo:expo, toggle"
             "$mod, p, exec, $colourPicker"
 
-            # "$mod, escape, exec, $lockscreen" # Change this to wlogout menu
+            "$mod, escape, exec, uwsm app -- wlogout"
             "$mod, l, exec, $lockscreen"
 
             # Clipboard
