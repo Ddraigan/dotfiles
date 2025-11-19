@@ -27,9 +27,9 @@
 
 * {
   border: none;
-  font-size: 16;
-  font-family: "Hack Nerd Font, Hack NF";
-  min-height: 0;
+  font-size: 16px;
+  font-family: "Hack Nerd Font", "Hack NF";
+  min-height: 0px;
   padding-right: 0px;
   padding-left: 0px;
   padding-bottom: 0px;
@@ -50,8 +50,8 @@
   padding: 0.3rem 0.7rem;
   margin: 5px;
   border-radius: 6px; /* These modules are always rounded */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  min-width: 0;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  min-width: 0px;
   border: none;
   /* Transition for background-color and color only */
   transition:
@@ -73,17 +73,13 @@
   background-color: @crust;
   padding: 0.3rem 0.7rem;
   margin: 5px 0px;
-  border-radius: 0;
+  border-radius: 0px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  min-width: 0;
+  min-width: 0px;
   border: none;
   transition:
     background-color 0.2s ease-in-out,
     color 0.2s ease-in-out;
-}
-
-#custom-clipboard {
-  text-align: center;
 }
 
 /* #tray, */
@@ -139,7 +135,7 @@
   outline: none;
 }
 
-#workspaces button.hover {
+#workspaces button:hover {
   color: @blue;
   border: none;
   outline: none;
@@ -148,7 +144,7 @@
 #temperature.critical,
 #wireplumber.muted {
   color: @red;
-  padding-top: 0;
+  padding-top: 0px;
 }
 
 #clock {
@@ -159,10 +155,10 @@
 #custom-music {
   background-color: @crust;
   padding: 0.3rem 0.7rem;
-  margin: 5px 5px;
+  margin: 5px;
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  min-width: 0;
+  min-width: 0px;
   border: none;
   outline: none;
   transition:
@@ -171,10 +167,6 @@
     outline 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
   font-weight: 600;
-}
-
-#custom-music {
-  margin-right: 5px;
 }
 
 #battery.charging {

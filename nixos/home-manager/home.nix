@@ -53,7 +53,8 @@
     };
   };
 
-  services.easyeffects.enable = false;
+  services.easyeffects.enable = true;
+  services.easyeffects.package = pkgs.unstable.easyeffects;
 
   programs = {
     home-manager.enable = true;
