@@ -25,15 +25,18 @@
         global = {
           # Display
           follow = "mouse";
-          width = 350;
+          # Notification Window (Not each single notification)
+          width = "(0, 350)";
           height = "(0, 300)";
+          offset = "(20, 30)";
           origin = "top-right";
-          offset = "(35, 35)";
-          indicate_hidden = "yes";
           notification_limit = 10;
-          gap_size = 12;
-          padding = 12;
-          horizontal_padding = 20;
+
+          indicate_hidden = true;
+          enable_posix_regex = true;
+          gap_size = 8;
+          padding = 8;
+          horizontal_padding = 16;
           frame_width = 1;
           sort = "no";
 
@@ -43,13 +46,16 @@
 
           # Colors
           foreground = "#cdd6f4";
-          frame_color = "#181825";
-          highlight = "#a6e3a1, #94e2d5";
+          frame_color = "#b4befe";
+          background = "#1e1e2e";
+          highlight = "#74c7ec";
+          separator_color = "frame";
 
           # Text
           font = "DejaVu Sans 10";
           markup = "full";
-          format = "<small>%a</small>\n<big><b>%s</b></big>\n%b";
+          format = "<b>󰁕 %a</b>\n%s\n<i>%b</i>";
+          # format = "<small>%a</small>\n<big><b>%s</b></big>\n%b";
           alignment = "left";
           vertical_alignment = "center";
           show_age_threshold = -1;
@@ -72,20 +78,24 @@
           mouse_right_click = "close_all";
         };
         urgency_low = {
-          background = "#313244";
-          timeout = 3;
+          default_icon = "./icons/bell-badge-low.svg";
+          foreground = "#a6e3a1";
+          frame_color = "#a6e3a1";
+          timeout = 4;
         };
         urgency_normal = {
-          background = "#313244";
+          default_icon = "./icons/bell-badge.svg";
+          foreground = "#74c7ec";
+          frame_color = "#74c7ec";
           timeout = 8;
         };
         urgency_critical = {
-          background = "#f38ba8";
-          frame_color = "#cba6f7";
+          default_icon = "./icons/alert-decagram.svg";
+          foreground = "#f38ba8";
+          frame_color = "#f38ba8";
           highlight = "#f5c2e7, #eba0ac";
           timeout = 0;
         };
-        # Rules
         fullscreen_delay_everything = {
           fullscreen = "delay";
         };

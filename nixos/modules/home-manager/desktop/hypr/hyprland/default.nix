@@ -4,7 +4,17 @@
   lib,
   config,
   ...
-}: {
+}: let
+  maybeWrapUWSMApp = cmd:
+    if config.programs.hyprland.withUSWM.enable
+    then "uwsm app -- ${cmd}"
+    else cmd;
+
+  maybeUWSMExit =
+    if config.programs.hyprland.withUSWM.enable
+    then "uwsm stop"
+    else "exit";
+in {
   options.modules.desktop.hypr.hyprland.enable = lib.mkEnableOption "Enable Hyprland";
 
   config = lib.mkIf config.modules.desktop.hypr.hyprland.enable {
@@ -18,6 +28,9 @@
       # For media keys
       playerctl
 
+      # QT
+      hyprland-qt-support
+
       # Screenshot Utils
       hyprshot
       grim
@@ -28,8 +41,9 @@
       xwayland.enable = true;
       # package = null;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      # portalPackage = "";
       systemd = {
-        enable = false;
+        enable = false; # Being enabled would conflict with UWSM
         variables = [
           "--all"
           # "DISPLAY"
@@ -40,58 +54,50 @@
         ];
       };
       plugins = [
-        # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.plugin here
-        # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-        # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
         inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
         inputs.hypr-darkwindow.packages.${pkgs.system}.Hypr-DarkWindow
       ];
       settings =
         {
-          # "plugin:hyprexpo" = {
-          #   columns = 3;
-          #   gap_size = 5;
-          #   bg_col = "rgb(111111)";
-          #   workspace_method = "center current"; # [center/first] [workspace] e.g. first 1 or center m+1
-          #
-          #   enable_gesture = true; # laptop touchpad
-          #   gesture_fingers = 3; # 3 or 4
-          #   gesture_distance = 300; # how far is the "max"
-          #   gesture_positive = true; # positive = swipe down. Negative = swipe up.
-          # };
-          # "plugin:split-monitor-workspaces" = {
-          #   count = 9;
-          #   keep_focused = 0;
-          #   enable_notifications = 0;
-          #   enable_persistent_workspaces = 0;
-          # };
           "plugin:overview" = {};
           "plugin:hyprsplit" = {
             num_workspaces = 9;
           };
 
-          "$terminal" = "wezterm";
-          "$fileManager" = "nemo";
-          # "$menu" = "walker";
-          "$menu" = "rofi -show drun";
-          "$browser" = "zen";
+          # Commands
+          "$exitCommand" = "${maybeUWSMExit}";
+          "$copy" = "wl-copy";
+          "$paste" = "wl-paste";
+
+          # Programs
+          "$terminal" = "${maybeWrapUWSMApp "wezterm"}";
+          "$fileManager" = "${maybeWrapUWSMApp "nemo"}";
+          "$drun" = "${maybeWrapUWSMApp "rofi -show drun"}";
+          "$browser" = "${maybeWrapUWSMApp "zen"}";
+
+          # Utils
+          "$colourPicker" = "${maybeWrapUWSMApp "hyprpicker -a"}";
+          "$lockScreen" = "${maybeWrapUWSMApp "hyprlock"}";
+          "$screenshot" = "${maybeWrapUWSMApp "hyprshot -m window"}";
+          "$screenshotRegion" = "${maybeWrapUWSMApp "hyprshot -m region output --clipboard-only"}";
 
           env = [
             "XDG_SCREENSHOTS_DIR,$HOME/Pictures/screenshots"
             "XDG_PICTURES_DIR,$HOME/Pictures"
             "HYPRSHOT_DIR,$HOME/Pictures/screenshots"
+
+            # When using hyprqt6engine over qt6ct
+            # "QT_QPA_PLATFORMTHEME=hyprqt6engine"
           ];
 
           exec-once = [
-            "$terminal"
+            "systemctl --user enable --now hyprpolkitagent.service"
             "systemctl --user enable --now hypridle.service" # To start hypridle at launch with uwsm
             "systemctl --user enable --now hyprpaper.service"
             "systemctl --user enable --now waybar.service"
-            # "systemctl --user enable --now walker.service"
-            # "walker --gapplication-service"
             "nm-applet --indicator"
-            # "wl-paste -p --watch wl-copy"
             "wl-paste --watch cliphist store"
+            "$terminal"
           ];
 
           windowrulev2 = [
@@ -215,7 +221,7 @@
             ", XF86AudioNext, exec, playerctl next"
           ];
           binde = [
-            # Vim Window Resize
+            # Vim Style Window Resize
             "$mod ALT, H, resizeactive, -10 0"
             "$mod ALT, L, resizeactive, 10 0"
             "$mod ALT, K, resizeactive, 0 -10"
@@ -228,24 +234,25 @@
           bind = [
             # "$mod, TAB, overview:toggle"
             # "$mod, Tab, hyprexpo:expo, toggle"
-            "$mod, p, exec, uwsm app -- hyprpicker -a"
+            "$mod, p, exec, $colourPicker"
 
-            "$mod, escape, exec, uwsm app -- hyprlock"
+            "$mod, escape, exec, uwsm app -- wlogout"
+            "$mod, l, exec, $lockscreen"
 
             # Clipboard
-            "$mod, i, exec, uwsm app -- hyprshot -m region output --clipboard-only"
-            "$mod SHIFT, I, exec, uwsm app -- hyprshot -m window"
-            ", PRINT, exec, uwsm app -- hyprshot -m window"
-            "$mod, V, exec, uwsm app -- wl-paste"
-            "$mod, C, exec, uwsm app -- wl-copy"
+            "$mod, i, exec, $screenshotRegion"
+            "$mod SHIFT, I, exec, $screenshot"
+            ", PRINT, exec, $screenshot"
+            "$mod, V, exec, $paste"
+            "$mod, C, exec, $copy"
 
-            "$mod, D, exec, uwsm app -- $menu"
-            "$mod, B, exec, uwsm app -- $browser"
-            "$mod, T, exec, uwsm app -- $terminal"
-            "$mod, F, exec, uwsm app -- $fileManager"
+            "$mod, D, exec, $drun"
+            "$mod, B, exec, $browser"
+            "$mod, T, exec, $terminal"
+            "$mod, F, exec, $fileManager"
 
             # "$mod SHIFT, X, exit"
-            "$mod SHIFT, X, exec, uwsm stop"
+            "$mod SHIFT, X, exec, $exitCommand"
             "$mod SHIFT, Q, killactive"
             "$mod SHIFT, F, fullscreen"
             "$mod SHIFT, Z, togglefloating"

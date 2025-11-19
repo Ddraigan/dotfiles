@@ -5,7 +5,7 @@
   ...
 }: {
   options.modules.desktop.wlogout.enable = lib.mkEnableOption "Enable Wlogout";
-  config = lib.mkIf config.modules.desktop.spicetify.enable {
+  config = lib.mkIf config.modules.desktop.wlogout.enable {
     home.packages = [
       pkgs.wlogout
     ];

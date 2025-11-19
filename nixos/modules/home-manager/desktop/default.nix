@@ -12,5 +12,6 @@
     ./dunst
     ./spotify
     ./wlogout
+    ./nemo
   ];
 }
