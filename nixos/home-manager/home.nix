@@ -100,6 +100,7 @@
       cd = "z";
     };
     packages = [
+      pkgs.just
       pkgs.gimp
       pkgs.loupe
       pkgs.firefox
