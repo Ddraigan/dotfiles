@@ -1,0 +1,10 @@
+default:
+  just --list
+
+switch-home profile:
+  git add .
+  home-manager switch --flake .#{{profile}}
+
+switch-nix host:
+  git add .
+  sudo nixos-rebuild switch --flake .#{{host}}
