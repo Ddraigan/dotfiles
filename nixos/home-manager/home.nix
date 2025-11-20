@@ -96,21 +96,18 @@
     sessionVariables = {
       EDITOR = "nvim";
     };
-    shellAliases = {
-      cd = "z";
-    };
     packages = [
       pkgs.just
+      # Image Stuff
       pkgs.gimp
       pkgs.loupe
+
       pkgs.firefox
-      pkgs.lua-language-server
       pkgs.unzip
       pkgs.zip
       pkgs.ripgrep
       pkgs.fzf
       pkgs.nerd-fonts.hack
-      pkgs.stylua
     ];
   };
 

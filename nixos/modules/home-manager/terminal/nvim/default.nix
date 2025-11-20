@@ -6,9 +6,6 @@
 }: {
   options.modules.terminal.nvim.enable = lib.mkEnableOption "Enable Nvim";
   config = lib.mkIf config.modules.terminal.nvim.enable {
-    # home.packages = [
-    #   pkgs.neovim
-    # ];
     programs.neovim = {
       enable = true;
       package = pkgs.neovim-unwrapped;
@@ -18,6 +15,8 @@
         gcc
         gnumake
         nodejs_24
+        lua-language-server
+        stylua
       ];
     };
     home.file = {
@@ -25,11 +24,5 @@
         source = ../../../../../nvim;
       };
     };
-    # home.file.".config/nvim/lua/config/nixopts.lua" = {
-    #   text = ''
-    #     -- npm is required for mason
-    #     vim.env.PATH = vim.env.PATH .. ":${pkgs.nodejs}/bin"
-    #   '';
-    # };
   };
 }
