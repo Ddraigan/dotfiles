@@ -6,6 +6,16 @@
 }: {
   options.modules.terminal.nvim.enable = lib.mkEnableOption "Enable Nvim";
   config = lib.mkIf config.modules.terminal.nvim.enable {
+    home = {
+      sessionVariables = {
+        EDITOR = "nvim";
+      };
+      file = {
+        ".config/nvim" = {
+          source = ../../../../../nvim;
+        };
+      };
+    };
     programs.neovim = {
       enable = true;
       package = pkgs.neovim-unwrapped;
@@ -18,11 +28,6 @@
         lua-language-server
         stylua
       ];
-    };
-    home.file = {
-      ".config/nvim" = {
-        source = ../../../../../nvim;
-      };
     };
   };
 }

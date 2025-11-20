@@ -50,8 +50,10 @@
     };
   };
 
-  services.easyeffects.enable = true;
-  services.easyeffects.package = pkgs.unstable.easyeffects;
+  services.easyeffects = {
+    enable = true;
+    package = pkgs.unstable.easyeffects;
+  };
 
   programs = {
     home-manager.enable = true;
@@ -85,17 +87,12 @@
     };
   };
 
-  fonts = {
-    fontconfig.enable = true;
-  };
+  fonts.fontconfig.enable = true;
 
   home = {
     username = "leon";
     homeDirectory = "/home/leon";
     stateVersion = "24.05";
-    sessionVariables = {
-      EDITOR = "nvim";
-    };
     packages = [
       pkgs.just
       # Image Stuff
