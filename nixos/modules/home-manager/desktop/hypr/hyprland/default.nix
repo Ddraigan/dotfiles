@@ -26,6 +26,11 @@ in {
         if cfg.uwsm
         then "uwsm stop"
         else "exit";
+
+      maybeUWSMRofi =
+        if cfg.uwsm
+        then "rofi -show drun -run-command 'uwsm app -- {cmd}'"
+        else "rofi -show -drun";
     in {
       home.packages = with pkgs; [
         # Colour Picker
@@ -81,7 +86,7 @@ in {
             # Programs
             "$terminal" = "${maybeWrapUWSMApp "wezterm"}";
             "$fileManager" = "${maybeWrapUWSMApp "nemo"}";
-            "$drun" = "${maybeWrapUWSMApp "rofi -show drun"}";
+            "$drun" = "${maybeUWSMRofi}";
             "$browser" = "${maybeWrapUWSMApp "zen"}";
 
             # Utils

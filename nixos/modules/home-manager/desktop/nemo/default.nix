@@ -6,14 +6,6 @@
 }: {
   options.modules.desktop.nemo = {
     enable = lib.mkEnableOption "Install configure and enable Nemo file manager";
-    openInTerminal = lib.mkOption {
-      type = lib.types.attrsOf lib.types.str;
-      default = {
-        exec = config.global.terminalCommand;
-        execArg = "";
-      };
-      description = "Command and argument to open terminal from Nemo";
-    };
     extensions = lib.mkOption {
       type = lib.types.listOf lib.types.package;
       default = [];
@@ -50,10 +42,14 @@
           };
         };
       };
-      dconf.settings."org/cinnamon/desktop/applications/terminal" = {
-        # Doesn't fking work apparantly #TODO:
-        exec = cfg.openInTerminal.exec;
-        exec-arg = "${cfg.openInTerminal.execArg} %d";
+      dconf.settings = {
+        "org/cinnamon/desktop/applications/terminal" = {
+          exec = config.global.primaryTerminal;
+          exec-arg = "start -- ";
+        };
+        "org/cinnamon/desktop/interface" = {
+          can-change-accels = true;
+        };
       };
     }
   );

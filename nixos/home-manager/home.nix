@@ -5,20 +5,6 @@
   pkgs,
   ...
 }: {
-  dconf = {
-    # settings = {
-    #   "org/cinnamon/desktop/applications/terminal" = {
-    #     exec = "/run/current-system/sw/bin/wezterm-cwd";
-    #     # exec-arg = ""; # argument
-    #   };
-    # };
-    settings = {
-      "org/cinnamon/desktop/interface" = {
-        can-change-accels = true;
-      };
-    };
-  };
-
   modules = {
     theme.stylix.enable = true;
     desktop = {
@@ -34,11 +20,9 @@
       walker.enable = false;
       nemo = {
         enable = true;
-        openInTerminal = {
-          exec = "${config.global.primaryTerminal} start";
-          execArg = "--cwd";
-        };
-        extensions = [];
+        extensions = [
+          pkgs.nemo-preview
+        ];
       };
       waybar.enable = true;
       dunst.enable = true;
