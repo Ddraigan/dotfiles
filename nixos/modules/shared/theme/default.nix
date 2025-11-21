@@ -5,8 +5,6 @@
   ...
 }: {
   imports = [
-    ./stylix
-    ./fonts
     ./colours
   ];
 }

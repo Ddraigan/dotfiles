@@ -6,5 +6,6 @@
 }: {
   imports = [
     ./terminal-core.nix
+    ./theme
   ];
 }

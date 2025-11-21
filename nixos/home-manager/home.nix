@@ -69,8 +69,6 @@
     };
   };
 
-  fonts.fontconfig.enable = true;
-
   home = {
     username = "leon";
     homeDirectory = "/home/leon";
@@ -86,7 +84,6 @@
       pkgs.zip
       pkgs.ripgrep
       pkgs.fzf
-      pkgs.nerd-fonts.hack
     ];
   };
 

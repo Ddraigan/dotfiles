@@ -1,11 +1,14 @@
-{ pkgs, lib, config, inputs, system, ... }:
-
-let
-  hyprlock-package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
-  # username = config.${namespace}.user.name;
-  main-monitor = "DP-2";
-in
 {
+  pkgs,
+  lib,
+  config,
+  inputs,
+  system,
+  ...
+}: let
+  hyprlock-package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
+  main-monitor = "DP-1";
+in {
   options.modules.desktop.hypr.hyprlock = {
     enable = lib.mkEnableOption "Enable Hyprlock";
   };
@@ -27,18 +30,8 @@ in
             blur_passes = 2; # 0 disables blurring
             blur_size = 3;
             brightness = 0.3;
-
           }
         ];
-        # image = {
-        #   monitor = "${main-monitor}";
-        #   path = "/home/${username}/Pictures/<image here>";
-        #
-        #   rounding = "-1"; #Negative makes a circle
-        #   position = "0, 50";
-        #   halign = "center";
-        #   valign = "center";
-        # };
         label = [
           {
             monitor = "${main-monitor}";
