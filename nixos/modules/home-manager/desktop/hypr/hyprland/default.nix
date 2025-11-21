@@ -42,6 +42,8 @@ in {
         # For media keys
         playerctl
 
+        hyprsysteminfo
+
         # QT
         hyprland-qt-support
 
@@ -49,6 +51,9 @@ in {
         hyprshot
         grim
         slurp
+      ];
+      home.packages = [
+        inputs.hyprqt6engine.packages.${pkgs.stdenv.hostPlatform.system}.default
       ];
       wayland.windowManager.hyprland = {
         enable = true;
@@ -101,7 +106,7 @@ in {
               "HYPRSHOT_DIR,$HOME/Pictures/screenshots"
 
               # When using hyprqt6engine over qt6ct
-              # "QT_QPA_PLATFORMTHEME=hyprqt6engine"
+              "QT_QPA_PLATFORMTHEME=hyprqt6engine"
             ];
 
             exec-once = [
