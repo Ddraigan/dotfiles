@@ -9,7 +9,10 @@
     primaryTerminal = lib.mkEnableOption "Set as primary terminal global value";
   };
   config = lib.mkIf config.modules.terminal.wezterm.enable {
-    programs.wezterm.package = pkgs.unstable.wezterm;
+    programs.wezterm = {
+      enable = true;
+      package = pkgs.unstable.wezterm;
+    };
     home.file = {
       ".config/wezterm" = {
         source = ../../../../../wezterm;
