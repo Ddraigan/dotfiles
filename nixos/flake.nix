@@ -65,7 +65,7 @@
           specialArgs = {inherit inputs;};
           modules = [
             ./machines/leon-pc/configuration.nix
-            ./modules/shared
+            # ./modules/shared
             ./modules/nixos
           ];
         };

@@ -1,18 +1,19 @@
 {
-  pkgs,
   lib,
   config,
+  pkgs,
   ...
 }: {
   options.modules.desktop.wlogout.enable = lib.mkEnableOption "Enable Wlogout";
   config = lib.mkIf config.modules.desktop.wlogout.enable {
     home.packages = [
-      pkgs.wlogout
+      pkgs.librsvg
     ];
+    xdg.configFile."wlogout/icons".source = ./icons;
     programs.wlogout = {
       enable = true;
       style = ''
-        ${builtins.readFile ./style.css}
+        ${(builtins.readFile ./style.css)}
       '';
       layout = [
         {
@@ -44,6 +45,12 @@
           action = "systemctl poweroff";
           text = "Power Off";
           keybind = "s";
+        }
+        {
+          label = "hibernate";
+          action = "";
+          text = "Hibernate";
+          keybind = "";
         }
       ];
     };
