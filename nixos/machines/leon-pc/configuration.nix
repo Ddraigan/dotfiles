@@ -43,7 +43,6 @@ in {
       enable = false;
       powerOnBoot = false;
     };
-    pulseaudio.enable = false;
     graphics = {
       enable = true;
     };

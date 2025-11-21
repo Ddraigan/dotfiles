@@ -4,12 +4,16 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.3";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.3";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
@@ -20,7 +24,6 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     hyprland.url = "github:hyprwm/Hyprland";
-    walker.url = "github:umbrageodotus/walker";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -34,13 +37,14 @@
       url = "github:shezdy/hyprsplit";
       inputs.hyprland.follows = "hyprland";
     };
-    hypr-darkwindow = {
-      url = "github:micha4w/Hypr-DarkWindow";
-      inputs.hyprland.follows = "hyprland";
-    };
+    # hypr-darkwindow = {
+    #   url = "github:micha4w/Hypr-DarkWindow";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
     hyprqt6engine = {
       url = "github:hyprwm/hyprqt6engine";
     };
+    # ashell.url = "github:MalpenZibo/ashell";
   };
 
   outputs = {
@@ -81,10 +85,10 @@
           ./home-manager/home.nix
           ./modules/shared
           ./modules/home-manager
-          inputs.walker.homeManagerModules.walker
           inputs.stylix.homeModules.stylix
           inputs.zen-browser.homeModules.beta
           inputs.spicetify-nix.homeManagerModules.spicetify
+          # inputs.ashell.homeManagerModules.default
           # inputs.hyprqt6engine.homeManagerModules.default
         ];
       };
