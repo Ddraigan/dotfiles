@@ -13,7 +13,6 @@ in {
     enable = lib.mkEnableOption "Enable Hyprlock";
   };
   config = lib.mkIf config.modules.desktop.hypr.hyprlock.enable {
-    security.pam.services.hyprlock = {}; # Can't unlock without this}
     programs.hyprlock = {
       enable = true;
       package = hyprlock-package;

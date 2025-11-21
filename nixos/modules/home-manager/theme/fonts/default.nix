@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }: let
   fontOption = {lib, ...}: {
@@ -42,10 +41,10 @@ in {
         cfg.serif
       ];
       fonts.fontconfig.enable = true;
-      global.home.fonts.active = {
-        mono = cfg.mono;
-        sans = cfg.sans;
-        serif = cfg.serif;
-      };
+      # global.home.fonts.active = {
+      #   mono = cfg.mono;
+      #   sans = cfg.sans;
+      #   serif = cfg.serif;
+      # };
     };
 }

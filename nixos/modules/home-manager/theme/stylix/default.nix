@@ -8,9 +8,9 @@
 
   config = lib.mkIf config.modules.theme.stylix.enable {
     stylix = let
-      col = config.modules.theme.colours.catppuccin.mocha;
-      font = config.global.home.fonts.active;
-    in  {
+      col = config.global.theme.colours.catppuccin.mocha;
+      font = config.global.home.fonts;
+    in {
       enable = true;
       autoEnable = true;
       cursor = {
@@ -69,21 +69,11 @@
         gtk = {
           enable = true;
           extraCss = ''
-            * {
-                background-color: rgba(0, 0, 0, 0.0);  /* Semi-transparent black background */
-            }
-
-            window {
-                background-color: rgba(0, 0, 0, 0.0);  /* More transparent window background */
-            }
-
-            .button {
-                background-color: rgba(242, 205, 205, 0.5); /* Transparent button background */
-            }
-
-            # .panel {
-            #     background-color: rgba(0, 0, 0, 0.0);  /* Transparent panel */
-            # }
+            @define-color window_bg_color rgba(0, 0, 0, 0.0);
+            @define-color view_bg_color rgba(0, 0, 0, 0.0);
+            @define-color headerbar_bg_color rgba(0, 0, 0, 0.0);
+            @define-color sidebar_bg_color rgba(0, 0, 0, 0.0);
+            @define-color secondary_sidebar_bg_color rgba(0, 0, 0, 0.0);
           '';
         };
       };

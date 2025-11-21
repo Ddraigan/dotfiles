@@ -1,11 +1,13 @@
 {
-  config,
-  pkgs,
   lib,
   ...
-}: {
-  config = {
-    global.theme.colours.catppuccin.mocha = {
+}: let
+  inherit (lib) mkOption types;
+in {
+  options.global.theme.colours.catppuccin.mocha = mkOption {
+    type = types.attrsOf types.str;
+    description = "Catppuccin Mocha theme color palette";
+    default = {
       crust = "11111b";
       mantle = "181825";
       base = "1e1e2e";

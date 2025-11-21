@@ -85,7 +85,7 @@
           inputs.stylix.homeModules.stylix
           inputs.zen-browser.homeModules.beta
           inputs.spicetify-nix.homeManagerModules.spicetify
-          inputs.hyprqt6engine.homeModules.default
+          # inputs.hyprqt6engine.homeManagerModules.default
         ];
       };
     };

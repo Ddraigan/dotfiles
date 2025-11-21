@@ -46,14 +46,12 @@ in {
 
         # QT
         hyprland-qt-support
+        inputs.hyprqt6engine.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         # Screenshot Utils
         hyprshot
         grim
         slurp
-      ];
-      home.packages = [
-        inputs.hyprqt6engine.packages.${pkgs.stdenv.hostPlatform.system}.default
       ];
       wayland.windowManager.hyprland = {
         enable = true;
