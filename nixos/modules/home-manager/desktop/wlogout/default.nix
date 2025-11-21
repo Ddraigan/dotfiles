@@ -13,7 +13,7 @@
     programs.wlogout = {
       enable = true;
       style = ''
-        ${(builtins.readFile ./style.css)}
+        ${builtins.readFile ./style.css}
       '';
       layout = [
         {
