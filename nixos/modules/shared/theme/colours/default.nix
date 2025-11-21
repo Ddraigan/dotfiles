@@ -5,7 +5,7 @@
   ...
 }: {
   config = {
-    catppuccin.mocha = {
+    global.theme.colours.catppuccin.mocha = {
       crust = "11111b";
       mantle = "181825";
       base = "1e1e2e";

@@ -9,7 +9,7 @@
   config = lib.mkIf config.modules.theme.stylix.enable {
     stylix = let
       col = config.modules.theme.colours.catppuccin.mocha;
-      font = config.global.home.primaryFont;
+      font = config.global.home.fonts.active;
     in  {
       enable = true;
       autoEnable = true;
@@ -19,18 +19,9 @@
         size = 20;
       };
       fonts = {
-        monospace = {
-          package = font.package;
-          name = "Hack Nerd Font";
-        };
-        sansSerif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Sans";
-        };
-        serif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Serif";
-        };
+        monospace = font.mono;
+        sansSerif = font.sans;
+        serif = font.serif;
       };
       icons = {
         enable = true;
