@@ -5,6 +5,21 @@
   pkgs,
   ...
 }: {
+  global.home.fonts = {
+    enable = true;
+    mono = {
+      name = "Hack Nerd Font, Hack NF";
+      package = pkgs.nerd-fonts.hack;
+    };
+    sans = {
+      name = "DejaVu Sans";
+      package = pkgs.dejavu_fonts;
+    };
+    serif = {
+      name = "DejaVu Serif";
+      package = pkgs.dejavu_fonts;
+    };
+  };
   modules = {
     theme.stylix.enable = true;
     desktop = {
@@ -75,6 +90,7 @@
     stateVersion = "24.05";
     packages = [
       pkgs.just
+
       # Image Stuff
       pkgs.gimp
       pkgs.loupe

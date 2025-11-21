@@ -8,7 +8,8 @@
 
   config = lib.mkIf config.modules.theme.stylix.enable {
     stylix = let
-      col = config.theme.colours.catppuccin.mocha;
+      col = config.modules.theme.colours.catppuccin.mocha;
+      font = config.global.home.primaryFont;
     in  {
       enable = true;
       autoEnable = true;
@@ -19,7 +20,7 @@
       };
       fonts = {
         monospace = {
-          package = pkgs.nerd-fonts.hack;
+          package = font.package;
           name = "Hack Nerd Font";
         };
         sansSerif = {
@@ -31,17 +32,6 @@
           name = "DejaVu Serif";
         };
       };
-      # opacity = {
-      #   applications = 0.2;
-      #   popups = 0.2;
-      #   desktop = 0.2;
-      # };
-      # icons = {
-      #   enable = true;
-      #   package = pkgs.candy-icons;
-      #   light = "candy-icons";
-      #   dark = "candy-icons";
-      # };
       icons = {
         enable = true;
         package = pkgs.catppuccin-papirus-folders.override {

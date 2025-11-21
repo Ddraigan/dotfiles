@@ -7,6 +7,5 @@
   imports = [
     ./stylix
     ./fonts
-    ./colours
   ];
 }
