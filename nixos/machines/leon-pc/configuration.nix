@@ -71,7 +71,7 @@ in {
     #   };
     # };
     ollama = {
-      enable = true;
+      enable = false;
       # Optional: preload models, see https://ollama.com/library
       loadModels = ["llama3"];
       acceleration = "cuda";
@@ -105,7 +105,7 @@ in {
 
   environment = {
     systemPackages = [
-      inputs.nixai.packages.${pkgs.system}.default
+      # inputs.nixai.packages.${pkgs.system}.default
       pkgs.sbctl
       wezterm-cwd
       pkgs.upower
