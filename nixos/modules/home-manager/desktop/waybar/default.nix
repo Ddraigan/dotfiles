@@ -12,7 +12,9 @@
       pavucontrol
       networkmanagerapplet
     ];
-    programs.waybar = {
+    programs.waybar = let
+      colours = config.global.theme.colours.catppuccin.mocha;
+    in  {
       enable = true;
       systemd.enable = false;
       style = ''
@@ -170,7 +172,6 @@
 
           cpu = {
             interval = 1;
-            # format = " {usage}%";
             format = "  {icon0}{icon1}{icon2}{icon3}{usage:>2}%";
             format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
             on-click = "btop";
@@ -178,7 +179,6 @@
 
           memory = {
             interval = 30;
-            # format = " {percentage}%";
             format = "  {used:0.1f}G/{total:0.1f}G";
             tooltip-format = "Memory";
           };

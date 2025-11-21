@@ -10,6 +10,7 @@
     ./rofi
     ./walker
     ./dunst
+    ./ashell
     ./spotify
     ./wlogout
     ./nemo

@@ -7,10 +7,10 @@
   options.modules.theme.stylix.enable = lib.mkEnableOption "enable stylix";
 
   config = lib.mkIf config.modules.theme.stylix.enable {
-    # home.packages = [
-    #   pkgs.catppuccin-papirus-folders
-    # ];
-    stylix = {
+    stylix = let
+      col = config.modules.theme.colours.catppuccin.mocha;
+      font = config.global.home.fonts.active;
+    in  {
       enable = true;
       autoEnable = true;
       cursor = {
@@ -19,30 +19,10 @@
         size = 20;
       };
       fonts = {
-        monospace = {
-          package = pkgs.nerd-fonts.hack;
-          name = "Hack Nerd Font";
-        };
-        sansSerif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Sans";
-        };
-        serif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Serif";
-        };
+        monospace = font.mono;
+        sansSerif = font.sans;
+        serif = font.serif;
       };
-      # opacity = {
-      #   applications = 0.2;
-      #   popups = 0.2;
-      #   desktop = 0.2;
-      # };
-      # icons = {
-      #   enable = true;
-      #   package = pkgs.candy-icons;
-      #   light = "candy-icons";
-      #   dark = "candy-icons";
-      # };
       icons = {
         enable = true;
         package = pkgs.catppuccin-papirus-folders.override {
@@ -53,22 +33,22 @@
         dark = "Papirus-Dark";
       };
       base16Scheme = {
-        base00 = "1e1e2e"; # base
-        base01 = "181825"; # mantle
-        base02 = "313244"; # surface0
-        base03 = "45475a"; # surface1
-        base04 = "585b70"; # surface2
-        base05 = "cdd6f4"; # text
-        base06 = "f5e0dc"; # rosewater
-        base07 = "b4befe"; # lavender
-        base08 = "f38ba8"; # red
-        base09 = "fab387"; # peach
-        base0A = "f9e2af"; # yellow
-        base0B = "a6e3a1"; # green
-        base0C = "94e2d5"; # teal
-        base0D = "89b4fa"; # blue
-        base0E = "cba6f7"; # mauve
-        base0F = "f2cdcd"; # flamingo
+        base00 = col.base;
+        base01 = col.mantle;
+        base02 = col.surface0;
+        base03 = col.surface1;
+        base04 = col.surface2;
+        base05 = col.text;
+        base06 = col.rosewater;
+        base07 = col.lavender;
+        base08 = col.red;
+        base09 = col.peach;
+        base0A = col.yellow;
+        base0B = col.green;
+        base0C = col.teal;
+        base0D = col.blue;
+        base0E = col.mauve;
+        base0F = col.flamingo;
       };
       targets = {
         dunst.enable = false;
