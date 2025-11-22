@@ -117,27 +117,16 @@ in {
               "$terminal"
             ];
 
-            windowrulev2 = [
-              "suppressevent maximize, class:.*"
+            windowrule = [
+              "suppress_event maximize, match:class .*"
 
-              # All this stuff hides the xwaylandbridge window
-              "opacity 0.0 override, class:^(xwaylandvideobridge)$"
-              "prop noanim, class:^(xwaylandvideobridge)$"
-              "noinitialfocus, class:^(xwaylandvideobridge)$"
-              "maxsize 1 1, class:^(xwaylandvideobridge)$"
-              "prop noblur, class:^(xwaylandvideobridge)$"
-              "prop nofocus, class:^(xwaylandvideobridge)$"
-            ];
-
-            layerrule = [
-              "blur, ^(gtk-layer-shell)$"
-              "blur, ^(launcher)$"
-              "ignorezero, ^(gtk-layer-shell)$"
-              "ignorezero, ^(launcher)$"
-              "blur, notifications"
-              "ignorezero, notifications"
-              "blur, bar"
-              "ignorezero, bar"
+              #   # All this stuff hides the xwaylandbridge window
+              #   "opacity 0.0 override, match:class ^(xwaylandvideobridge)$"
+              #   "no_initial_focus, match:class ^(xwaylandvideobridge)$"
+              #   "maxsize 1 1, match:class ^(xwaylandvideobridge)$"
+              #   "no_anim, match:class ^(xwaylandvideobridge)$"
+              #   "no_blur, match:class ^(xwaylandvideobridge)$"
+              #   "no_focus, match:class ^(xwaylandvideobridge)$"
             ];
 
             general = {
