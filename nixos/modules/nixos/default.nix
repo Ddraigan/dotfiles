@@ -7,5 +7,6 @@
   imports = [
     ./desktop
     ./nvidia.nix
+    ./greetd.nix
   ];
 }

@@ -12,7 +12,10 @@ in {
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
-  modules.nix.nvidia.enable = true;
+  modules.nix = {
+    nvidia.enable = true;
+    greetd.enable = false;
+  };
 
   users = {
     defaultUserShell = pkgs.zsh;
@@ -43,27 +46,17 @@ in {
       powerOnBoot = false;
     };
     # graphics = {
-      # May fix lag if i experiance it - Hyprland version of mesa drivers
-      # package = pkgs.unstable.mesa.drivers;
-      #
-      # # if you also want 32-bit support (e.g for Steam)
-      # enable32Bit = true;
-      # package32 = pkgs.unstable.pkgsi686Linux.mesa.drivers;
+    # May fix lag if i experiance it - Hyprland version of mesa drivers
+    # package = pkgs.unstable.mesa.drivers;
+    #
+    # # if you also want 32-bit support (e.g for Steam)
+    # enable32Bit = true;
+    # package32 = pkgs.unstable.pkgsi686Linux.mesa.drivers;
     # };
   };
 
   # Configure keymap in X11
   services = {
-    # greetd = {
-    #   enable = true;
-    #   settings = rec {
-    #     initial_session = {
-    #       command = "uwsm start -- hyprland.desktop";
-    #       user = "leon";
-    #     };
-    #     default_session = initial_session;
-    #   };
-    # };
     ollama = {
       enable = false;
       # Optional: preload models, see https://ollama.com/library
@@ -116,12 +109,6 @@ in {
         {
           withVencord = true;
         })
-      # pkgs.vesktop
-      # pkgs.webcord
-      # (pkgs.discord.override {
-      #  withVencord = true;
-      #  })
-      # pkgs.unstable.hyprnotify
       # (pkgs.heroic.override {
       #   extraPkgs = pkgs: [
       #     pkgs.gamescope
@@ -209,12 +196,7 @@ in {
 
   fonts = {
     fontDir.enable = true;
-    # packages = with pkgs; [
-    #   candy-icons
-    # ];
   };
-
-  # Bootloader.
 
   boot = {
     loader = {
