@@ -87,7 +87,7 @@
   home = {
     username = "leon";
     homeDirectory = "/home/leon";
-    stateVersion = "24.05";
+    stateVersion = "24.05"; # Don't change this I'm pretty sure
     packages = [
       pkgs.just
 

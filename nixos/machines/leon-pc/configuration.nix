@@ -12,6 +12,8 @@ in {
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
+  modules.nix.nvidia.enable = true;
+
   users = {
     defaultUserShell = pkgs.zsh;
     users = {
@@ -33,9 +35,7 @@ in {
 
   nixpkgs = {
     overlays = [inputs.self.overlays.unstable-packages];
-    config = {
-      allowUnfree = true;
-    };
+    config.allowUnfree = true;
   };
 
   hardware = {
@@ -45,15 +45,12 @@ in {
     };
     graphics = {
       enable = true;
-    };
-    nvidia = {
-      modesetting.enable = true;
-      powerManagement = {
-        enable = false; #Unlikely to need this one (Experimental)
-        finegrained = false;
-      };
-      open = true;
-      nvidiaSettings = true;
+      # May fix lag if i experiance it - Hyprland version of mesa drivers
+      # package = pkgs.unstable.mesa.drivers;
+      #
+      # # if you also want 32-bit support (e.g for Steam)
+      # enable32Bit = true;
+      # package32 = pkgs.unstable.pkgsi686Linux.mesa.drivers;
     };
   };
 
@@ -82,7 +79,6 @@ in {
         layout = "us";
         variant = "";
       };
-      videoDrivers = ["nvidia"];
     };
     pipewire = {
       enable = true;

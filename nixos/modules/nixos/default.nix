@@ -6,5 +6,6 @@
 }: {
   imports = [
     ./desktop
+    ./nvidia.nix
   ];
 }
