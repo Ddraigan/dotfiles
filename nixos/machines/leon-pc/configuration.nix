@@ -14,7 +14,7 @@ in {
 
   modules.nix = {
     nvidia.enable = true;
-    greetd.enable = false;
+    greetd.enable = true;
   };
 
   users = {
@@ -79,11 +79,11 @@ in {
       jack.enable = true;
       wireplumber.enable = true;
     };
-    displayManager = {
-      sddm = {
-        wayland.enable = true;
-      };
-    };
+    # displayManager = {
+    #   sddm = {
+    #     wayland.enable = true;
+    #   };
+    # };
   };
 
   # Configure console keymap

@@ -17,15 +17,17 @@
   in {
     services.greetd = {
       enable = true;
+      vt = 1;
+      restart = false;
       settings = {
-        default_session = {
-          command = "Hyprland -- config ${hyprGreetConf}";
+        initial_session = {
+          command = "Hyprland --config ${hyprGreetConf}";
           user = "greeter";
         };
-        # default_session = {
-        #   command = "uwsm start default";
-        #   user = "leon";
-        # };
+        default_session = {
+          command = "uwsm start default";
+          user = "leon";
+        };
       };
     };
     programs.regreet = {
