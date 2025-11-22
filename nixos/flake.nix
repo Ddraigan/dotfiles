@@ -30,21 +30,14 @@
     };
     hyprlock = {
       url = "github:hyprwm/hyprlock";
-      # Doesn't have this sadly
-      # inputs.hyprland.follows = "hyprland";
     };
     hyprsplit = {
       url = "github:shezdy/hyprsplit";
       inputs.hyprland.follows = "hyprland";
     };
-    # hypr-darkwindow = {
-    #   url = "github:micha4w/Hypr-DarkWindow";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
     hyprqt6engine = {
       url = "github:hyprwm/hyprqt6engine";
     };
-    # ashell.url = "github:MalpenZibo/ashell";
   };
 
   outputs = {

@@ -72,7 +72,6 @@ in {
         };
         plugins = [
           inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
-          # inputs.hypr-darkwindow.packages.${pkgs.system}.Hypr-DarkWindow
         ];
         settings =
           {

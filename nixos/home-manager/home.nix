@@ -1,6 +1,5 @@
 {
   inputs,
-  lib,
   config,
   pkgs,
   ...
@@ -23,6 +22,7 @@
   modules = {
     theme.stylix.enable = true;
     desktop = {
+      ashell.enable = true;
       hypr = {
         hyprland = {
           enable = true;
