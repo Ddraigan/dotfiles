@@ -21,7 +21,7 @@
       ];
       extraConfig = {
         # Keybinds vim-like
-        kb-mode-complete =  "";
+        kb-mode-complete = "";
         kb-row-up = "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
         kb-row-down = "Down,Control+j";
         kb-row-left = "Control+h";
@@ -56,6 +56,7 @@
         "window" = {
           fullscreen = false;
           transparency = "real";
+          position = "center";
           "background-color" = lib.mkForce (mkLiteral "transparent");
           padding = mkLiteral "10px 20px";
         };
@@ -115,7 +116,7 @@
         # };
 
         "element-icon" = {
-          size = mkLiteral "64px";
+          size = mkLiteral "48px";
           "horizontal-align" = mkLiteral "0.5";
           "background-color" = lib.mkForce (mkLiteral "transparent");
         };
