@@ -8,5 +8,6 @@
     ./wezterm
     ./zoxide
     ./zsh
+    ./terminal-core.nix
   ];
 }

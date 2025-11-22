@@ -20,19 +20,38 @@
       vt = 1;
       restart = false;
       settings = {
-        initial_session = {
-          # command = "${config.programs.hyprland.package}/bin/Hyprland --config ${hyprGreetConf}";
-          command = "uswm start hyprland.desktop --config ${hyprGreetConf}";
-          user = "greeter";
-        };
         default_session = {
-          command = "uwsm start default";
-          user = "leon";
+          command = "${config.programs.hyprland.package}/bin/hyprland --config ${hyprGreetConf}";
+          user = "greeter";
         };
       };
     };
+    environment.etc."greetd/skyline.jpg".source = ./skyline.jpg;
     programs.regreet = {
       enable = true;
+      settings = {
+        GTK = {
+          application_prefer_dark_theme = true;
+        };
+        background = {
+          path = "/etc/greetd/skyline.jpg";
+          fit = "Contain";
+        };
+      };
+      theme = {
+        package = pkgs.catppuccin-gtk;
+        name = "Catppuccin-Mocha-Standard-Lavender-Dark";
+      };
+      font = {
+        package = pkgs.nerd-fonts.hack;
+        name = "Hack Nerd Font";
+      };
+      iconTheme = {
+        package = pkgs.papirus-icon-theme;
+        name = "Papirus-Dark";
+      };
+      # extraCss = ''
+      # '';
     };
   });
 }

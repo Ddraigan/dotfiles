@@ -1,11 +1,10 @@
 {
-  lib,
   config,
+  lib,
   pkgs,
   ...
 }: {
   imports = [
-    ./terminal-core.nix
     ./theme
   ];
 }

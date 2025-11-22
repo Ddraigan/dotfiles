@@ -20,6 +20,7 @@
       url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # catppuccin.url = "github:catppuccin/nix";
     # nixai.url = "github:olafkfreund/nix-ai-help";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
@@ -62,8 +63,9 @@
           specialArgs = {inherit inputs;};
           modules = [
             ./machines/leon-pc/configuration.nix
-            # ./modules/shared
+            ./modules/shared
             ./modules/nixos
+            # inputs.catppuccin.nixosModules.catppuccin
           ];
         };
     };
