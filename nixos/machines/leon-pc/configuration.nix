@@ -28,7 +28,6 @@ in {
           };
         in
           pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
-        #packages = with pkgs; [ ];
       };
     };
   };
@@ -43,15 +42,14 @@ in {
       enable = false;
       powerOnBoot = false;
     };
-    graphics = {
-      enable = true;
+    # graphics = {
       # May fix lag if i experiance it - Hyprland version of mesa drivers
       # package = pkgs.unstable.mesa.drivers;
       #
       # # if you also want 32-bit support (e.g for Steam)
       # enable32Bit = true;
       # package32 = pkgs.unstable.pkgsi686Linux.mesa.drivers;
-    };
+    # };
   };
 
   # Configure keymap in X11
