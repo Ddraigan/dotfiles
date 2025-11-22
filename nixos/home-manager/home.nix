@@ -82,6 +82,7 @@
         init.defaultBranch = "main";
       };
     };
+    fastfetch.enable = true;
   };
 
   home = {

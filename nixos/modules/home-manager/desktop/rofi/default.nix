@@ -140,9 +140,6 @@
           "horizontal-align" = mkLiteral "0.5";
         };
 
-        # "button selected" = {
-        # };
-
         "scrollbar" = {
           width = 4;
           border = 0;

@@ -6,9 +6,6 @@
 }: {
   options.modules.terminal.zsh.enable = lib.mkEnableOption "Enable zsh";
   config = lib.mkIf config.modules.terminal.zsh.enable {
-    home.packages = [
-      pkgs.zsh
-    ];
     programs.zsh = {
       enable = true;
       syntaxHighlighting.enable = true;
@@ -17,12 +14,13 @@
         expireDuplicatesFirst = true;
         ignoreDups = true;
       };
-
       initContent = ''
-        # Auto attach to Tmux session or create a new session called default
-        # if ! { [ "$TERM" = "xterm-256color" ] && [ -n "$TMUX" ]; } then
-        #   tmux new -As default
-        # fi
+        tty=$(tty)
+        if [[ $tty == "/dev/pts/0" ]]; then
+          if ! { [ "$TERM" = "xterm-256color" ] && [ -n "$TMUX" ]; } then
+            tmux new-session -A -s main "zsh -c 'fastfetch; exec zsh'"
+          fi
+        fi
       '';
     };
   };
@@ -34,5 +32,10 @@
 # Use this to go straight into hyprland
 #  if uwsm check may-start; then
 #     exec uwsm start hyprland.desktop
+# fi
+#
+# Auto attach to Tmux session or create a new session called default
+# if ! { [ "$TERM" = "xterm-256color" ] && [ -n "$TMUX" ]; } then
+#   tmux new -As default
 # fi
 
