@@ -8,5 +8,6 @@
     ./desktop
     ./nvidia.nix
     ./greetd.nix
+    ./secureboot.nix
   ];
 }

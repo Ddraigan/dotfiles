@@ -30,12 +30,17 @@
     programs.regreet = {
       enable = true;
       settings = {
-        GTK = {
-          application_prefer_dark_theme = true;
+        env = {
+          XDG_CURRENT_DESKTOP = "Hyprland";
+          XDG_SESSION_TYPE = "wayland";
+          XDG_SESSION_DESKTOP = "Hyprland";
         };
         background = {
           path = "/etc/greetd/skyline.jpg";
           fit = "Contain";
+        };
+        GTK = {
+          application_prefer_dark_theme = true;
         };
       };
       theme = {

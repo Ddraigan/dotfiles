@@ -30,6 +30,7 @@
         };
         hyprpaper.enable = true;
         hyprlock.enable = true;
+        hypridle.enable = true;
       };
       rofi.enable = true;
       walker.enable = false;

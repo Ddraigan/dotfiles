@@ -15,6 +15,10 @@ in {
   modules.nix = {
     nvidia.enable = true;
     greetd.enable = true;
+    # secureboot.enable = true;
+    desktop = {
+      hyprland.enable = true;
+    };
   };
 
   users = {
@@ -79,11 +83,6 @@ in {
       jack.enable = true;
       wireplumber.enable = true;
     };
-    # displayManager = {
-    #   sddm = {
-    #     wayland.enable = true;
-    #   };
-    # };
   };
 
   # Configure console keymap
@@ -97,11 +96,8 @@ in {
       pkgs.upower
       pkgs.mangohud
       pkgs.protonup
-      pkgs.hyprpolkitagent
-      # pkgs.pulseaudio
       pkgs.kdePackages.xwaylandvideobridge
       pkgs.helvum
-      # pkgs.spotify
       pkgs.bitwarden
       pkgs.rustup
       pkgs.nixd
@@ -115,20 +111,6 @@ in {
       #   ];
       # })
     ];
-    variables = {
-      # UWSM manages these
-      # XDG_CURRENT_DESKTOP = "Hyprland";
-      # XDG_SESSION_TYPE = "wayland";
-      # XDG_SESSION_DESKTOP = "Hyprland";
-    };
-    sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/leon/.steam/root/compatibilitytools.d";
-      NIXOS_OZONE_WL = "1";
-      MOZ_ENABLE_WAYLAND = "1";
-      T_QPA_PLATFORM = "wayland";
-      GDK_BACKEND = "wayland";
-      WLR_NO_HARDWARE_CURSORS = "1";
-    };
   };
 
   nix = let
@@ -143,27 +125,9 @@ in {
   };
 
   programs = {
-    # regreet.enable = true;
     gdk-pixbuf.modulePackages = [pkgs.librsvg];
     dconf.enable = true;
     zsh.enable = true;
-    uwsm = {
-      enable = true;
-      # waylandCompositors = {
-      #   hyprland = {
-      #     prettyName = "Hyprland";
-      #     comment = "Hyprland compositor managed by UWSM";
-      #     binPath = "/home/leon/.nix-profile/bin/Hyprland";
-      #   };
-      # };
-    };
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-      withUWSM = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    };
     steam = {
       enable = true;
       gamescopeSession.enable = true;
@@ -172,20 +136,6 @@ in {
       dedicatedServer.openFirewall = true;
     };
     gamemode.enable = true;
-  };
-
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
-    config = {
-      common.default = ["gtk"];
-      hyprland.default = ["hyprland" "gtk"];
-    };
-    extraPortals = [
-      # pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk
-      # pkgs.xdg-desktop-portal-wlr
-    ];
   };
 
   security = {
@@ -254,8 +204,10 @@ in {
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [57621 4321];
-  networking.firewall.allowedUDPPorts = [5353];
+  networking.firewall = {
+    allowedTCPPorts = [57621 4321];
+    allowedUDPPorts = [5353];
+  };
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
@@ -267,54 +219,3 @@ in {
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
 }
-# modules = {
-#   desktop = {
-#     thunar = false;
-#   };
-# };
-# stylix = {
-#   enable = true;
-#   autoEnable = true;
-#   homeManagerIntegration.autoImport = false;
-#   cursor = {
-#     package = pkgs.bibata-cursors;
-#     name = "Bibata-Modern-Ice";
-#     size = 16;
-#   };
-#   fonts = {
-#     monospace = {
-#       package = pkgs.nerd-fonts.hack;
-#       name = "Hack Nerd Font";
-#     };
-#     sansSerif = {
-#       package = pkgs.dejavu_fonts;
-#       name = "DejaVu Sans";
-#     };
-#     serif = {
-#       package = pkgs.dejavu_fonts;
-#       name = "DejaVu Serif";
-#     };
-#   };
-#   opacity = {
-#     applications = 0.5;
-#   };
-#   base16Scheme = {
-#     base00 = "1e1e2e"; # base
-#     base01 = "181825"; # mantle
-#     base02 = "313244"; # surface0
-#     base03 = "45475a"; # surface1
-#     base04 = "585b70"; # surface2
-#     base05 = "cdd6f4"; # text
-#     base06 = "f5e0dc"; # rosewater
-#     base07 = "b4befe"; # lavender
-#     base08 = "f38ba8"; # red
-#     base09 = "fab387"; # peach
-#     base0A = "f9e2af"; # yellow
-#     base0B = "a6e3a1"; # green
-#     base0C = "94e2d5"; # teal
-#     base0D = "89b4fa"; # blue
-#     base0E = "cba6f7"; # mauve
-#     base0F = "f2cdcd"; # flamingo
-#   };
-# };
-
