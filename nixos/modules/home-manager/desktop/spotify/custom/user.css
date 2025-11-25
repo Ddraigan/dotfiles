@@ -1,0 +1,140 @@
+/* Set theme vars to transparent where possible */
+:root {
+  --spice-main: rgba(0, 0, 0, 0) !important;
+  --spice-main-2: rgba(0, 0, 0, 0) !important;
+  --spice-canvas: rgba(0, 0, 0, 0) !important;
+  --spice-bg: rgba(0, 0, 0, 0) !important;
+}
+
+/* Generic root / main containers */
+.Root,
+.Root__main-view,
+.main-root,
+.main-view-container__scroll-node,
+.main-view-container__scroll-node-child,
+.layout,
+.app-root,
+.body-root,
+#app,
+[data-testid="root"],
+[data-testid="main-view"] {
+  background: rgba(0, 0, 0, 0) !important;
+  background-image: none !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Sidebars, navbars, topbars, overlays */
+.main-navBar-navBar,
+.main-topBar-container,
+.main-topBar-background,
+.Root__now-playing-bar,
+.now-playing,
+.now-playing-bar,
+.Root__overlay,
+.overlay,
+.overlay-root,
+.sidebar,
+.left-column,
+.right-column,
+.contentSpacing {
+  background: rgba(0, 0, 0, 0) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Lists, track rows, cards */
+.tracklist,
+.tracklist-row,
+.trackList,
+.main-trackList,
+.card,
+.card-root,
+.react-root {
+  background: rgba(0, 0, 0, 0) !important;
+  box-shadow: none !important;
+}
+
+/* Pseudo elements (gradients & overlays) */
+.Root::before,
+.Root::after,
+.main-root::before,
+.main-root::after,
+.main-topBar-background::before,
+.main-topBar-background::after,
+[data-testid="background"]::before,
+[data-testid="background"]::after {
+  background: transparent !important;
+  content: none !important;
+}
+
+/* Scrollbars / scroll containers */
+.os-theme-spotify,
+.os-scrollbar,
+.os-scrollbar-rail,
+.os-scrollbar-thumb,
+.scroll-area {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Album art / large blurred backgrounds */
+.cover-art,
+.cover-art-image,
+.thumbnail,
+.backgroundImage,
+.main-image,
+.artwork,
+.background-blur {
+  background: transparent !important;
+  background-image: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove gradients, overlays on buttons, inputs */
+button,
+.btn,
+input,
+.header,
+.search-box,
+.search-input,
+.search {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Force full transparency on any inline style fallback */
+*[style*="background"],
+*[style*="background-color"],
+*[style*="background-image"],
+*[style*="box-shadow"] {
+  background: transparent !important;
+  background-image: none !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  box-shadow: none !important;
+}
+
+/* Ensure not hidden by any forced backdrop filter */
+* {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Optional: make text areas more readable when background shows through */
+body,
+.Root,
+.main-root {
+  color: inherit !important;
+  -webkit-text-fill-color: unset !important;
+}
+
+/* Last resort: forcibly set the root container opacity to full (so compositor opacity applies) */
+#app,
+.Root,
+.main-root {
+  background-clip: padding-box !important;
+  -webkit-background-clip: padding-box !important;
+}

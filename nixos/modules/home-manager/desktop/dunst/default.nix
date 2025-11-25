@@ -28,7 +28,7 @@
           # Notification Window (Not each single notification)
           width = "(0, 350)";
           height = "(0, 300)";
-          offset = "(20, 30)";
+          offset = "(20, 22)";
           origin = "top-right";
           notification_limit = 10;
 
