@@ -136,6 +136,10 @@ in {
       dedicatedServer.openFirewall = true;
     };
     gamemode.enable = true;
+    localsend = {
+      enable = true;
+      openFirewall = true;
+    };
   };
 
   security = {
