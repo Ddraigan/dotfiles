@@ -22,7 +22,8 @@
   modules = {
     theme.stylix.enable = true;
     desktop = {
-      ashell.enable = true;
+      ashell.enable = false;
+      dunst.enable = true;
       hypr = {
         hyprland = {
           enable = true;
@@ -32,19 +33,18 @@
         hyprlock.enable = true;
         hypridle.enable = true;
       };
-      rofi.enable = true;
-      walker.enable = false;
-      zen.enable = true;
+      mpv.enable = true;
       nemo = {
         enable = true;
         extensions = [
           pkgs.nemo-preview
         ];
       };
-      waybar.enable = true;
-      dunst.enable = true;
+      rofi.enable = true;
       spicetify.enable = true;
+      waybar.enable = true;
       wlogout.enable = true;
+      zen.enable = true;
     };
     terminal = {
       nvim.enable = true;
@@ -55,6 +55,7 @@
         primaryTerminal = true;
       };
       zoxide.enable = true;
+      eza.enable = true;
       zsh.enable = true;
     };
   };
