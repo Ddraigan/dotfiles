@@ -85,6 +85,20 @@
           inputs.spicetify-nix.homeManagerModules.spicetify
         ];
       };
+      keane = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+        };
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./home-manager/home.nix
+          ./modules/shared
+          ./modules/home-manager
+          inputs.stylix.homeModules.stylix
+          inputs.zen-browser.homeModules.beta
+          inputs.spicetify-nix.homeManagerModules.spicetify
+        ];
+      };
     };
   };
 }
