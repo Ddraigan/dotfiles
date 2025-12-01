@@ -191,6 +191,21 @@ in {
               "DP-2, preferred, auto-left, auto"
             ];
 
+            # monitorv2 = [
+            #   {
+            #     output = "DP-1";
+            #     mode = "preferred";
+            #     position = "0x0";
+            #     scale = 1;
+            #   }
+            #   {
+            #     output = "DP-2";
+            #     mode = "preferred";
+            #     position = "auto-left";
+            #     scale = "auto";
+            #   }
+            # ];
+
             animations = {
               enabled = true;
               bezier = "overshot,0.13,0.99,0.29,1.1";

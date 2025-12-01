@@ -36,6 +36,11 @@ in {
         in
           pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
       };
+      keane = {
+        isNormalUser = true;
+        description = "Keane";
+        extraGroups = ["audio" "sound" "video" "input" "pipewire"];
+      };
     };
   };
 
