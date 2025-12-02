@@ -77,7 +77,7 @@
         };
         extraSpecialArgs = {inherit inputs;};
         modules = [
-          ./home-manager/home.nix
+          ./home-manager/leon/home.nix
           ./modules/shared
           ./modules/home-manager
           inputs.stylix.homeModules.stylix
@@ -91,7 +91,7 @@
         };
         extraSpecialArgs = {inherit inputs;};
         modules = [
-          ./home-manager/home.nix
+          ./home-manager/keane/home.nix
           ./modules/shared
           ./modules/home-manager
           inputs.stylix.homeModules.stylix
