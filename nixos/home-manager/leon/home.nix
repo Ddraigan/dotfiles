@@ -107,7 +107,7 @@
     ];
     file = {
       ".config/quickshell" = {
-        source = ../../../../../quickshell;
+        source = ../../../quickshell;
       };
     };
   };
