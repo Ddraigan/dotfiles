@@ -105,6 +105,11 @@
       pkgs.ripgrep
       pkgs.fzf
     ];
+    file = {
+      ".config/quickshell" = {
+        source = ../../../../../quickshell;
+      };
+    };
   };
 
   xdg = {

@@ -7,6 +7,7 @@
 !alacritty/
 !hypr/
 !nixos/
+!quickshell/
 
 # But Ignore These Directories
 tmux/plugins
