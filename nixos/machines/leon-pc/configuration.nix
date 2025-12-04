@@ -27,7 +27,7 @@ in {
       leon = {
         isNormalUser = true;
         description = "Leon Jones";
-        extraGroups = ["networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire"];
+        extraGroups = ["networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire" "docker"];
         openssh.authorizedKeys.keys = let
           authorizedKeys = pkgs.fetchurl {
             url = "https://github.com/Ddraigan.keys";
@@ -179,6 +179,8 @@ in {
       wifi.powersave = false;
     };
   };
+
+  virtualisation.docker.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/London";
