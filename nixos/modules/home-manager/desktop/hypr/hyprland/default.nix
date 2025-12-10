@@ -134,7 +134,8 @@ in {
               "systemctl --user enable --now hyprpolkitagent.service"
               "systemctl --user enable --now hypridle.service" # To start hypridle at launch with uwsm
               "systemctl --user enable --now hyprpaper.service"
-              "systemctl --user enable --now waybar.service"
+              # "systemctl --user enable --now waybar.service"
+              "systemctl --user enable --now dms.service"
               "nm-applet --indicator"
               "wl-paste --watch cliphist store"
               "$terminal"
