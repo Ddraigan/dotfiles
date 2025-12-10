@@ -23,6 +23,7 @@
     theme.stylix.enable = true;
     desktop = {
       ashell.enable = false;
+      quickshell.enable = false;
       dunst.enable = true;
       hypr = {
         hyprland = {
