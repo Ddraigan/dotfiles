@@ -1,27 +1,17 @@
 pragma Singleton
 
 import Quickshell
-import Quickshell.Io
 import QtQuick
 
 Singleton {
   id: root
-  property string time
 
-  Process {
-    id: dateProc
-    command: ["date"]
-    running: true
-
-    stdout: StdioCollector {
-      onStreamFinished: root.time = this.text
-    }
+  readonly property string time: {
+    Qt.formatDateTime(clock.date, "ddd MMM d hh:mm:ss AP t yyyy")
   }
 
-  Timer {
-    interval: 1000
-    running: true
-    repeat: true
-    onTriggered: dateProc.running = true
+  SystemClock {
+    id: clock
+    precision: SystemClock.Seconds
   }
 }
