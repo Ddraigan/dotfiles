@@ -17,5 +17,6 @@
     ./wlogout
     ./nemo
     ./zen
+    ./quickshell
   ];
 }

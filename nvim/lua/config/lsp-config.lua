@@ -25,6 +25,7 @@ M.mason = {
     "clangd",
     "typescript-language-server",
     "tailwindcss-language-server",
+    "qmlls",
 
     -- Formatters
     "prettierd",

@@ -24,6 +24,15 @@
     #   url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+    dgop = {
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dankMaterialShell = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.dgop.follows = "dgop";
+    };
     # catppuccin.url = "github:catppuccin/nix";
     # nixai.url = "github:olafkfreund/nix-ai-help";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -101,6 +110,7 @@
           inputs.stylix.homeModules.stylix
           inputs.zen-browser.homeModules.beta
           inputs.spicetify-nix.homeManagerModules.spicetify
+          inputs.dankMaterialShell.homeModules.dankMaterialShell.default
         ];
       };
     };

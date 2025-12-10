@@ -23,6 +23,7 @@
     theme.stylix.enable = true;
     desktop = {
       ashell.enable = false;
+      quickshell.enable = false;
       dunst.enable = true;
       hypr = {
         hyprland = {
@@ -94,7 +95,10 @@
     packages = [
       pkgs.just
 
+<<<<<<< HEAD
       # inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
+=======
+>>>>>>> b2eb702e248561aa28042c8777876e73b085b45a
       # Image Stuff
       pkgs.gimp
       pkgs.loupe
@@ -105,11 +109,6 @@
       pkgs.ripgrep
       pkgs.fzf
     ];
-    file = {
-      ".config/quickshell" = {
-        source = ../../../quickshell;
-      };
-    };
   };
 
   xdg = {
