@@ -94,7 +94,7 @@
     packages = [
       pkgs.just
 
-      inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
+      # inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
       # Image Stuff
       pkgs.gimp
       pkgs.loupe

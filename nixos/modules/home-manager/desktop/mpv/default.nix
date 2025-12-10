@@ -5,7 +5,7 @@
   ...
 }: {
   options.modules.desktop.mpv = {
-    enable = lib.mkEnableOption "Install configure and enable Nemo file manager";
+    enable = lib.mkEnableOption "Enable MPV";
   };
   config = lib.mkIf config.modules.desktop.mpv.enable {
     programs.mpv = {

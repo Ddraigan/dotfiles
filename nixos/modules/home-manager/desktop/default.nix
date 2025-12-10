@@ -8,6 +8,7 @@
     ./hypr
     ./waybar
     ./rofi
+    ./caelestia
     ./walker
     ./dunst
     ./mpv

@@ -20,10 +20,10 @@
       url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # quickshell = {
+    #   url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # catppuccin.url = "github:catppuccin/nix";
     # nixai.url = "github:olafkfreund/nix-ai-help";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
