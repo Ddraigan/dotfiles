@@ -81,9 +81,11 @@
     element-desktop.enable = true;
     git = {
       enable = true;
-      userName = "Ddraigan";
-      userEmail = "lkjjones1999@gmail.com";
-      extraConfig = {
+      settings = {
+        user = {
+          email = "lkjjones1999@gmail.com";
+          name = "Ddraigan";
+        };
         init.defaultBranch = "main";
       };
     };

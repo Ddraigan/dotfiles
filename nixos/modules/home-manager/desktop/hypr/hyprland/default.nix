@@ -143,15 +143,6 @@ in {
 
             windowrule = [
               "suppress_event maximize, match:class .*"
-              # "opacity 0.8, match:class ^(spotify)$"
-
-              #   # All this stuff hides the xwaylandbridge window
-              #   "opacity 0.0 override, match:class ^(xwaylandvideobridge)$"
-              #   "no_initial_focus, match:class ^(xwaylandvideobridge)$"
-              #   "maxsize 1 1, match:class ^(xwaylandvideobridge)$"
-              #   "no_anim, match:class ^(xwaylandvideobridge)$"
-              #   "no_blur, match:class ^(xwaylandvideobridge)$"
-              #   "no_focus, match:class ^(xwaylandvideobridge)$"
             ];
 
             general = {

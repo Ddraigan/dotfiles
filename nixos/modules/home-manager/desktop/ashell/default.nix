@@ -8,8 +8,7 @@
   options.modules.desktop.ashell = {
     enable = lib.mkEnableOption "Enable Ashell";
   };
-  imports = ["${inputs.home-manager-unstable}/modules/programs/ashell.nix"];
-  config = {
+  config = lib.mkIf config.modules.desktop.ashell.enable {
     # home.packages = [
     #   pkgs.unstable.ashell
     # ];

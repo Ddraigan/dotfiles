@@ -100,10 +100,13 @@ in {
       wezterm-cwd
       pkgs.upower
       pkgs.mangohud
-      pkgs.protonup
-      pkgs.kdePackages.xwaylandvideobridge
+      # NOTE: Changed 25.11
+      pkgs.protonup-ng
+      # NOTE: Changed 25.11
+      # pkgs.kdePackages.xwaylandvideobridge
       pkgs.helvum
-      pkgs.bitwarden
+      # NOTE: Changed 25.11
+      pkgs.bitwarden-desktop
       pkgs.rustup
       pkgs.nixd
       (pkgs.discord-canary.override
