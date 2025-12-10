@@ -110,7 +110,7 @@
           inputs.stylix.homeModules.stylix
           inputs.zen-browser.homeModules.beta
           inputs.spicetify-nix.homeManagerModules.spicetify
-          inputs.dankMaterialShell.homeModules.dankMaterialShell.default
+          # inputs.dankMaterialShell.homeModules.dankMaterialShell.default
         ];
       };
     };

@@ -23,8 +23,10 @@
     theme.stylix.enable = true;
     desktop = {
       ashell.enable = false;
-      quickshell.enable = false;
+      # quickshell.enable = false;
+      # caelestia.enable = false;
       dunst.enable = true;
+      # dms.enable = false;
       hypr = {
         hyprland = {
           enable = true;

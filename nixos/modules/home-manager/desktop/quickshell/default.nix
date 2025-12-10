@@ -11,11 +11,11 @@
       packages = [
         inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
       ];
-      file = {
-        ".config/quickshell" = {
-          source = ./config;
-        };
-      };
+      # file = {
+      #   ".config/quickshell" = {
+      #     source = ./config;
+      #   };
+      # };
     };
   };
 }

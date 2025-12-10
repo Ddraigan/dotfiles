@@ -8,7 +8,6 @@
     ./hypr
     ./waybar
     ./rofi
-    ./caelestia
     ./walker
     ./dunst
     ./mpv
@@ -17,6 +16,5 @@
     ./wlogout
     ./nemo
     ./zen
-    ./quickshell
   ];
 }
