@@ -94,7 +94,6 @@
     packages = [
       pkgs.just
 
-      inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
       # Image Stuff
       pkgs.gimp
       pkgs.loupe
@@ -105,11 +104,6 @@
       pkgs.ripgrep
       pkgs.fzf
     ];
-    file = {
-      ".config/quickshell" = {
-        source = ../../../quickshell;
-      };
-    };
   };
 
   xdg = {
