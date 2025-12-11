@@ -11,6 +11,7 @@ in {
     modules.desktop.hypr.hyprland = {
       enable = lib.mkEnableOption "Enable Hyprland";
       uwsm = lib.mkEnableOption "Use UWSM?";
+      dms = lib.mkEnableOption "Use DMS?";
     };
   };
 
@@ -134,21 +135,51 @@ in {
               "systemctl --user enable --now hyprpolkitagent.service"
               "systemctl --user enable --now hypridle.service" # To start hypridle at launch with uwsm
               "systemctl --user enable --now hyprpaper.service"
-              "systemctl --user enable --now waybar.service"
-              # "systemctl --user enable --now dms.service"
+              # "systemctl --user enable --now waybar.service"
+              "systemctl --user enable --now dms.service"
               "nm-applet --indicator"
-              "wl-paste --watch cliphist store"
+              "wl-paste --watch cliphist store &"
               "$terminal"
             ];
 
             windowrule = [
               "suppress_event maximize, match:class .*"
             ];
+            # # Opacity for inactive windows
+            # windowrulev2 = opacity 0.9 0.9, floating:0, focus:0
+            #
+            # # GNOME apps
+            # windowrulev2 = rounding 12, class:^(org\.gnome\.)
+            # windowrulev2 = noborder, class:^(org\.gnome\.)
+            #
+            # # Terminal apps - no borders
+            # windowrulev2 = noborder, class:^(org\.wezfurlong\.wezterm)$
+            # windowrulev2 = noborder, class:^(Alacritty)$
+            # windowrulev2 = noborder, class:^(zen)$
+            # windowrulev2 = noborder, class:^(com\.mitchellh\.ghostty)$
+            # windowrulev2 = noborder, class:^(kitty)$
+            #
+            # # Floating windows
+            # windowrulev2 = float, class:^(gnome-calculator)$
+            # windowrulev2 = float, class:^(blueman-manager)$
+            # windowrulev2 = float, class:^(org\.gnome\.Nautilus)$
+            #
+            # # Open DMS windows as floating by default
+            # windowrulev2 = float, class:^(org.quickshell)$
+
+            layerrule = [
+              "noanim, ^(dms)$"
+            ];
 
             general = {
-              border_size = 2;
+              # DMS
+              border_size = 0;
               gaps_in = 5;
-              gaps_out = 20;
+              gaps_out = 5;
+
+              # border_size = 2;
+              # gaps_in = 5;
+              # gaps_out = 20;
               resize_on_border = true;
               allow_tearing = false;
               layout = "dwindle";
@@ -158,15 +189,26 @@ in {
             };
 
             decoration = {
-              rounding = 10;
+              # DMS
+              rounding = 12;
               active_opacity = 1.0;
-              inactive_opacity = 1.0;
+              inactive_opacity = 0.9;
               shadow = {
                 enabled = true;
-                range = 4;
-                render_power = 3;
-                color = "rgba(1a1a1aee)";
+                range = 30;
+                render_power = 5;
+                offset = 0 5;
+                color = rgba 00000070;
               };
+              # rounding = 10;
+              # active_opacity = 1.0;
+              # inactive_opacity = 1.0;
+              # shadow = {
+              #   enabled = true;
+              #   range = 4;
+              #   render_power = 3;
+              #   color = "rgba(1a1a1aee)";
+              # };
               blur = {
                 enabled = true;
                 size = 3;
@@ -248,14 +290,25 @@ in {
             # t -> transparent, cannot be shadowed by other binds.
             # i -> ignore mods, will ignore modifiers.
             bindel = [
-              ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%+"
-              ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%-"
+              # ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%+"
+              # ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%-"
+
+              # DMS
+              # Audio Controls
+              ", XF86AudioRaiseVolume, exec, dms ipc call audio increment 2"
+              ", XF86AudioLowerVolume, exec, dms ipc call audio decrement 2"
+              # Brightness Controls
+              ", XF86MonBrightnessUp, exec, dms ipc call brightness increment 5"
+              ", XF86MonBrightnessDown, exec, dms ipc call brightness decrement 5"
             ];
             bindl = [
               ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
               ", XF86AudioPlay, exec, playerctl play-pause"
               ", XF86AudioPrev, exec, playerctl previous"
               ", XF86AudioNext, exec, playerctl next"
+
+              # DMS
+              ", XF86AudioMute, exec, dms ipc call audio mute"
             ];
             binde = [
               # Vim Style Window Resize
@@ -280,7 +333,7 @@ in {
               "$mod, i, exec, $screenshotRegion"
               "$mod SHIFT, I, exec, $screenshot"
               ", PRINT, exec, $screenshot"
-              "$mod, V, exec, $paste"
+              # "$mod, V, exec, $paste"
               "$mod, C, exec, $copy"
 
               "$mod, D, exec, $drun"
@@ -314,29 +367,19 @@ in {
               "$mod SHIFT, K, movewindow, u"
               "$mod SHIFT, J, movewindow, d"
 
-              # "$mod, 1, workspace, 1"
-              # "$mod, 2, workspace, 2"
-              # "$mod, 3, workspace, 3"
-              # "$mod, 4, workspace, 4"
-              # "$mod, 5, workspace, 5"
-              # "$mod, 6, workspace, 6"
-              # "$mod, 7, workspace, 7"
-              # "$mod, 8, workspace, 8"
-              # "$mod, 9, workspace, 9"
-              # "$mod, 10, workspace, 0"
-
-              # "$mod SHIFT, 1, movetoworkspace, 1"
-              # "$mod SHIFT, 2, movetoworkspace, 2"
-              # "$mod SHIFT, 3, movetoworkspace, 3"
-              # "$mod SHIFT, 4, movetoworkspace, 4"
-              # "$mod SHIFT, 5, movetoworkspace, 5"
-              # "$mod SHIFT, 6, movetoworkspace, 6"
-              # "$mod SHIFT, 7, movetoworkspace, 7"
-              # "$mod SHIFT, 8, movetoworkspace, 8"
-              # "$mod SHIFT, 9, movetoworkspace, 9"
-              # "$mod SHIFT, 0, movetoworkspace, 0"
-
               "$mod, W, togglespecialworkspace, magic"
+
+              # DMS
+              # Application Launchers
+              "$mod, space, exec, dms ipc call spotlight toggle"
+              "$mod, V, exec, dms ipc call clipboard toggle"
+              "$mod, M, exec, dms ipc call processlist focusOrToggle"
+              "$mod, comma, exec, dms ipc call settings focusOrToggle"
+              "$mod, N, exec, dms ipc call notifications toggle"
+              "$mod, Y, exec, dms ipc call dankdash wallpaper"
+              "$mod, TAB, exec, dms ipc call hypr toggleOverview"
+              # Security
+              "$mod ALT, L, exec, dms ipc call lock lock"
             ];
           }
           // import

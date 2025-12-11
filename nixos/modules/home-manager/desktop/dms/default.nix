@@ -14,7 +14,7 @@
   config = lib.mkIf config.modules.desktop.dms.enable {
     programs.dankMaterialShell = {
       enable = true;
-      quickshell.package = pkgs.quickshell;
+      # quickshell.package = pkgs.quickshell;
       systemd = {
         enable = false; # Systemd service for auto-start
         restartIfChanged = true; # Auto-restart dms.service when dankMaterialShell changes
