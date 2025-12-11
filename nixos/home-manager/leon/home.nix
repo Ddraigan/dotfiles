@@ -45,7 +45,7 @@
       };
       rofi.enable = true;
       spicetify.enable = true;
-      waybar.enable = true;
+      waybar.enable = false;
       wlogout.enable = true;
       zen.enable = true;
     };

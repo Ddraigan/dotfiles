@@ -167,13 +167,13 @@ in {
             # # Open DMS windows as floating by default
             # windowrulev2 = float, class:^(org.quickshell)$
 
-            layerrule = [
-              "noanim, ^(dms)$"
-            ];
+            # layerrule = [
+            #   "noanim, ^(dms)$"
+            # ];
 
             general = {
               # DMS
-              border_size = 0;
+              border_size = 1;
               gaps_in = 5;
               gaps_out = 5;
 
@@ -197,8 +197,8 @@ in {
                 enabled = true;
                 range = 30;
                 render_power = 5;
-                offset = 0 5;
-                color = rgba 00000070;
+                offset = "0 5";
+                color = "rgba(00000070)";
               };
               # rounding = 10;
               # active_opacity = 1.0;
