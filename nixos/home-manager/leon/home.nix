@@ -26,7 +26,7 @@
       # quickshell.enable = false;
       # caelestia.enable = false;
       dunst.enable = true;
-      # dms.enable = false;
+      dms.enable = true;
       hypr = {
         hyprland = {
           enable = true;

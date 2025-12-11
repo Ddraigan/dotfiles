@@ -23,8 +23,8 @@
       enableSystemMonitoring = true; # System monitoring widgets (dgop)
       enableClipboard = false; # Clipboard history manager
       enableVPN = true; # VPN management widget
-      enableBrightnessControl = false; # Backlight/brightness controls
-      enableColorPicker = false; # Color picker tool
+      # enableBrightnessControl = false; # Backlight/brightness controls
+      # enableColorPicker = false; # Color picker tool
       enableDynamicTheming = false; # Wallpaper-based theming (matugen)
       enableAudioWavelength = true; # Audio visualizer (cava)
       enableCalendarEvents = true; # Calendar integration (khal)

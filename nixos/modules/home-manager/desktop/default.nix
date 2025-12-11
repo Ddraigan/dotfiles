@@ -15,6 +15,7 @@
     ./spotify
     ./wlogout
     ./nemo
+    ./dms
     ./zen
   ];
 }
