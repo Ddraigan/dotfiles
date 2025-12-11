@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
-      url = "github:nix-community/stylix";
+      url = "github:nix-community/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # quickshell = {
@@ -26,11 +26,11 @@
     # };
     dgop = {
       url = "github:AvengeMedia/dgop";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     dankMaterialShell = {
       url = "github:AvengeMedia/DankMaterialShell";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.dgop.follows = "dgop";
     };
     # catppuccin.url = "github:catppuccin/nix";
@@ -96,6 +96,7 @@
           inputs.stylix.homeModules.stylix
           inputs.zen-browser.homeModules.beta
           inputs.spicetify-nix.homeManagerModules.spicetify
+          # inputs.dankMaterialShell.homeModules.dankMaterialShell.default
         ];
       };
       keane = inputs.home-manager.lib.homeManagerConfiguration {
@@ -110,7 +111,6 @@
           inputs.stylix.homeModules.stylix
           inputs.zen-browser.homeModules.beta
           inputs.spicetify-nix.homeManagerModules.spicetify
-          # inputs.dankMaterialShell.homeModules.dankMaterialShell.default
         ];
       };
     };
