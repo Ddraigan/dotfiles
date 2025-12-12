@@ -61,10 +61,10 @@
         spicetify.enable = false;
         waybar.enable = false;
         tmux.enable = false;
-        # zen-browser = {
-        #   enable = true;
-        #   profileNames = ["default"];
-        # };
+        zen-browser = {
+          enable = true;
+          profileNames = ["default"];
+        };
         wezterm.enable = false;
         gtk = {
           enable = true;

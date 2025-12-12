@@ -25,7 +25,7 @@
       ashell.enable = false;
       # quickshell.enable = false;
       # caelestia.enable = false;
-      dunst.enable = true;
+      dunst.enable = false;
       dms.enable = true;
       hypr = {
         hyprland = {
@@ -33,7 +33,7 @@
           uwsm = true;
         };
         hyprpaper.enable = true;
-        hyprlock.enable = true;
+        hyprlock.enable = false;
         hypridle.enable = true;
       };
       mpv.enable = true;
@@ -43,7 +43,7 @@
           pkgs.nemo-preview
         ];
       };
-      rofi.enable = true;
+      rofi.enable = false;
       spicetify.enable = true;
       waybar.enable = false;
       wlogout.enable = true;

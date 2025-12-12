@@ -144,6 +144,10 @@ in {
 
             windowrule = [
               "suppress_event maximize, match:class .*"
+              "float on, match:class org.quickshell"
+              "float on, match:class gnome-calculator"
+              "float on, match:class blueman-manager"
+              "float on, match:class nemo"
             ];
             # # Opacity for inactive windows
             # windowrulev2 = opacity 0.9 0.9, floating:0, focus:0
@@ -172,14 +176,15 @@ in {
             # ];
 
             general = {
+              # border_size = 2;
+              # gaps_in = 5;
+              # gaps_out = 20;
+
               # DMS
               border_size = 1;
               gaps_in = 5;
               gaps_out = 5;
 
-              # border_size = 2;
-              # gaps_in = 5;
-              # gaps_out = 20;
               resize_on_border = true;
               allow_tearing = false;
               layout = "dwindle";
@@ -302,7 +307,7 @@ in {
               ", XF86MonBrightnessDown, exec, dms ipc call brightness decrement 5"
             ];
             bindl = [
-              ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+              # ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
               ", XF86AudioPlay, exec, playerctl play-pause"
               ", XF86AudioPrev, exec, playerctl previous"
               ", XF86AudioNext, exec, playerctl next"
@@ -327,7 +332,7 @@ in {
               "$mod, p, exec, $colourPicker"
 
               "$mod, escape, exec, uwsm app -- wlogout"
-              "$mod, l, exec, $lockscreen"
+              # "$mod, l, exec, $lockscreen"
 
               # Clipboard
               "$mod, i, exec, $screenshotRegion"
@@ -336,7 +341,7 @@ in {
               # "$mod, V, exec, $paste"
               "$mod, C, exec, $copy"
 
-              "$mod, D, exec, $drun"
+              # "$mod, D, exec, $drun"
               "$mod, B, exec, $browser"
               "$mod, T, exec, $terminal"
               "$mod, F, exec, $fileManager"
@@ -371,7 +376,7 @@ in {
 
               # DMS
               # Application Launchers
-              "$mod, space, exec, dms ipc call spotlight toggle"
+              "$mod, D, exec, dms ipc call spotlight toggle"
               "$mod, V, exec, dms ipc call clipboard toggle"
               "$mod, M, exec, dms ipc call processlist focusOrToggle"
               "$mod, comma, exec, dms ipc call settings focusOrToggle"
