@@ -20,10 +20,6 @@
       url = "github:nix-community/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # quickshell = {
-    #   url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     dgop = {
       url = "github:AvengeMedia/dgop";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -96,7 +92,6 @@
           inputs.stylix.homeModules.stylix
           inputs.zen-browser.homeModules.beta
           inputs.spicetify-nix.homeManagerModules.spicetify
-          # inputs.dankMaterialShell.homeModules.dankMaterialShell.default
         ];
       };
       keane = inputs.home-manager.lib.homeManagerConfiguration {

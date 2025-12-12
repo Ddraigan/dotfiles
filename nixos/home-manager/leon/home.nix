@@ -23,8 +23,6 @@
     theme.stylix.enable = true;
     desktop = {
       ashell.enable = false;
-      # quickshell.enable = false;
-      # caelestia.enable = false;
       dunst.enable = false;
       dms.enable = true;
       hypr = {
