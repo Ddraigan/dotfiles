@@ -142,6 +142,10 @@ in {
               "$terminal"
             ];
 
+            layerrule = [
+              "blur on, match:namespace rofi"
+            ];
+
             windowrule = [
               "suppress_event maximize, match:class .*"
               "float on, match:class org.quickshell"
@@ -341,7 +345,7 @@ in {
               # "$mod, V, exec, $paste"
               "$mod, C, exec, $copy"
 
-              # "$mod, D, exec, $drun"
+              "$mod, D, exec, $drun"
               "$mod, B, exec, $browser"
               "$mod, T, exec, $terminal"
               "$mod, F, exec, $fileManager"
@@ -376,7 +380,7 @@ in {
 
               # DMS
               # Application Launchers
-              "$mod, D, exec, dms ipc call spotlight toggle"
+              "$mod, space, exec, dms ipc call spotlight toggle"
               "$mod, V, exec, dms ipc call clipboard toggle"
               "$mod, M, exec, dms ipc call processlist focusOrToggle"
               "$mod, comma, exec, dms ipc call settings focusOrToggle"
