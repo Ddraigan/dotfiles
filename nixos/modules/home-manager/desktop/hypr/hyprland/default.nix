@@ -144,6 +144,7 @@ in {
 
             layerrule = [
               "blur on, match:namespace rofi"
+              "noanim on, match:namespace dms"
             ];
 
             windowrule = [
@@ -151,7 +152,7 @@ in {
               "float on, match:class org.quickshell"
               "float on, match:class gnome-calculator"
               "float on, match:class blueman-manager"
-              "float on, match:class nemo"
+              # "float on, match:class nemo"
             ];
             # # Opacity for inactive windows
             # windowrulev2 = opacity 0.9 0.9, floating:0, focus:0
