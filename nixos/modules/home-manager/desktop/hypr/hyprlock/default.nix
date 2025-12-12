@@ -6,7 +6,7 @@
   system,
   ...
 }: let
-  hyprlock-package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
+  hyprlock-package = inputs.hyprlock.packages.${pkgs.stdenv.hostPlatform.system}.hyprlock;
   main-monitor = "DP-1";
 in {
   options.modules.desktop.hypr.hyprlock = {

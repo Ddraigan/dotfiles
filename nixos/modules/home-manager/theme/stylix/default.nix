@@ -62,7 +62,7 @@
         waybar.enable = false;
         tmux.enable = false;
         zen-browser = {
-          enable = true;
+          enable = false;
           profileNames = ["default"];
         };
         wezterm.enable = false;

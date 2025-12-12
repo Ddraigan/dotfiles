@@ -72,7 +72,7 @@ in {
           ];
         };
         plugins = [
-          inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
+          inputs.hyprsplit.packages.${pkgs.stdenv.hostPlatform.system}.hyprsplit
         ];
         settings =
           {
@@ -144,7 +144,7 @@ in {
 
             layerrule = [
               "blur on, match:namespace rofi"
-              "noanim on, match:namespace dms"
+              "no_anim on, match:namespace dms"
             ];
 
             windowrule = [
