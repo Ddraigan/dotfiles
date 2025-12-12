@@ -142,12 +142,17 @@ in {
               "$terminal"
             ];
 
+            layerrule = [
+              "blur on, match:namespace rofi"
+              "noanim on, match:namespace dms"
+            ];
+
             windowrule = [
               "suppress_event maximize, match:class .*"
               "float on, match:class org.quickshell"
               "float on, match:class gnome-calculator"
               "float on, match:class blueman-manager"
-              "float on, match:class nemo"
+              # "float on, match:class nemo"
             ];
             # # Opacity for inactive windows
             # windowrulev2 = opacity 0.9 0.9, floating:0, focus:0
@@ -341,7 +346,7 @@ in {
               # "$mod, V, exec, $paste"
               "$mod, C, exec, $copy"
 
-              # "$mod, D, exec, $drun"
+              "$mod, D, exec, $drun"
               "$mod, B, exec, $browser"
               "$mod, T, exec, $terminal"
               "$mod, F, exec, $fileManager"
@@ -376,7 +381,7 @@ in {
 
               # DMS
               # Application Launchers
-              "$mod, D, exec, dms ipc call spotlight toggle"
+              "$mod, space, exec, dms ipc call spotlight toggle"
               "$mod, V, exec, dms ipc call clipboard toggle"
               "$mod, M, exec, dms ipc call processlist focusOrToggle"
               "$mod, comma, exec, dms ipc call settings focusOrToggle"

@@ -41,7 +41,7 @@
           pkgs.nemo-preview
         ];
       };
-      rofi.enable = false;
+      rofi.enable = true;
       spicetify.enable = true;
       waybar.enable = false;
       wlogout.enable = true;
