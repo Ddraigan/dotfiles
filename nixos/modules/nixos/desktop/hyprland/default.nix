@@ -4,7 +4,9 @@
   inputs,
   config,
   ...
-}: {
+}: let
+  sys = pkgs.stdenv.hostPlatform.system;
+in {
   options.modules.nix.desktop.hyprland.enable = lib.mkEnableOption "Enable Hyprland";
   config = lib.mkIf config.modules.nix.desktop.hyprland.enable {
     environment = {
@@ -26,6 +28,12 @@
         WLR_NO_HARDWARE_CURSORS = "1";
       };
     };
+    hardware.graphics = let
+      hyprland-package-sync = inputs.hyprland.inputs.nixpkgs.legacyPackages.${sys};
+    in {
+      package = hyprland-package-sync.mesa;
+      package32 = hyprland-package-sync.pkgsi686Linux.mesa;
+    };
     programs = {
       uwsm = {
         enable = true;
@@ -34,8 +42,8 @@
         enable = true;
         xwayland.enable = true;
         withUWSM = true;
-        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+        package = inputs.hyprland.packages.${sys}.hyprland;
+        portalPackage = inputs.hyprland.packages.${sys}.xdg-desktop-portal-hyprland;
       };
     };
     xdg.portal = {
@@ -46,9 +54,8 @@
         hyprland.default = ["hyprland" "gtk"];
       };
       extraPortals = [
-        # pkgs.xdg-desktop-portal-hyprland
+        # pkgs.xdg-desktop-portal-hyprland # Home manager module provides this one
         pkgs.xdg-desktop-portal-gtk
-        # pkgs.xdg-desktop-portal-wlr
       ];
     };
   };
