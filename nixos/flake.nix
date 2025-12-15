@@ -48,6 +48,10 @@
     hyprqt6engine = {
       url = "github:hyprwm/hyprqt6engine";
     };
+    hypr-darkwindow = {
+      url = "github:micha4w/Hypr-DarkWindow"; # Make sure to change the tag to match your hyprland version
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
   outputs = {

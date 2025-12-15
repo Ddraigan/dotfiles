@@ -6,6 +6,7 @@
   ...
 }: let
   cfg = config.modules.desktop.hypr.hyprland;
+  sys = pkgs.stdenv.hostPlatform.system;
 in {
   options = {
     modules.desktop.hypr.hyprland = {
@@ -47,7 +48,7 @@ in {
 
         # QT
         hyprland-qt-support
-        inputs.hyprqt6engine.packages.${pkgs.stdenv.hostPlatform.system}.default
+        inputs.hyprqt6engine.packages.${sys}.default
 
         # Screenshot Utils
         hyprshot
@@ -58,7 +59,7 @@ in {
         enable = true;
         xwayland.enable = true;
         # package = null;
-        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        package = inputs.hyprland.packages.${sys}.hyprland;
         # portalPackage = "";
         systemd = {
           enable = false; # Being enabled would conflict with UWSM
@@ -72,7 +73,8 @@ in {
           ];
         };
         plugins = [
-          inputs.hyprsplit.packages.${pkgs.stdenv.hostPlatform.system}.hyprsplit
+          inputs.hyprsplit.packages.${sys}.hyprsplit
+          inputs.hypr-darkwindow.packages.${sys}.Hypr-DarkWindow
         ];
         settings =
           {
@@ -104,6 +106,8 @@ in {
                 "$mod SHIFT, W, split:movetoworkspace, special:magic"
               ];
             };
+
+            "plugin:darkwindow:load_shaders" = "chromakey";
 
             # Commands
             "$exitCommand" = "${maybeUWSMExit}";
@@ -152,8 +156,9 @@ in {
               "float on, match:class org.quickshell"
               "float on, match:class gnome-calculator"
               "float on, match:class blueman-manager"
-              # "float on, match:class nemo"
+              "darkwindow:shade chromakey bkg=[.17 .17 .17], match:class spotify"
             ];
+
             # # Opacity for inactive windows
             # windowrulev2 = opacity 0.9 0.9, floating:0, focus:0
             #
@@ -231,8 +236,8 @@ in {
             };
 
             monitor = [
-              "DP-1, preferred, 0x0, 1"
-              "DP-2, preferred, auto-left, auto"
+              "DP-1, preferred, 0x0, 1, bitdepth, 8"
+              "DP-2, preferred, auto-left, auto, bitdepth, 8"
             ];
 
             # monitorv2 = [
