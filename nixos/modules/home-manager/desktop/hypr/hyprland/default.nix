@@ -109,6 +109,13 @@ in {
 
             "plugin:darkwindow:load_shaders" = "chromakey";
 
+            "plugin:darkwindow" = {
+              windowrule = [
+                "darkwindow:shade chromakey bkg=[0.0 0.0 0.0] targetOpacity=0.0, match:class spotify"
+                "darkwindow:shade chromakey bkg=[0.255 0.255 0.255] targetOpacity=0.0, match:class com.github.wwmm.easyeffects"
+              ];
+            };
+
             # Commands
             "$exitCommand" = "${maybeUWSMExit}";
             "$copy" = "wl-copy";
@@ -156,7 +163,6 @@ in {
               "float on, match:class org.quickshell"
               "float on, match:class gnome-calculator"
               "float on, match:class blueman-manager"
-              "darkwindow:shade chromakey bkg=[.17 .17 .17], match:class spotify"
             ];
 
             # # Opacity for inactive windows

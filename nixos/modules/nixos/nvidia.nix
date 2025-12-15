@@ -11,7 +11,7 @@
     hardware = {
       graphics = {
         enable = true; # Enable OpenGL
-        enable32bit = true;
+        enable32Bit = true;
       };
       nvidia = {
         modesetting.enable = true; # Required
