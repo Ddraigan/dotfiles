@@ -143,6 +143,10 @@ in {
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
     };
+    gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
     gamemode.enable = true;
     localsend = {
       enable = true;

@@ -17,5 +17,6 @@
     ./nemo
     ./dms
     ./zen
+    ./obs
   ];
 }
