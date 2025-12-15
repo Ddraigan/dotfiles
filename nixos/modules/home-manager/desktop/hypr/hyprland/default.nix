@@ -328,8 +328,8 @@ in {
               "$mod ALT, J, resizeactive, 0 10"
             ];
             bindm = [
-              "SHIFT, $LMB, movewindow"
-              "ALT, $LMB, resizewindow"
+              "$mod SHIFT, $LMB, movewindow"
+              "$mod ALT, $LMB, resizewindow"
             ];
             bind = [
               # "$mod, TAB, overview:toggle"

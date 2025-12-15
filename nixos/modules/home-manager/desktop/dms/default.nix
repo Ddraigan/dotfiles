@@ -276,13 +276,13 @@
             "showOnLastDisplay" = true;
             "leftWidgets" = [
               "launcherButton"
-              "workspaceSwitcher"
-              "focusedWindow"
+              "weather"
+              "clock"
+              "music"
             ];
             "centerWidgets" = [
-              "music"
-              "clock"
-              "weather"
+              "workspaceSwitcher"
+              "focusedWindow"
             ];
             "rightWidgets" = [
               "systemTray"
