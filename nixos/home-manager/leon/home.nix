@@ -25,6 +25,7 @@
       ashell.enable = false;
       dunst.enable = false;
       dms.enable = true;
+      obs.enable = true;
       hypr = {
         hyprland = {
           enable = true;
@@ -97,6 +98,7 @@
     packages = [
       pkgs.just
 
+      pkgs.deadlock-mod-manager
       # Image Stuff
       pkgs.gimp
       pkgs.loupe
