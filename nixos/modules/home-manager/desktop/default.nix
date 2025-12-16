@@ -14,6 +14,7 @@
     ./ashell
     ./spotify
     ./wlogout
+    ./lutris
     ./nemo
     ./dms
     ./zen
