@@ -18,6 +18,7 @@ in {
     # secureboot.enable = true;
     desktop = {
       hyprland.enable = true;
+      gaming.enable = true;
     };
   };
 
@@ -99,9 +100,6 @@ in {
       pkgs.sbctl
       wezterm-cwd
       pkgs.upower
-      pkgs.mangohud
-      # NOTE: Changed 25.11
-      pkgs.protonup-ng
       # NOTE: Changed 25.11
       # pkgs.kdePackages.xwaylandvideobridge
       pkgs.helvum
@@ -113,11 +111,6 @@ in {
         {
           withVencord = true;
         })
-      # (pkgs.heroic.override {
-      #   extraPkgs = pkgs: [
-      #     pkgs.gamescope
-      #   ];
-      # })
     ];
   };
 
@@ -136,21 +129,6 @@ in {
     gdk-pixbuf.modulePackages = [pkgs.librsvg];
     dconf.enable = true;
     zsh.enable = true;
-    steam = {
-      enable = true;
-      gamescopeSession.enable = true;
-      localNetworkGameTransfers.openFirewall = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-      extraCompatPackages = [
-        pkgs.proton-ge-bin
-      ];
-    };
-    gamescope = {
-      enable = true;
-      capSysNice = true;
-    };
-    gamemode.enable = true;
     localsend = {
       enable = true;
       openFirewall = true;
@@ -177,10 +155,6 @@ in {
       pkiBundle = "/var/lib/sbctl";
     };
   };
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   networking = {
     hostName = "leon-pc";

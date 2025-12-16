@@ -7,5 +7,6 @@
   imports = [
     ./thunar
     ./hyprland
+    ./gaming
   ];
 }
