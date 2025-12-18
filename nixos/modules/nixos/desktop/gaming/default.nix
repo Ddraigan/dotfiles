@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }: {
   options.modules.nix.desktop.gaming.enable = lib.mkEnableOption "Enable Gaming Config";
@@ -10,7 +11,9 @@
       mangohud
       # NOTE: Changed 25.11
       protonup-ng
+      protonup-qt
     ];
+
     programs = {
       steam = {
         enable = true;
@@ -20,7 +23,7 @@
         dedicatedServer.openFirewall = true;
         extraCompatPackages = [
           pkgs.proton-ge-bin
-          inputs.nix-proton-cachyos.packages.${pkgs.stdenv.hostPlatform.system}.proton-cachyos
+          # inputs.nix-proton-cachyos.packages.${pkgs.stdenv.hostPlatform.system}.proton-cachyos
         ];
       };
       gamescope = {
