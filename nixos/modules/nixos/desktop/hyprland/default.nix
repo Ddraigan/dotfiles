@@ -25,6 +25,7 @@ in {
         MOZ_ENABLE_WAYLAND = "1";
         T_QPA_PLATFORM = "wayland";
         GDK_BACKEND = "wayland";
+      inputs.dgop.follows = "dgop";
         WLR_NO_HARDWARE_CURSORS = "1";
       };
     };

@@ -13,10 +13,10 @@
           disable_splash_rendering = true
           disable_hyprland_guiutils_check = true
       }
-            input = {
-              kb_layout = "us";
-              kb_variant = "dvorak";
-              };
+      input = {
+          kb_layout = "us";
+          kb_variant = "dvorak";
+      };
     '';
   in {
     services.greetd = {

@@ -3,34 +3,25 @@
   inputs,
   lib,
   config,
+  isLaptop,
   ...
 }: let
   cfg = config.modules.desktop.hypr.hyprland;
   sys = pkgs.stdenv.hostPlatform.system;
 in {
-  options = {
-    modules.desktop.hypr.hyprland = {
-      enable = lib.mkEnableOption "Enable Hyprland";
-      uwsm = lib.mkEnableOption "Use UWSM?";
-      dms = lib.mkEnableOption "Use DMS?";
-      keyboardLanguage = lib.mkOption {
-        type = lib.types.str;
-        default = "us";
-        description = "Keyboard language";
-      };
-      keyboardLayout = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-          description = "Keyboard layout, e.g. qwerty";
-      };
-    };
+  imports =
+    []
+    ++ (lib.optionals isLaptop [./hosts/laptop.nix])
+    ++ (lib.optionals (!isLaptop) [./hosts/desktop.nix]);
+  options.modules.desktop.hypr.hyprland = {
+    enable = lib.mkEnableOption "Enable Hyprland";
+    uwsm = lib.mkEnableOption "Use UWSM?";
+    dms = lib.mkEnableOption "Use DMS?";
   };
 
   config =
     lib.mkIf cfg.enable
     (let
-      keyboardLanguage = cfg.keyboardLanguage;
-      keyboardLayout = cfg.keyboardLayout;
       maybeWrapUWSMApp = cmd:
         if cfg.uwsm
         then "uwsm app -- ${cmd}"
@@ -253,26 +244,6 @@ in {
               };
             };
 
-            monitor = [
-              "DP-1, preferred, 0x0, 1, bitdepth, 8"
-              "DP-2, preferred, auto-left, auto, bitdepth, 8"
-            ];
-
-            # monitorv2 = [
-            #   {
-            #     output = "DP-1";
-            #     mode = "preferred";
-            #     position = "0x0";
-            #     scale = 1;
-            #   }
-            #   {
-            #     output = "DP-2";
-            #     mode = "preferred";
-            #     position = "auto-left";
-            #     scale = "auto";
-            #   }
-            # ];
-
             animations = {
               enabled = true;
               bezier = "overshot,0.13,0.99,0.29,1.1";
@@ -296,34 +267,35 @@ in {
               disable_hyprland_logo = true;
             };
 
+            monitorv2 = [
+              {
+                output = "DP-1";
+                mode = "preferred";
+                position = "0x0";
+                scale = 1;
+                bitdepth = 8;
+              }
+              {
+                output = "DP-2";
+                mode = "preferred";
+                position = "auto-left";
+                scale = "auto";
+                bitdepth = 8;
+              }
+            ];
+
             input = {
-              # kb_layout = "${keyboardLanguage}";
-              # kb_variant = "${keyboardLayout}";
               kb_layout = "us";
-              kb_variant = "dvorak";
+              # kb_variant = "dvorak";
 
               follow_mouse = 1;
               sensitivity = 0;
-              touchpad = {
-                natural_scroll = true;
-              };
-            };
-
-            gestures = {
-              workspace = true;
             };
 
             "$mod" = "SUPER";
             "$LMB" = "mouse:272";
             "$RMB" = "mouse:273";
 
-            # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
-            # r -> release, will trigger on release of a key.
-            # e -> repeat, will repeat when held.
-            # n -> non-consuming, key/mouse events will be passed to the active window in addition to triggering the dispatcher.
-            # m -> mouse, see below
-            # t -> transparent, cannot be shadowed by other binds.
-            # i -> ignore mods, will ignore modifiers.
             bindel = [
               # ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%+"
               # ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%-"
@@ -417,9 +389,15 @@ in {
               "$mod ALT, L, exec, dms ipc call lock lock"
             ];
           }
-          // import
-          ./mocha.nix
-          {};
+          // import ./mocha.nix {};
       };
     });
 }
+# l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active
+# r -> release, will trigger on release of a key
+# e -> repeat, will repeat when held
+# n -> non-consuming, key/mouse events will be passed to the active window in addition to triggering the dispatcher
+# m -> mouse, see below
+# t -> transparent, cannot be shadowed by other binds
+# i -> ignore mods, will ignore modifiers.
+

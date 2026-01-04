@@ -15,7 +15,7 @@
     programs.ashell = {
       enable = true;
       # package = pkgs.unstable.ashell;
-      # package = inputs.ashell.defaultPackage.${pkgs.system};
+      # package = inputs.ashell.defaultPackage.${pkgs.stdenv.hostPlatform.system};
       settings = {
         log_level = "Info";
         position = "Top";

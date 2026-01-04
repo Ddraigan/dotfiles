@@ -12,7 +12,6 @@
   # config = lib.mkIf config.modules.nix.secureboot.enable {
   #   environment = {
   #     systemPackages = [
-  #       # inputs.nixai.packages.${pkgs.system}.default
   #       pkgs.sbctl
   #     ];
   #   };

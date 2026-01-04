@@ -21,13 +21,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dgop = {
-	    url = "github:AvengeMedia/dgop";
-	    inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     dankMaterialShell = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      # inputs.dgop.follows = "dgop";
     };
     # catppuccin.url = "github:catppuccin/nix";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -112,7 +111,10 @@
         pkgs = import nixpkgs {
           system = "x86_64-linux";
         };
-        extraSpecialArgs = {inherit inputs;};
+        extraSpecialArgs = {
+          isLaptop = true;
+          inherit inputs;
+        };
         modules = [
           ./home-manager/leon/home.nix
           ./modules/shared

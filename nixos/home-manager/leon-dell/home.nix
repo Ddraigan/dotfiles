@@ -31,8 +31,6 @@
         hyprland = {
           enable = true;
           uwsm = true;
-          keyboardLanguage = "us";
-          keyboardLayout = "dvorak";
         };
         hyprpaper.enable = true;
         hyprlock.enable = false;

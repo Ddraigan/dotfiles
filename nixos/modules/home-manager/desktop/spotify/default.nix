@@ -5,7 +5,7 @@
   inputs,
   ...
 }: let
-  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in {
   options.modules.desktop.spicetify.enable = lib.mkEnableOption "Enable Spicetify";
   config = lib.mkIf config.modules.desktop.spicetify.enable {
