@@ -13,12 +13,24 @@ in {
       enable = lib.mkEnableOption "Enable Hyprland";
       uwsm = lib.mkEnableOption "Use UWSM?";
       dms = lib.mkEnableOption "Use DMS?";
+      keyboardLanguage = lib.mkOption {
+        type = lib.types.str;
+        default = "us";
+        description = "Keyboard language";
+      };
+      keyboardLayout = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+          description = "Keyboard layout, e.g. qwerty";
+      };
     };
   };
 
   config =
     lib.mkIf cfg.enable
     (let
+      keyboardLanguage = cfg.keyboardLanguage;
+      keyboardLayout = cfg.keyboardLayout;
       maybeWrapUWSMApp = cmd:
         if cfg.uwsm
         then "uwsm app -- ${cmd}"
@@ -285,8 +297,10 @@ in {
             };
 
             input = {
+              # kb_layout = "${keyboardLanguage}";
+              # kb_variant = "${keyboardLayout}";
               kb_layout = "us";
-              kb_variant = "";
+              kb_variant = "dvorak";
 
               follow_mouse = 1;
               sensitivity = 0;
