@@ -6,14 +6,15 @@
   ...
 }: {
   imports = [
-    inputs.dankMaterialShell.homeModules.dankMaterialShell.default
+    inputs.dankMaterialShell.homeModules.dank-material-shell
   ];
   options.modules.desktop.dms = {
     enable = lib.mkEnableOption "Enable Dank Material Shell";
   };
   config = lib.mkIf config.modules.desktop.dms.enable {
-    programs.dankMaterialShell = {
+    programs.dank-material-shell = {
       enable = true;
+       dgop.package = inputs.dgop;
       # quickshell.package = pkgs.quickshell;
       systemd = {
         enable = false; # Systemd service for auto-start
@@ -21,14 +22,14 @@
       };
       # Core features
       enableSystemMonitoring = true; # System monitoring widgets (dgop)
-      enableClipboard = false; # Clipboard history manager
+      # enableClipboard = false; # Clipboard history manager
       enableVPN = true; # VPN management widget
       # enableBrightnessControl = false; # Backlight/brightness controls
       # enableColorPicker = false; # Color picker tool
       enableDynamicTheming = false; # Wallpaper-based theming (matugen)
       enableAudioWavelength = true; # Audio visualizer (cava)
       enableCalendarEvents = true; # Calendar integration (khal)
-      enableSystemSound = true; # System sound effects
+      # enableSystemSound = true; # System sound effects
 
       default.settings = {
         "currentThemeName" = "cat-pink";

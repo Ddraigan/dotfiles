@@ -3,7 +3,6 @@
   lib,
   config,
   inputs,
-  system,
   ...
 }: let
   hyprlock-package = inputs.hyprlock.packages.${pkgs.stdenv.hostPlatform.system}.hyprlock;

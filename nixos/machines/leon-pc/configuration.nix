@@ -96,12 +96,9 @@ in {
 
   environment = {
     systemPackages = [
-      # inputs.nixai.packages.${pkgs.system}.default
       pkgs.sbctl
       wezterm-cwd
       pkgs.upower
-      # NOTE: Changed 25.11
-      # pkgs.kdePackages.xwaylandvideobridge
       pkgs.helvum
       # NOTE: Changed 25.11
       pkgs.bitwarden-desktop

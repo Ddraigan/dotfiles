@@ -27,7 +27,6 @@
     dankMaterialShell = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.dgop.follows = "dgop";
     };
     # catppuccin.url = "github:catppuccin/nix";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -70,6 +69,16 @@
             ./machines/leon-laptop/configuration.nix
           ];
         };
+      leon-dell =
+        nixpkgs.lib.nixosSystem
+        {
+          specialArgs = {inherit inputs;};
+          modules = [
+            ./machines/leon-dell/configuration.nix
+            ./modules/shared
+            ./modules/nixos
+          ];
+        };
       leon-pc =
         nixpkgs.lib.nixosSystem
         {
@@ -89,6 +98,23 @@
           system = "x86_64-linux";
         };
         extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./home-manager/leon/home.nix
+          ./modules/shared
+          ./modules/home-manager
+          inputs.stylix.homeModules.stylix
+          inputs.zen-browser.homeModules.beta
+          inputs.spicetify-nix.homeManagerModules.spicetify
+        ];
+      };
+      leon-dell = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+        };
+        extraSpecialArgs = {
+          isLaptop = true;
+          inherit inputs;
+        };
         modules = [
           ./home-manager/leon/home.nix
           ./modules/shared
