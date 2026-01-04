@@ -10,7 +10,7 @@
   config = lib.mkIf config.modules.desktop.lutris.enable {
     programs.lutris = {
       enable = true;
-      steamPackage = nixosConfig.programs.steam.package;
+      # steamPackage = nixosConfig.programs.steam.package;
       extraPackages = with pkgs; [
         mangohud
         winetricks

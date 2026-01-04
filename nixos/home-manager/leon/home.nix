@@ -25,7 +25,7 @@
       ashell.enable = false;
       dunst.enable = false;
       dms.enable = true;
-      lutris.enable = true;
+      lutris.enable = false;
       obs.enable = true;
       hypr = {
         hyprland = {
