@@ -168,38 +168,7 @@ in {
               "float on, match:class blueman-manager"
             ];
 
-            # # Opacity for inactive windows
-            # windowrulev2 = opacity 0.9 0.9, floating:0, focus:0
-            #
-            # # GNOME apps
-            # windowrulev2 = rounding 12, class:^(org\.gnome\.)
-            # windowrulev2 = noborder, class:^(org\.gnome\.)
-            #
-            # # Terminal apps - no borders
-            # windowrulev2 = noborder, class:^(org\.wezfurlong\.wezterm)$
-            # windowrulev2 = noborder, class:^(Alacritty)$
-            # windowrulev2 = noborder, class:^(zen)$
-            # windowrulev2 = noborder, class:^(com\.mitchellh\.ghostty)$
-            # windowrulev2 = noborder, class:^(kitty)$
-            #
-            # # Floating windows
-            # windowrulev2 = float, class:^(gnome-calculator)$
-            # windowrulev2 = float, class:^(blueman-manager)$
-            # windowrulev2 = float, class:^(org\.gnome\.Nautilus)$
-            #
-            # # Open DMS windows as floating by default
-            # windowrulev2 = float, class:^(org.quickshell)$
-
-            # layerrule = [
-            #   "noanim, ^(dms)$"
-            # ];
-
             general = {
-              # border_size = 2;
-              # gaps_in = 5;
-              # gaps_out = 20;
-
-              # DMS
               border_size = 1;
               gaps_in = 5;
               gaps_out = 5;
@@ -213,7 +182,6 @@ in {
             };
 
             decoration = {
-              # DMS
               rounding = 12;
               active_opacity = 1.0;
               inactive_opacity = 0.9;
@@ -224,15 +192,6 @@ in {
                 offset = "0 5";
                 color = "rgba(00000070)";
               };
-              # rounding = 10;
-              # active_opacity = 1.0;
-              # inactive_opacity = 1.0;
-              # shadow = {
-              #   enabled = true;
-              #   range = 4;
-              #   render_power = 3;
-              #   color = "rgba(1a1a1aee)";
-              # };
               blur = {
                 enabled = true;
                 size = 3;
@@ -267,22 +226,22 @@ in {
               disable_hyprland_logo = true;
             };
 
-            monitorv2 = [
-              {
-                output = "DP-1";
-                mode = "preferred";
-                position = "0x0";
-                scale = 1;
-                bitdepth = 8;
-              }
-              {
-                output = "DP-2";
-                mode = "preferred";
-                position = "auto-left";
-                scale = "auto";
-                bitdepth = 8;
-              }
-            ];
+            # monitorv2 = [
+            #   {
+            #     output = "DP-1";
+            #     mode = "preferred";
+            #     position = "0x0";
+            #     scale = 1;
+            #     bitdepth = 8;
+            #   }
+            #   {
+            #     output = "DP-2";
+            #     mode = "preferred";
+            #     position = "auto-left";
+            #     scale = "auto";
+            #     bitdepth = 8;
+            #   }
+            # ];
 
             input = {
               kb_layout = "us";
