@@ -312,7 +312,7 @@
             "widgetOutlineColor" = "primary";
             "widgetOutlineOpacity" = 1;
             "widgetOutlineThickness" = 1;
-            "fontScale" = 1.25;
+            "fontScale" = 1.5;
             "autoHide" = false;
             "autoHideDelay" = 250;
             "openOnOverview" = false;

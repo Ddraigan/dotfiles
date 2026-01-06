@@ -99,7 +99,7 @@
     packages = [
       pkgs.just
 
-      pkgs.deadlock-mod-manager
+      # pkgs.deadlock-mod-manager
       # Image Stuff
       pkgs.gimp
       pkgs.loupe
