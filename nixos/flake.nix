@@ -97,7 +97,10 @@
         pkgs = import nixpkgs {
           system = "x86_64-linux";
         };
-        extraSpecialArgs = {inherit inputs;};
+        extraSpecialArgs = {
+          isLaptop = false;
+          inherit inputs;
+        };
         modules = [
           ./home-manager/leon/home.nix
           ./modules/shared
