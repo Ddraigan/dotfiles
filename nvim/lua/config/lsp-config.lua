@@ -7,7 +7,7 @@ M.exclude_configs = {
 
 M.system = {
   nix = {
-    "nixd",
+    -- "nixd",
     "lua_ls",
   },
 }
@@ -26,6 +26,7 @@ M.mason = {
     "typescript-language-server",
     "tailwindcss-language-server",
     "qmlls",
+    "nil",
 
     -- Formatters
     "prettierd",
