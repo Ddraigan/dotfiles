@@ -12,10 +12,12 @@
     enable = lib.mkEnableOption "Enable Dank Material Shell";
   };
   config = lib.mkIf config.modules.desktop.dms.enable {
+    home.packages = [
+      pkgs.unstable.dgop
+    ];
     programs.dank-material-shell = {
       enable = true;
-       dgop.package = inputs.dgop;
-      # quickshell.package = pkgs.quickshell;
+      dgop.package = inputs.dgop;
       systemd = {
         enable = false; # Systemd service for auto-start
         restartIfChanged = true; # Auto-restart dms.service when dankMaterialShell changes
@@ -147,7 +149,7 @@
         "spotlightCloseNiriOverview" = true;
         "niriOverviewOverlayEnabled" = true;
         "weatherLocation" = "Mynydd Isa= CH7 6UE";
-        "weatherCoordinates" = "53.1677268=-3.1121717";
+        "weatherCoordinates" = "53.1677268= -3.1121717";
         "useAutoLocation" = false;
         "weatherEnabled" = true;
         "networkPreference" = "auto";
@@ -266,7 +268,7 @@
             "id" = "default";
             "name" = "Main Bar";
             "enabled" = true;
-            "position" = 0;
+            "position" = 1;
             "screenPreferences" = [
               "all"
             ];
@@ -308,7 +310,7 @@
             "widgetOutlineColor" = "primary";
             "widgetOutlineOpacity" = 1;
             "widgetOutlineThickness" = 1;
-            "fontScale" = 1.5;
+            "fontScale" = 1.25;
             "autoHide" = false;
             "autoHideDelay" = 250;
             "openOnOverview" = false;

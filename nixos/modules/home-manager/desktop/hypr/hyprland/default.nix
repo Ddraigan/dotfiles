@@ -8,7 +8,6 @@
 }: let
   cfg = config.modules.desktop.hypr.hyprland;
   sys = pkgs.stdenv.hostPlatform.system;
-  host = config.networking.hostName or "";
 in {
   imports = [
     ./hosts/${profileName}.nix
@@ -22,20 +21,28 @@ in {
   config =
     lib.mkIf cfg.enable
     (let
-      maybeWrapUWSMApp = cmd:
-        if cfg.uwsm
-        then "uwsm app -- ${cmd}"
-        else cmd;
+      maybeUWSM = {
+        wrap = cmd:
+          if cfg.uwsm
+          then "uwsm app -- ${cmd}"
+          else cmd;
+        exit =
+          if cfg.uwsm
+          then "uwsm stop"
+          else "exit";
+        rofi =
+          if cfg.uwsm
+          then "rofi -show drun -run-command 'uwsm app -- {cmd}'"
+          else "rofi -show drun";
+      };
 
-      maybeUWSMExit =
-        if cfg.uwsm
-        then "uwsm stop"
-        else "exit";
-
-      maybeUWSMRofi =
-        if cfg.uwsm
-        then "rofi -show drun -run-command 'uwsm app -- {cmd}'"
-        else "rofi -show -drun";
+      workspaces = lib.range 1 9;
+      wsBinds =
+        lib.concatMap (i: [
+          "$mod, ${toString i}, split:workspace, ${toString i}"
+          "$mod SHIFT, ${toString i}, split:movetoworkspace, ${toString i}"
+        ])
+        workspaces;
     in {
       home.packages = with pkgs; [
         # Colour Picker
@@ -83,35 +90,14 @@ in {
           {
             "plugin:hyprsplit" = {
               num_workspaces = 9;
-              bind = [
-                "$mod, 1, split:workspace, 1"
-                "$mod, 2, split:workspace, 2"
-                "$mod, 3, split:workspace, 3"
-                "$mod, 4, split:workspace, 4"
-                "$mod, 5, split:workspace, 5"
-                "$mod, 6, split:workspace, 6"
-                "$mod, 7, split:workspace, 7"
-                "$mod, 8, split:workspace, 8"
-                "$mod, 9, split:workspace, 9"
-
-                "$mod SHIFT, 1, split:movetoworkspace, 1"
-                "$mod SHIFT, 2, split:movetoworkspace, 2"
-                "$mod SHIFT, 3, split:movetoworkspace, 3"
-                "$mod SHIFT, 4, split:movetoworkspace, 4"
-                "$mod SHIFT, 5, split:movetoworkspace, 5"
-                "$mod SHIFT, 6, split:movetoworkspace, 6"
-                "$mod SHIFT, 7, split:movetoworkspace, 7"
-                "$mod SHIFT, 8, split:movetoworkspace, 8"
-                "$mod SHIFT, 9, split:movetoworkspace, 9"
-                "$mod SHIFT, 0, split:movetoworkspace, 0"
-
-                "$mod SHIFT, n, split:swapactiveworkspaces, current +1"
-                "$mod SHIFT, W, split:movetoworkspace, special:magic"
-              ];
+              bind =
+                wsBinds
+                ++ [
+                  "$mod SHIFT, n, split:swapactiveworkspaces, current +1"
+                  "$mod SHIFT, W, split:movetoworkspace, special:magic"
+                ];
             };
-
             "plugin:darkwindow:load_shaders" = "chromakey";
-
             "plugin:darkwindow" = {
               windowrule = [
                 "darkwindow:shade chromakey bkg=[0.0 0.0 0.0] targetOpacity=0.0, match:class spotify"
@@ -120,21 +106,21 @@ in {
             };
 
             # Commands
-            "$exitCommand" = "${maybeUWSMExit}";
+            "$exitCommand" = "${maybeUWSM.exit}";
             "$copy" = "wl-copy";
             "$paste" = "wl-paste";
 
             # Programs
-            "$terminal" = "${maybeWrapUWSMApp "wezterm"}";
-            "$fileManager" = "${maybeWrapUWSMApp "nemo"}";
-            "$drun" = "${maybeUWSMRofi}";
-            "$browser" = "${maybeWrapUWSMApp "zen"}";
+            "$terminal" = "${maybeUWSM.wrap "wezterm"}";
+            "$fileManager" = "${maybeUWSM.wrap "nemo"}";
+            "$drun" = "${maybeUWSM.rofi}";
+            "$browser" = "${maybeUWSM.wrap "zen"}";
 
             # Utils
-            "$colourPicker" = "${maybeWrapUWSMApp "hyprpicker -a"}";
-            "$lockScreen" = "${maybeWrapUWSMApp "hyprlock"}";
-            "$screenshot" = "${maybeWrapUWSMApp "hyprshot -m window"}";
-            "$screenshotRegion" = "${maybeWrapUWSMApp "hyprshot -m region output --clipboard-only"}";
+            "$colourPicker" = "${maybeUWSM.wrap "hyprpicker -a"}";
+            "$lockScreen" = "${maybeUWSM.wrap "hyprlock"}";
+            "$screenshot" = "${maybeUWSM.wrap "hyprshot -m window"}";
+            "$screenshotRegion" = "${maybeUWSM.wrap "hyprshot -m region output --clipboard-only"}";
 
             env = [
               "XDG_SCREENSHOTS_DIR,$HOME/Pictures/screenshots"
@@ -294,6 +280,7 @@ in {
 
               "$mod, escape, exec, uwsm app -- wlogout"
               # "$mod, l, exec, $lockscreen"
+              # "$mod, l, exec, $lockscreen"
 
               # Clipboard
               "$mod, i, exec, $screenshotRegion"
@@ -346,6 +333,8 @@ in {
               "$mod, TAB, exec, dms ipc call hypr toggleOverview"
               # Security
               "$mod ALT, L, exec, dms ipc call lock lock"
+
+              "$mod, a, exec, dms ipc call audio cycleoutput"
             ];
           }
           // import ./mocha.nix {};

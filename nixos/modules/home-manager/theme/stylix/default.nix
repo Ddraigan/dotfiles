@@ -20,8 +20,7 @@
       cursor = {
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Ice";
-        size = 60;
-        # size = 20;
+        size = 24;
       };
       fonts = {
         monospace = font.mono;

@@ -134,7 +134,7 @@ in {
 
   security = {
     rtkit.enable = true;
-    pam.services.hyprlock = {}; # Can't unlock without this}
+    pam.services.hyprlock = {}; # Can't unlock without this
     polkit.enable = true;
   };
 

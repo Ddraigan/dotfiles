@@ -72,7 +72,7 @@
   };
 
   services.easyeffects = {
-    enable = true;
+    enable = false;
     package = pkgs.unstable.easyeffects;
   };
 

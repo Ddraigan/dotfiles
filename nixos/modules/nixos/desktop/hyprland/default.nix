@@ -23,7 +23,7 @@ in {
         STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/leon/.steam/root/compatibilitytools.d";
         NIXOS_OZONE_WL = "1";
         MOZ_ENABLE_WAYLAND = "1";
-        T_QPA_PLATFORM = "wayland";
+        QT_QPA_PLATFORM = "wayland";
         GDK_BACKEND = "wayland";
         WLR_NO_HARDWARE_CURSORS = "1";
       };
