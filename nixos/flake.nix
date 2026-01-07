@@ -53,93 +53,47 @@
     };
   };
 
-  outputs = {
-    nixpkgs,
-    ...
-  } @ inputs: {
+  outputs = {nixpkgs, ...} @ inputs: let
+    mkMachine = name: system:
+      nixpkgs.lib.nixosSystem
+      {
+        system = system;
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./machines/${name}/configuration.nix
+          ./modules/shared
+          ./modules/nixos
+        ];
+      };
+
+    mkHome = name: system:
+      inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {inherit system;};
+
+        extraSpecialArgs = {
+          profileName = name;
+          inherit inputs;
+        };
+
+        modules = [
+          ./home-manager/${name}/home.nix
+          ./modules/shared
+          ./modules/home-manager
+        ];
+      };
+  in {
     overlays = import ./overlays {inherit inputs;};
 
     nixosConfigurations = {
-      leon-laptop =
-        nixpkgs.lib.nixosSystem
-        {
-          specialArgs = {inherit inputs;};
-          modules = [
-            ./machines/leon-laptop/configuration.nix
-          ];
-        };
-      leon-dell =
-        nixpkgs.lib.nixosSystem
-        {
-          specialArgs = {inherit inputs;};
-          modules = [
-            ./machines/leon-dell/configuration.nix
-            ./modules/shared
-            ./modules/nixos
-          ];
-        };
-      leon-pc =
-        nixpkgs.lib.nixosSystem
-        {
-          specialArgs = {inherit inputs;};
-          modules = [
-            ./machines/leon-pc/configuration.nix
-            ./modules/shared
-            ./modules/nixos
-            # inputs.catppuccin.nixosModules.catppuccin
-          ];
-        };
+      leon-pc = mkMachine "leon-pc" "x86_64-linux";
+      leon-laptop = mkMachine "leon-laptop" "x86_64-linux";
+      leon-dell = mkMachine "leon-dell" "x86_64-linux";
     };
 
     homeConfigurations = {
-      leon = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-        };
-        extraSpecialArgs = {
-          isLaptop = false;
-          inherit inputs;
-        };
-        modules = [
-          ./home-manager/leon/home.nix
-          ./modules/shared
-          ./modules/home-manager
-          inputs.stylix.homeModules.stylix
-          inputs.zen-browser.homeModules.beta
-          inputs.spicetify-nix.homeManagerModules.spicetify
-        ];
-      };
-      leon-dell = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-        };
-        extraSpecialArgs = {
-          isLaptop = true;
-          inherit inputs;
-        };
-        modules = [
-          ./home-manager/leon/home.nix
-          ./modules/shared
-          ./modules/home-manager
-          inputs.stylix.homeModules.stylix
-          inputs.zen-browser.homeModules.beta
-          inputs.spicetify-nix.homeManagerModules.spicetify
-        ];
-      };
-      keane = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-        };
-        extraSpecialArgs = {inherit inputs;};
-        modules = [
-          ./home-manager/keane/home.nix
-          ./modules/shared
-          ./modules/home-manager
-          inputs.stylix.homeModules.stylix
-          inputs.zen-browser.homeModules.beta
-          inputs.spicetify-nix.homeManagerModules.spicetify
-        ];
-      };
+      leon = mkHome "leon" "x86_64-linux";
+      leon-dell = mkHome "leon-dell" "x86_64-linux";
+      keane = mkHome "keane" "x86_64-linux";
     };
   };
 }

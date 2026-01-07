@@ -3,16 +3,16 @@
   inputs,
   lib,
   config,
-  isLaptop,
+  profileName,
   ...
 }: let
   cfg = config.modules.desktop.hypr.hyprland;
   sys = pkgs.stdenv.hostPlatform.system;
+  host = config.networking.hostName or "";
 in {
-  imports =
-    []
-    ++ (lib.optionals isLaptop [./hosts/laptop.nix])
-    ++ (lib.optionals (!isLaptop) [./hosts/desktop.nix]);
+  imports = [
+    ./hosts/${profileName}.nix
+  ];
   options.modules.desktop.hypr.hyprland = {
     enable = lib.mkEnableOption "Enable Hyprland";
     uwsm = lib.mkEnableOption "Use UWSM?";

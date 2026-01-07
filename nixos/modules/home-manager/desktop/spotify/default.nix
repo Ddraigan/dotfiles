@@ -5,8 +5,13 @@
   inputs,
   ...
 }: let
-  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  spicetify = inputs.spicetify-nix;
+  spicetify_hm = spicetify.homeManagerModules.spicetify;
+  spicePkgs = spicetify.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in {
+  imports = [
+    spicetify_hm
+  ];
   options.modules.desktop.spicetify.enable = lib.mkEnableOption "Enable Spicetify";
   config = lib.mkIf config.modules.desktop.spicetify.enable {
     programs.spotify-player = {

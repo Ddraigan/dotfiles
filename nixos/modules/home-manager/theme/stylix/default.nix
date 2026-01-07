@@ -2,8 +2,12 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }: {
+  imports = [
+    inputs.stylix.homeModules.stylix
+  ];
   options.modules.theme.stylix.enable = lib.mkEnableOption "enable stylix";
 
   config = lib.mkIf config.modules.theme.stylix.enable {

@@ -8,3 +8,6 @@ home profile:
 nix host:
   git add .
   sudo nixos-rebuild switch --flake .#{{host}}
+
+update:
+  nix flake update

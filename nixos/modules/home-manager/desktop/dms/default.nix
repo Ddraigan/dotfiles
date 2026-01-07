@@ -22,16 +22,12 @@
       };
       # Core features
       enableSystemMonitoring = true; # System monitoring widgets (dgop)
-      # enableClipboard = false; # Clipboard history manager
-      enableVPN = true; # VPN management widget
-      # enableBrightnessControl = false; # Backlight/brightness controls
-      # enableColorPicker = false; # Color picker tool
       enableDynamicTheming = false; # Wallpaper-based theming (matugen)
+      enableVPN = true; # VPN management widget
       enableAudioWavelength = true; # Audio visualizer (cava)
       enableCalendarEvents = true; # Calendar integration (khal)
-      # enableSystemSound = true; # System sound effects
 
-      default.settings = {
+      settings = {
         "currentThemeName" = "cat-pink";
         "customThemeFile" = "";
         "matugenScheme" = "scheme-tonal-spot";

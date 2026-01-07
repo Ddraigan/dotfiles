@@ -2,8 +2,12 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }: {
+  imports = [
+    inputs.zen-browser.homeModules.beta
+  ];
   options.modules.desktop.zen.enable = lib.mkEnableOption "Enable Zen Browser";
   config = lib.mkIf config.modules.desktop.zen.enable {
     programs.zen-browser = {
