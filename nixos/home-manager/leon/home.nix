@@ -31,7 +31,7 @@
       hypr = {
         hyprland = {
           enable = true;
-          # uwsm = true;
+          mod = "SUPER";
         };
         hyprpaper.enable = true;
         hyprlock = {

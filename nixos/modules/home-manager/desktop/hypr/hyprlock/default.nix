@@ -3,10 +3,12 @@
   lib,
   config,
   inputs,
+  uwsmUtils,
   ...
 }: let
   cfg = config.modules.desktop.hypr.hyprlock;
   hyprlock-package = inputs.hyprlock.packages.${pkgs.stdenv.hostPlatform.system}.hyprlock;
+  hyprland-config = config.modules.desktop.hypr.hyprland;
 in
   with lib; {
     options.modules.desktop.hypr.hyprlock = {
@@ -20,6 +22,9 @@ in
       };
     };
     config = lib.mkIf cfg.enable {
+      wayland.windowManager.hyprland.settings.bind = lib.mkIf hyprland-config.enable [
+        "${hyprland-config.mod}, l, exec, ${uwsmUtils.wrap "hyprlock"}"
+      ];
       programs.hyprlock = {
         enable = true;
         package = hyprlock-package;

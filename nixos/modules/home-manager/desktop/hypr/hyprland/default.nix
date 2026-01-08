@@ -15,6 +15,10 @@ in {
   ];
   options.modules.desktop.hypr.hyprland = {
     enable = lib.mkEnableOption "Enable Hyprland";
+    mod = lib.mkOption {
+      type = lib.types.str;
+      example = "SUPER";
+    };
     # uwsm = lib.mkEnableOption "Use UWSM?";
     # dms = lib.mkEnableOption "Use DMS?";
   };
@@ -104,7 +108,7 @@ in {
 
             # Utils
             "$colourPicker" = "${uwsmUtils.wrap "hyprpicker -a"}";
-            "$lockScreen" = "${uwsmUtils.wrap "hyprlock"}";
+            # "$lockScreen" = "${uwsmUtils.wrap "hyprlock"}";
             "$screenshot" = "${uwsmUtils.wrap "hyprshot -m window"}";
             "$screenshotRegion" = "${uwsmUtils.wrap "hyprshot -m region output --clipboard-only"}";
 
@@ -222,7 +226,7 @@ in {
               sensitivity = 0;
             };
 
-            "$mod" = "SUPER";
+            "$mod" = cfg.mod;
             "$LMB" = "mouse:272";
             "$RMB" = "mouse:273";
 
@@ -264,7 +268,6 @@ in {
               "$mod, p, exec, $colourPicker"
 
               "$mod, escape, exec, uwsm app -- wlogout"
-              # "$mod, l, exec, $lockscreen"
               # "$mod, l, exec, $lockscreen"
 
               # Clipboard
