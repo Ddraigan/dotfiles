@@ -4,6 +4,7 @@
   lib,
   config,
   profileName,
+  uwsmUtils,
   ...
 }: let
   cfg = config.modules.desktop.hypr.hyprland;
@@ -14,28 +15,13 @@ in {
   ];
   options.modules.desktop.hypr.hyprland = {
     enable = lib.mkEnableOption "Enable Hyprland";
-    uwsm = lib.mkEnableOption "Use UWSM?";
-    dms = lib.mkEnableOption "Use DMS?";
+    # uwsm = lib.mkEnableOption "Use UWSM?";
+    # dms = lib.mkEnableOption "Use DMS?";
   };
 
   config =
     lib.mkIf cfg.enable
     (let
-      maybeUWSM = {
-        wrap = cmd:
-          if cfg.uwsm
-          then "uwsm app -- ${cmd}"
-          else cmd;
-        exit =
-          if cfg.uwsm
-          then "uwsm stop"
-          else "exit";
-        rofi =
-          if cfg.uwsm
-          then "rofi -show drun -run-command 'uwsm app -- {cmd}'"
-          else "rofi -show drun";
-      };
-
       workspaces = lib.range 1 9;
       wsBinds =
         lib.concatMap (i: [
@@ -106,21 +92,21 @@ in {
             };
 
             # Commands
-            "$exitCommand" = "${maybeUWSM.exit}";
+            "$exitCommand" = "${uwsmUtils.exit}";
             "$copy" = "wl-copy";
             "$paste" = "wl-paste";
 
             # Programs
-            "$terminal" = "${maybeUWSM.wrap "wezterm"}";
-            "$fileManager" = "${maybeUWSM.wrap "nemo"}";
-            "$drun" = "${maybeUWSM.rofi}";
-            "$browser" = "${maybeUWSM.wrap "zen"}";
+            "$terminal" = "${uwsmUtils.wrap "wezterm"}";
+            "$fileManager" = "${uwsmUtils.wrap "nemo"}";
+            "$drun" = "${uwsmUtils.rofi}";
+            "$browser" = "${uwsmUtils.wrap "zen"}";
 
             # Utils
-            "$colourPicker" = "${maybeUWSM.wrap "hyprpicker -a"}";
-            "$lockScreen" = "${maybeUWSM.wrap "hyprlock"}";
-            "$screenshot" = "${maybeUWSM.wrap "hyprshot -m window"}";
-            "$screenshotRegion" = "${maybeUWSM.wrap "hyprshot -m region output --clipboard-only"}";
+            "$colourPicker" = "${uwsmUtils.wrap "hyprpicker -a"}";
+            "$lockScreen" = "${uwsmUtils.wrap "hyprlock"}";
+            "$screenshot" = "${uwsmUtils.wrap "hyprshot -m window"}";
+            "$screenshotRegion" = "${uwsmUtils.wrap "hyprshot -m region output --clipboard-only"}";
 
             env = [
               "XDG_SCREENSHOTS_DIR,$HOME/Pictures/screenshots"
@@ -133,9 +119,8 @@ in {
 
             exec-once = [
               "systemctl --user enable --now hyprpolkitagent.service"
-              "systemctl --user enable --now hypridle.service" # To start hypridle at launch with uwsm
+              "systemctl --user enable --now hypridle.service"
               "systemctl --user enable --now hyprpaper.service"
-              # "systemctl --user enable --now waybar.service"
               "systemctl --user enable --now dms.service"
               "nm-applet --indicator"
               "wl-paste --watch cliphist store &"

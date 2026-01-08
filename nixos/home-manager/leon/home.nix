@@ -20,6 +20,7 @@
     };
   };
   modules = {
+    lib.uwsm.enable = true;
     theme.stylix.enable = true;
     desktop = {
       ashell.enable = false;
@@ -30,10 +31,13 @@
       hypr = {
         hyprland = {
           enable = true;
-          uwsm = true;
+          # uwsm = true;
         };
         hyprpaper.enable = true;
-        hyprlock.enable = false;
+        hyprlock = {
+          enable = true;
+          mainMonitor = "DP-1";
+        };
         hypridle.enable = true;
       };
       mpv.enable = true;
