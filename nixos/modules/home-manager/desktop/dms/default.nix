@@ -4,20 +4,21 @@
   config,
   inputs,
   ...
-}: {
+}: let
+  dgopPackage = inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.dgop;
+  dms =
+    inputs.dankMaterialShell.homeModules.dank-material-shell;
+in {
   imports = [
-    inputs.dankMaterialShell.homeModules.dank-material-shell
+    dms
   ];
   options.modules.desktop.dms = {
     enable = lib.mkEnableOption "Enable Dank Material Shell";
   };
   config = lib.mkIf config.modules.desktop.dms.enable {
-    home.packages = [
-      pkgs.unstable.dgop
-    ];
     programs.dank-material-shell = {
       enable = true;
-      dgop.package = inputs.dgop;
+      dgop.package = dgopPackage;
       systemd = {
         enable = false; # Systemd service for auto-start
         restartIfChanged = true; # Auto-restart dms.service when dankMaterialShell changes
