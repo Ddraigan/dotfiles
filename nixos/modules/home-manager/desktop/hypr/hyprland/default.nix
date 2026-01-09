@@ -20,8 +20,6 @@ in {
       type = lib.types.str;
       example = "SUPER";
     };
-    # uwsm = lib.mkEnableOption "Use UWSM?";
-    # dms = lib.mkEnableOption "Use DMS?";
   };
 
   config =

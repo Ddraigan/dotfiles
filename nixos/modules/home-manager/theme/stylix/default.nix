@@ -73,11 +73,11 @@
         gtk = {
           enable = true;
           extraCss = ''
-            @define-color window_bg_color rgba(0, 0, 0, 0.0);
-            @define-color view_bg_color rgba(0, 0, 0, 0.0);
-            @define-color headerbar_bg_color rgba(0, 0, 0, 0.0);
-            @define-color sidebar_bg_color rgba(0, 0, 0, 0.0);
-            @define-color secondary_sidebar_bg_color rgba(0, 0, 0, 0.0);
+            @define-color window_bg_color ${colours.rgba colours.rgb.crust 0.0};
+            @define-color view_bg_color ${colours.rgba colours.rgb.crust 0.0};
+            @define-color headerbar_bg_color ${colours.rgba colours.rgb.crust 0.0};
+            @define-color sidebar_bg_color ${colours.rgba colours.rgb.crust 0.0};
+            @define-color secondary_sidebar_bg_color ${colours.rgba colours.rgb.crust 0.0};
           '';
         };
       };
