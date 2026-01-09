@@ -38,8 +38,8 @@ in {
     };
     stripped = lib.mapAttrs (_: stripHash) hex;
     rgb = lib.mapAttrs (_: hex: let
-      h = stripHash hex;
-      rgbValues = conversions.hexToRGBString "," h;
+      stripped = stripHash hex;
+      rgbValues = conversions.hexToRGBString "," stripped;
     in "rgb(${rgbValues})")
     hex;
     rgba = rgbColour: alpha: let
