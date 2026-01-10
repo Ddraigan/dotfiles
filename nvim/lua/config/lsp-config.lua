@@ -9,6 +9,8 @@ M.system = {
   nix = {
     -- "nixd",
     "lua_ls",
+    "haskell-language-server",
+    "hls",
   },
 }
 
@@ -32,6 +34,7 @@ M.mason = {
     "prettierd",
     "prettier",
     "alejandra",
+    "fourmolu",
 
     -- DAPs
     "codelldb",
@@ -48,14 +51,14 @@ M.mason = {
 ---@return table
 M.get_lsps_for_mason = function()
   if vim.fn.has("win32") == 1 then
-    return vim.tbl_extend('keep', M.mason.base, M.mason.windows)
+    return vim.tbl_extend("keep", M.mason.base, M.mason.windows)
   end
   return M.mason.base
 end
 
 local signs = require("config.theme").icons.diagnostics
 
-M.get_diagnostic_highlights = function ()
+M.get_diagnostic_highlights = function()
   local hl
   for type, _ in pairs(signs) do
     hl = "DiagnosticSign" .. require("config.utils").firstToUpper(type)
