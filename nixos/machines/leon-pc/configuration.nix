@@ -19,6 +19,7 @@ in {
       hyprland.enable = true;
       gaming.enable = true;
     };
+    sunshine.enable = true;
   };
 
   users = {

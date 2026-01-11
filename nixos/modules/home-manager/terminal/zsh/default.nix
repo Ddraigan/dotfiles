@@ -6,6 +6,9 @@
 }: {
   options.modules.terminal.zsh.enable = lib.mkEnableOption "Enable zsh";
   config = lib.mkIf config.modules.terminal.zsh.enable {
+    home.sessionVariables = {
+      NIX_BUILD_SHELL = "/run/current-system/sw/bin/zsh";
+    };
     programs.zsh = {
       enable = true;
       syntaxHighlighting.enable = true;

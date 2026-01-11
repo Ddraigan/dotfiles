@@ -9,5 +9,6 @@
     ./nvidia.nix
     ./greetd.nix
     ./secureboot.nix
+    ./sunshine.nix
   ];
 }
