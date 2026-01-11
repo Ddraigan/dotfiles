@@ -100,6 +100,9 @@
     username = "leon";
     homeDirectory = "/home/leon";
     stateVersion = "24.05"; # Don't change this I'm pretty sure
+    shellAliases = {
+      cf = "clear && fastfetch";
+    };
     packages = [
       pkgs.just
       inputs.diff-tool.packages.${pkgs.stdenv.hostPlatform.system}.default
