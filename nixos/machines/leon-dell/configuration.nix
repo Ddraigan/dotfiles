@@ -17,6 +17,7 @@
     desktop = {
       hyprland.enable = true;
     };
+    sunshine.enable = true;
   };
 
   nixpkgs = {
