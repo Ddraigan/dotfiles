@@ -18,6 +18,15 @@
       name = "DejaVu Serif";
       package = pkgs.dejavu_fonts;
     };
+    icons = {
+      enable = true;
+      name = "Papirus-Dark";
+      package = pkgs.catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "mauve";
+      };
+      size = "32x32";
+    };
   };
   modules = {
     lib.uwsm.enable = true;
@@ -55,6 +64,7 @@
     };
     terminal = {
       nvim.enable = true;
+      fastfetch.enable = true;
       starship.enable = true;
       tmux.enable = true;
       wezterm = {
@@ -93,7 +103,6 @@
         init.defaultBranch = "main";
       };
     };
-    fastfetch.enable = true;
   };
 
   home = {

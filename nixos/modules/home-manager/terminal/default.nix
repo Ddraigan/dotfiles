@@ -12,6 +12,7 @@
     ./zoxide
     ./eza
     ./zsh
+    ./fastfetch
     ./terminal-core.nix
   ];
 }

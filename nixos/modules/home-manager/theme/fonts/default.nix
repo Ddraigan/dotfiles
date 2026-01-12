@@ -30,6 +30,23 @@ in {
       type = lib.types.submodule fontOption;
       description = "Serif primary font.";
     };
+    icons = {
+      enable = lib.mkEnableOption "custom icon theme configuration";
+      name = lib.mkOption {
+        type = lib.types.str;
+        default = "Papirus-Dark";
+        description = "Icon theme name";
+      };
+      package = lib.mkOption {
+        type = lib.types.package;
+        description = "Icon theme package";
+      };
+      size = lib.mkOption {
+        type = lib.types.str;
+        default = "32x32";
+        description = "Icon size";
+      };
+    };
   };
   config = let
     cfg = config.global.home.fonts;
@@ -41,10 +58,5 @@ in {
         cfg.serif
       ];
       fonts.fontconfig.enable = true;
-      # global.home.fonts.active = {
-      #   mono = cfg.mono;
-      #   sans = cfg.sans;
-      #   serif = cfg.serif;
-      # };
     };
 }

@@ -1,4 +1,5 @@
 vim.g.mapleader = " " -- Set <space> as leader key
+vim.keymap.set({ "n", "i" }, "<F1>", "<Nop>", { silent = true })
 
 local M = {}
 

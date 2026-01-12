@@ -149,7 +149,7 @@ in {
         "appLauncherGridColumns" = 4;
         "spotlightCloseNiriOverview" = true;
         "niriOverviewOverlayEnabled" = true;
-        "weatherLocation" = "Mynydd Isa CH7 6UE";
+        "weatherLocation" = "";
         "weatherCoordinates" = "";
         "useAutoLocation" = false;
         "weatherEnabled" = true;
