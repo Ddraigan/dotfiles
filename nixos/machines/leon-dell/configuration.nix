@@ -139,7 +139,7 @@
         openssh.authorizedKeys.keys = let
           authorizedKeys = pkgs.fetchurl {
             url = "https://github.com/Ddraigan.keys";
-            hash = "SHA256:rhL8wfj3Cr48CbD+J+pgLcYqIegVdZPx9F+U/VnuG6M";
+            hash = "SHA256:4jrMrA5pQkilb2VJwJb4oYZwaTinCSFUOhOjPimqtmQ";
           };
         in
           pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
