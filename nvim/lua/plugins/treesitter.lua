@@ -14,7 +14,7 @@ return {
   config = function()
     -- the mdx filetype will use the markdown parser and queries.
     vim.treesitter.language.register("markdown", "mdx")
-    require("nvim-treesitter.configs").setup({
+    require("nvim-treesitter").setup({
       ensure_installed = {
         "lua",
         "rust",

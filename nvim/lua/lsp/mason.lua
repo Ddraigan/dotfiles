@@ -11,6 +11,9 @@ return {
       ui = {
         icons = icons,
       },
+      npm = {
+        use_pnpm = true,
+      },
     }
   end,
 }
