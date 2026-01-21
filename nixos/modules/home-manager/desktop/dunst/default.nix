@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   lib,
   config,
   ...
@@ -11,15 +10,14 @@
     home.packages = [
       pkgs.libnotify
     ];
-    services.dunst = {
+    services.dunst = let
+      icons = config.global.home.fonts.icons;
+    in {
       enable = true;
       iconTheme = {
-        name = "Papirus-Dark";
-        package = pkgs.catppuccin-papirus-folders.override {
-          flavor = "mocha";
-          accent = "mauve";
-        };
-        size = "32x32";
+        name = icons.name;
+        package = icons.package;
+        size = icons.size;
       };
       settings = {
         global = {

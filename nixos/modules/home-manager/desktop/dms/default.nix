@@ -4,9 +4,13 @@
   config,
   inputs,
   ...
-}: {
+}: let
+  dgopPackage = inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.dgop;
+  dms =
+    inputs.dankMaterialShell.homeModules.dank-material-shell;
+in {
   imports = [
-    inputs.dankMaterialShell.homeModules.dank-material-shell
+    dms
   ];
   options.modules.desktop.dms = {
     enable = lib.mkEnableOption "Enable Dank Material Shell";
@@ -14,8 +18,7 @@
   config = lib.mkIf config.modules.desktop.dms.enable {
     programs.dank-material-shell = {
       enable = true;
-       dgop.package = inputs.dgop;
-      # quickshell.package = pkgs.quickshell;
+      dgop.package = dgopPackage;
       systemd = {
         enable = false; # Systemd service for auto-start
         restartIfChanged = true; # Auto-restart dms.service when dankMaterialShell changes
@@ -146,8 +149,8 @@
         "appLauncherGridColumns" = 4;
         "spotlightCloseNiriOverview" = true;
         "niriOverviewOverlayEnabled" = true;
-        "weatherLocation" = "Mynydd Isa= CH7 6UE";
-        "weatherCoordinates" = "53.1677268=-3.1121717";
+        "weatherLocation" = "";
+        "weatherCoordinates" = "";
         "useAutoLocation" = false;
         "weatherEnabled" = true;
         "networkPreference" = "auto";
@@ -266,7 +269,7 @@
             "id" = "default";
             "name" = "Main Bar";
             "enabled" = true;
-            "position" = 0;
+            "position" = 1;
             "screenPreferences" = [
               "all"
             ];
@@ -308,7 +311,7 @@
             "widgetOutlineColor" = "primary";
             "widgetOutlineOpacity" = 1;
             "widgetOutlineThickness" = 1;
-            "fontScale" = 1.5;
+            "fontScale" = 1.25;
             "autoHide" = false;
             "autoHideDelay" = 250;
             "openOnOverview" = false;

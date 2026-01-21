@@ -14,9 +14,11 @@
 
   modules.nix = {
     greetd.enable = true;
+    # lanzaboot.enable = false;
     desktop = {
       hyprland.enable = true;
     };
+    sunshine.enable = true;
   };
 
   nixpkgs = {

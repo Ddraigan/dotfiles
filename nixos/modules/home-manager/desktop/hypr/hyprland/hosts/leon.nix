@@ -4,11 +4,6 @@
   ...
 }: {
   config = {
-    # monitor = [
-    #   "DP-1, preferred, 0x0, 1, bitdepth, 8"
-    #   "DP-2, preferred, auto-left, auto, bitdepth, 8"
-    # ];
-
     wayland.windowManager.hyprland.settings = {
       monitorv2 = [
         {
@@ -28,7 +23,7 @@
       ];
 
       input = {
-        kb_variant = "qwerty";
+        kb_variant = "";
       };
     };
   };

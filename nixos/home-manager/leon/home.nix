@@ -18,8 +18,18 @@
       name = "DejaVu Serif";
       package = pkgs.dejavu_fonts;
     };
+    icons = {
+      enable = true;
+      name = "Papirus-Dark";
+      package = pkgs.catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "mauve";
+      };
+      size = "32x32";
+    };
   };
   modules = {
+    lib.uwsm.enable = true;
     theme.stylix.enable = true;
     desktop = {
       ashell.enable = false;
@@ -30,10 +40,13 @@
       hypr = {
         hyprland = {
           enable = true;
-          uwsm = true;
+          mod = "SUPER";
         };
         hyprpaper.enable = true;
-        hyprlock.enable = false;
+        hyprlock = {
+          enable = true;
+          mainMonitor = "DP-1";
+        };
         hypridle.enable = true;
       };
       mpv.enable = true;
@@ -51,6 +64,7 @@
     };
     terminal = {
       nvim.enable = true;
+      fastfetch.enable = true;
       starship.enable = true;
       tmux.enable = true;
       wezterm = {
@@ -72,7 +86,7 @@
   };
 
   services.easyeffects = {
-    enable = true;
+    enable = false;
     package = pkgs.unstable.easyeffects;
   };
 
@@ -89,15 +103,18 @@
         init.defaultBranch = "main";
       };
     };
-    fastfetch.enable = true;
   };
 
   home = {
     username = "leon";
     homeDirectory = "/home/leon";
     stateVersion = "24.05"; # Don't change this I'm pretty sure
+    shellAliases = {
+      cf = "clear && fastfetch";
+    };
     packages = [
       pkgs.just
+      inputs.diff-tool.packages.${pkgs.stdenv.hostPlatform.system}.default
 
       # pkgs.deadlock-mod-manager
       # Image Stuff

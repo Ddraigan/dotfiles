@@ -3,6 +3,7 @@
   config,
   pkgs,
   inputs,
+  colours,
   ...
 }: {
   imports = [
@@ -12,16 +13,18 @@
 
   config = lib.mkIf config.modules.theme.stylix.enable {
     stylix = let
-      col = config.global.theme.colours.catppuccin.mocha;
       font = config.global.home.fonts;
+      icons = font.icons;
+      stripped = colours.stripped;
+      rgb = colours.rgb;
+      rgba = colours.rgba;
     in {
       enable = true;
       autoEnable = true;
       cursor = {
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Ice";
-        size = 60;
-        # size = 20;
+        size = 24;
       };
       fonts = {
         monospace = font.mono;
@@ -30,30 +33,27 @@
       };
       icons = {
         enable = true;
-        package = pkgs.catppuccin-papirus-folders.override {
-          flavor = "mocha";
-          accent = "mauve";
-        };
-        light = "Papirus-Dark";
-        dark = "Papirus-Dark";
+        package = icons.package;
+        light = icons.name;
+        dark = icons.name;
       };
       base16Scheme = {
-        base00 = col.base;
-        base01 = col.mantle;
-        base02 = col.surface0;
-        base03 = col.surface1;
-        base04 = col.surface2;
-        base05 = col.text;
-        base06 = col.rosewater;
-        base07 = col.lavender;
-        base08 = col.red;
-        base09 = col.peach;
-        base0A = col.yellow;
-        base0B = col.green;
-        base0C = col.teal;
-        base0D = col.blue;
-        base0E = col.mauve;
-        base0F = col.flamingo;
+        base00 = stripped.base;
+        base01 = stripped.mantle;
+        base02 = stripped.surface0;
+        base03 = stripped.surface1;
+        base04 = stripped.surface2;
+        base05 = stripped.text;
+        base06 = stripped.rosewater;
+        base07 = stripped.lavender;
+        base08 = stripped.red;
+        base09 = stripped.peach;
+        base0A = stripped.yellow;
+        base0B = stripped.green;
+        base0C = stripped.teal;
+        base0D = stripped.blue;
+        base0E = stripped.mauve;
+        base0F = stripped.flamingo;
       };
       targets = {
         dunst.enable = false;
@@ -74,11 +74,11 @@
         gtk = {
           enable = true;
           extraCss = ''
-            @define-color window_bg_color rgba(0, 0, 0, 0.0);
-            @define-color view_bg_color rgba(0, 0, 0, 0.0);
-            @define-color headerbar_bg_color rgba(0, 0, 0, 0.0);
-            @define-color sidebar_bg_color rgba(0, 0, 0, 0.0);
-            @define-color secondary_sidebar_bg_color rgba(0, 0, 0, 0.0);
+            @define-color window_bg_color ${rgba rgb.crust 0.0};
+            @define-color view_bg_color ${rgba rgb.crust 0.0};
+            @define-color headerbar_bg_color ${rgba rgb.crust 0.0};
+            @define-color sidebar_bg_color ${rgba rgb.crust 0.0};
+            @define-color secondary_sidebar_bg_color ${rgba rgb.crust 0.0};
           '';
         };
       };

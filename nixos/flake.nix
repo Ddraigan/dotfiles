@@ -20,6 +20,7 @@
       url = "github:nix-community/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     dgop = {
       url = "github:AvengeMedia/dgop";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -50,6 +51,7 @@
       url = "github:micha4w/Hypr-DarkWindow"; # Make sure to change the tag to match your hyprland version
       inputs.hyprland.follows = "hyprland";
     };
+    diff-tool.url = "github:ddraigan/diff-tool";
   };
 
   outputs = {nixpkgs, ...} @ inputs: let

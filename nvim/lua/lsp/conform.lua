@@ -17,6 +17,7 @@ return {
       html = { "prettierd", "prettier", stop_after_first = true },
       css = { "prettierd", "prettier", stop_after_first = true },
       nix = { "alejandra" },
+      haskell = { "fourmolu" },
       -- Use the "_" filetype to run formatters on filetypes that don't
       -- have other formatters configured.
       ["_"] = { "trim_whitespace" },

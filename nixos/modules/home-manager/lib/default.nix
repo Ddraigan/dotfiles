@@ -5,9 +5,6 @@
   ...
 }: {
   imports = [
-    ./lib
-    ./desktop
-    ./terminal
-    ./theme
+    ./uwsm.nix
   ];
 }

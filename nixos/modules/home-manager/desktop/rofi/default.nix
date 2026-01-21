@@ -28,8 +28,8 @@
         kb-row-right = "Control+l";
         kb-accept-entry = "Control+m,Return,KP_Enter";
         kb-remove-to-eol = "Control+Shift+e";
-        kb-mode-next = "Shift+Right,Control+Tab";
-        kb-mode-previous = "Shift+Left,Control+Shift+Tab";
+        kb-mode-next = "Shift+Right,Control+Tab,Control+n";
+        kb-mode-previous = "Shift+Left,Control+Shift+Tab,Control+p";
         kb-remove-char-back = "BackSpace";
 
         drun-display-format = "{icon} {name}";

@@ -9,17 +9,17 @@
 in {
   imports = [
     ./hardware-configuration.nix
-    inputs.lanzaboote.nixosModules.lanzaboote
+    ../../modules/nixos/secureboot.nix
   ];
 
   modules.nix = {
     nvidia.enable = true;
     greetd.enable = true;
-    # secureboot.enable = true;
     desktop = {
       hyprland.enable = true;
       gaming.enable = true;
     };
+    sunshine.enable = true;
   };
 
   users = {
@@ -96,7 +96,6 @@ in {
 
   environment = {
     systemPackages = [
-      pkgs.sbctl
       wezterm-cwd
       pkgs.upower
       pkgs.helvum
@@ -134,23 +133,12 @@ in {
 
   security = {
     rtkit.enable = true;
-    pam.services.hyprlock = {}; # Can't unlock without this}
+    pam.services.hyprlock = {}; # Can't unlock without this
     polkit.enable = true;
   };
 
   fonts = {
     fontDir.enable = true;
-  };
-
-  boot = {
-    loader = {
-      systemd-boot.enable = lib.mkForce false;
-      efi.canTouchEfiVariables = true;
-    };
-    lanzaboote = {
-      enable = true;
-      pkiBundle = "/var/lib/sbctl";
-    };
   };
 
   networking = {
