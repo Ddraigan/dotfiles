@@ -21,6 +21,7 @@
         dedicatedServer.openFirewall = true;
         extraCompatPackages = [
           pkgs.proton-ge-bin
+          pkgs.steamtinkerlaunch
         ];
       };
       gamescope = {
