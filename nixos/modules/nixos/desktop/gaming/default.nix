@@ -10,6 +10,11 @@
       mangohud
       protonup-ng
       protonup-qt
+      # steamtinkerlaunch
+
+      pkgsi686Linux.freetype
+      pkgsi686Linux.fontconfig
+      pkgsi686Linux.zlib
     ];
 
     programs = {
