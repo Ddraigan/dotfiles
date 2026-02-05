@@ -232,7 +232,7 @@ in {
             ", XF86AudioMute, exec, dms ipc call audio mute"
           ];
           binde = [
-            # Vim Style Window Resize
+            ##! Vim Style Window Resize
             "$mod ALT, H, resizeactive, -10 0"
             "$mod ALT, L, resizeactive, 10 0"
             "$mod ALT, K, resizeactive, 0 -10"
@@ -250,7 +250,7 @@ in {
             "$mod, escape, exec, uwsm app -- wlogout"
             # "$mod, l, exec, $lockscreen"
 
-            # Clipboard
+            ##! Clipboard
             "$mod, i, exec, $screenshotRegion"
             "$mod SHIFT, I, exec, $screenshot"
             ", PRINT, exec, $screenshot"

@@ -16,6 +16,7 @@
     ./wlogout
     ./lutris
     ./nemo
+    ./noctalia
     ./dms
     ./zen
     ./obs

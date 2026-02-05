@@ -13,7 +13,7 @@
           disable_splash_rendering = true
           disable_hyprland_guiutils_check = true
       }
-      input = {
+      input {
           kb_layout = "us"
           kb_variant = "dvorak"
       }
