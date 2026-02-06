@@ -43,7 +43,7 @@ M.mason = {
     "lua_ls",
     "rust_analyzer",
     "stylua",
-    "nil",
+    -- "nil",
   },
 }
 
@@ -58,7 +58,9 @@ end
 
 local signs = require("config.theme").icons.diagnostics
 
-M.get_diagnostic_highlights = function()
+--- Generates Diagnostic Highlights from given icon table
+---@return table
+M.generate_diagnostic_highlights = function()
   local hl
   for type, _ in pairs(signs) do
     hl = "DiagnosticSign" .. require("config.utils").firstToUpper(type)
@@ -77,8 +79,8 @@ M.diagnostic_config = {
       [vim.diagnostic.severity.INFO] = signs.info,
       [vim.diagnostic.severity.HINT] = signs.hint,
     },
-    linehl = M.get_diagnostic_highlights(),
-    numhl = M.get_diagnostic_highlights(),
+    linehl = M.generate_diagnostic_highlights(),
+    numhl = M.generate_diagnostic_highlights(),
   },
   severity_sort = true,
 }

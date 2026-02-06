@@ -12,7 +12,6 @@ in
   config = lib.mkIf cfg.enable {
     programs.noctalia-shell ={
       enable = true;
-      systemd.enable = true;
       plugins = {
         sources = [
         {
