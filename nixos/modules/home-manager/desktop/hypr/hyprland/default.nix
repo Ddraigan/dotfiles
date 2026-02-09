@@ -25,6 +25,7 @@ in {
   config =
     lib.mkIf cfg.enable
     (let
+      hyprQTPkg = inputs.hyprqt6engine.packages.${sys}.default;
       workspaces = lib.range 1 9;
       wsBinds =
         lib.concatMap (i: [
@@ -47,7 +48,7 @@ in {
 
         # QT
         hyprland-qt-support
-        inputs.hyprqt6engine.packages.${sys}.default
+        hyprQTPkg
 
         # Screenshot Utils
         hyprshot
@@ -114,7 +115,8 @@ in {
             "XDG_SCREENSHOTS_DIR,$HOME/Pictures/screenshots"
             "XDG_PICTURES_DIR,$HOME/Pictures"
             "HYPRSHOT_DIR,$HOME/Pictures/screenshots"
-
+          ]
+          ++ lib.optionals (lib.elem hyprQTPkg config.home.packages) [
             # When using hyprqt6engine over qt6ct
             "QT_QPA_PLATFORMTHEME=hyprqt6engine"
           ];
@@ -123,7 +125,6 @@ in {
             "systemctl --user enable --now hyprpolkitagent.service"
             "systemctl --user enable --now hypridle.service"
             "systemctl --user enable --now hyprpaper.service"
-            "systemctl --user enable --now dms.service"
             "nm-applet --indicator"
             "wl-paste --watch cliphist store &"
             "$terminal"
@@ -216,9 +217,9 @@ in {
           ];
           bindl = [
             # ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-            ", XF86AudioPlay, exec, playerctl play-pause"
-            ", XF86AudioPrev, exec, playerctl previous"
-            ", XF86AudioNext, exec, playerctl next"
+            # ", XF86AudioPlay, exec, playerctl play-pause"
+            # ", XF86AudioPrev, exec, playerctl previous"
+            # ", XF86AudioNext, exec, playerctl next"
           ];
           binde = [
             ##! Vim Style Window Resize
@@ -237,7 +238,7 @@ in {
             "$mod, p, exec, $colourPicker"
 
             "$mod, escape, exec, uwsm app -- wlogout"
-            # "$mod, l, exec, $lockscreen"
+            # "$mod, l, exec, $locksCreen"
 
             ##! Clipboard
             "$mod, i, exec, $screenshotRegion"

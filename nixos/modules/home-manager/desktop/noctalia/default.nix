@@ -49,5 +49,36 @@ in
         mTertiary = hex.pink;
       };
     };
+    wayland.windowManager.hyprland.settings = {
+      exec-once = [
+          "systemctl --user enable --now noctalia.service"
+      ];
+
+      "$noctipc = noctalia-shell ipc call";
+
+      bind = [ 
+        "SUPER, SPACE, exec, $noctipc launcher toggle"
+        "SUPER, S, exec, $noctipc controlCenter toggle"
+        "SUPER, comma, exec, $noctipc settings toggle" 
+      ];
+
+      bindel = [
+        # Media
+        ", XF86AudioRaiseVolume, exec, $noctipc volume increase"
+        ", XF86AudioLowerVolume, exec, $noctipc volume decrease"
+
+        # Brightness
+        ", XF86MonBrightnessUp, exec, $noctipc brightness increase"
+        ", XF86MonBrightnessDown, exec, $noctipc brightness decrease"
+      ];
+
+      bindl = [
+        # Media
+        ", XF86AudioMute, exec, $noctipc volume muteOutput"
+        ", XF86AudioPlay, exec, $noctipc media play"
+        ", XF86AudioPrev, exec, $noctipc media previous"
+        ", XF86AudioNext, exec, $noctipc media next"
+      ];
+    };
   };
 }
