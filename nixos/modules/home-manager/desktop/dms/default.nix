@@ -6,8 +6,8 @@
   ...
 }: let
   dgopPackage = inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.dgop;
-  dms =
-    inputs.dankMaterialShell.homeModules.dank-material-shell;
+  dms = inputs.dankMaterialShell.homeModules.dank-material-shell;
+  cfg = config.modules.desktop.dms;
 in {
   imports = [
     dms
@@ -15,7 +15,7 @@ in {
   options.modules.desktop.dms = {
     enable = lib.mkEnableOption "Enable Dank Material Shell";
   };
-  config = lib.mkIf config.modules.desktop.dms.enable {
+  config = lib.mkIf cfg.enable {
     programs.dank-material-shell = {
       enable = true;
       dgop.package = dgopPackage;
@@ -333,7 +333,7 @@ in {
     };
     wayland.windowManager.hyprland.settings = {
       exec-once = [
-          "systemctl --user enable --now dms.service"
+        "systemctl --user enable --now dms.service"
       ];
       bindel = [
         # Audio Controls

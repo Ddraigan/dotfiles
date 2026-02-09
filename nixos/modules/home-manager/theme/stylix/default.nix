@@ -60,7 +60,7 @@
         hyprland = {
           enable = false;
         };
-        # noctalia-shell.enable = false;
+        noctalia-shell.enable = false;
         hyprlock.enable = false;
         rofi.enable = true;
         starship.enable = false;

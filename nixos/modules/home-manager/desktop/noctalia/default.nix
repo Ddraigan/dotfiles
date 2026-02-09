@@ -17,6 +17,8 @@ in {
   config = lib.mkIf cfg.enable {
     programs.noctalia-shell = {
       enable = true;
+      systemd.enable = true;
+      settings = builtins.fromJSON (builtins.readFile ./settings.json);
       plugins = {
         sources = [
           {
@@ -33,32 +35,28 @@ in {
         };
         version = 1;
       };
-      # colors = let
-      #   hex = colours.hex;
-      # in {
-      #   mError = hex.red;
-      #   mOnError = hex.text;
-      #   mOnPrimary = hex.text;
-      #   mOnSecondary = hex.text;
-      #   mOnSurface = hex.text;
-      #   mOnSurfaceVariant = hex.text;
-      #   mOnTertiary = hex.text;
-      #   mOnHover = hex.text;
-      #   mOutline = hex.crust;
-      #   mPrimary = hex.mauve;
-      #   mSecondary = hex.maroon;
-      #   mShadow = hex.crust;
-      #   mSurface = hex.surface0;
-      #   mHover = hex.base;
-      #   mSurfaceVariant = hex.surface2;
-      #   mTertiary = hex.pink;
-      # };
+      colors = let
+        hex = colours.hex;
+      in {
+        mError = hex.red;
+        mOnError = hex.text;
+        mOnPrimary = hex.crust;
+        mOnSecondary = hex.crust;
+        mOnSurface = hex.text;
+        mOnSurfaceVariant = hex.text;
+        mOnTertiary = hex.text;
+        mOnHover = hex.text;
+        mOutline = hex.crust;
+        mPrimary = hex.mauve;
+        mSecondary = hex.maroon;
+        mShadow = hex.crust;
+        mSurface = hex.mantle;
+        mHover = hex.base;
+        mSurfaceVariant = hex.base;
+        mTertiary = hex.pink;
+      };
     };
     wayland.windowManager.hyprland.settings = {
-      exec-once = [
-        "systemctl --user enable --now noctalia.service"
-      ];
-
       "$noctipc" = "noctalia-shell ipc call";
 
       bind = [
@@ -71,18 +69,27 @@ in {
         # Media
         ", XF86AudioRaiseVolume, exec, $noctipc volume increase"
         ", XF86AudioLowerVolume, exec, $noctipc volume decrease"
+        ", XF86AudioVolumeUp, exec, $noctipc volume increase"
+        ", XF86AudioVolumeDown, exec, $noctipc volume decrease"
 
         # Brightness
         ", XF86MonBrightnessUp, exec, $noctipc brightness increase"
         ", XF86MonBrightnessDown, exec, $noctipc brightness decrease"
+        ", XF86BrightnessUp, exec, $noctipc brightness increase"
+        ", XF86BrightnessDown, exec, $noctipc brightness decrease"
       ];
 
       bindl = [
         # Media
-        ", XF86AudioMute, exec, $noctipc volume muteOutput"
-        ", XF86AudioPlay, exec, $noctipc media play"
+        ", XF86AudioPlay, exec, $noctipc media playPause"
+        ", XF86AudioPause, exec, $noctipc media pause"
         ", XF86AudioPrev, exec, $noctipc media previous"
         ", XF86AudioNext, exec, $noctipc media next"
+        ", XF86AudioStop, exec, $noctipc media stop"
+
+        # Audio
+        ", XF86AudioMute, exec, $noctipc volume muteOutput"
+        ", XF86AudioMicMute, exec, $noctipc volume muteInput"
       ];
     };
   };
