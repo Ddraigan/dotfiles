@@ -106,7 +106,7 @@ in {
 
           # Utils
           "$colourPicker" = "${uwsmUtils.wrap "hyprpicker -a"}";
-          # "$lockScreen" = "${uwsmUtils.wrap "hyprlock"}";
+          "$lockScreen" = "${uwsmUtils.wrap "hyprlock"}";
           "$screenshot" = "${uwsmUtils.wrap "hyprshot -m window"}";
           "$screenshotRegion" = "${uwsmUtils.wrap "hyprshot -m region output --clipboard-only"}";
 
@@ -213,23 +213,12 @@ in {
           bindel = [
             # ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%+"
             # ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%-"
-
-            # DMS
-            # Audio Controls
-            ", XF86AudioRaiseVolume, exec, dms ipc call audio increment 2"
-            ", XF86AudioLowerVolume, exec, dms ipc call audio decrement 2"
-            # Brightness Controls
-            ", XF86MonBrightnessUp, exec, dms ipc call brightness increment 5"
-            ", XF86MonBrightnessDown, exec, dms ipc call brightness decrement 5"
           ];
           bindl = [
             # ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
             ", XF86AudioPlay, exec, playerctl play-pause"
             ", XF86AudioPrev, exec, playerctl previous"
             ", XF86AudioNext, exec, playerctl next"
-
-            # DMS
-            ", XF86AudioMute, exec, dms ipc call audio mute"
           ];
           binde = [
             ##! Vim Style Window Resize
@@ -289,20 +278,6 @@ in {
             "$mod SHIFT, J, movewindow, d"
 
             "$mod, W, togglespecialworkspace, magic"
-
-            # DMS
-            # Application Launchers
-            "$mod, space, exec, dms ipc call spotlight toggle"
-            "$mod, V, exec, dms ipc call clipboard toggle"
-            "$mod, M, exec, dms ipc call processlist focusOrToggle"
-            "$mod, comma, exec, dms ipc call settings focusOrToggle"
-            "$mod, N, exec, dms ipc call notifications toggle"
-            "$mod, Y, exec, dms ipc call dankdash wallpaper"
-            "$mod, TAB, exec, dms ipc call hypr toggleOverview"
-            # Security
-            "$mod ALT, L, exec, dms ipc call lock lock"
-
-            "$mod, a, exec, dms ipc call audio cycleoutput"
           ];
         };
       };

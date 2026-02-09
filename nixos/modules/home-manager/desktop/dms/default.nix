@@ -331,5 +331,32 @@ in {
       #   };
       # };
     };
+    wayland.windowManager.hyprland.settings = {
+      bindel = [
+        # Audio Controls
+        ", XF86AudioRaiseVolume, exec, dms ipc call audio increment 2"
+        ", XF86AudioLowerVolume, exec, dms ipc call audio decrement 2"
+        # Brightness Controls
+        ", XF86MonBrightnessUp, exec, dms ipc call brightness increment 5"
+        ", XF86MonBrightnessDown, exec, dms ipc call brightness decrement 5"
+      ];
+      bindl = [
+        ", XF86AudioMute, exec, dms ipc call audio mute"
+      ];
+      bind = [
+        # Application Launchers
+        "$mod, space, exec, dms ipc call spotlight toggle"
+        "$mod, V, exec, dms ipc call clipboard toggle"
+        "$mod, M, exec, dms ipc call processlist focusOrToggle"
+        "$mod, comma, exec, dms ipc call settings focusOrToggle"
+        "$mod, N, exec, dms ipc call notifications toggle"
+        "$mod, Y, exec, dms ipc call dankdash wallpaper"
+        "$mod, TAB, exec, dms ipc call hypr toggleOverview"
+        # Security
+        "$mod ALT, L, exec, dms ipc call lock lock"
+        # Audio
+        "$mod, a, exec, dms ipc call audio cycleoutput"
+      ];
+    };
   };
 }
