@@ -1,8 +1,13 @@
-{pkgs, inputs, lib, config, colours, ...}:
-let
-cfg = config.modules.desktop.noctalia;
-in 
 {
+  inputs,
+  pkgs,
+  lib,
+  config,
+  colours,
+  ...
+}: let
+  cfg = config.modules.desktop.noctalia;
+in {
   imports = [
     inputs.noctalia.homeModules.default
   ];
@@ -10,15 +15,15 @@ in
     enable = lib.mkEnableOption "Enable Noctalia Shell";
   };
   config = lib.mkIf cfg.enable {
-    programs.noctalia-shell ={
+    programs.noctalia-shell = {
       enable = true;
       plugins = {
         sources = [
-        {
-          enabled = true;
-          name = "Official Noctalia Plugins";
-          url = "https://github.com/noctalia-dev/noctalia-plugins";
-        }
+          {
+            enabled = true;
+            name = "Official Noctalia Plugins";
+            url = "https://github.com/noctalia-dev/noctalia-plugins";
+          }
         ];
         states = {
           catwalk = {
@@ -30,7 +35,7 @@ in
       };
       colors = let
         hex = colours.hex;
-      in  {
+      in {
         mError = hex.red;
         mOnError = hex.text;
         mOnPrimary = hex.text;
@@ -51,15 +56,15 @@ in
     };
     wayland.windowManager.hyprland.settings = {
       exec-once = [
-          "systemctl --user enable --now noctalia.service"
+        "systemctl --user enable --now noctalia.service"
       ];
 
-      "$noctipc = noctalia-shell ipc call";
+      "$noctipc" = "noctalia-shell ipc call";
 
-      bind = [ 
+      bind = [
         "SUPER, SPACE, exec, $noctipc launcher toggle"
         "SUPER, S, exec, $noctipc controlCenter toggle"
-        "SUPER, comma, exec, $noctipc settings toggle" 
+        "SUPER, comma, exec, $noctipc settings toggle"
       ];
 
       bindel = [
