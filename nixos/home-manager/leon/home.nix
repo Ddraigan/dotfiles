@@ -116,6 +116,7 @@
     packages = [
       pkgs.just
       inputs.diff-tool.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.dgop
 
       # pkgs.deadlock-mod-manager
       # Image Stuff
