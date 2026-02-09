@@ -33,26 +33,26 @@ in {
         };
         version = 1;
       };
-      colors = let
-        hex = colours.hex;
-      in {
-        mError = hex.red;
-        mOnError = hex.text;
-        mOnPrimary = hex.text;
-        mOnSecondary = hex.text;
-        mOnSurface = hex.text;
-        mOnSurfaceVariant = hex.text;
-        mOnTertiary = hex.text;
-        mOnHover = hex.text;
-        mOutline = hex.crust;
-        mPrimary = hex.mauve;
-        mSecondary = hex.maroon;
-        mShadow = hex.crust;
-        mSurface = hex.surface0;
-        mHover = hex.base;
-        mSurfaceVariant = hex.surface3;
-        mTertiary = hex.pink;
-      };
+      # colors = let
+      #   hex = colours.hex;
+      # in {
+      #   mError = hex.red;
+      #   mOnError = hex.text;
+      #   mOnPrimary = hex.text;
+      #   mOnSecondary = hex.text;
+      #   mOnSurface = hex.text;
+      #   mOnSurfaceVariant = hex.text;
+      #   mOnTertiary = hex.text;
+      #   mOnHover = hex.text;
+      #   mOutline = hex.crust;
+      #   mPrimary = hex.mauve;
+      #   mSecondary = hex.maroon;
+      #   mShadow = hex.crust;
+      #   mSurface = hex.surface0;
+      #   mHover = hex.base;
+      #   mSurfaceVariant = hex.surface2;
+      #   mTertiary = hex.pink;
+      # };
     };
     wayland.windowManager.hyprland.settings = {
       exec-once = [
