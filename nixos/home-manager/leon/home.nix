@@ -34,7 +34,8 @@
     desktop = {
       ashell.enable = false;
       dunst.enable = false;
-      dms.enable = true;
+      dms.enable = false;
+      noctalia.enable = true;
       lutris.enable = true;
       obs.enable = true;
       hypr = {
@@ -42,7 +43,7 @@
           enable = true;
           mod = "SUPER";
         };
-        hyprpaper.enable = true;
+        hyprpaper.enable = false;
         hyprlock = {
           enable = true;
           mainMonitor = "DP-1";
@@ -115,6 +116,7 @@
     packages = [
       pkgs.just
       inputs.diff-tool.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.dgop
 
       # pkgs.deadlock-mod-manager
       # Image Stuff
@@ -130,6 +132,8 @@
   };
 
   xdg = {
-    configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
+    configFile = {
+      "uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
+    };
   };
 }

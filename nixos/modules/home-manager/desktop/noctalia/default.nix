@@ -1,8 +1,13 @@
-{pkgs, inputs, lib, config, colours, ...}:
-let
-cfg = config.modules.desktop.noctalia;
-in 
 {
+  inputs,
+  pkgs,
+  lib,
+  config,
+  colours,
+  ...
+}: let
+  cfg = config.modules.desktop.noctalia;
+in {
   imports = [
     inputs.noctalia.homeModules.default
   ];
@@ -10,15 +15,17 @@ in
     enable = lib.mkEnableOption "Enable Noctalia Shell";
   };
   config = lib.mkIf cfg.enable {
-    programs.noctalia-shell ={
+    programs.noctalia-shell = {
       enable = true;
+      systemd.enable = true;
+      settings = builtins.fromJSON (builtins.readFile ./settings.json);
       plugins = {
         sources = [
-        {
-          enabled = true;
-          name = "Official Noctalia Plugins";
-          url = "https://github.com/noctalia-dev/noctalia-plugins";
-        }
+          {
+            enabled = true;
+            name = "Official Noctalia Plugins";
+            url = "https://github.com/noctalia-dev/noctalia-plugins";
+          }
         ];
         states = {
           catwalk = {
@@ -30,11 +37,11 @@ in
       };
       colors = let
         hex = colours.hex;
-      in  {
+      in {
         mError = hex.red;
         mOnError = hex.text;
-        mOnPrimary = hex.text;
-        mOnSecondary = hex.text;
+        mOnPrimary = hex.crust;
+        mOnSecondary = hex.crust;
         mOnSurface = hex.text;
         mOnSurfaceVariant = hex.text;
         mOnTertiary = hex.text;
@@ -43,41 +50,46 @@ in
         mPrimary = hex.mauve;
         mSecondary = hex.maroon;
         mShadow = hex.crust;
-        mSurface = hex.surface0;
+        mSurface = hex.mantle;
         mHover = hex.base;
-        mSurfaceVariant = hex.surface3;
+        mSurfaceVariant = hex.base;
         mTertiary = hex.pink;
       };
     };
     wayland.windowManager.hyprland.settings = {
-      exec-once = [
-          "systemctl --user enable --now noctalia.service"
-      ];
+      "$noctipc" = "noctalia-shell ipc call";
 
-      "$noctipc = noctalia-shell ipc call";
-
-      bind = [ 
+      bind = [
         "SUPER, SPACE, exec, $noctipc launcher toggle"
         "SUPER, S, exec, $noctipc controlCenter toggle"
-        "SUPER, comma, exec, $noctipc settings toggle" 
+        "SUPER, comma, exec, $noctipc settings toggle"
       ];
 
       bindel = [
         # Media
         ", XF86AudioRaiseVolume, exec, $noctipc volume increase"
         ", XF86AudioLowerVolume, exec, $noctipc volume decrease"
+        ", XF86AudioVolumeUp, exec, $noctipc volume increase"
+        ", XF86AudioVolumeDown, exec, $noctipc volume decrease"
 
         # Brightness
         ", XF86MonBrightnessUp, exec, $noctipc brightness increase"
         ", XF86MonBrightnessDown, exec, $noctipc brightness decrease"
+        ", XF86BrightnessUp, exec, $noctipc brightness increase"
+        ", XF86BrightnessDown, exec, $noctipc brightness decrease"
       ];
 
       bindl = [
         # Media
-        ", XF86AudioMute, exec, $noctipc volume muteOutput"
-        ", XF86AudioPlay, exec, $noctipc media play"
+        ", XF86AudioPlay, exec, $noctipc media playPause"
+        ", XF86AudioPause, exec, $noctipc media pause"
         ", XF86AudioPrev, exec, $noctipc media previous"
         ", XF86AudioNext, exec, $noctipc media next"
+        ", XF86AudioStop, exec, $noctipc media stop"
+
+        # Audio
+        ", XF86AudioMute, exec, $noctipc volume muteOutput"
+        ", XF86AudioMicMute, exec, $noctipc volume muteInput"
       ];
     };
   };

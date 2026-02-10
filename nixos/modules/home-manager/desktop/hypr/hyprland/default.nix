@@ -108,18 +108,20 @@ in {
           # Utils
           "$colourPicker" = "${uwsmUtils.wrap "hyprpicker -a"}";
           "$lockScreen" = "${uwsmUtils.wrap "hyprlock"}";
+          "$sessionScreen" = "${uwsmUtils.wrap "wlogout"}";
           "$screenshot" = "${uwsmUtils.wrap "hyprshot -m window"}";
           "$screenshotRegion" = "${uwsmUtils.wrap "hyprshot -m region output --clipboard-only"}";
 
-          env = [
-            "XDG_SCREENSHOTS_DIR,$HOME/Pictures/screenshots"
-            "XDG_PICTURES_DIR,$HOME/Pictures"
-            "HYPRSHOT_DIR,$HOME/Pictures/screenshots"
-          ]
-          ++ lib.optionals (lib.elem hyprQTPkg config.home.packages) [
-            # When using hyprqt6engine over qt6ct
-            "QT_QPA_PLATFORMTHEME=hyprqt6engine"
-          ];
+          env =
+            [
+              "XDG_SCREENSHOTS_DIR,$HOME/Pictures/screenshots"
+              "XDG_PICTURES_DIR,$HOME/Pictures"
+              "HYPRSHOT_DIR,$HOME/Pictures/screenshots"
+            ]
+            ++ lib.optionals (lib.elem hyprQTPkg config.home.packages) [
+              # When using hyprqt6engine over qt6ct
+              "QT_QPA_PLATFORMTHEME=hyprqt6engine"
+            ];
 
           exec-once = [
             "systemctl --user enable --now hyprpolkitagent.service"
@@ -140,6 +142,8 @@ in {
             "float on, match:class org.quickshell"
             "float on, match:class gnome-calculator"
             "float on, match:class blueman-manager"
+            "float on, match:class yad"
+            "float on, match:title Steam Settings"
           ];
 
           general = {
@@ -214,6 +218,10 @@ in {
           bindel = [
             # ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%+"
             # ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%-"
+
+            # Keyboard backlight
+            ", XF86KbdBrightnessUp, exec, brightnessctl -d *kbd* set +5%"
+            ", XF86KbdBrightnessDown, exec, brightnessctl -d *kbd* set 5%-"
           ];
           bindl = [
             # ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
@@ -237,7 +245,7 @@ in {
             # "$mod, Tab, hyprexpo:expo, toggle"
             "$mod, p, exec, $colourPicker"
 
-            "$mod, escape, exec, uwsm app -- wlogout"
+            "$mod, escape, exec, $sessionScreen"
             # "$mod, l, exec, $locksCreen"
 
             ##! Clipboard
@@ -279,6 +287,11 @@ in {
             "$mod SHIFT, J, movewindow, d"
 
             "$mod, W, togglespecialworkspace, magic"
+
+            # Touchpad
+            ", XF86TouchpadToggle, exec, hyprctl keyword device:*:enabled toggle"
+            ", XF86TouchpadOn, exec, hyprctl keyword device:*:enabled true"
+            ", XF86TouchpadOff, exec, hyprctl keyword device:*:enabled false"
           ];
         };
       };

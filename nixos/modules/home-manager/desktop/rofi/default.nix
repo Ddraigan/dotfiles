@@ -12,12 +12,14 @@
       enable = true;
       cycle = true;
       package = pkgs.rofi;
+      plugins = [pkgs.rofi-calc];
       terminal = "${pkgs.wezterm}/bin/wezterm";
       location = "center";
       modes = [
         "drun"
         "run"
         "window"
+        "calc"
       ];
       extraConfig = {
         # Keybinds vim-like
@@ -40,10 +42,12 @@
 
         sidebar-mode = true;
 
-        display-drun = " Apps";
-        display-run = " Run";
-        display-window = " Window";
-        display-Network = " 󰤨 Network";
+        display-drun = "Apps";
+        display-run = "Run";
+        display-window = "Window";
+        display-Network = "󰤨 Network";
+        display-calc = "Calculator";
+        calc-command = "qalc {expression}";
       };
       theme = {
         "*" = {
