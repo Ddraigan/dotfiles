@@ -7,7 +7,6 @@ M.exclude_configs = {
 
 M.system = {
   nix = {
-    -- "nixd",
     "lua_ls",
     "haskell-language-server",
     "hls",
@@ -43,15 +42,16 @@ M.mason = {
     "lua_ls",
     "rust_analyzer",
     "stylua",
-    -- "nil",
   },
 }
 
 --- Gets list of lsps for mason to install
 ---@return table
-M.get_lsps_for_mason = function()
+M.get_mason_servers = function()
   if vim.fn.has("win32") == 1 then
-    return vim.tbl_extend("keep", M.mason.base, M.mason.windows)
+    -- return vim.tbl_extend("keep", M.mason.base, M.mason.windows)
+    -- return vim.list_extend(M.mason.base, M.mason.windows)
+    return require("config.utils").merge_tables(M.mason.base, M.mason.windows)
   end
   return M.mason.base
 end

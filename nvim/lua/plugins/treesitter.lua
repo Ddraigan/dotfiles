@@ -8,7 +8,6 @@ return {
     },
     { "nvim-treesitter/nvim-treesitter-textobjects" },
   },
-  cmd = { "Treesitter" },
   event = { "BufReadPost", "BufNewFile" },
   build = ":TSUpdate",
   config = function()
@@ -25,12 +24,12 @@ return {
         "vimdoc",
         "regex",
         "bash",
+        "morkdown",
         "markdown_inline",
         "astro",
       },
       sync_install = false,
       auto_install = true,
-      ignore_install = {},
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
