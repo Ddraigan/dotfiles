@@ -135,5 +135,13 @@
     configFile = {
       "uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
     };
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/html" = ["zen-beta.desktop"];
+        "x-scheme-handler/http" = ["zen-beta.desktop"];
+        "x-scheme-handler/https" = ["zen-beta.desktop"];
+      };
+    };
   };
 }

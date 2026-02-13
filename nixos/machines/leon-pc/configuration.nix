@@ -20,6 +20,7 @@ in {
       gaming.enable = true;
     };
     sunshine.enable = true;
+    solaar.enable = true;
   };
 
   users = {

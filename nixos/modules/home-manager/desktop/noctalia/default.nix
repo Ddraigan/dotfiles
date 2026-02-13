@@ -28,10 +28,6 @@ in {
           }
         ];
         states = {
-          catwalk = {
-            enabled = true;
-            sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-          };
         };
         version = 1;
       };

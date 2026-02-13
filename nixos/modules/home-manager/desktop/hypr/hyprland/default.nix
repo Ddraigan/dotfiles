@@ -25,7 +25,6 @@ in {
   config =
     lib.mkIf cfg.enable
     (let
-      hyprQTPkg = inputs.hyprqt6engine.packages.${sys}.default;
       workspaces = lib.range 1 9;
       wsBinds =
         lib.concatMap (i: [
@@ -34,33 +33,40 @@ in {
         ])
         workspaces;
     in {
-      home.packages = with pkgs; [
-        # Colour Picker
-        hyprpicker
-        # Clipboard
-        cliphist
-        wl-clipboard
+      home = {
+        packages = with pkgs; [
+          # Colour Picker
+          hyprpicker
+          # Clipboard
+          cliphist
+          wl-clipboard
 
-        # For media keys
-        playerctl
+          # For media keys
+          playerctl
 
-        hyprsysteminfo
+          hyprsysteminfo
 
-        # QT
-        hyprland-qt-support
-        hyprQTPkg
+          # QT
+          hyprland-qt-support
 
-        # Screenshot Utils
-        hyprshot
-        grim
-        slurp
-      ];
+          # Screenshot Utils
+          hyprshot
+          grim
+          slurp
+        ];
+        sessionVariables = {
+          NIXOS_XDG_OPEN_USE_PORTAL = "1";
+          XDG_SCREENSHOTS_DIR = "$HOME/Pictures/screenshots";
+          XDG_PICTURES_DIR = "$HOME/Pictures";
+          HYPRSHOT_DIR = "$HOME/Pictures/screenshots";
+        };
+      };
       wayland.windowManager.hyprland = {
         enable = true;
         xwayland.enable = true;
         # package = null;
         package = inputs.hyprland.packages.${sys}.hyprland;
-        # portalPackage = "";
+        portalPackage = null;
         systemd = {
           enable = false; # Being enabled would conflict with UWSM
           variables = [
@@ -74,7 +80,7 @@ in {
         };
         plugins = [
           inputs.hyprsplit.packages.${sys}.hyprsplit
-          inputs.hypr-darkwindow.packages.${sys}.Hypr-DarkWindow
+          # inputs.hypr-darkwindow.packages.${sys}.Hypr-DarkWindow
         ];
         settings = {
           "plugin:hyprsplit" = {
@@ -86,13 +92,13 @@ in {
                 "$mod SHIFT, W, split:movetoworkspace, special:magic"
               ];
           };
-          "plugin:darkwindow:load_shaders" = "chromakey";
-          "plugin:darkwindow" = {
-            windowrule = [
-              "darkwindow:shade chromakey bkg=[0.0 0.0 0.0] targetOpacity=0.0, match:class spotify"
-              "darkwindow:shade chromakey bkg=[0.255 0.255 0.255] targetOpacity=0.0, match:class com.github.wwmm.easyeffects"
-            ];
-          };
+          # "plugin:darkwindow:load_shaders" = "chromakey";
+          # "plugin:darkwindow" = {
+          #   windowrule = [
+          #     "darkwindow:shade chromakey bkg=[0.0 0.0 0.0] targetOpacity=0.0, match:class spotify"
+          #     "darkwindow:shade chromakey bkg=[0.255 0.255 0.255] targetOpacity=0.0, match:class com.github.wwmm.easyeffects"
+          #   ];
+          # };
 
           # Commands
           "$exitCommand" = "${uwsmUtils.exit}";
@@ -112,16 +118,15 @@ in {
           "$screenshot" = "${uwsmUtils.wrap "hyprshot -m window"}";
           "$screenshotRegion" = "${uwsmUtils.wrap "hyprshot -m region output --clipboard-only"}";
 
-          env =
-            [
-              "XDG_SCREENSHOTS_DIR,$HOME/Pictures/screenshots"
-              "XDG_PICTURES_DIR,$HOME/Pictures"
-              "HYPRSHOT_DIR,$HOME/Pictures/screenshots"
-            ]
-            ++ lib.optionals (lib.elem hyprQTPkg config.home.packages) [
-              # When using hyprqt6engine over qt6ct
-              "QT_QPA_PLATFORMTHEME=hyprqt6engine"
-            ];
+          # env =
+          # [
+          # "XDG_SCREENSHOTS_DIR,$HOME/Pictures/screenshots"
+          # "XDG_PICTURES_DIR,$HOME/Pictures"
+          # "HYPRSHOT_DIR,$HOME/Pictures/screenshots"
+          # ];
+          # ++ lib.optionals (lib.elem hyprQTPkg config.home.packages) [
+          #   # When using hyprqt6engine over qt6ct
+          #   "QT_QPA_PLATFORMTHEME=hyprqt6engine"
 
           exec-once = [
             "systemctl --user enable --now hyprpolkitagent.service"
@@ -164,7 +169,7 @@ in {
             active_opacity = 1.0;
             inactive_opacity = 0.9;
             shadow = {
-              enabled = true;
+              enabled = false;
               range = 30;
               render_power = 5;
               offset = "0 5";

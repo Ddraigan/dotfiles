@@ -10,5 +10,6 @@
     ./greetd.nix
     # ./secureboot.nix
     ./sunshine.nix
+    ./solaar.nix
   ];
 }

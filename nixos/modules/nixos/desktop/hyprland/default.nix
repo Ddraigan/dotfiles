@@ -51,7 +51,9 @@ in {
       xdgOpenUsePortal = true;
       config = {
         common.default = ["gtk"];
-        hyprland.default = ["hyprland" "gtk"];
+        hyprland = {
+          default = ["hyprland" "gtk"];
+        };
       };
       extraPortals = [
         # pkgs.xdg-desktop-portal-hyprland # Home manager module provides this one

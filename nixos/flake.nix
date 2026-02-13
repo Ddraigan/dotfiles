@@ -48,12 +48,13 @@
       url = "github:shezdy/hyprsplit";
       inputs.hyprland.follows = "hyprland";
     };
-    hyprqt6engine = {
-      url = "github:hyprwm/hyprqt6engine";
-    };
     hypr-darkwindow = {
       url = "github:micha4w/Hypr-DarkWindow"; # Make sure to change the tag to match your hyprland version
       inputs.hyprland.follows = "hyprland";
+    };
+    solaar = {
+      url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     diff-tool.url = "github:ddraigan/diff-tool";
   };
@@ -63,7 +64,10 @@
       nixpkgs.lib.nixosSystem
       {
         system = system;
-        specialArgs = {inherit inputs;};
+        specialArgs = {
+          hostName = name;
+          inherit inputs;
+        };
         modules = [
           ./machines/${name}/configuration.nix
           ./modules/shared
