@@ -9,7 +9,6 @@
   spicetify = inputs.spicetify-nix;
   spicetify_hm = spicetify.homeManagerModules.spicetify;
   spicePkgs = spicetify.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-  cols = colours.stripped;
   transparentFriendlyColour = "000000";
 in {
   imports = [
@@ -32,26 +31,26 @@ in {
         marketplace
       ];
       colorScheme = "custom";
-      customColorScheme = {
-        text = cols.text;
-        subtext = cols.subtext1;
+      customColorScheme = with colours.stripped; {
+        text = text;
+        subtext = subtext1;
         main = transparentFriendlyColour;
         main-elevated = transparentFriendlyColour;
-        highlight = cols.surface0;
-        highlight-elevated = cols.surface1;
+        highlight = surface0;
+        highlight-elevated = surface1;
         sidebar = transparentFriendlyColour;
         player = transparentFriendlyColour;
         card = transparentFriendlyColour;
-        shadow = cols.mantle;
-        selected-row = cols.overlay2;
-        button = cols.overlay1;
-        button-active = cols.overlay2;
-        button-disabled = cols.overlay0;
-        tab-active = cols.surface1;
-        notification = cols.rosewater;
-        notification-error = cols.red;
+        shadow = mantle;
+        selected-row = overlay2;
+        button = overlay1;
+        button-active = overlay2;
+        button-disabled = overlay0;
+        tab-active = surface1;
+        notification = rosewater;
+        notification-error = red;
         equalizer = transparentFriendlyColour;
-        misc = cols.surface1;
+        misc = surface1;
       };
     };
   };

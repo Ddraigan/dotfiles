@@ -6,8 +6,13 @@
 }: let
   cfg = config.modules.terminal.fastfetch;
 in {
-  options = {modules.terminal.fastfetch.enable = lib.mkEnableOption "Enable Fastfetch";};
+  options = {
+    modules.terminal.fastfetch.enable = lib.mkEnableOption "Enable Fastfetch";
+  };
   config = lib.mkIf cfg.enable {
+    home.shellAliases = {
+      cf = "clear && fastfetch";
+    };
     programs.fastfetch = {
       enable = true;
       settings = {

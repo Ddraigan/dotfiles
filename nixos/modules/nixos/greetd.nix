@@ -14,8 +14,8 @@
           disable_hyprland_guiutils_check = true
       }
       input {
-          kb_layout = "us"
-          kb_variant = "dvorak"
+          kb_layout = us
+          kb_variant = dvorak
       }
     '';
   in {

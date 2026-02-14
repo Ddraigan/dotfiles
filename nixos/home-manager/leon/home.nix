@@ -94,6 +94,7 @@
   programs = {
     home-manager.enable = true;
     element-desktop.enable = true;
+    firefox.enable = true;
     git = {
       enable = true;
       settings = {
@@ -110,20 +111,15 @@
     username = "leon";
     homeDirectory = "/home/leon";
     stateVersion = "24.05"; # Don't change this I'm pretty sure
-    shellAliases = {
-      cf = "clear && fastfetch";
-    };
     packages = [
       pkgs.just
       inputs.diff-tool.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.dgop
 
-      # pkgs.deadlock-mod-manager
       # Image Stuff
       pkgs.gimp
       pkgs.loupe
 
-      pkgs.firefox
       pkgs.unzip
       pkgs.zip
       pkgs.ripgrep

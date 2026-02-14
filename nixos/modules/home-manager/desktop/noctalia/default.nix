@@ -31,25 +31,23 @@ in {
         };
         version = 1;
       };
-      colors = let
-        hex = colours.hex;
-      in {
-        mError = hex.red;
-        mOnError = hex.text;
-        mOnPrimary = hex.crust;
-        mOnSecondary = hex.crust;
-        mOnSurface = hex.text;
-        mOnSurfaceVariant = hex.text;
-        mOnTertiary = hex.text;
-        mOnHover = hex.text;
-        mOutline = hex.crust;
-        mPrimary = hex.mauve;
-        mSecondary = hex.maroon;
-        mShadow = hex.crust;
-        mSurface = hex.mantle;
-        mHover = hex.base;
-        mSurfaceVariant = hex.base;
-        mTertiary = hex.pink;
+      colors = with colours.hex; {
+        mError = red;
+        mOnError = text;
+        mOnPrimary = crust;
+        mOnSecondary = crust;
+        mOnSurface = text;
+        mOnSurfaceVariant = text;
+        mOnTertiary = text;
+        mOnHover = text;
+        mOutline = crust;
+        mPrimary = mauve;
+        mSecondary = maroon;
+        mShadow = crust;
+        mSurface = mantle;
+        mHover = base;
+        mSurfaceVariant = base;
+        mTertiary = pink;
       };
     };
     wayland.windowManager.hyprland.settings = {

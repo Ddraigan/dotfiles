@@ -145,7 +145,6 @@ in {
           windowrule = [
             "suppress_event maximize, match:class .*"
             "float on, match:class org.quickshell"
-            "float on, match:class gnome-calculator"
             "float on, match:class blueman-manager"
             "float on, match:class yad"
             "float on, match:title Steam Settings"
@@ -167,7 +166,7 @@ in {
           decoration = {
             rounding = 12;
             active_opacity = 1.0;
-            inactive_opacity = 0.9;
+            inactive_opacity = 1.0;
             shadow = {
               enabled = false;
               range = 30;

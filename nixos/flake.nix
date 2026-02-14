@@ -33,7 +33,10 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     nix-proton-cachyos.url = "github:kimjongbing/nix-proton-cachyos";
     hyprland.url = "github:hyprwm/Hyprland";
