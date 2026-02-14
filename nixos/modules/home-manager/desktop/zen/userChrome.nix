@@ -31,7 +31,11 @@ with colours; ''
     }
 
     .sidebar-placesTree {
-      background-color: ${hex.base} !important;
+      background-color: transparent !important;
+    }
+
+    #sidebar-box {
+      background-color: transparent !important;
     }
 
     #zen-workspaces-button {
@@ -41,6 +45,14 @@ with colours; ''
     .tab-text {
         color: ${hex.text} !important;
       }
+
+    .tabbrowser-tab[selected] .tab-background {
+        background-color: ${rgba rgb.flamingo 0.4} !important;
+    }
+
+    .tab-label-container[selected] label {
+        color: ${hex.text} !important;
+    }
 
     .urlbar-background {
       background-color: ${hex.surface0} !important;
@@ -52,8 +64,12 @@ with colours; ''
     }
 
     .urlbarView-url {
-      color: ${hex.pink} !important;
+      color: ${hex.flamingo} !important;
     }
+
+    .urlbarView-row {
+        color: ${hex.text} !important;
+      }
 
     #urlbar-input::selection {
       background-color: ${hex.pink} !important;
