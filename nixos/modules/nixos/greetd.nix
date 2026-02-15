@@ -2,12 +2,20 @@
   lib,
   pkgs,
   config,
+  hostName,
   ...
 }: {
   options.modules.nix.greetd.enable = lib.mkEnableOption "Enable greetd";
   config = lib.mkIf config.modules.nix.greetd.enable (let
+    kbVariant =
+      if hostName == "leon-pc"
+      then ""
+      else "dvorak";
+
+    # exec-once = "${config.programs.regreet.package}/bin/regreet"; hyprctl dispatch exit
     hyprGreetConf = pkgs.writeText "hypr-greet.conf" ''
-      exec-once = "${config.programs.regreet.package}/bin/regreet"; hyprctl dispatch exit
+      exec-once = ${lib.getExe config.programs.regreet.package}; hyprctl dispatch exit
+
       misc {
           disable_hyprland_logo = true
           disable_splash_rendering = true
@@ -15,7 +23,7 @@
       }
       input {
           kb_layout = us
-          kb_variant = dvorak
+          ${lib.optionalString (kbVariant != "") "kb_variant = ${kbVariant}"}
       }
     '';
   in {
@@ -24,7 +32,8 @@
       restart = false;
       settings = {
         default_session = {
-          command = "${config.programs.hyprland.package}/bin/hyprland --config ${hyprGreetConf}";
+          # command = "${config.programs.hyprland.package}/bin/hyprland --config ${hyprGreetConf}";
+          command = "${lib.getExe config.programs.hyprland.package} --config ${hyprGreetConf}";
           user = "greeter";
         };
       };

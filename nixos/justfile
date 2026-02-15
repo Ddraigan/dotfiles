@@ -9,5 +9,16 @@ nix host:
   git add .
   sudo nixos-rebuild switch --flake .#{{host}}
 
-update:
-  nix flake update
+update package="":
+  nix flake update #{{package}}
+
+history:
+  nix profile history --profile /nix/var/nix/profiles/system
+
+clean:
+  # remove all generations older than 7 days
+  sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --older-than 7d
+
+gc:
+  # garbage collect all unused nix store entries
+  sudo nix-collect-garbage --delete-old
