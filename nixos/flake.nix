@@ -12,6 +12,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    nix-test.url = "path:/home/leon/Downloads/test/test";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.3";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -100,6 +101,7 @@
       leon-pc = mkMachine "leon-pc" "x86_64-linux";
       leon-laptop = mkMachine "leon-laptop" "x86_64-linux";
       leon-dell = mkMachine "leon-dell" "x86_64-linux";
+      test = mkMachine "test" "x86_64-linux";
     };
 
     homeConfigurations = {

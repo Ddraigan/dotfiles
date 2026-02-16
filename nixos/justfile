@@ -1,24 +1,34 @@
 default:
   just --list
 
-home profile:
+[group("home-manager")]
+hm-switch profile:
   git add .
   home-manager switch --flake .#{{profile}}
 
-nix host:
+[group("nix")]
+nix-switch host:
   git add .
   sudo nixos-rebuild switch --flake .#{{host}}
 
-update package="":
-  nix flake update #{{package}}
+[group("nix")]
+nix-update package="":
+  nix flake update {{package}}
 
-history:
+[group("nix")]
+nix-history:
   nix profile history --profile /nix/var/nix/profiles/system
 
-clean:
+[group("nix")]
+nix-clean:
   # remove all generations older than 7 days
   sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --older-than 7d
 
-gc:
+[group("nix")]
+nix-gc:
   # garbage collect all unused nix store entries
   sudo nix-collect-garbage --delete-old
+
+[group("nix")]
+nix-build-vm host:
+  nix build .#nixosConfigurations.{{host}}.config.system.build.vm

@@ -106,7 +106,6 @@ in {
   environment = {
     systemPackages = [
       wezterm-cwd
-      pkgs.upower
       pkgs.helvum
       # NOTE: Changed 25.11
       pkgs.bitwarden-desktop
@@ -156,6 +155,10 @@ in {
       enable = true;
       wifi.powersave = false;
     };
+    firewall = {
+      allowedTCPPorts = [57621 4321];
+      allowedUDPPorts = [5353];
+    };
   };
 
   virtualisation.docker.enable = true;
@@ -191,14 +194,6 @@ in {
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  networking.firewall = {
-    allowedTCPPorts = [57621 4321];
-    allowedUDPPorts = [5353];
-  };
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
