@@ -17,14 +17,13 @@ in {
 
     virtualisation.oci-containers.containers.cloudflare-ddns = {
       image = "favonia/cloudflare-ddns:latest";
-      # Use host networking to make IPv6 easier
       autoStart = true;
       user = "1000:1000";
-      readOnly = true;
       cmd = [
         "--network-mode=host"
         "--cap-drop=ALL"
         "--security-opt=no-new-privileges:true"
+        "--read-only"
       ];
       environmentFiles = [
         "/home/leon/secrets/cloudflare-ddns.env"
