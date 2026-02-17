@@ -10,6 +10,7 @@
 
   modules.nix.containers = {
     traefik.enable = true;
+    homeass.enable = true;
   };
 
   boot.loader = {
