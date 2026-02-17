@@ -2,6 +2,7 @@
   config,
   inputs,
   pkgs,
+  hostName,
   ...
 }: {
   imports = [
@@ -68,6 +69,7 @@
   };
 
   networking = {
+    hostName = hostName;
     networkmanager.enable = true;
     firewall.allowedTCPPorts = [22];
   };

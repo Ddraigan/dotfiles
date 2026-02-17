@@ -7,7 +7,7 @@
   cfg = config.modules.nix.containers.traefik;
   yaml = pkgs.formats.yaml {};
 in {
-  config = lib.mkIf cfg.enable {
+  config ={
     environment.etc."traefik/traefik.yml".source = yaml.generate "traefik.yml" {
       api.dashboard = true;
 
