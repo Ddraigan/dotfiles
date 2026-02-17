@@ -65,16 +65,6 @@
     };
     oci-containers = {
       backend = "docker";
-      containers = {
-        some-container = let
-          system = pkgs.system;
-          nixTestImage = inputs.nix-test.packages.${system}.docker;
-        in {
-          image = "nix-test:latest";
-          imageFile = nixTestImage;
-          autoStart = true;
-        };
-      };
     };
   };
 
