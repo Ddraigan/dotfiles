@@ -4,11 +4,13 @@
   lib,
   ...
 }: let
+  cfg = config.modules.nix.containers.cfddns;
   mainUser = "leon";
   dataPath = "${config.users.users.${mainUser}.home}/appdata";
   cfddnsPath = "${dataPath}/cloudflare-ddns";
 in {
-  config = {
+  options.modules.nix.containers.cfddns.enable = lib.mkEnableOption "Enable cloudflare-ddns";
+  config = lib.mkIf cfg.enable {
     systemd.tmpfiles.rules = [
       "d ${cfddnsPath} 0755 ${mainUser} users -"
     ];
@@ -16,11 +18,14 @@ in {
     virtualisation.oci-containers.containers.cloudflare-ddns = {
       image = "favonia/cloudflare-ddns:latest";
       # Use host networking to make IPv6 easier
-      networkMode = "host";
-      restartPolicy = "always";
+      autoStart = true;
       user = "1000:1000";
       readOnly = true;
-      securityOpt = ["no-new-privileges:true"];
+      cmd = [
+        "--network-mode=host"
+        "--cap-drop=ALL"
+        "--security-opt=no-new-privileges:true"
+      ];
       environmentFiles = [
         "/home/leon/secrets/cloudflare-ddns.env"
       ];
