@@ -12,6 +12,7 @@
   modules.nix.containers = {
     traefik.enable = true;
     homeass.enable = true;
+    cfddns.enable = true;
   };
 
   boot.loader = {
