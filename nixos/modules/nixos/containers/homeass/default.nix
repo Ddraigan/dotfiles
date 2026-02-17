@@ -4,12 +4,12 @@
   pkgs,
   ...
 }: let
-  cfg = config.modules.nix.containers;
+  cfg = config.modules.nix.containers.homeass;
   mainUser = "leon";
   dataPath = "${config.users.users.${mainUser}.home}/appdata";
   homeassPath = "${dataPath}/homeass";
 in {
-  options.modules.nix.containers.homeass.enable = lib.mkEnable "Enable Home Assistant Container";
+  options.modules.nix.containers.homeass.enable = lib.mkEnableOption "Enable Home Assistant Container";
   config = lib.mkIf cfg.enable {
     systemd.tmpfiles.rules = [
       "d ${homeassPath} 0755 ${mainUser} ${mainUser} -"
