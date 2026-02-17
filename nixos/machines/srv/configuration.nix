@@ -30,7 +30,7 @@
   services = {
     openssh = {
       enable = true;
-      settings.PasswordAuthentication = true;
+      settings.PasswordAuthentication = false;
     };
     displayManager.gdm.enable = false;
     desktopManager.gnome.enable = false;
