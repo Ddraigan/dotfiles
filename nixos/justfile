@@ -32,3 +32,7 @@ nix-gc:
 [group("nix")]
 nix-build-vm host:
   nix build .#nixosConfigurations.{{host}}.config.system.build.vm
+
+[group("nix")]
+nix-build-iso:
+  nix build .#nixosConfigurations.iso.config.system.build.isoImage

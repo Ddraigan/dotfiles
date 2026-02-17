@@ -79,6 +79,19 @@
         ];
       };
 
+    mkIso = name: system:
+      nixpkgs.lib.nixosSystem
+      {
+        system = system;
+        specialArgs = {
+          hostName = name;
+          inherit inputs;
+        };
+        modules = [
+          ./machines/${name}/configuration.nix
+        ];
+      };
+
     mkHome = name: system:
       inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {inherit system;};
@@ -102,6 +115,7 @@
       leon-laptop = mkMachine "leon-laptop" "x86_64-linux";
       leon-dell = mkMachine "leon-dell" "x86_64-linux";
       test = mkMachine "test" "x86_64-linux";
+      iso = mkIso "iso" "x86_64-linux";
     };
 
     homeConfigurations = {
