@@ -4,6 +4,10 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
   modules.nix.containers = {
     traefik.enable = true;
   };
