@@ -13,6 +13,7 @@
 in {
   options.modules.nix.containers.traefik.enable = lib.mkEnableOption "Enable Traefik";
   config = lib.mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = [443 80];
     systemd.tmpfiles.rules = [
       "d ${traefikPath} 0755 ${mainUser} users -"
       "Z ${traefikPath} - ${mainUser} users -"
