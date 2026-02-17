@@ -33,7 +33,6 @@ in {
       extraOptions = [
         "--cap-add=NET_ADMIN"
         "--cap-add=NET_RAW"
-        "--restart=unless-stopped"
       ];
       environment = {
         TZ = config.time.timeZone;

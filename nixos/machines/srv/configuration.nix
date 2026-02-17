@@ -21,9 +21,7 @@
   environment.systemPackages = with pkgs; [
     git
     vim
-    cowsay
-    lolcat
-    hello
+    just
   ];
 
   programs.zsh.enable = true;
