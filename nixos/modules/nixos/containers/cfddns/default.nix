@@ -19,8 +19,11 @@ in {
       image = "favonia/cloudflare-ddns:latest";
       autoStart = true;
       user = "1000:1000";
+      extraOptions = [
+        "--network=host"
+      ];
       cmd = [
-        "--network-mode=host"
+        # "--network-mode=host"
         "--cap-drop=ALL"
         "--security-opt=no-new-privileges:true"
         "--read-only"
