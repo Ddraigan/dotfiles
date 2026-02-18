@@ -23,10 +23,10 @@ in {
         "${homeassPath}:/config"
         "/run/dbus:/run/dbus:ro"
       ];
-      # devices = [
-      #   "/dev/ttyUSB0:/dev/ttyUSB0"
+      devices = [
+        "/dev/ttyUSB0:/dev/ttyUSB0"
       # "/dev/serial/by-id/usb-YourStickID:/dev/ttyUSB0" # Better way to mount usb
-      # ];
+      ];
       ports = [
         "8123:8123"
       ];
