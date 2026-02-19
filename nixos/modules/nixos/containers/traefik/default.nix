@@ -29,10 +29,10 @@ in {
           ];
           labels = {
             "traefik.enable" = "true";
-            "traefik.http.routers.uptime-kuma.rule" = "Host(\`uptime-kuma.${cfg.domain}\`)";
-            "traefik.http.services.uptime-kuma.loadbalancer.server.port" = "3001";
             "traefik.http.routers.uptime-kuma.entrypoints" = "websecure";
             "traefik.http.routers.uptime-kuma.tls.certresolver" = "certresolver";
+            "traefik.http.routers.uptime-kuma.rule" = "Host(\`uptime-kuma.${cfg.domain}\`)";
+            "traefik.http.services.uptime-kuma.loadbalancer.server.port" = "3001";
             # WebSocket support
             "traefik.http.middlewares.uptime-kuma-headers.headers.customrequestheaders.X-Forwarded-Proto" = "https";
             "traefik.http.routers.uptime-kuma.middlewares" = "uptime-kuma-headers";
@@ -52,6 +52,12 @@ in {
           environmentFiles = [
             "/home/leon/secrets/traefik.env"
           ];
+          labels = {
+            # "traefik.http.routers.uptime-kuma.entrypoints" = "websecure";
+            # "traefik.http.routers.uptime-kuma.tls.certresolver" = "certresolver";
+            # "traefik.http.routers.uptime-kuma.rule" = "Host(\`uptime-kuma.${cfg.domain}\`)";
+            # "traefik.http.services.uptime-kuma.loadbalancer.server.port" = "";
+          };
           cmd = [
             "--api.insecure=true"
             "--providers.docker=true"
