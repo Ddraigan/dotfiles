@@ -5,7 +5,7 @@
   ...
 }: let
   cfg = config.modules.nix.containers;
-  cfddnsPath = cfg.mkPath "cloudflare-ddns";
+  cfddnsPath = "${cfg.dataPath}/cloudflare-ddns";
 in {
   options.modules.nix.containers.cfddns.enable = lib.mkEnableOption "Enable cloudflare-ddns";
   config = lib.mkIf cfg.cfddns.enable {

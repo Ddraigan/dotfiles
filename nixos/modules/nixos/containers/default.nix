@@ -26,8 +26,4 @@
       description = "Base path for container persistent data.";
     };
   };
-  config = {
-    modules.nix.containers.mkPath =
-      name: "${config.modules.nix.containers.dataPath}/${name}";
-  };
 }

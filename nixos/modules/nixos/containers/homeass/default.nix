@@ -5,7 +5,7 @@
   ...
 }: let
   cfg = config.modules.nix.containers;
-  homeassPath = cfg.mkPath "homeass";
+  homeassPath = "${cfg.dataPath}/homeass";
 in {
   options.modules.nix.containers.homeass.enable = lib.mkEnableOption "Enable Home Assistant Container";
   config = lib.mkIf cfg.homeass.enable {
@@ -23,7 +23,7 @@ in {
       ];
       devices = [
         "/dev/ttyUSB0:/dev/ttyUSB0"
-      # "/dev/serial/by-id/usb-YourStickID:/dev/ttyUSB0" # Better way to mount usb
+        # "/dev/serial/by-id/usb-YourStickID:/dev/ttyUSB0" # Better way to mount usb
       ];
       ports = [
         "8123:8123"

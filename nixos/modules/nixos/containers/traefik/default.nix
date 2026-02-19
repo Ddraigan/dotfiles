@@ -5,8 +5,8 @@
   ...
 }: let
   cfg = config.modules.nix.containers;
-  traefikPath = cfg.mkPath "traefik";
-  kumaPath = cfg.mkPath "uptime-kuma";
+  traefikPath = "${cfg.dataPath}/traefik";
+  kumaPath = "${cfg.dataPath}/uptime-kuma";
 in {
   options.modules.nix.containers.traefik.enable = lib.mkEnableOption "Enable Traefik";
   config = lib.mkIf cfg.traefik.enable {
