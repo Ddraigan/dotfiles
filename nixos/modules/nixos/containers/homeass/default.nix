@@ -43,10 +43,6 @@ in {
         "traefik.http.routers.homeass.tls.certresolver" = "certresolver";
 
         "traefik.http.services.homeass.loadbalancer.server.port" = "8123";
-
-        # WebSocket support
-        "traefik.http.middlewares.homeass-headers.headers.customrequestheaders.X-Forwarded-Proto" = "https";
-        "traefik.http.routers.homeass.middlewares" = "homeass";
       };
     };
   };
