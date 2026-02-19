@@ -4,24 +4,21 @@
   lib,
   ...
 }: let
-  cfg = config.modules.nix.containers.traefik;
-  domain = "ddraigan.com";
-  mainUser = "leon";
-  dataPath = "${config.users.users.${mainUser}.home}/appdata";
-  traefikPath = "${dataPath}/traefik";
-  kumaPath = "${dataPath}/uptime-kuma";
+  cfg = config.modules.nix.containers;
+  traefikPath = cfg.mkPath "traefik";
+  kumaPath = cfg.mkPath "uptime-kuma";
 in {
   options.modules.nix.containers.traefik.enable = lib.mkEnableOption "Enable Traefik";
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.traefik.enable {
     networking.firewall.allowedTCPPorts = [443 80];
     systemd.tmpfiles.rules = [
-      "d ${traefikPath} 0755 ${mainUser} users -"
-      "Z ${traefikPath} - ${mainUser} users -"
+      "d ${traefikPath} 0755 ${cfg.mainUser} users -"
+      "Z ${traefikPath} - ${cfg.mainUser} users -"
 
-      "d ${kumaPath} 0755 ${mainUser} users -"
+      "d ${kumaPath} 0755 ${cfg.mainUser} users -"
 
-      "d ${traefikPath} 0755 ${mainUser} users -"
-      "f ${traefikPath}/acme.json 0600 ${mainUser} users -"
+      "d ${traefikPath} 0755 ${cfg.mainUser} users -"
+      "f ${traefikPath}/acme.json 0600 ${cfg.mainUser} users -"
     ];
     virtualisation.oci-containers = {
       containers = {
@@ -32,7 +29,7 @@ in {
           ];
           labels = {
             "traefik.enable" = "true";
-            "traefik.http.routers.uptime-kuma.rule" = "Host(\`uptime-kuma.${domain}\`)";
+            "traefik.http.routers.uptime-kuma.rule" = "Host(\`uptime-kuma.${cfg.domain}\`)";
             "traefik.http.services.uptime-kuma.loadbalancer.server.port" = "3001";
             "traefik.http.routers.uptime-kuma.entrypoints" = "websecure";
             "traefik.http.routers.uptime-kuma.tls.certresolver" = "certresolver";

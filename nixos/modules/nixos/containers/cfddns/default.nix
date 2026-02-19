@@ -4,15 +4,13 @@
   lib,
   ...
 }: let
-  cfg = config.modules.nix.containers.cfddns;
-  mainUser = "leon";
-  dataPath = "${config.users.users.${mainUser}.home}/appdata";
-  cfddnsPath = "${dataPath}/cloudflare-ddns";
+  cfg = config.modules.nix.containers;
+  cfddnsPath = cfg.mkPath "cloudflare-ddns";
 in {
   options.modules.nix.containers.cfddns.enable = lib.mkEnableOption "Enable cloudflare-ddns";
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.cfddns.enable {
     systemd.tmpfiles.rules = [
-      "d ${cfddnsPath} 0755 ${mainUser} users -"
+      "d ${cfddnsPath} 0755 ${cfg.mainUser} users -"
     ];
 
     virtualisation.oci-containers.containers.cloudflare-ddns = {
@@ -21,9 +19,6 @@ in {
       user = "1000:1000";
       extraOptions = [
         "--network=host"
-      ];
-      cmd = [
-        # "--network-mode=host"
         "--cap-drop=ALL"
         "--security-opt=no-new-privileges:true"
         "--read-only"

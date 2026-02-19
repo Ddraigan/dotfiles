@@ -4,15 +4,13 @@
   pkgs,
   ...
 }: let
-  cfg = config.modules.nix.containers.homeass;
-  mainUser = "leon";
-  dataPath = "${config.users.users.${mainUser}.home}/appdata";
-  homeassPath = "${dataPath}/homeass";
+  cfg = config.modules.nix.containers;
+  homeassPath = cfg.mkPath "homeass";
 in {
   options.modules.nix.containers.homeass.enable = lib.mkEnableOption "Enable Home Assistant Container";
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.homeass.enable {
     systemd.tmpfiles.rules = [
-      "d ${homeassPath} 0755 ${mainUser} ${mainUser} -"
+      "d ${homeassPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
     ];
     networking.firewall.allowedTCPPorts = [8123];
     virtualisation.oci-containers.containers.homeass = {
@@ -36,6 +34,15 @@ in {
       ];
       environment = {
         TZ = config.time.timeZone;
+      };
+      labels = {
+        "traefik.enable" = "true";
+
+        "traefik.http.routers.homeass.rule" = "Host(`homeass.${cfg.domain}`)";
+        "traefik.http.routers.homeass.entrypoints" = "websecure";
+        "traefik.http.routers.homeass.tls.certresolver" = "certresolver";
+
+        "traefik.http.services.homeass.loadbalancer.server.port" = "8123";
       };
     };
   };

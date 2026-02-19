@@ -10,6 +10,8 @@
   ];
 
   modules.nix.containers = {
+    domain = "ddraigan.com";
+    mainUser = "leon";
     traefik.enable = true;
     homeass.enable = true;
     cfddns.enable = true;
