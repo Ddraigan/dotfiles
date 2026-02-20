@@ -53,9 +53,11 @@ in {
             "/home/leon/secrets/traefik.env"
           ];
           labels = {
+            "traefik.enable" = "true";
+            "traefik.http.routers.dashboard.rule" = "Host(\`traefik.${cfg.domain}\`)";
+            "traefik.http.routers.dashboard.service" = "api@internal";
             "traefik.http.routers.dashboard.entrypoints" = "websecure";
             "traefik.http.routers.dashboard.tls.certresolver" = "certresolver";
-            "traefik.http.routers.dashboard.rule" = "Host(\`traefik.${cfg.domain}\`)";
             "traefik.http.services.dashboard.loadbalancer.server.port" = "8080";
           };
           cmd = [
