@@ -53,10 +53,10 @@ in {
             "/home/leon/secrets/traefik.env"
           ];
           labels = {
-            # "traefik.http.routers.uptime-kuma.entrypoints" = "websecure";
-            # "traefik.http.routers.uptime-kuma.tls.certresolver" = "certresolver";
-            # "traefik.http.routers.uptime-kuma.rule" = "Host(\`uptime-kuma.${cfg.domain}\`)";
-            # "traefik.http.services.uptime-kuma.loadbalancer.server.port" = "";
+            "traefik.http.routers.dashboard.entrypoints" = "websecure";
+            "traefik.http.routers.dashboard.tls.certresolver" = "certresolver";
+            "traefik.http.routers.dashboard.rule" = "Host(\`traefik.${cfg.domain}\`)";
+            "traefik.http.services.dashboard.loadbalancer.server.port" = "8080";
           };
           cmd = [
             "--api.insecure=true"

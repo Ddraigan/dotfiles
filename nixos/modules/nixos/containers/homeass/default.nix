@@ -37,11 +37,9 @@ in {
       };
       labels = {
         "traefik.enable" = "true";
-
         "traefik.http.routers.homeass.rule" = "Host(\`homeass.${cfg.domain}\`)";
         "traefik.http.routers.homeass.entrypoints" = "websecure";
         "traefik.http.routers.homeass.tls.certresolver" = "certresolver";
-
         "traefik.http.services.homeass.loadbalancer.server.port" = "8123";
       };
     };
