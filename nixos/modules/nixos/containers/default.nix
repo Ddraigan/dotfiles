@@ -35,16 +35,19 @@ in {
       name,
       port,
       extraLabels ? {},
+      enableTls ? true,
     }:
       lib.mkMerge [
         {
           "traefik.enable" = "true";
           "traefik.http.routers.${name}.rule" = "Host(`${name}.${cfg.domain}`)";
           "traefik.http.routers.${name}.entrypoints" = "websecure";
-          "traefik.http.routers.${name}.tls" = "true";
           "traefik.http.services.${name}.loadbalancer.server.port" =
             toString port;
         }
+        (lib.mkIf enableTls {
+          "traefik.http.routers.${name}.tls" = "true";
+        })
         extraLabels
       ];
   };
