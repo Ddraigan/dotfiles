@@ -15,6 +15,7 @@
     traefik.enable = true;
     homeass.enable = true;
     cfddns.enable = true;
+    uptime-kuma.enable = true;
   };
 
   boot.loader = {

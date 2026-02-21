@@ -10,7 +10,7 @@ in {
     ./traefik
     ./homeass
     ./cfddns
- #   ./uptime-kuma
+    #   ./uptime-kuma
   ];
   options.modules.nix.containers = with lib; {
     domain = mkOption {
@@ -42,8 +42,7 @@ in {
           "traefik.enable" = "true";
           "traefik.http.routers.${name}.rule" = "Host(`${name}.${cfg.domain}`)";
           "traefik.http.routers.${name}.entrypoints" = "websecure";
-          "traefik.http.services.${name}.loadbalancer.server.port" =
-            toString port;
+          "traefik.http.services.${name}.loadbalancer.server.port" = toString port;
         }
         (lib.mkIf enableTls {
           "traefik.http.routers.${name}.tls" = "true";

@@ -2,11 +2,11 @@
   config,
   pgks,
   lib,
+  containerUtils,
   ...
 }: let
   cfg = config.modules.nix.containers;
   traefikPath = "${cfg.dataPath}/traefik";
-  kumaPath = "${cfg.dataPath}/uptime-kuma";
 in {
   options.modules.nix.containers.traefik.enable = lib.mkEnableOption "Enable Traefik";
   config = lib.mkIf cfg.traefik.enable {
@@ -15,31 +15,11 @@ in {
       "d ${traefikPath} 0755 ${cfg.mainUser} users -"
       "Z ${traefikPath} - ${cfg.mainUser} users -"
 
-      "d ${kumaPath} 0755 ${cfg.mainUser} users -"
-
       "d ${traefikPath} 0755 ${cfg.mainUser} users -"
       "f ${traefikPath}/acme.json 0600 ${cfg.mainUser} users -"
     ];
     virtualisation.oci-containers = {
       containers = {
-        uptime-kuma = {
-          image = "louislam/uptime-kuma:2.1.1";
-          volumes = [
-            "${kumaPath}:/app/data"
-            "/var/run/docker.sock:/var/run/docker.sock"
-          ];
-          labels = {
-            "traefik.enable" = "true";
-            "traefik.http.routers.uptime-kuma.rule" = "Host(\`uptime-kuma.${cfg.domain}\`)";
-            "traefik.http.services.uptime-kuma.loadbalancer.server.port" = "3001";
-            "traefik.http.routers.uptime-kuma.entrypoints" = "websecure";
-            # "traefik.http.routers.uptime-kuma.tls.certresolver" = "certresolver";
-            "traefik.http.routers.uptime-kuma.tls" = "true";
-            # WebSocket support
-            "traefik.http.middlewares.uptime-kuma-headers.headers.customrequestheaders.X-Forwarded-Proto" = "https";
-            "traefik.http.routers.uptime-kuma.middlewares" = "uptime-kuma-headers";
-          };
-        };
         traefik = {
           image = "traefik:v3.6";
           ports = [
@@ -54,14 +34,15 @@ in {
           environmentFiles = [
             "/home/leon/secrets/traefik.env"
           ];
-          labels = {
-            "traefik.enable" = "true";
-            "traefik.http.routers.dashboard.rule" = "Host(\`traefik.${cfg.domain}\`)";
-            "traefik.http.routers.dashboard.tls.domains[0].main" = "ddraigan.com";
-            "traefik.http.routers.dashboard.tls.domains[0].sans" = "*.ddraigan.com";
-            "traefik.http.routers.dashboard.entrypoints" = "websecure";
-            "traefik.http.routers.dashboard.tls.certresolver" = "certresolver";
-            "traefik.http.services.dashboard.loadbalancer.server.port" = "8080";
+          labels = containerUtils.mkTraefikLabels {
+            name = "traefik";
+            port = 8080;
+            enableTls = false;
+            extraLabels = {
+              "traefik.http.routers.dashboard.tls.domains[0].main" = "ddraigan.com";
+              "traefik.http.routers.dashboard.tls.domains[0].sans" = "*.ddraigan.com";
+              "traefik.http.routers.dashboard.tls.certresolver" = "certresolver";
+            };
           };
           cmd = [
             "--api.insecure=true"
