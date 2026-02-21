@@ -12,7 +12,6 @@ in {
     systemd.tmpfiles.rules = [
       "d ${homeassPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
     ];
-    networking.firewall.allowedTCPPorts = [8123];
     virtualisation.oci-containers.containers.homeass = {
       image = "ghcr.io/home-assistant/home-assistant:stable";
       autoStart = true;
