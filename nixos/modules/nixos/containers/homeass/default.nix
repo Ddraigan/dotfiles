@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  containerUtils,
   ...
 }: let
   cfg = config.modules.nix.containers;
@@ -31,12 +32,9 @@ in {
       environment = {
         TZ = config.time.timeZone;
       };
-      labels = {
-        "traefik.enable" = "true";
-        "traefik.http.routers.homeass.rule" = "Host(\`homeass.${cfg.domain}\`)";
-        "traefik.http.routers.homeass.entrypoints" = "websecure";
-        "traefik.http.routers.homeass.tls" = "true";
-        "traefik.http.services.homeass.loadbalancer.server.port" = "8123";
+      labels = containerUtils.mkTraefikLabels {
+        name = "homeass";
+        port = 8123;
       };
     };
   };
