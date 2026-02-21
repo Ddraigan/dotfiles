@@ -26,6 +26,7 @@ in {
           image = "louislam/uptime-kuma:2.1.1";
           volumes = [
             "${kumaPath}:/app/data"
+            "/var/run/docker.sock:/var/run/docker.sock"
           ];
           labels = {
             "traefik.enable" = "true";
