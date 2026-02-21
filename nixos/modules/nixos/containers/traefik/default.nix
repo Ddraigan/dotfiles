@@ -66,7 +66,7 @@ in {
             "--providers.docker=true"
             "--entrypoints.web.address=:80"
             "--entrypoints.websecure.address=:443"
-            "--certificatesresolvers.certresolver.acme.email=$CF_API_EMAIL"
+            "--certificatesresolvers.certresolver.acme.email=lkjjones1999@gmail.com"
             "--certificatesresolvers.certresolver.acme.storage=/data/acme.json"
             "--certificatesresolvers.certresolver.acme.dnschallenge=true"
             "--certificatesresolvers.certresolver.acme.dnschallenge.provider=cloudflare"
