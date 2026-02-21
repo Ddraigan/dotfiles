@@ -10,7 +10,7 @@
 in {
   options.modules.nix.containers.traefik.enable = lib.mkEnableOption "Enable Traefik";
   config = lib.mkIf cfg.traefik.enable {
-    networking.firewall.allowedTCPPorts = [443 80 3001];
+    networking.firewall.allowedTCPPorts = [443 80];
     systemd.tmpfiles.rules = [
       "d ${traefikPath} 0755 ${cfg.mainUser} users -"
       "Z ${traefikPath} - ${cfg.mainUser} users -"
@@ -27,9 +27,6 @@ in {
           volumes = [
             "${kumaPath}:/app/data"
             "/var/run/docker.sock:/var/run/docker.sock"
-          ];
-          port = [
-            "3001:3001"
           ];
           labels = {
             "traefik.enable" = "true";
