@@ -30,10 +30,11 @@ in {
           ];
           labels = {
             "traefik.enable" = "true";
-            "traefik.http.routers.uptime-kuma.entrypoints" = "websecure";
-            "traefik.http.routers.uptime-kuma.tls.certresolver" = "certresolver";
             "traefik.http.routers.uptime-kuma.rule" = "Host(\`uptime-kuma.${cfg.domain}\`)";
             "traefik.http.services.uptime-kuma.loadbalancer.server.port" = "3001";
+            "traefik.http.routers.uptime-kuma.entrypoints" = "websecure";
+            # "traefik.http.routers.uptime-kuma.tls.certresolver" = "certresolver";
+            "traefik.http.routers.uptime-kuma.tls" = "true";
             # WebSocket support
             "traefik.http.middlewares.uptime-kuma-headers.headers.customrequestheaders.X-Forwarded-Proto" = "https";
             "traefik.http.routers.uptime-kuma.middlewares" = "uptime-kuma-headers";
