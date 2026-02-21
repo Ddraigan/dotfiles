@@ -10,7 +10,7 @@ in {
     ./traefik
     ./homeass
     ./cfddns
-    #   ./uptime-kuma
+    ./uptime-kuma
   ];
   options.modules.nix.containers = with lib; {
     domain = mkOption {
