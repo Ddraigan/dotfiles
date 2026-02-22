@@ -34,15 +34,15 @@ in {
           environmentFiles = [
             "/home/leon/secrets/traefik.env"
           ];
-          labels = containerUtils.mkTraefikLabels {
-            name = "traefik";
-            port = 8080;
-            # enableTls = false;
-            extraLabels = {
-              "traefik.http.routers.dashboard.tls.domains[0].main" = "ddraigan.com";
-              "traefik.http.routers.dashboard.tls.domains[0].sans" = "*.ddraigan.com";
-              # "traefik.http.routers.dashboard.tls.certresolver" = "certresolver";
-            };
+          labels = {
+            "traefik.enable" = "true";
+            "traefik.http.routers.traefik-dashboard.rule" = "Host(`traefik.${cfg.domain}`)";
+            "traefik.http.routers.traefik-dashboard.entrypoints" = "websecure";
+            "traefik.http.services.traefik-dashboard.loadbalancer.server.port" = "8080";
+            "traefik.http.routers.traefik-dashboard.tls.domains[0].main" = "ddraigan.com";
+            "traefik.http.routers.traefik-dashboard.tls.domains[0].sans" = "*.ddraigan.com";
+            "traefik.http.routers.traefik-dashboard.tls" = "true";
+            # "traefik.http.routers.dashboard.tls.certresolver" = "certresolver";
           };
           cmd = [
             "--api.insecure=true"
