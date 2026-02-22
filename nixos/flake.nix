@@ -114,7 +114,7 @@
       leon-pc = mkMachine "leon-pc" "x86_64-linux";
       leon-laptop = mkMachine "leon-laptop" "x86_64-linux";
       leon-dell = mkMachine "leon-dell" "x86_64-linux";
-      srv-dell = mkMachine "srv-dell" "x86_64-linux";
+      mynydd = mkMachine "mynydd" "x86_64-linux";
       iso = mkIso "iso" "x86_64-linux";
     };
 
