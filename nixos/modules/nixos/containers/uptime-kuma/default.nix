@@ -24,11 +24,11 @@ in {
           labels = containerUtils.mkTraefikLabels {
             name = "uptime-kuma";
             port = 3001;
-            extraLabels = {
-              # WebSocket support
-              "traefik.http.middlewares.uptime-kuma-headers.headers.customrequestheaders.X-Forwarded-Proto" = "https";
-              "traefik.http.routers.uptime-kuma.middlewares" = "uptime-kuma-headers";
-            };
+            # extraLabels = {
+            #   # WebSocket support
+            #   "traefik.http.middlewares.uptime-kuma-headers.headers.customrequestheaders.X-Forwarded-Proto" = "https";
+            #   "traefik.http.routers.uptime-kuma.middlewares" = "uptime-kuma-headers";
+            # };
           };
         };
       };
