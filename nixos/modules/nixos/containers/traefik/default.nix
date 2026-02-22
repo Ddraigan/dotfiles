@@ -37,11 +37,11 @@ in {
           labels = containerUtils.mkTraefikLabels {
             name = "traefik";
             port = 8080;
-            enableTls = false;
+            # enableTls = false;
             extraLabels = {
               "traefik.http.routers.dashboard.tls.domains[0].main" = "ddraigan.com";
               "traefik.http.routers.dashboard.tls.domains[0].sans" = "*.ddraigan.com";
-              "traefik.http.routers.dashboard.tls.certresolver" = "certresolver";
+              # "traefik.http.routers.dashboard.tls.certresolver" = "certresolver";
             };
           };
           cmd = [
