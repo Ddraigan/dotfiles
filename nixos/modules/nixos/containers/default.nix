@@ -11,6 +11,7 @@ in {
     ./homeass
     ./cfddns
     ./uptime-kuma
+    ./jellyfin
   ];
   options.modules.nix.containers = with lib; {
     domain = mkOption {

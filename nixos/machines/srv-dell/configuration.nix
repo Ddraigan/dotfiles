@@ -16,6 +16,7 @@
     homeass.enable = true;
     cfddns.enable = true;
     uptime-kuma.enable = true;
+    jellyfin.enable = true;
   };
 
   boot.loader = {

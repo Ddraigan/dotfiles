@@ -10,7 +10,6 @@
 in {
   options.modules.nix.containers.uptime-kuma.enable = lib.mkEnableOption "Enable Uptime-kuma";
   config = lib.mkIf cfg.uptime-kuma.enable {
-    networking.firewall.allowedTCPPorts = [443 80];
     systemd.tmpfiles.rules = [
       "d ${kumaPath} 0755 ${cfg.mainUser} users -"
     ];
