@@ -56,6 +56,7 @@ in {
       enable = false;
       powerOnBoot = false;
     };
+    keyboard.qmk.enable = true;
     # graphics = {
     # May fix lag if i experiance it - Hyprland version of mesa drivers
     # package = pkgs.unstable.mesa.drivers;
@@ -66,22 +67,9 @@ in {
     # };
   };
 
-  # Configure keymap in X11
   services = {
-    ollama = {
-      enable = false;
-      # Optional: preload models, see https://ollama.com/library
-      loadModels = ["llama3"];
-      acceleration = "cuda";
-    };
     upower.enable = true;
-    xserver = {
-      enable = false;
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-    };
+    udev.packages = [pkgs.via];
     pipewire = {
       enable = true;
       audio.enable = true;
@@ -109,6 +97,8 @@ in {
       pkgs.helvum
       # NOTE: Changed 25.11
       pkgs.bitwarden-desktop
+      pkgs.qmk
+      pkgs.via
       pkgs.rustup
       pkgs.nixd
       (pkgs.discord-canary.override
