@@ -62,6 +62,10 @@ in {
         capabilities = {
           net_admin = true;
         };
+        labels = containerUtils.mkTraefikLabels {
+          name = "qbittorrent";
+          port = 8081;
+        };
       };
 
       # jackett = {
