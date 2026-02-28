@@ -10,6 +10,7 @@ M.system = {
     "lua_ls",
     "haskell-language-server",
     "hls",
+    "clangd",
   },
 }
 
@@ -23,7 +24,6 @@ M.mason = {
     "emmet-ls",
     "css-lsp",
     "json-lsp",
-    "clangd",
     "typescript-language-server",
     "tailwindcss-language-server",
     "qmlls",
@@ -42,6 +42,7 @@ M.mason = {
     "lua_ls",
     "rust_analyzer",
     "stylua",
+    "clangd",
   },
 }
 

@@ -70,6 +70,10 @@ in {
   services = {
     upower.enable = true;
     udev.packages = [pkgs.via];
+    udisks2 = {
+      enable = true;
+      mountOnMedia = true;
+    };
     pipewire = {
       enable = true;
       audio.enable = true;

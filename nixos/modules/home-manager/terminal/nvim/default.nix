@@ -27,6 +27,7 @@
         nodejs_24
         lua-language-server
         stylua
+        libclang
       ];
     };
   };

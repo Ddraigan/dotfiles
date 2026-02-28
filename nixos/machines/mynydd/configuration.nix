@@ -17,6 +17,7 @@
     cfddns.enable = true;
     uptime-kuma.enable = true;
     jellyfin.enable = true;
+    downloads.enable = true;
   };
 
   boot.loader = {
@@ -65,7 +66,7 @@
       };
       daemon.settings = {
         data-root = "/docker-data";
-        userland-proxy = false;
+        userland-proxy = true;
       };
     };
     oci-containers = {

@@ -12,6 +12,7 @@ in {
     ./cfddns
     ./uptime-kuma
     ./jellyfin
+    ./downloads
   ];
   options.modules.nix.containers = with lib; {
     domain = mkOption {
@@ -47,5 +48,6 @@ in {
         }
         extraLabels
       ];
+    mkDataPath = name: "${cfg.dataPath}/${name}";
   };
 }

@@ -30,6 +30,10 @@ nix-gc:
   sudo nix-collect-garbage --delete-old
 
 [group("nix")]
+nix-build host:
+  nix build .#nixosConfigurations.{{host}}.config.system.build
+
+[group("nix")]
 nix-build-vm host:
   nix build .#nixosConfigurations.{{host}}.config.system.build.vm
 

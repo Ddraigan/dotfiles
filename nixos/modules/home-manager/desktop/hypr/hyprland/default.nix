@@ -109,7 +109,7 @@ in {
           "$terminal" = "${uwsmUtils.wrap "wezterm"}";
           "$fileManager" = "${uwsmUtils.wrap "nemo"}";
           "$drun" = "${uwsmUtils.rofi}";
-          "$browser" = "${uwsmUtils.wrap "zen"}";
+          "$browser" = "${uwsmUtils.wrap "zen-beta"}";
 
           # Utils
           "$colourPicker" = "${uwsmUtils.wrap "hyprpicker -a"}";
