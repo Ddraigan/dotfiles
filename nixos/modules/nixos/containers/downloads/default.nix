@@ -28,7 +28,7 @@ in {
           "6881:6881"
           "6881:6881/udp"
           "8118:8118"
-          "8080:8080" # Webui
+          "8081:8080" # Webui
           "9117:9117" # Jackett port
           "8989:8989" # Sonarr port
           "7878:7878" # Radarr port
@@ -50,7 +50,7 @@ in {
           VPN_CLIENT = "openvpn";
           STRICT_PORT_FORWARD = "no";
           ENABLE_PRIVOXY = "yes";
-          WEBUI_PORT = "8080";
+          WEBUI_PORT = "8081";
           LAN_NETWORK = "192.168.1.0/24";
           NAME_SERVERS = "209.222.18.222,84.200.69.80,37.235.1.174,1.1.1.1,209.222.18.218,37.235.1.177,84.200.70.40,1.0.0.1";
           VPN_INPUT_PORTS = "9117,8989,7878";
