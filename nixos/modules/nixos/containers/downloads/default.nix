@@ -28,7 +28,7 @@ in {
           "6881:6881"
           "6881:6881/udp"
           "8118:8118"
-          "8081:8080" # Webui
+          "8120:8080" # Webui
           "9117:9117" # Jackett port
           "8989:8989" # Sonarr port
           "7878:7878" # Radarr port
@@ -64,7 +64,7 @@ in {
         };
         labels = containerUtils.mkTraefikLabels {
           name = "qbittorrent";
-          port = 8081;
+          port = 8120;
         };
       };
 
