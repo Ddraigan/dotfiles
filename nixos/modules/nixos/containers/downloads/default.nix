@@ -50,7 +50,7 @@ in {
           VPN_CLIENT = "openvpn";
           STRICT_PORT_FORWARD = "no";
           ENABLE_PRIVOXY = "yes";
-          WEBUI_PORT = "8081";
+          WEBUI_PORT = "8120";
           LAN_NETWORK = "192.168.1.0/24";
           NAME_SERVERS = "209.222.18.222,84.200.69.80,37.235.1.174,1.1.1.1,209.222.18.218,37.235.1.177,84.200.70.40,1.0.0.1";
           VPN_INPUT_PORTS = "9117,8989,7878";
