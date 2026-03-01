@@ -6,8 +6,8 @@
   ...
 }: let
   cfg = config.modules.nix.containers;
-  containerName = "jellyfin";
-  jellyPath = "${cfg.dataPath}/${containerName}";
+  jellyPath = containerUtils.mkDataPath "jellyfin";
+  storagePaths = containerUtils.storagePaths;
 in {
   options.modules.nix.containers.jellyfin.enable = lib.mkEnableOption "Enable Jellyfin";
   config = lib.mkIf cfg.jellyfin.enable {
@@ -15,23 +15,25 @@ in {
       "d ${jellyPath} 0755 ${cfg.mainUser} users -"
     ];
     virtualisation.oci-containers.containers = {
-      ${containerName} = {
+      jellyfin = {
         image = "jellyfin/jellyfin";
         autoStart = true;
         volumes = [
           "${jellyPath}/config:/config"
           "${jellyPath}/cache:/cache"
           "${jellyPath}/log:/log"
-          "storage/media/movies:/movies"
-          "storage/media/tv:/tv"
-          "storage/media/music:/music"
-          "storage/media/books:/books"
+          "${storagePaths.media.subdirs.books}:/books"
+          "${storagePaths.media.subdirs.movies}:/movies"
+          "${storagePaths.media.subdirs.music}:/music"
+          "${storagePaths.media.subdirs.tv}:/tv"
         ];
         environment = {
           JELLYFIN_LOG_DIR = "/log";
+          PUID = "99";
+          PGID = "100";
         };
         labels = containerUtils.mkTraefikLabels {
-          name = containerName;
+          name = "jellyfin";
           port = 8096;
         };
       };

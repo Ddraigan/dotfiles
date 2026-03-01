@@ -12,27 +12,7 @@
     sonarr = containerUtils.mkDataPath "sonarr";
     radarr = containerUtils.mkDataPath "radarr";
   };
-  storagePaths = rec {
-    base = "/storage";
-    torrents = rec {
-      dir = "${base}/torrents";
-      subdirs = {
-        books = "${dir}/books";
-        movies = "${dir}/movies";
-        music = "${dir}/music";
-        tv = "${dir}/tv";
-      };
-    };
-    media = rec {
-      dir = "${base}/media";
-      subdirs = {
-        books = "${dir}/books";
-        movies = "${dir}/movies";
-        music = "${dir}/music";
-        tv = "${dir}/tv";
-      };
-    };
-  };
+  storagePaths = containerUtils.storagePaths;
 in {
   options.modules.nix.containers.downloads.enable = lib.mkEnableOption "Enable Downloads Containers";
   config = lib.mkIf cfg.downloads.enable {

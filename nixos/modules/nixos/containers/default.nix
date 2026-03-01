@@ -49,5 +49,26 @@ in {
         extraLabels
       ];
     mkDataPath = name: "${cfg.dataPath}/${name}";
+    storagePaths = rec {
+      base = "/storage";
+      torrents = rec {
+        dir = "${base}/torrents";
+        subdirs = {
+          books = "${dir}/books";
+          movies = "${dir}/movies";
+          music = "${dir}/music";
+          tv = "${dir}/tv";
+        };
+      };
+      media = rec {
+        dir = "${base}/media";
+        subdirs = {
+          books = "${dir}/books";
+          movies = "${dir}/movies";
+          music = "${dir}/music";
+          tv = "${dir}/tv";
+        };
+      };
+    };
   };
 }
