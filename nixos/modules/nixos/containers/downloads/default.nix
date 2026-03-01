@@ -177,6 +177,14 @@ in {
         image = "ghcr.io/flaresolverr/flaresolverr:v3.4.6";
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
+        environment = {
+          BROWSER_ARGS = ''
+            --disable-canvas-aa
+            --disable-2d-canvas-clip-aa
+            --disable-gl-drawing-for-tests
+            --no-sandbox
+          '';
+        };
         # labels = containerUtils.mkTraefikLabels {
         #   name = "flaresolverr";
         #   port = 8191;
