@@ -21,6 +21,11 @@ in {
       "d ${radarrPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
       "d ${mediaPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
     ];
+    boot.kernelModules = [
+      "iptable_filter"
+      "iptable_nat"
+      "ip6table_filter"
+    ];
     virtualisation.oci-containers.containers = {
       qbittorrent = {
         image = "binhex/arch-qbittorrentvpn:5.1";
