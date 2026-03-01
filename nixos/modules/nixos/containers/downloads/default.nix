@@ -97,23 +97,23 @@ in {
         };
       };
 
-      # jackett = {
-      #   image = "linuxserver/jackett:0.24.957";
-      #   volumes = [
-      #     "${dataPaths.jackett}:/config"
-      #     "/etc/localtime:/etc/localtime:ro"
-      #   ];
-      #   environment = {
-      #     PUID = "99";
-      #     PGID = "100";
-      #   };
-      #   dependsOn = ["qbittorrent"];
-      #   networks = ["container:qbittorrent"];
-      #   labels = containerUtils.mkTraefikLabels {
-      #     name = "jackett";
-      #     port = 9117;
-      #   };
-      # };
+      jackett = {
+        image = "linuxserver/jackett:0.24.957";
+        volumes = [
+          "${dataPaths.jackett}:/config"
+          "/etc/localtime:/etc/localtime:ro"
+        ];
+        environment = {
+          PUID = "99";
+          PGID = "100";
+        };
+        dependsOn = ["qbittorrent"];
+        networks = ["container:qbittorrent"];
+        labels = containerUtils.mkTraefikLabels {
+          name = "jackett";
+          port = 9117;
+        };
+      };
 
       prowlarr = {
         image = "linuxserver/prowlarr:2.3.0";
@@ -185,6 +185,10 @@ in {
             --no-sandbox
           '';
         };
+        extraOptions = [
+          "--cpu-shares=1024"
+          "--memory=2g"
+        ];
         # labels = containerUtils.mkTraefikLabels {
         #   name = "flaresolverr";
         #   port = 8191;
