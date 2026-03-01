@@ -11,6 +11,7 @@
     jackett = containerUtils.mkDataPath "jackett";
     sonarr = containerUtils.mkDataPath "sonarr";
     radarr = containerUtils.mkDataPath "radarr";
+    prowlarr = containerUtils.mkDataPath "prowlarr";
   };
   storagePaths = containerUtils.storagePaths;
 in {
@@ -59,6 +60,7 @@ in {
           "9117:9117" # Jackett port
           "8989:8989" # Sonarr port
           "7878:7878" # Radarr port
+          "9696:9696" # Prowlarr port
           "8191:8191" # Flaresolverr port
         ];
         volumes = [
@@ -95,10 +97,28 @@ in {
         };
       };
 
-      jackett = {
-        image = "linuxserver/jackett:0.24.957";
+      # jackett = {
+      #   image = "linuxserver/jackett:0.24.957";
+      #   volumes = [
+      #     "${dataPaths.jackett}:/config"
+      #     "/etc/localtime:/etc/localtime:ro"
+      #   ];
+      #   environment = {
+      #     PUID = "99";
+      #     PGID = "100";
+      #   };
+      #   dependsOn = ["qbittorrent"];
+      #   networks = ["container:qbittorrent"];
+      #   labels = containerUtils.mkTraefikLabels {
+      #     name = "jackett";
+      #     port = 9117;
+      #   };
+      # };
+
+      prowlarr = {
+        image = "linuxserver/prowlarr:2.3.0.5236";
         volumes = [
-          "${dataPaths.jackett}:/config"
+          "${dataPaths.prowlarr}:/config"
           "/etc/localtime:/etc/localtime:ro"
         ];
         environment = {
@@ -108,8 +128,8 @@ in {
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
         labels = containerUtils.mkTraefikLabels {
-          name = "jackett";
-          port = 9117;
+          name = "prowlarr";
+          port = 9696;
         };
       };
 
@@ -157,6 +177,10 @@ in {
         image = "ghcr.io/flaresolverr/flaresolverr:v3.4.6";
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
+        labels = containerUtils.mkTraefikLabels {
+          name = "flaresolverr";
+          port = 8191;
+        };
       };
     };
   };
