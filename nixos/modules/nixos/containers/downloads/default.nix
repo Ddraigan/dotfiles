@@ -38,7 +38,7 @@ in {
   config = lib.mkIf cfg.downloads.enable {
     systemd.tmpfiles = {
       rules = [
-        "d ${dataPaths.qbittorrentPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
+        "d ${dataPaths.qbittorrent} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
         "d ${dataPaths.jackettPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
         "d ${dataPaths.sonarrPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
         "d ${dataPaths.radarrPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
