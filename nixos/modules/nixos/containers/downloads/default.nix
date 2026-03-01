@@ -116,7 +116,7 @@ in {
       # };
 
       prowlarr = {
-        image = "linuxserver/prowlarr:2.3.0.5236";
+        image = "linuxserver/prowlarr:2.3.0";
         volumes = [
           "${dataPaths.prowlarr}:/config"
           "/etc/localtime:/etc/localtime:ro"
