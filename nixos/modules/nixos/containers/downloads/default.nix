@@ -107,46 +107,57 @@ in {
         };
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
+        labels = containerUtils.mkTraefikLabels {
+          name = "jackett";
+          port = 9117;
+        };
       };
 
-      # sonarr = {
-      #   image = "linuxserver/sonarr:4.0.15";
-      #   volumes = [
-      #     "${sonarrPath}:/config"
-      #     "${mediaPath}/completed:/downloads"
-      #     "/mnt/fern/plex:/tv"
-      #     "/dev/rtc:/dev/rtc"
-      #     "/etc/localtime:/etc/localtime:ro"
-      #   ];
-      #   environment = {
-      #     PUID = "99";
-      #     PGID = "100";
-      #   };
-      #   dependsOn = ["qbittorrent"];
-      #   networks = ["container:qbittorrent"];
-      # };
-      #
-      # radarr = {
-      #   image = "binhex/arch-radarr:5.25";
-      #   volumes = [
-      #     "${radarrPath}:/config"
-      #     "${mediaPath}:/data"
-      #     "/mnt/fern/plex:/media"
-      #   ];
-      #   environment = {
-      #     PUID = "99";
-      #     PGID = "100";
-      #     UMASK = "000";
-      #   };
-      #   dependsOn = ["qbittorrent"];
-      #   networks = ["container:qbittorrent"];
-      # };
-      #
-      # flaresolverr = {
-      #   image = "ghcr.io/flaresolverr/flaresolverr:v3.4.6";
-      #   dependsOn = ["qbittorrent"];
-      #   networks = ["container:qbittorrent"];
-      # };
+      sonarr = {
+        image = "linuxserver/sonarr:4.0.15";
+        volumes = [
+          "${dataPaths.sonarr}:/config"
+          "${storagePaths.base}:/storage"
+          # "/dev/rtc:/dev/rtc"
+          "/etc/localtime:/etc/localtime:ro"
+        ];
+        environment = {
+          PUID = "99";
+          PGID = "100";
+        };
+        dependsOn = ["qbittorrent"];
+        networks = ["container:qbittorrent"];
+        labels = containerUtils.mkTraefikLabels {
+          name = "sonarr";
+          port = 8989;
+        };
+      };
+
+      radarr = {
+        image = "binhex/arch-radarr:5.25";
+        volumes = [
+          "${dataPaths.radarr}:/config"
+          "${storagePaths.base}:/storage"
+          "/etc/localtime:/etc/localtime:ro"
+        ];
+        environment = {
+          PUID = "99";
+          PGID = "100";
+          UMASK = "000";
+        };
+        dependsOn = ["qbittorrent"];
+        networks = ["container:qbittorrent"];
+        labels = containerUtils.mkTraefikLabels {
+          name = "radarr";
+          port = 7878;
+        };
+      };
+
+      flaresolverr = {
+        image = "ghcr.io/flaresolverr/flaresolverr:v3.4.6";
+        dependsOn = ["qbittorrent"];
+        networks = ["container:qbittorrent"];
+      };
     };
   };
 }

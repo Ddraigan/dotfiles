@@ -7,7 +7,7 @@
 }: let
   cfg = config.modules.nix.containers;
   jellyPath = containerUtils.mkDataPath "jellyfin";
-  storagePaths = containerUtils.storagePaths;
+  mediaPaths = containerUtils.storagePaths.media;
 in {
   options.modules.nix.containers.jellyfin.enable = lib.mkEnableOption "Enable Jellyfin";
   config = lib.mkIf cfg.jellyfin.enable {
@@ -22,10 +22,10 @@ in {
           "${jellyPath}/config:/config"
           "${jellyPath}/cache:/cache"
           "${jellyPath}/log:/log"
-          "${storagePaths.media.subdirs.books}:/books"
-          "${storagePaths.media.subdirs.movies}:/movies"
-          "${storagePaths.media.subdirs.music}:/music"
-          "${storagePaths.media.subdirs.tv}:/tv"
+          "${mediaPaths.subdirs.books}:/books"
+          "${mediaPaths.subdirs.movies}:/movies"
+          "${mediaPaths.subdirs.music}:/music"
+          "${mediaPaths.subdirs.tv}:/tv"
         ];
         environment = {
           JELLYFIN_LOG_DIR = "/log";
