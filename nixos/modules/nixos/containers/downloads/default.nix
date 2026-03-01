@@ -73,20 +73,20 @@ in {
         };
       };
 
-      # jackett = {
-      #   image = "linuxserver/jackett:0.24.957";
-      #   volumes = [
-      #     "${jackettPath}:/config"
-      #     "/etc/localtime:/etc/localtime:ro"
-      #   ];
-      #   environment = {
-      #     PUID = "99";
-      #     PGID = "100";
-      #   };
-      #   dependsOn = ["qbittorrent"];
-      #   networks = ["container:qbittorrent"];
-      # };
-      #
+      jackett = {
+        image = "linuxserver/jackett:0.24.957";
+        volumes = [
+          "${jackettPath}:/config"
+          "/etc/localtime:/etc/localtime:ro"
+        ];
+        environment = {
+          PUID = "99";
+          PGID = "100";
+        };
+        dependsOn = ["qbittorrent"];
+        networks = ["container:qbittorrent"];
+      };
+
       # sonarr = {
       #   image = "linuxserver/sonarr:4.0.15";
       #   volumes = [
