@@ -6,21 +6,63 @@
   ...
 }: let
   cfg = config.modules.nix.containers;
-  qbittorrentPath = containerUtils.mkDataPath "qbittorent";
-  jackettPath = containerUtils.mkDataPath "jackett";
-  sonarrPath = containerUtils.mkDataPath "sonarr";
-  radarrPath = containerUtils.mkDataPath "radarr";
-  mediaPath = "/home/leon/media/qbittorent";
+  dataPaths = {
+    qbittorrent = containerUtils.mkDataPath "qbittorent";
+    jackett = containerUtils.mkDataPath "jackett";
+    sonarr = containerUtils.mkDataPath "sonarr";
+    radarr = containerUtils.mkDataPath "radarr";
+  };
+  storagePaths = rec {
+    base = "/storage";
+    torrents = rec {
+      dir = "${base}/torrents";
+      subdirs = {
+        books = "${dir}/books";
+        movies = "${dir}/movies";
+        music = "${dir}/music";
+        tv = "${dir}/tv";
+      };
+    };
+    media = rec {
+      dir = "${base}/media";
+      subdirs = {
+        books = "${dir}/books";
+        movies = "${dir}/movies";
+        music = "${dir}/music";
+        tv = "${dir}/tv";
+      };
+    };
+  };
 in {
   options.modules.nix.containers.downloads.enable = lib.mkEnableOption "Enable Downloads Containers";
   config = lib.mkIf cfg.downloads.enable {
-    systemd.tmpfiles.rules = [
-      "d ${qbittorrentPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
-      "d ${jackettPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
-      "d ${sonarrPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
-      "d ${radarrPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
-      "d ${mediaPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
-    ];
+    systemd.tmpfiles = {
+      rules = [
+        "d ${dataPaths.qbittorrentPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
+        "d ${dataPaths.jackettPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
+        "d ${dataPaths.sonarrPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
+        "d ${dataPaths.radarrPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
+      ];
+      settings."storage-dirs" = let
+        allPaths =
+          [
+            storagePaths.base
+            storagePaths.torrents.dir
+            storagePaths.media.dir
+          ]
+          ++ builtins.attrValues storagePaths.torrents.subdirs
+          ++ builtins.attrValues storagePaths.media.subdirs;
+      in
+        builtins.listToAttrs (map (path: {
+            name = path;
+            value.d = {
+              mode = "0775";
+              user = "99";
+              group = "100";
+            };
+          })
+          allPaths);
+    };
     boot.kernelModules = [
       "iptable_filter"
       "iptable_nat"
@@ -40,8 +82,8 @@ in {
           "8191:8191" # Flaresolverr port
         ];
         volumes = [
-          "${qbittorrentPath}:/config"
-          "${mediaPath}:/downloads"
+          "${dataPaths.qbittorrent}:/config"
+          "${storagePaths.torrents.dir}:/storage/torrents"
           "/etc/localtime:/etc/localtime:ro"
         ];
         environmentFiles = [
@@ -76,7 +118,7 @@ in {
       jackett = {
         image = "linuxserver/jackett:0.24.957";
         volumes = [
-          "${jackettPath}:/config"
+          "${dataPaths.jackett}:/config"
           "/etc/localtime:/etc/localtime:ro"
         ];
         environment = {
