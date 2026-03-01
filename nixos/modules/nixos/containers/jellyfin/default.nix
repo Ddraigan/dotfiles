@@ -22,10 +22,10 @@ in {
           "${jellyPath}/config:/config"
           "${jellyPath}/cache:/cache"
           "${jellyPath}/log:/log"
-          "${mediaPaths.subdirs.books}:/books"
-          "${mediaPaths.subdirs.movies}:/movies"
-          "${mediaPaths.subdirs.music}:/music"
-          "${mediaPaths.subdirs.tv}:/tv"
+          "${mediaPaths.subdirs.books}:/storage/media/books"
+          "${mediaPaths.subdirs.movies}:/storage/media/movies"
+          "${mediaPaths.subdirs.music}:/storage/media/music"
+          "${mediaPaths.subdirs.tv}:/storage/media/tv"
         ];
         environment = {
           JELLYFIN_LOG_DIR = "/log";
