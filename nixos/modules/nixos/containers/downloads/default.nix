@@ -39,9 +39,9 @@ in {
     systemd.tmpfiles = {
       rules = [
         "d ${dataPaths.qbittorrent} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
-        "d ${dataPaths.jackettPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
-        "d ${dataPaths.sonarrPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
-        "d ${dataPaths.radarrPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
+        "d ${dataPaths.jackett} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
+        "d ${dataPaths.sonarr} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
+        "d ${dataPaths.radarr} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
       ];
       settings."storage-dirs" = let
         allPaths =
