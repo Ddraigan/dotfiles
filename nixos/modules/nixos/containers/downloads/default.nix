@@ -177,10 +177,10 @@ in {
         image = "ghcr.io/flaresolverr/flaresolverr:v3.4.6";
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
-        labels = containerUtils.mkTraefikLabels {
-          name = "flaresolverr";
-          port = 8191;
-        };
+        # labels = containerUtils.mkTraefikLabels {
+        #   name = "flaresolverr";
+        #   port = 8191;
+        # };
       };
     };
   };
