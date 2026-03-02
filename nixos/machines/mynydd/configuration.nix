@@ -66,7 +66,8 @@
       };
       daemon.settings = {
         data-root = "/docker-data";
-        userland-proxy = true;
+        userland-proxy = false;
+        dns = ["192.168.1.22"];
       };
     };
     oci-containers = {
