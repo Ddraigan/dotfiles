@@ -12,6 +12,7 @@
     sonarr = containerUtils.mkDataPath "sonarr";
     radarr = containerUtils.mkDataPath "radarr";
     prowlarr = containerUtils.mkDataPath "prowlarr";
+    byparr = containerUtils.mkDataPath "byparr";
   };
   storagePaths = containerUtils.storagePaths;
 in {
@@ -23,6 +24,8 @@ in {
         "d ${dataPaths.jackett} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
         "d ${dataPaths.sonarr} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
         "d ${dataPaths.radarr} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
+        "d ${dataPaths.prowlarr} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
+        "d ${dataPaths.byparr} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
       ];
       settings."storage-dirs" = let
         allPaths =
@@ -173,27 +176,33 @@ in {
         };
       };
 
-      flaresolverr = {
-        image = "ghcr.io/flaresolverr/flaresolverr:v3.4.6";
+      byparr = {
+        image = "ghcr.io/thephaseless/byparr:latest";
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
-        environment = {
-          BROWSER_ARGS = ''
-            --disable-canvas-aa
-            --disable-2d-canvas-clip-aa
-            --disable-gl-drawing-for-tests
-            --no-sandbox
-          '';
-        };
-        extraOptions = [
-          "--cpu-shares=1024"
-          "--memory=2g"
-        ];
-        # labels = containerUtils.mkTraefikLabels {
-        #   name = "flaresolverr";
-        #   port = 8191;
-        # };
       };
+
+      # flaresolverr = {
+      #   image = "ghcr.io/flaresolverr/flaresolverr:v3.4.6";
+      #   dependsOn = ["qbittorrent"];
+      #   networks = ["container:qbittorrent"];
+      #   environment = {
+      #     BROWSER_ARGS = ''
+      #       --disable-canvas-aa
+      #       --disable-2d-canvas-clip-aa
+      #       --disable-gl-drawing-for-tests
+      #       --no-sandbox
+      #     '';
+      #   };
+      #   extraOptions = [
+      #     "--cpu-shares=1024"
+      #     "--memory=2g"
+      #   ];
+      #   # labels = containerUtils.mkTraefikLabels {
+      #   #   name = "flaresolverr";
+      #   #   port = 8191;
+      #   # };
+      # };
     };
   };
 }
