@@ -148,7 +148,7 @@ in {
           PUID = "99";
           PGID = "100";
         };
-        extraConfig = ''
+        extraOptions = ''
           --dns 192.168.1.22
         '';
         dependsOn = ["qbittorrent"];
