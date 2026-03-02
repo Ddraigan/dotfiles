@@ -148,9 +148,9 @@ in {
           PUID = "99";
           PGID = "100";
         };
-        extraOptions = ''
-          --dns 192.168.1.22
-        '';
+        extraOption = [
+          "--dns 192.168.1.22"
+        ];
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
         labels = containerUtils.mkTraefikLabels {
