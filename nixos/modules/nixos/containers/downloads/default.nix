@@ -94,32 +94,10 @@ in {
         capabilities = {
           net_admin = true;
         };
-        labels = lib.mkMerge [
-          (containerUtils.mkTraefikLabels {
-            name = "qbittorrent";
-            port = 8120;
-          })
-          (containerUtils.mkTraefikLabels {
-            name = "sonarr";
-            port = 8989;
-          })
-          (containerUtils.mkTraefikLabels {
-            name = "radarr";
-            port = 7878;
-          })
-          (containerUtils.mkTraefikLabels {
-            name = "prowlarr";
-            port = 9696;
-          })
-          (containerUtils.mkTraefikLabels {
-            name = "jackett";
-            port = 9117;
-          })
-          (containerUtils.mkTraefikLabels {
-            name = "byparr";
-            port = 8191;
-          })
-        ];
+        labels = containerUtils.mkTraefikLabels {
+          name = "qbittorrent";
+          port = 8120;
+        };
       };
 
       jackett = {
@@ -134,10 +112,10 @@ in {
         };
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
-        # labels = containerUtils.mkTraefikLabels {
-        #   name = "jackett";
-        #   port = 9117;
-        # };
+        labels = containerUtils.mkTraefikLabels {
+          name = "jackett";
+          port = 9117;
+        };
       };
 
       prowlarr = {
@@ -152,10 +130,10 @@ in {
         };
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
-        # labels = containerUtils.mkTraefikLabels {
-        #   name = "prowlarr";
-        #   port = 9696;
-        # };
+        labels = containerUtils.mkTraefikLabels {
+          name = "prowlarr";
+          port = 9696;
+        };
       };
 
       sonarr = {
@@ -172,10 +150,10 @@ in {
         };
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
-        # labels = containerUtils.mkTraefikLabels {
-        #   name = "sonarr";
-        #   port = 8989;
-        # };
+        labels = containerUtils.mkTraefikLabels {
+          name = "sonarr";
+          port = 8989;
+        };
       };
 
       radarr = {
@@ -192,10 +170,10 @@ in {
         };
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
-        # labels = containerUtils.mkTraefikLabels {
-        #   name = "radarr";
-        #   port = 7878;
-        # };
+        labels = containerUtils.mkTraefikLabels {
+          name = "radarr";
+          port = 7878;
+        };
       };
 
       byparr = {
