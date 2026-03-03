@@ -34,6 +34,12 @@ in {
           environmentFiles = [
             "/home/leon/secrets/traefik.env"
           ];
+          extraOptions = [
+            "--health-cmd=traefik healthcheck --ping"
+            "--health-interval=10s"
+            "--health-timeout=5s"
+            "--health-retries=3"
+          ];
           labels = {
             "traefik.enable" = "true";
             "traefik.http.routers.traefik-dashboard.rule" = "Host(`traefik.${cfg.domain}`)";
@@ -49,7 +55,7 @@ in {
             "--providers.docker=true"
             "--entrypoints.web.address=:80"
             "--entrypoints.websecure.address=:443"
-             
+
             # Makes default resolver for all containers using traefik
             "--entrypoints.websecure.http.tls.certresolver=certresolver"
 
