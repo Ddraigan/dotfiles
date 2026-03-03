@@ -55,10 +55,6 @@ in {
             "--providers.docker=true"
             "--entrypoints.web.address=:80"
             "--entrypoints.websecure.address=:443"
-
-            # Makes default resolver for all containers using traefik
-            "--entrypoints.websecure.http.tls.certresolver=certresolver"
-
             "--certificatesresolvers.certresolver.acme.email=lkjjones1999@gmail.com"
             "--certificatesresolvers.certresolver.acme.storage=/data/acme.json"
             "--certificatesresolvers.certresolver.acme.dnschallenge=true"
