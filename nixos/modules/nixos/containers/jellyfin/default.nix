@@ -15,6 +15,7 @@ in {
     systemd.tmpfiles.rules = [
       "d ${jellyPath} 0755 ${cfg.mainUser} users -"
       "d ${seerrPath} 0755 ${cfg.mainUser} users -"
+      "Z ${seerrPath} - ${cfg.mainUser} users -"
     ];
     virtualisation.oci-containers.containers = {
       jellyfin = {
@@ -48,8 +49,8 @@ in {
         environment = {
           LOG_LEVEL = "debug";
           PORT = "5055";
-          PUID = "1000";
-          PGID = "100";
+          # PUID = "99";
+          # PGID = "100";
         };
         labels = containerUtils.mkTraefikLabels {
           name = "seerr";
