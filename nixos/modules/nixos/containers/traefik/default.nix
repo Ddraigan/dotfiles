@@ -34,12 +34,6 @@ in {
           environmentFiles = [
             "/home/leon/secrets/traefik.env"
           ];
-          extraOptions = [
-            "--health-cmd=traefik healthcheck --ping"
-            "--health-interval=10s"
-            "--health-timeout=5s"
-            "--health-retries=3"
-          ];
           labels = {
             "traefik.enable" = "true";
             "traefik.http.routers.traefik-dashboard.rule" = "Host(`traefik.${cfg.domain}`)";

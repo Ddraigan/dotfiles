@@ -7,12 +7,14 @@
 }: let
   cfg = config.modules.nix.containers;
   jellyPath = containerUtils.mkDataPath "jellyfin";
+  seerPath = containerUtils.mkDataPath "seer";
   mediaPaths = containerUtils.storagePaths.media;
 in {
   options.modules.nix.containers.jellyfin.enable = lib.mkEnableOption "Enable Jellyfin";
   config = lib.mkIf cfg.jellyfin.enable {
     systemd.tmpfiles.rules = [
       "d ${jellyPath} 0755 ${cfg.mainUser} users -"
+      "d ${seerPath} 0755 ${cfg.mainUser} users -"
     ];
     virtualisation.oci-containers.containers = {
       jellyfin = {
@@ -35,6 +37,23 @@ in {
         labels = containerUtils.mkTraefikLabels {
           name = "jellyfin";
           port = 8096;
+        };
+      };
+      seerr = {
+        image = "ghcr.io/seerr-team/seerr:latest";
+        autoStart = true;
+        volumes = [
+          "${seerPath}:/app/config"
+        ];
+        environment = {
+          LOG_LEVEL = "debug";
+          PORT = "5055";
+          PUID = "99";
+          PGID = "100";
+        };
+        labels = containerUtils.mkTraefikLabels {
+          name = "seer";
+          port = 5055;
         };
       };
     };
