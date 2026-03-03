@@ -118,24 +118,6 @@ in {
         };
       };
 
-      prowlarr = {
-        image = "linuxserver/prowlarr:2.3.0";
-        volumes = [
-          "${dataPaths.prowlarr}:/config"
-          "/etc/localtime:/etc/localtime:ro"
-        ];
-        environment = {
-          PUID = "99";
-          PGID = "100";
-        };
-        dependsOn = ["qbittorrent"];
-        networks = ["container:qbittorrent"];
-        labels = containerUtils.mkTraefikLabels {
-          name = "prowlarr";
-          port = 9696;
-        };
-      };
-
       sonarr = {
         image = "linuxserver/sonarr:4.0.15";
         volumes = [
@@ -176,11 +158,30 @@ in {
         };
       };
 
-      byparr = {
-        image = "ghcr.io/thephaseless/byparr:latest";
-        dependsOn = ["qbittorrent"];
-        networks = ["container:qbittorrent"];
-      };
+      # byparr = {
+      #   image = "ghcr.io/thephaseless/byparr:latest";
+      #   dependsOn = ["qbittorrent"];
+      #   networks = ["container:qbittorrent"];
+      # };
+
+      # prowlarr = {
+      #   image = "linuxserver/prowlarr:2.3.0";
+      #   volumes = [
+      #     "${dataPaths.prowlarr}:/config"
+      #     "/etc/localtime:/etc/localtime:ro"
+      #   ];
+      #   environment = {
+      #     PUID = "99";
+      #     PGID = "100";
+      #   };
+      #   dependsOn = ["qbittorrent"];
+      #   networks = ["container:qbittorrent"];
+      #   labels = containerUtils.mkTraefikLabels {
+      #     name = "prowlarr";
+      #     port = 9696;
+      #   };
+      # };
+
 
       # flaresolverr = {
       #   image = "ghcr.io/flaresolverr/flaresolverr:v3.4.6";
