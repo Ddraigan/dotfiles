@@ -48,8 +48,8 @@ in {
         environment = {
           LOG_LEVEL = "debug";
           PORT = "5055";
-          # PUID = "99";
-          # PGID = "100";
+          PUID = "1000";
+          PGID = "100";
         };
         labels = containerUtils.mkTraefikLabels {
           name = "seerr";
