@@ -42,13 +42,17 @@ in {
             "traefik.http.routers.traefik-dashboard.tls.domains[0].main" = "ddraigan.com";
             "traefik.http.routers.traefik-dashboard.tls.domains[0].sans" = "*.ddraigan.com";
             "traefik.http.routers.traefik-dashboard.tls" = "true";
-            # "traefik.http.routers.dashboard.tls.certresolver" = "certresolver";
+            # "traefik.http.routers.traefik-dashboard.tls.certresolver" = "certresolver";
           };
           cmd = [
             "--api.insecure=true"
             "--providers.docker=true"
             "--entrypoints.web.address=:80"
             "--entrypoints.websecure.address=:443"
+             
+            # Makes default resolver for all containers using traefik
+            "--entrypoints.websecure.http.tls.certresolver=certresolver"
+
             "--certificatesresolvers.certresolver.acme.email=lkjjones1999@gmail.com"
             "--certificatesresolvers.certresolver.acme.storage=/data/acme.json"
             "--certificatesresolvers.certresolver.acme.dnschallenge=true"

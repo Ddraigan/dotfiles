@@ -43,6 +43,7 @@ M.mason = {
     "rust_analyzer",
     "stylua",
     "clangd",
+    "rnix-lsp"
   },
 }
 
