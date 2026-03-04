@@ -1,7 +1,7 @@
 {
   config,
-  pgks,
   lib,
+  pkgs,
   containerUtils,
   ...
 }: let
@@ -14,8 +14,6 @@ in {
     systemd.tmpfiles.rules = [
       "d ${traefikPath} 0755 ${cfg.mainUser} users -"
       "Z ${traefikPath} - ${cfg.mainUser} users -"
-
-      "d ${traefikPath} 0755 ${cfg.mainUser} users -"
       "f ${traefikPath}/acme.json 0600 ${cfg.mainUser} users -"
     ];
     virtualisation.oci-containers = {
@@ -30,6 +28,7 @@ in {
           volumes = [
             "/var/run/docker.sock:/var/run/docker.sock"
             "${traefikPath}:/data"
+            "${import ./traefikconf.nix {inherit pkgs config containerUtils;}}:/etc/traefik/traefik.yaml:ro"
           ];
           environmentFiles = [
             "/home/leon/secrets/traefik.env"
@@ -38,24 +37,26 @@ in {
             "traefik.enable" = "true";
             "traefik.http.routers.traefik-dashboard.rule" = "Host(`traefik.${cfg.domain}`)";
             "traefik.http.routers.traefik-dashboard.entrypoints" = "websecure";
-            "traefik.http.services.traefik-dashboard.loadbalancer.server.port" = "8080";
-            "traefik.http.routers.traefik-dashboard.tls.domains[0].main" = "ddraigan.com";
-            "traefik.http.routers.traefik-dashboard.tls.domains[0].sans" = "*.ddraigan.com";
+            "traefik.http.routers.traefik-dashboard.service" = "api@internal";
             "traefik.http.routers.traefik-dashboard.tls" = "true";
+            "traefik.http.routers.traefik-dashboard.tls.domains[0].main" = "${cfg.domain}";
+            "traefik.http.routers.traefik-dashboard.tls.domains[0].sans" = "*.${cfg.domain}";
+            "traefik.http.services.traefik-dashboard.loadbalancer.server.port" = "8080";
             # "traefik.http.routers.traefik-dashboard.tls.certresolver" = "certresolver";
           };
-          cmd = [
-            "--api.insecure=true"
-            "--providers.docker=true"
-            "--entrypoints.web.address=:80"
-            "--entrypoints.websecure.address=:443"
-            "--certificatesresolvers.certresolver.acme.email=lkjjones1999@gmail.com"
-            "--certificatesresolvers.certresolver.acme.storage=/data/acme.json"
-            "--certificatesresolvers.certresolver.acme.dnschallenge=true"
-            "--certificatesresolvers.certresolver.acme.dnschallenge.provider=cloudflare"
-            "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-            "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-          ];
+          # cmd = [
+          #   "--api.insecure=true"
+          #   "--providers.docker=true"
+          #   "--entrypoints.web.address=:80"
+          #   "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+          #   "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+          #   "--entrypoints.websecure.address=:443"
+          #
+          #   "--certificatesresolvers.certresolver.acme.email=lkjjones1999@gmail.com"
+          #   "--certificatesresolvers.certresolver.acme.storage=/data/acme.json"
+          #   "--certificatesresolvers.certresolver.acme.dnschallenge=true"
+          #   "--certificatesresolvers.certresolver.acme.dnschallenge.provider=cloudflare"
+          # ];
         };
       };
     };
