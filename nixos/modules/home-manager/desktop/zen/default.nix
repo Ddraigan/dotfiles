@@ -34,8 +34,8 @@
         #         }
         #     }
         # '';
-        userChrome = import ./userChrome.nix {inherit colours;};
-        userContent = import ./userContent.nix {inherit colours;};
+        # userChrome = import ./userChrome.nix {inherit colours;};
+        # userContent = import ./userContent.nix {inherit colours;};
         settings = let
           font = config.global.home.fonts;
         in {
