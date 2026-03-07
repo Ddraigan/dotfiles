@@ -27,6 +27,10 @@
   };
 
   services = {
+    udisks2 = {
+      enable = true;
+      mountOnMedia = true;
+    };
     pipewire = {
       enable = true;
       audio.enable = true;

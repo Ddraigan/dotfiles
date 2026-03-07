@@ -12,11 +12,6 @@
   options.modules.theme.stylix.enable = lib.mkEnableOption "enable stylix";
 
   config = lib.mkIf config.modules.theme.stylix.enable {
-    # qt = {
-    #   enable = false;
-    #   platformTheme.name = "qtct";
-    #   style.name = "adwaita-dark";
-    # };
     stylix = let
       font = config.global.home.fonts;
       icons = font.icons;
@@ -72,6 +67,7 @@
         tmux.enable = false;
         zen-browser = {
           enable = true;
+          profileNames = ["default"];
         };
         firefox = {
           enable = true;

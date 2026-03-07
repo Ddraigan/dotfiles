@@ -57,6 +57,7 @@
     terminal = {
       nvim.enable = true;
       starship.enable = true;
+      fastfetch.enable = true;
       tmux.enable = true;
       wezterm = {
         enable = true;
@@ -94,7 +95,6 @@
         init.defaultBranch = "main";
       };
     };
-    fastfetch.enable = true;
   };
 
   home = {
