@@ -84,6 +84,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+    binfmt.emulatedSystems = ["aarch64-linux"];
     # Something here fixes screen flicker - max_cstate=3 i think
     kernelModules = ["kvm-intel"];
     initrd.kernelModules = ["i915"];
