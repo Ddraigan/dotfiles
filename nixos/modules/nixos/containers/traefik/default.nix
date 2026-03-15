@@ -23,7 +23,6 @@ in {
           ports = [
             "80:80"
             "443:443"
-            "8080:8080"
           ];
           volumes = [
             "/var/run/docker.sock:/var/run/docker.sock"
@@ -40,7 +39,6 @@ in {
             "traefik.http.routers.traefik-dashboard.rule" = "Host(`traefik.${cfg.domain}`)";
             "traefik.http.routers.traefik-dashboard.entrypoints" = "websecure";
             "traefik.http.routers.traefik-dashboard.service" = "api@internal";
-            "traefik.http.services.traefik-dashboard.loadbalancer.server.port" = "8080";
 
             # SSL Wildcard Config
             "traefik.http.routers.traefik-dashboard.tls" = "true";
@@ -49,7 +47,7 @@ in {
             "traefik.http.routers.traefik-dashboard.tls.domains[0].sans" = "*.${cfg.domain}";
           };
           cmd = [
-            "--api.insecure=true"
+            "--api.dashboard=true"
             "--providers.docker=true"
             "--entrypoints.web.address=:80"
             "--entrypoints.web.http.redirections.entrypoint.to=websecure"
