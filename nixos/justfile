@@ -43,4 +43,4 @@ nix-build-iso:
 
 [group("nix")]
 nix-switch-remote host user ip:
-  nixos-rebuild switch --flake .#{{host}} --target-host {{user}}@{{ip}} --sudo --ask-sudo-password
+  nixos-rebuild switch --flake .#{{host}} --target-host {{user}}@{{ip}} --sudo
