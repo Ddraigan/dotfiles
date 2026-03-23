@@ -25,7 +25,8 @@
     desktop = {
       ashell.enable = false;
       dunst.enable = false;
-      dms.enable = true;
+      dms.enable = false;
+      noctalia.enable = true;
       lutris.enable = false;
       obs.enable = false;
       hypr = {
@@ -33,7 +34,7 @@
           enable = true;
           mod = "SUPER";
         };
-        hyprpaper.enable = true;
+        hyprpaper.enable = false;
         hyprlock = {
           enable = true;
           mainMonitor = "eDP-1";
@@ -56,6 +57,7 @@
     terminal = {
       nvim.enable = true;
       starship.enable = true;
+      fastfetch.enable = true;
       tmux.enable = true;
       wezterm = {
         enable = true;
@@ -93,7 +95,6 @@
         init.defaultBranch = "main";
       };
     };
-    fastfetch.enable = true;
   };
 
   home = {

@@ -39,7 +39,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    nix-proton-cachyos.url = "github:kimjongbing/nix-proton-cachyos";
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";

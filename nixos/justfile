@@ -31,7 +31,7 @@ nix-gc:
 
 [group("nix")]
 nix-build host:
-  nix build .#nixosConfigurations.{{host}}.config.system.build
+  nix build .#nixosConfigurations.{{host}}.config.system.build.toplevel
 
 [group("nix")]
 nix-build-vm host:
@@ -40,3 +40,7 @@ nix-build-vm host:
 [group("nix")]
 nix-build-iso:
   nix build .#nixosConfigurations.iso.config.system.build.isoImage
+
+[group("nix")]
+nix-switch-remote host user ip:
+  nixos-rebuild switch --flake .#{{host}} --target-host {{user}}@{{ip}} --sudo --ask-sudo-password

@@ -88,6 +88,7 @@
 
   nix.settings = {
     experimental-features = "nix-command flakes";
+    trusted-users = ["root" "leon"];
   };
 
   users = {
@@ -101,6 +102,7 @@
       ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK211oX+SFHFii/sP3VpPK46PwiZ+wMbSYc+qzm1RKHF leon@leon-pc"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJKQI0ISRODZQeEdApapX+91z0nH6GqM7hRJxIit4Hic lkjjones1999@gmail.com"
       ];
     };
   };

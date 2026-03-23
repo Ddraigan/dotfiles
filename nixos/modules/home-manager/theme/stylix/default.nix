@@ -12,16 +12,12 @@
   options.modules.theme.stylix.enable = lib.mkEnableOption "enable stylix";
 
   config = lib.mkIf config.modules.theme.stylix.enable {
-    qt = {
-      enable = false;
-      platformTheme.name = "qtct";
-      style.name = "adwaita-dark";
-    };
     stylix = let
       font = config.global.home.fonts;
       icons = font.icons;
     in {
       enable = true;
+      polarity = "dark";
       autoEnable = true;
       cursor = {
         package = pkgs.bibata-cursors;
@@ -70,10 +66,13 @@
         waybar.enable = false;
         tmux.enable = false;
         zen-browser = {
-          enable = false;
+          enable = true;
           profileNames = ["default"];
         };
-        firefox.enable = false;
+        firefox = {
+          enable = true;
+          profileNames = ["default"];
+        };
         wezterm.enable = false;
         gtk = {
           enable = true;

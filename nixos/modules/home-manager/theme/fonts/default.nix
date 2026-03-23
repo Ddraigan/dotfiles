@@ -1,7 +1,8 @@
 {
-  lib,
-  config,
-  ...
+lib,
+config,
+pkgs,
+...
 }: let
   fontOption = {lib, ...}: {
     options = {
@@ -39,6 +40,10 @@ in {
       };
       package = lib.mkOption {
         type = lib.types.package;
+        default = pkgs.catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "mauve";
+      };
         description = "Icon theme package";
       };
       size = lib.mkOption {
