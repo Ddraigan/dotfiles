@@ -4,8 +4,10 @@
         inherit name;
         value = let
           zen-browser = config.programs.zen-browser.package;
+          # Use the desktopFileName if it exists, otherwise fallback to "zen.desktop"
+          desktopFile = zen-browser.meta.desktopFileName or "zen.desktop";
         in
-          zen-browser.meta.desktopFileName;
+          desktopFile;
       }) [
         "application/x-extension-shtml"
         "application/x-extension-xhtml"
@@ -24,6 +26,7 @@
         "text/html"
       ]);
   in {
+    enable = true; # Ensure mimeApps is enabled
     associations.added = associations;
     defaultApplications = associations;
   };

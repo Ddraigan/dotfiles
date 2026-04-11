@@ -270,7 +270,7 @@ in {
             "$mod SHIFT, F, fullscreen"
             "$mod SHIFT, Z, togglefloating"
             "$mod SHIFT, P, pseudo"
-            "$mod SHIFT, S, togglesplit"
+            # "$mod SHIFT, S, togglesplit"
 
             # Window Focus
             "$mod, left, movefocus, l"
