@@ -98,7 +98,7 @@ in {
   environment = {
     systemPackages = [
       wezterm-cwd
-      pkgs.helvum
+      pkgs.crosspipe
       # NOTE: Changed 25.11
       pkgs.bitwarden-desktop
       pkgs.qmk

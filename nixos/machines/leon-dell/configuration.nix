@@ -60,7 +60,7 @@
   environment = {
     systemPackages = [
       pkgs.upower
-      pkgs.helvum
+      pkgs.crosspipe
       # NOTE: Changed 25.11
       pkgs.bitwarden-desktop
       pkgs.rustup

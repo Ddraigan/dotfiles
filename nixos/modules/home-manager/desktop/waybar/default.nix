@@ -210,7 +210,7 @@
             justify = "center";
             max-volume = 150;
             on-click = "wpctl set-mute @DEFAULT_SINK@ toggle";
-            on-click-middle = "helvum";
+            on-click-middle = "crosspipe";
             on-click-right = "pavucontrol";
             tooltip = true;
             tooltip-format = "{node_name}";
