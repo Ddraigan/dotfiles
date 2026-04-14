@@ -25,6 +25,9 @@
         localNetworkGameTransfers.openFirewall = true;
         remotePlay.openFirewall = true;
         dedicatedServer.openFirewall = true;
+        extraPackages = with pkgs; [
+          gamemode
+        ];
         extraCompatPackages = with pkgs; [
           proton-ge-bin
           steamtinkerlaunch
@@ -34,7 +37,10 @@
         enable = true;
         capSysNice = true;
       };
-      gamemode.enable = true;
+      gamemode = {
+        enable = true;
+        enableRenice = true;
+      };
     };
   };
 }

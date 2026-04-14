@@ -28,8 +28,8 @@
         nvidiaSettings = true;
       };
     };
-    boot.kernelParams = [
-      "nvidia-drm.modeset=1"
+    boot.kernelModules = [
+      "ntsync"
     ];
   };
 }
