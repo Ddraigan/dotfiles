@@ -103,6 +103,7 @@ in {
       pkgs.bitwarden-desktop
       pkgs.qmk
       pkgs.via
+      pkgs.libnotify
       pkgs.rustup
       pkgs.nixd
       (pkgs.discord-canary.override

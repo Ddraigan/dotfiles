@@ -9,7 +9,7 @@
     environment.systemPackages = with pkgs; [
       mangohud
       protonplus
-      protonup-qt
+      # protonup-qt
       # protonup-rs # Rust CLI installer
       # steamtinkerlaunch
 
@@ -40,6 +40,12 @@
       gamemode = {
         enable = true;
         enableRenice = true;
+        settings = {
+          custom = {
+            start = "notify-send -a 'Gamemode' 'Optimizations activated'";
+            end = "notify-send -a 'Gamemode' 'Optimizations deactivated'";
+          };
+        };
       };
     };
   };
