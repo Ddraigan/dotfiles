@@ -19,6 +19,8 @@
     programs.neovim = {
       enable = true;
       package = pkgs.neovim-unwrapped;
+      withRuby = false;
+      withPython3 = false;
       extraPackages = with pkgs; [
         fd
         ripgrep
