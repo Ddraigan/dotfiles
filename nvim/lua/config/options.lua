@@ -47,3 +47,40 @@ vim.opt.scrolloff = 8
 
 -- Syncs clipboard between os and nvim
 vim.o.clipboard = "unnamedplus"
+
+local augroup = vim.api.nvim_create_augroup
+local autocommand = vim.api.nvim_create_autocmd
+
+autocommand("TextYankPost", {
+  desc = "Highlight when yanking (copying) text",
+  group = augroup("dd-autos", { clear = true }),
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
+
+autocommand("BufEnter", {
+  desc = "Disable New Line Continuing Comment",
+  group = augroup("dd-autos", { clear = true }),
+  callback = function()
+    vim.opt.formatoptions:remove({ "c", "r", "o" })
+  end,
+})
+
+autocommand("FileType", {
+  group = augroup("dd-treesitter", { clear = true }),
+  callback = function(args)
+    local buf = args.buf
+    local lang = vim.treesitter.language.get_lang(vim.bo[buf].filetype)
+
+    -- Check if we have a parser for this language
+    if lang and pcall(vim.treesitter.start, buf, lang) then
+      -- NATIVE INDENT: Replaces 'indent = { enable = true }'
+      -- vim.bo[buf].indentexpr = "v:lua.vim.treesitter.indentexpr()"
+
+      -- NATIVE FOLDS: Enables folding based on TS nodes
+      vim.wo.foldmethod = "manual"
+      vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    end
+  end,
+})

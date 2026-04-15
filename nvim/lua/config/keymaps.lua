@@ -335,22 +335,6 @@ end, {
   desc = "Re-enable autoformat-on-save",
 })
 
-autocommand("TextYankPost", {
-  desc = "Highlight when yanking (copying) text",
-  group = augroup("dd-yank", { clear = true }),
-  callback = function()
-    vim.hl.on_yank()
-  end,
-})
-
-autocommand("BufEnter", {
-  desc = "Disable New Line Continuing Comment",
-  group = augroup("dd-comment", { clear = true }),
-  callback = function()
-    vim.opt.formatoptions:remove({ "c", "r", "o" })
-  end,
-})
-
 -- autocommand("BufRead", {
 --   group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
 --   pattern = "Cargo.toml",

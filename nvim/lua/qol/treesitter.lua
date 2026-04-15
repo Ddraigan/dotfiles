@@ -1,19 +1,8 @@
 return {
-  "nvim-treesitter/nvim-treesitter",
-  dependencies = {
-    {
-      "nvim-treesitter/nvim-treesitter-context",
-      name = "treesitter-context",
-      config = true,
-    },
-    { "nvim-treesitter/nvim-treesitter-textobjects" },
-  },
-  event = { "BufReadPost", "BufNewFile" },
-  build = ":TSUpdate",
-  config = function()
-    -- the mdx filetype will use the markdown parser and queries.
-    vim.treesitter.language.register("markdown", "mdx")
-    require("nvim-treesitter").setup({
+  {
+    "romus204/tree-sitter-manager.nvim",
+    lazy = false,
+    opts = {
       ensure_installed = {
         "lua",
         "rust",
@@ -24,56 +13,112 @@ return {
         "vimdoc",
         "regex",
         "bash",
-        "morkdown",
+        "markdown",
         "markdown_inline",
         "astro",
+        "nix",
       },
-      sync_install = false,
       auto_install = true,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-      },
-      indent = {
-        enable = true,
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<CR>",
-          node_incremental = "<CR>",
-          scope_incremental = "<S-CR>",
-          node_decremental = "<BS>",
-        },
-      },
-      textobjects = {
+    },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "BufReadPost",
+    opts = { enable = true, max_lines = 3 },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    event = "BufReadPost",
+    config = function()
+      require("nvim-treesitter-textobjects").setup({
         select = {
-          enable = true,
-          lookahead = true,
           keymaps = {
-            ["af"] = { query = "@function.outer", desc = "Outer Function" },
-            ["if"] = { query = "@function.inner", desc = "Inner Function" },
-            ["ac"] = { query = "@class.outer", desc = "Outer Class" },
-            ["ic"] = { query = "@class.inner", desc = "Inner Class" },
-            ["as"] = { query = "@scope", query_group = "locals", desc = "Select language Scope" },
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
           },
-          selection_modes = {
-            ["@parameter.outer"] = "v", -- charwise
-            ["@function.outer"] = "V", -- linewise
-            ["@class.outer"] = "<c-v>", -- blockwise
-          },
-          include_surrounding_whitespace = true,
+          include_surrounding_whitespace = false,
         },
-        swap = {
-          enable = true,
-          swap_next = {
-            ["<leader>a"] = "@parameter.inner",
-          },
-          swap_previous = {
-            ["<leader>A"] = "@parameter.inner",
-          },
-        },
-      },
-    })
-  end,
+      })
+    end,
+  },
 }
+
+-- "nvim-treesitter/nvim-treesitter",
+-- dependencies = {
+--   {
+--     "nvim-treesitter/nvim-treesitter-context",
+--     name = "treesitter-context",
+--     config = true,
+--   },
+--   { "nvim-treesitter/nvim-treesitter-textobjects" },
+-- },
+-- event = { "BufReadPost", "BufNewFile" },
+-- build = ":TSUpdate",
+-- config = function()
+--   -- the mdx filetype will use the markdown parser and queries.
+--   vim.treesitter.language.register("markdown", "mdx")
+--   require("nvim-treesitter").setup({
+--     ensure_installed = {
+--       "lua",
+--       "rust",
+--       "javascript",
+--       "typescript",
+--       "tsx",
+--       "vim",
+--       "vimdoc",
+--       "regex",
+--       "bash",
+--       "morkdown",
+--       "markdown_inline",
+--       "astro",
+--     },
+--     sync_install = false,
+--     auto_install = true,
+--     highlight = {
+--       enable = true,
+--       additional_vim_regex_highlighting = false,
+--     },
+--     indent = {
+--       enable = true,
+--     },
+--     incremental_selection = {
+--       enable = true,
+--       keymaps = {
+--         init_selection = "<CR>",
+--         node_incremental = "<CR>",
+--         scope_incremental = "<S-CR>",
+--         node_decremental = "<BS>",
+--       },
+--     },
+--     textobjects = {
+--       select = {
+--         enable = true,
+--         lookahead = true,
+--         keymaps = {
+--           ["af"] = { query = "@function.outer", desc = "Outer Function" },
+--           ["if"] = { query = "@function.inner", desc = "Inner Function" },
+--           ["ac"] = { query = "@class.outer", desc = "Outer Class" },
+--           ["ic"] = { query = "@class.inner", desc = "Inner Class" },
+--           ["as"] = { query = "@scope", query_group = "locals", desc = "Select language Scope" },
+--         },
+--         selection_modes = {
+--           ["@parameter.outer"] = "v", -- charwise
+--           ["@function.outer"] = "V", -- linewise
+--           ["@class.outer"] = "<c-v>", -- blockwise
+--         },
+--         include_surrounding_whitespace = true,
+--       },
+--       swap = {
+--         enable = true,
+--         swap_next = {
+--           ["<leader>a"] = "@parameter.inner",
+--         },
+--         swap_previous = {
+--           ["<leader>A"] = "@parameter.inner",
+--         },
+--       },
+--     },
+--   })
+-- end,
