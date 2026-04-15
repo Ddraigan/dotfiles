@@ -77,10 +77,13 @@ autocommand("FileType", {
     if lang and pcall(vim.treesitter.start, buf, lang) then
       -- NATIVE INDENT: Replaces 'indent = { enable = true }'
       -- vim.bo[buf].indentexpr = "v:lua.vim.treesitter.indentexpr()"
+      vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
       -- NATIVE FOLDS: Enables folding based on TS nodes
-      vim.wo.foldmethod = "manual"
-      vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      vim.wo[0][0].foldmethod = "expr"
+      -- vim.wo.foldmethod = "manual"
+      -- vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
     end
   end,
 })
