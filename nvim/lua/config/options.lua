@@ -23,7 +23,7 @@ vim.opt.relativenumber = true -- Relative line numbers
 -- Indenting
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
-vim.opt.smartindent = true
+vim.opt.smartindent = false
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 
@@ -75,15 +75,25 @@ autocommand("FileType", {
 
     -- Check if we have a parser for this language
     if lang and pcall(vim.treesitter.start, buf, lang) then
-      -- NATIVE INDENT: Replaces 'indent = { enable = true }'
-      -- vim.bo[buf].indentexpr = "v:lua.vim.treesitter.indentexpr()"
       vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
-      -- NATIVE FOLDS: Enables folding based on TS nodes
-      vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
-      vim.wo[0][0].foldmethod = "expr"
-      -- vim.wo.foldmethod = "manual"
-      -- vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      vim.wo.foldmethod = "expr"
+      vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      vim.wo.foldlevel = 99
+    end
+  end,
+})
+
+autocommand("BufWinEnter", {
+  group = augroup("dd-better-help", { clear = true }),
+  callback = function(args)
+    if vim.bo[args.buf].filetype == "help" then
+      vim.cmd("only")
+
+      vim.keymap.set("n", "q", ":buffer #<CR>", {
+        buffer = args.buf,
+        silent = true,
+      })
     end
   end,
 })
