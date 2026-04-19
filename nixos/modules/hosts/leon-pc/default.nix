@@ -1,5 +1,5 @@
 {config, ...}: {
-  flake.modules.nixos."hosts/leon-pc" = {lib, ...}: {
+  flake.modules.nixos."leon-pc" = {lib, ...}: {
     imports = with config.flake.modules.nixos; [
       audio
     ];

@@ -9,10 +9,6 @@
     nixpkgs-unstable.url = "github:/nixos/nixpkgs/nixpkgs-unstable";
   };
 
-  imports = [
-    inputs.flake-file.flakeModules.default
-  ];
-
   perSystem = {system, ...}: {
     _module.args.pkgs = import inputs.nixpkgs {
       inherit system;

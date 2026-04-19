@@ -11,5 +11,8 @@
     };
     import-tree.url = "github:vic/import-tree";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    nixpkgs-unstable.url = "github:/nixos/nixpkgs/nixpkgs-unstable";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 }
