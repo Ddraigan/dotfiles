@@ -1,13 +1,12 @@
 {
   flake.modules.nixos.gaming = {pkgs, ...}: {
-    environment.systemPackages = with pkgs;
-      [
-        mangohud
-        protonplus
-        pkgsi686Linux.freetype
-        pkgsi686Linux.fontconfig
-        pkgsi686Linux.zlib
-      ];
+    environment.systemPackages = with pkgs; [
+      mangohud
+      protonplus
+      pkgsi686Linux.freetype
+      pkgsi686Linux.fontconfig
+      pkgsi686Linux.zlib
+    ];
 
     hardware = {
       graphics = {
