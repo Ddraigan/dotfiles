@@ -31,6 +31,10 @@
       enable = true;
       mountOnMedia = true;
     };
+    usbmuxd = {
+      enable = true;
+      package = pkgs.usbmuxd;
+    };
     pipewire = {
       enable = true;
       audio.enable = true;
@@ -38,13 +42,6 @@
       pulse.enable = true;
       jack.enable = true;
       wireplumber.enable = true;
-    };
-    xserver = {
-      enable = false;
-      xkb = {
-        layout = "us";
-        variant = "dvorak";
-      };
     };
   };
 
@@ -59,6 +56,10 @@
 
   environment = {
     systemPackages = [
+      pkgs.libimobiledevice
+      pkgs.idevicerestore
+      pkgs.usbutils
+      pkgs.ifuse
       pkgs.upower
       pkgs.helvum
       # NOTE: Changed 25.11
@@ -140,7 +141,7 @@
       leon = {
         isNormalUser = true;
         description = "Leon Jones";
-        extraGroups = ["networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire" "docker"];
+        extraGroups = ["networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire" "docker" "usbmux" "adbusers"];
         openssh.authorizedKeys.keys = let
           authorizedKeys = pkgs.fetchurl {
             url = "https://github.com/Ddraigan.keys";

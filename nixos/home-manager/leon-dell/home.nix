@@ -103,6 +103,7 @@
     stateVersion = "24.05"; # Don't change this I'm pretty sure
     packages = [
       pkgs.just
+      inputs.diff-tool.packages.${pkgs.stdenv.hostPlatform.system}.default
 
       # Image Stuff
       pkgs.gimp

@@ -104,6 +104,10 @@
   # Configure keymap in X11
   services = {
     upower.enable = true;
+    udisks2 = {
+      enable = true;
+      mountOnMedia = true;
+    };
     xserver.xkb = {
       layout = "us";
       variant = "dvorak";
