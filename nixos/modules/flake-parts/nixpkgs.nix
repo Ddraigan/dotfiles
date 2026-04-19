@@ -13,7 +13,7 @@
     _module.args.pkgs = import inputs.nixpkgs {
       inherit system;
       config = {
-        allowUnfreePredicate = _pkg: true;
+        allowUnfree = true;
       };
       overlays = [
         (final: _prev: {
