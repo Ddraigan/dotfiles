@@ -164,7 +164,7 @@ in {
           };
 
           decoration = {
-            rounding = 12;
+            rounding = 0;
             active_opacity = 1.0;
             inactive_opacity = 1.0;
             shadow = {
@@ -270,7 +270,7 @@ in {
             "$mod SHIFT, F, fullscreen"
             "$mod SHIFT, Z, togglefloating"
             "$mod SHIFT, P, pseudo"
-            "$mod SHIFT, S, togglesplit"
+            "$mod SHIFT, S, layoutmsg, togglesplit"
 
             # Window Focus
             "$mod, left, movefocus, l"

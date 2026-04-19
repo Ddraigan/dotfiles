@@ -15,11 +15,11 @@
     nix-test.url = "path:/home/leon/Downloads/test/test";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.3";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     stylix = {
-      url = "github:nix-community/stylix/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     dgop = {
@@ -35,8 +35,9 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
+      url = "github:0xc000022070/zen-browser-flake/beta";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.home-manager.follows = "home-manager";
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     hyprland.url = "github:hyprwm/Hyprland";
@@ -57,15 +58,19 @@
     };
     solaar = {
       url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     diff-tool.url = "github:ddraigan/diff-tool";
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
-    mkMachine = name: system:
-      nixpkgs.lib.nixosSystem
-      {
+    mkMachine = name: system: {stable ? true}: let
+      pkgsSource =
+        if stable
+        then nixpkgs.lib
+        else inputs.nixpkgs-unstable.lib;
+    in
+      pkgsSource.nixosSystem {
         system = system;
         specialArgs = {
           hostName = name;
@@ -91,9 +96,21 @@
         ];
       };
 
-    mkHome = name: system:
-      inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {inherit system;};
+    mkHome = name: system: {stable ? true}: let
+      hmLib =
+        if stable
+        then inputs.home-manager.lib
+        else inputs.home-manager-unstable.lib;
+      pkgsSource =
+        if stable
+        then nixpkgs
+        else inputs.nixpkgs-unstable;
+    in
+      hmLib.homeManagerConfiguration {
+        pkgs = import pkgsSource {
+          inherit system;
+          config.allowUnfree = true;
+        };
 
         extraSpecialArgs = {
           profileName = name;
@@ -110,16 +127,16 @@
     overlays = import ./overlays {inherit inputs;};
 
     nixosConfigurations = {
-      leon-pc = mkMachine "leon-pc" "x86_64-linux";
+      leon-pc = mkMachine "leon-pc" "x86_64-linux" {stable = false;};
       leon-laptop = mkMachine "leon-laptop" "x86_64-linux";
-      leon-dell = mkMachine "leon-dell" "x86_64-linux";
+      leon-dell = mkMachine "leon-dell" "x86_64-linux" {stable = false;};
       mynydd = mkMachine "mynydd" "x86_64-linux";
       iso = mkIso "iso" "x86_64-linux";
     };
 
     homeConfigurations = {
-      leon = mkHome "leon" "x86_64-linux";
-      leon-dell = mkHome "leon-dell" "x86_64-linux";
+      leon = mkHome "leon" "x86_64-linux" {stable = false;};
+      leon-dell = mkHome "leon-dell" "x86_64-linux" {stable = false;};
       keane = mkHome "keane" "x86_64-linux";
     };
   };

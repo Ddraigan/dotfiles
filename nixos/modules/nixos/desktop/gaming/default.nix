@@ -8,8 +8,9 @@
   config = lib.mkIf config.modules.nix.desktop.gaming.enable {
     environment.systemPackages = with pkgs; [
       mangohud
-      protonup-ng
-      protonup-qt
+      protonplus
+      # protonup-qt
+      # protonup-rs # Rust CLI installer
       # steamtinkerlaunch
 
       pkgsi686Linux.freetype
@@ -24,16 +25,28 @@
         localNetworkGameTransfers.openFirewall = true;
         remotePlay.openFirewall = true;
         dedicatedServer.openFirewall = true;
-        extraCompatPackages = [
-          pkgs.proton-ge-bin
-          pkgs.steamtinkerlaunch
+        extraPackages = with pkgs; [
+          gamemode
+        ];
+        extraCompatPackages = with pkgs; [
+          proton-ge-bin
+          steamtinkerlaunch
         ];
       };
       gamescope = {
         enable = true;
         capSysNice = true;
       };
-      gamemode.enable = true;
+      gamemode = {
+        enable = true;
+        enableRenice = true;
+        settings = {
+          custom = {
+            start = "notify-send -a 'Gamemode' 'Optimizations activated'";
+            end = "notify-send -a 'Gamemode' 'Optimizations deactivated'";
+          };
+        };
+      };
     };
   };
 }

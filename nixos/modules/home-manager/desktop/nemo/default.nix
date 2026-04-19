@@ -20,6 +20,9 @@
       home = {
         packages =
           [
+            (pkgs.writeShellScriptBin "nemo-terminal-wrapper" ''
+              exec ${pkgs.wezterm}/bin/wezterm start --cwd "$1"
+            '')
             pkgs.nemo-with-extensions
           ]
           ++ cfg.extensions;
@@ -44,8 +47,7 @@
       };
       dconf.settings = {
         "org/cinnamon/desktop/applications/terminal" = {
-          exec = config.global.primaryTerminal;
-          exec-arg = "start -- ";
+          exec = "uwsm app -- nemo-terminal-wrapper";
         };
         "org/cinnamon/desktop/interface" = {
           can-change-accels = true;

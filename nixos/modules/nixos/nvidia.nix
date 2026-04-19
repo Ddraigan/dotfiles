@@ -18,6 +18,7 @@
         ];
       };
       nvidia = {
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
         modesetting.enable = true; # Required
         powerManagement = {
           enable = false; # Often causes suspend / resume issues on desktops
@@ -27,8 +28,8 @@
         nvidiaSettings = true;
       };
     };
-    boot.kernelParams = [
-      "nvidia-drm.modeset=1"
+    boot.kernelModules = [
+      "ntsync"
     ];
   };
 }

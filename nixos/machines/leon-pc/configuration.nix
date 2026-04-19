@@ -29,7 +29,7 @@ in {
       leon = {
         isNormalUser = true;
         description = "Leon Jones";
-        extraGroups = ["networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire" "docker"];
+        extraGroups = ["networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire" "docker" "gamemode"];
         openssh.authorizedKeys.keys = let
           authorizedKeys = pkgs.fetchurl {
             url = "https://github.com/Ddraigan.keys";
@@ -98,11 +98,12 @@ in {
   environment = {
     systemPackages = [
       wezterm-cwd
-      pkgs.helvum
+      pkgs.crosspipe
       # NOTE: Changed 25.11
       pkgs.bitwarden-desktop
       pkgs.qmk
       pkgs.via
+      pkgs.libnotify
       pkgs.rustup
       pkgs.nixd
       (pkgs.discord-canary.override

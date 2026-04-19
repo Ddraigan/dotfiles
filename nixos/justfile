@@ -2,14 +2,30 @@ default:
   just --list
 
 [group("home-manager")]
-hm-switch profile:
+home-switch profile:
   git add .
   home-manager switch --flake .#{{profile}}
+
+[group("home-manager")]
+home-switch-dry profile:
+  git add .
+  home-manager build --flake .#{{profile}} --dry-run
+
+[group("home-manager")]
+home-build-compare profile:
+  git add .
+  nix build .#homeConfigurations.{{profile}}.activationPackage --out-link ./result-home
+  nix shell nixpkgs#nvd -c nvd diff ~/.local/state/nix/profiles/home-manager ./result-home
 
 [group("nix")]
 nix-switch host:
   git add .
   sudo nixos-rebuild switch --flake .#{{host}}
+
+[group("nix")]
+nix-switch-dry host:
+  git add .
+  sudo nixos-rebuild dry-activate --flake .#{{host}}
 
 [group("nix")]
 nix-update package="":
@@ -32,6 +48,12 @@ nix-gc:
 [group("nix")]
 nix-build host:
   nix build .#nixosConfigurations.{{host}}.config.system.build.toplevel
+
+[group("nix")]
+nix-build-compare host:
+  git add .
+  nix build .#nixosConfigurations.{{host}}.config.system.build.toplevel --out-link ./result-system
+  nix shell nixpkgs#nvd -c nvd diff /run/current-system ./result-system
 
 [group("nix")]
 nix-build-vm host:
