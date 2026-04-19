@@ -129,14 +129,14 @@
     nixosConfigurations = {
       leon-pc = mkMachine "leon-pc" "x86_64-linux" {stable = false;};
       leon-laptop = mkMachine "leon-laptop" "x86_64-linux";
-      leon-dell = mkMachine "leon-dell" "x86_64-linux";
+      leon-dell = mkMachine "leon-dell" "x86_64-linux" {stable = false;};
       mynydd = mkMachine "mynydd" "x86_64-linux";
       iso = mkIso "iso" "x86_64-linux";
     };
 
     homeConfigurations = {
       leon = mkHome "leon" "x86_64-linux" {stable = false;};
-      leon-dell = mkHome "leon-dell" "x86_64-linux";
+      leon-dell = mkHome "leon-dell" "x86_64-linux" {stable = false;};
       keane = mkHome "keane" "x86_64-linux";
     };
   };
