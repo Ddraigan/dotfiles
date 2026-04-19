@@ -3,12 +3,11 @@
     environment.systemPackages = with pkgs;
       [
         mangohud
-        # protonplus
+        protonplus
         pkgsi686Linux.freetype
         pkgsi686Linux.fontconfig
         pkgsi686Linux.zlib
-      ]
-      ++ [pkgs.nixpkgs-master.protonplus];
+      ];
 
     hardware = {
       graphics = {

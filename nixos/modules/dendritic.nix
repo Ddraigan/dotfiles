@@ -1,13 +1,14 @@
-{
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   # flake-file.inputs = {
   #   nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   #   flake-parts.url = "github:hercules-ci/flake-parts";
   #   flake-file.url = lib.mkDefault "github:vic/flake-file";
   #   import-tree.url = "github:vic/import-tree";
   # };
+  flake-file.inputs.home-manager = {
+    url = "github:nix-community/home-manager";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   # flake-file.type = "dendritic";
   # flake-file.path = ./.;
