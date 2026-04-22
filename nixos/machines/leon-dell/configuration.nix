@@ -31,6 +31,7 @@
       enable = true;
       mountOnMedia = true;
     };
+    upower.enable = true;
     usbmuxd = {
       enable = true;
       package = pkgs.usbmuxd;
@@ -60,7 +61,6 @@
       pkgs.idevicerestore
       pkgs.usbutils
       pkgs.ifuse
-      pkgs.upower
       pkgs.crosspipe
       # NOTE: Changed 25.11
       pkgs.bitwarden-desktop
