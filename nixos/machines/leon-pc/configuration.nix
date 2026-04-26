@@ -128,6 +128,7 @@ in {
     gdk-pixbuf.modulePackages = [pkgs.librsvg];
     dconf.enable = true;
     zsh.enable = true;
+    nix-ld.enable = true;
     localsend = {
       enable = true;
       openFirewall = true;
