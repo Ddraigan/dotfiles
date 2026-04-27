@@ -29,7 +29,7 @@ in {
       leon = {
         isNormalUser = true;
         description = "Leon Jones";
-        extraGroups = ["networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire" "docker" "gamemode"];
+        extraGroups = ["networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire" "docker" "gamemode" "kvm" "adbusers"];
         openssh.authorizedKeys.keys = let
           authorizedKeys = pkgs.fetchurl {
             url = "https://github.com/Ddraigan.keys";
@@ -69,7 +69,7 @@ in {
 
   services = {
     upower.enable = true;
-    udev.packages = [pkgs.via];
+    udev.packages = with pkgs; [via android-tools];
     udisks2 = {
       enable = true;
       mountOnMedia = true;

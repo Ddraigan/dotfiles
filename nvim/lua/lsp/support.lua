@@ -63,4 +63,13 @@ return {
 
   { "NoahTheDuke/vim-just", ft = "just" },
   { "IndianBoy42/tree-sitter-just", ft = "just" },
+  {
+    "mrxiaozhuox/dioxus.nvim",
+    opts = {
+      format = {
+        split_line_attributes = true,
+      },
+    },
+    ft = "rust",
+  },
 }

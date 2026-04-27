@@ -14,7 +14,7 @@ return {
     -- Figure out where to get adapter from and which one to use
     if has_mason then
       local extension_path = vim.fn.expand("$MASON/packages/codelldb/extension")
-      local codelldb_path = extension_path .. 'adapter/codelldb'
+      local codelldb_path = extension_path .. "adapter/codelldb"
       local liblldb_path ---@type string
 
       if vim.fn.has("win32") == 1 then
@@ -62,10 +62,16 @@ return {
           )
           vim.keymap.set(
             "n",
-            "<leader>lrd>",
-            "<cmd> RustLsp renderDiagnostic",
+            "<leader>lrd",
+            "<cmd> RustLsp renderDiagnostic <CR>",
             { buffer = bufnr, desc = "[Rust]: Render Diagnostic as if cargo build" }
           )
+          -- Dioxus Plugin
+          vim.keymap.set("n", "<leader>ldff", "<cmd> DxFormatBuffer <CR>", { buffer = bufnr, desc = "[Dioxus]: Format Buffer" })
+          vim.keymap.set("n", "<leader>ldii", "<cmd> DxFormatInline <CR>", { buffer = bufnr, desc = "[Dioxus]: Format Inline" })
+          vim.keymap.set("n", "<leader>ldti", "<cmd> DxTranslateInline <CR>", { buffer = bufnr, desc = "[Dioxus]: Translate Inline" })
+          vim.keymap.set("n", "<leader>ldtp", "<cmd> DxTranslatePrompt <CR>", { buffer = bufnr, desc = "[Dioxus]: Translate Prompt" })
+          vim.keymap.set("n", "<leader>ldc", "<cmd> DxCheckBuffer <CR>", { buffer = bufnr, desc = "[Dioxus]: Check Buffer" })
         end,
         settings = {
           ["rust-analyzer"] = {
