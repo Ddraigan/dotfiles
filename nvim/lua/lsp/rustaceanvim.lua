@@ -68,7 +68,7 @@ return {
           )
           -- Dioxus Plugin
           vim.keymap.set("n", "<leader>ldff", "<cmd> DxFormatBuffer <CR>", { buffer = bufnr, desc = "[Dioxus]: Format Buffer" })
-          vim.keymap.set("n", "<leader>ldii", "<cmd> DxFormatInline <CR>", { buffer = bufnr, desc = "[Dioxus]: Format Inline" })
+          vim.keymap.set("n", "<leader>ldfi", "<cmd> DxFormatInline <CR>", { buffer = bufnr, desc = "[Dioxus]: Format Inline" })
           vim.keymap.set("n", "<leader>ldti", "<cmd> DxTranslateInline <CR>", { buffer = bufnr, desc = "[Dioxus]: Translate Inline" })
           vim.keymap.set("n", "<leader>ldtp", "<cmd> DxTranslatePrompt <CR>", { buffer = bufnr, desc = "[Dioxus]: Translate Prompt" })
           vim.keymap.set("n", "<leader>ldc", "<cmd> DxCheckBuffer <CR>", { buffer = bufnr, desc = "[Dioxus]: Check Buffer" })
