@@ -42,12 +42,6 @@ return {
             "<cmd> RustLsp hover actions <CR>",
             { buffer = bufnr, desc = "[Rust]: Hover Actions" }
           )
-          -- vim.keymap.set(
-          -- 	"n",
-          -- 	"<leader>la",
-          -- 	"<cmd> RustLsp codeAction <CR>",
-          -- 	{ buffer = bufnr, desc = "[Rust]: Code Actions" }
-          -- )
           vim.keymap.set(
             "n",
             "<leader>lre",

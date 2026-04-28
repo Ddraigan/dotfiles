@@ -16,7 +16,6 @@ M.system = {
 
 M.mason = {
   base = {
-    -- you can turn off/on auto_update per tool
     -- LSPs
     "astro-language-server",
     "yaml-language-server",
