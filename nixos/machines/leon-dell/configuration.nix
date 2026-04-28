@@ -46,6 +46,8 @@
     };
   };
 
+  virtualisation.docker.enable = true;
+
   programs = {
     dconf.enable = true;
     zsh.enable = true;
