@@ -68,7 +68,7 @@
         };
         nix_shell = {
           symbol = "󱄅 ";
-          format = lang_format;
+          format = "[$symbol$state( \($name\))]($style) ";
           heuristic = true;
         };
         haskell = {
