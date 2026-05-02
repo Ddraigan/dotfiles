@@ -25,7 +25,6 @@ M.mason = {
     "json-lsp",
     "typescript-language-server",
     "tailwindcss-language-server",
-    "qmlls",
     "nil",
 
     -- Formatters
