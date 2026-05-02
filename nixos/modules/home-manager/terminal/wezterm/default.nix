@@ -28,12 +28,8 @@
         };
         use_dead_keys = false;
         font = lib.generators.mkLuaInline ''wezterm.font("Hack Nerd Font")'';
+        font_size = 16.0;
       };
     };
-    # home.file = {
-    #   ".config/wezterm" = {
-    #   source = ../../../../../wezterm;
-    # };
-    # };
   };
 }
