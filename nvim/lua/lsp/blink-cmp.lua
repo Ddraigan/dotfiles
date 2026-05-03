@@ -1,117 +1,163 @@
 return {
-  "saghen/blink.cmp",
-  event = "InsertEnter",
-  dependencies = {
-    "rafamadriz/friendly-snippets",
-    "moyiz/blink-emoji.nvim",
-    "saghen/blink.pairs",
-    "Kaiser-Yang/blink-cmp-avante",
-    { "L3MON4D3/LuaSnip", version = "v2.*" },
-  },
-  -- use a release tag to download pre-built binaries
-  version = "1.*",
-  -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-  -- build = 'cargo build --release',
-  -- If you use nix, you can build from source using latest nightly rust with:
-  -- build = 'nix run .#build-plugin',
+  {
+    "saghen/blink.cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      "moyiz/blink-emoji.nvim",
+      "saghen/blink.pairs",
+      "Kaiser-Yang/blink-cmp-avante",
+      { "L3MON4D3/LuaSnip", version = "v2.*" },
+    },
+    -- use a release tag to download pre-built binaries
+    version = "1.*",
+    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    -- build = 'cargo build --release',
+    -- If you use nix, you can build from source using latest nightly rust with:
+    -- build = 'nix run .#build-plugin',
 
-  ---@module "blink.cmp"
-  ---@type blink.cmp.Config
-  opts = {
-    -- Preset bindings -
-    -- C-n/C-p or Up/Down: Select next/previous item
-    -- C-e: Hide menu
-    -- C-k: Toggle signature help (if signature.enabled = true)
-    keymap = {
-      preset = "default",
-      ["<C-e>"] = { "hide", "show" },
-    },
-    appearance = {
-      nerd_font_variant = "mono",
-      kind_icons = require("config.theme").icons.cmp,
-    },
-    completion = {
-      documentation = { auto_show = true },
-      ghost_text = { enabled = true },
-      list = {
-        selection = {
-          preselect = true,
-          auto_insert = true,
-        },
+    ---@module "blink.cmp"
+    ---@type blink.cmp.Config
+    opts = {
+      -- Preset bindings -
+      -- C-n/C-p or Up/Down: Select next/previous item
+      -- C-e: Hide menu
+      -- C-k: Toggle signature help (if signature.enabled = true)
+      keymap = {
+        preset = "default",
+        ["<C-e>"] = { "hide", "show" },
       },
-      menu = {
-        min_width = 30,
-        max_height = 15,
-        border = "shadow",
-        draw = {
-          -- align_to = "cursor", -- I want align to original cursor location
-          columns = {
-            { "kind_icon" },
-            { "label", "label_description", gap = 1 },
-            { "source_name", width = { fill = true } },
+      appearance = {
+        nerd_font_variant = "mono",
+        kind_icons = require("config.theme").icons.cmp,
+      },
+      completion = {
+        documentation = { auto_show = true },
+        ghost_text = { enabled = true },
+        list = {
+          selection = {
+            preselect = true,
+            auto_insert = true,
           },
-          components = {
-            source_name = {
-              text = function(ctx)
-                return string.format("[%s]", ctx.source_name)
-              end,
+        },
+        menu = {
+          min_width = 30,
+          max_height = 15,
+          border = "shadow",
+          draw = {
+            -- align_to = "cursor", -- I want align to original cursor location
+            columns = {
+              { "kind_icon" },
+              { "label", "label_description", gap = 1 },
+              { "source_name", width = { fill = true } },
+            },
+            components = {
+              source_name = {
+                text = function(ctx)
+                  return string.format("[%s]", ctx.source_name)
+                end,
+              },
             },
           },
         },
       },
-    },
 
-    cmdline = {
-      enabled = true,
-      -- use 'inherit' to inherit mappings from top level `keymap` config
-      keymap = { preset = "cmdline" },
-      sources = { "buffer", "cmdline" },
+      cmdline = {
+        enabled = true,
+        -- use 'inherit' to inherit mappings from top level `keymap` config
+        keymap = { preset = "cmdline" },
+        sources = { "buffer", "cmdline" },
 
-      completion = {
-        menu = {
-          auto_show = true,
+        completion = {
+          menu = {
+            auto_show = true,
+          },
+          ghost_text = { enabled = true },
         },
-        ghost_text = { enabled = true },
       },
-    },
-    signature = { enabled = true },
-    snippets = { preset = "luasnip" },
-    sources = {
-      default = { "lazydev", "avante", "lsp", "path", "snippets", "buffer", "emoji" },
-      providers = {
-        avante = {
-          module = "blink-cmp-avante",
-          name = "Avante",
-          opts = {},
-        },
-        lazydev = {
-          name = "LazyDev",
-          module = "lazydev.integrations.blink",
-          -- make lazydev completions top priority (see `:h blink.cmp`)
-          score_offset = 100,
-        },
-        emoji = {
-          module = "blink-emoji",
-          name = "Emoji",
-          score_offset = 15, -- Tune by preference
-          opts = {
-            insert = true, -- Insert emoji (default) or complete its name
-            ---@type string|table|fun():table
-            trigger = function()
-              return { ":" }
+      signature = { enabled = true },
+      snippets = { preset = "luasnip" },
+      sources = {
+        default = { "lazydev", "avante", "lsp", "path", "snippets", "buffer", "emoji" },
+        providers = {
+          avante = {
+            module = "blink-cmp-avante",
+            name = "Avante",
+            opts = {},
+          },
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            -- make lazydev completions top priority (see `:h blink.cmp`)
+            score_offset = 100,
+          },
+          emoji = {
+            module = "blink-emoji",
+            name = "Emoji",
+            score_offset = 15, -- Tune by preference
+            opts = {
+              insert = true, -- Insert emoji (default) or complete its name
+              ---@type string|table|fun():table
+              trigger = function()
+                return { ":" }
+              end,
+            },
+            should_show_items = function()
+              return vim.tbl_contains(
+                -- Enable emoji completion only for git commits and markdown.
+                { "gitcommit", "markdown" },
+                vim.o.filetype
+              )
             end,
           },
-          should_show_items = function()
-            return vim.tbl_contains(
-              -- Enable emoji completion only for git commits and markdown.
-              { "gitcommit", "markdown" },
-              vim.o.filetype
-            )
-          end,
         },
       },
+      fuzzy = { implementation = "prefer_rust_with_warning" },
     },
-    fuzzy = { implementation = "prefer_rust_with_warning" },
+    opts_extend = { "sources.default" },
   },
-  opts_extend = { "sources.default" },
+  {
+    "saghen/blink.pairs",
+    version = "*", -- (recommended) only required with prebuilt binaries
+    -- download prebuilt binaries from github releases
+    dependencies = "saghen/blink.download",
+    --- @module 'blink.pairs'
+    --- @type blink.pairs.Config
+    opts = {
+      mappings = {
+        -- you can call require("blink.pairs.mappings").enable()
+        -- and require("blink.pairs.mappings").disable()
+        -- to enable/disable mappings at runtime
+        enabled = true,
+        cmdline = true,
+        -- or disable with `vim.g.pairs = false` (global) and `vim.b.pairs = false` (per-buffer)
+        -- and/or with `vim.g.blink_pairs = false` and `vim.b.blink_pairs = false`
+        disabled_filetypes = {},
+        pairs = {},
+      },
+      highlights = {
+        enabled = false,
+        -- requires require('vim._extui').enable({}), otherwise has no effect
+        cmdline = true,
+        groups = {
+          "BlinkPairsOrange",
+          "BlinkPairsPurple",
+          "BlinkPairsBlue",
+        },
+        unmatched_group = "BlinkPairsUnmatched",
+
+        -- highlights matching pairs under the cursor
+        matchparen = {
+          enabled = true,
+          -- known issue where typing won't update matchparen highlight, disabled by default
+          cmdline = false,
+          -- also include pairs not on top of the cursor, but surrounding the cursor
+          include_surrounding = false,
+          group = "BlinkPairsMatchParen",
+          priority = 250,
+        },
+      },
+      debug = false,
+    },
+  },
 }

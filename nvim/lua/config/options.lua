@@ -73,7 +73,6 @@ autocommand("FileType", {
     local buf = args.buf
     local lang = vim.treesitter.language.get_lang(vim.bo[buf].filetype)
 
-    -- Check if we have a parser for this language
     if lang and pcall(vim.treesitter.start, buf, lang) then
       vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
