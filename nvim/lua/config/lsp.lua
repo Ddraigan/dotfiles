@@ -19,6 +19,38 @@ for _, server in ipairs(all_servers) do
   end
 end
 
+local tw_template = vim.lsp.config["tailwindcss"]
+if not tw_template then
+  tw_template = { filetypes = {}, settings = {} }
+end
+
+local my_overrides = {
+  filetypes = vim.list_extend(vim.deepcopy(tw_template.filetypes or {}), { "rust" }),
+  init_options = {
+    userLanguages = {
+      rust = "html",
+    },
+  },
+  settings = {
+    tailwindCSS = {
+      experimental = {
+        classRegex = {
+          { 'class:\\s*"([^"]*)"', '([^"]*)' },
+          { 'class\\s*=\\s*"([^"]*)"', '([^"]*)' },
+        },
+      },
+      includeLanguages = {
+        rust = "html",
+      },
+    },
+  },
+  root_markers = { "Cargo.toml", "tailwind.config.js", "package.json", ".git" },
+}
+
+local final_config = vim.tbl_deep_extend("force", tw_template, my_overrides)
+
+vim.lsp.config("tailwindcss", final_config)
+
 vim.lsp.enable(servers)
 
 return M
