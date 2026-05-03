@@ -2,10 +2,14 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }: {
   options.modules.nix.desktop.gaming.enable = lib.mkEnableOption "Enable Gaming Config";
   config = lib.mkIf config.modules.nix.desktop.gaming.enable {
+    nixpkgs = {
+      overlays = [inputs.millennium.overlays.default];
+    };
     environment.systemPackages = with pkgs; [
       mangohud
       protonplus
@@ -21,6 +25,7 @@
     programs = {
       steam = {
         enable = true;
+        package = pkgs.millennium-steam;
         gamescopeSession.enable = true;
         localNetworkGameTransfers.openFirewall = true;
         remotePlay.openFirewall = true;
