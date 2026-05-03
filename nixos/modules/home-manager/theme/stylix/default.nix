@@ -64,7 +64,9 @@
         starship.enable = false;
         spicetify.enable = false;
         waybar.enable = false;
-        tmux.enable = false;
+        tmux = {
+          enable = false;
+        };
         zen-browser = {
           enable = true;
           profileNames = ["default"];
