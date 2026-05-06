@@ -61,15 +61,21 @@ local signs = require("config.theme").icons.diagnostics
 --- Generates Diagnostic Highlights from given icon table
 ---@return table
 M.generate_diagnostic_highlights = function()
-  local highlights = {}
-
+  local hl
   for type, _ in pairs(signs) do
-    -- Construct the string and insert it into the table
-    local hl_name = "DiagnosticSign" .. utils.firstToUpper(type)
-    table.insert(highlights, hl_name)
+    hl = "DiagnosticSign" .. utils.firstToUpper(type)
   end
+  return hl
 
-  return highlights
+  -- local highlights = {}
+  --
+  --   for type, _ in pairs(signs) do
+  --     -- Construct the string and insert it into the table
+  --     local hl_name = "DiagnosticSign" .. utils.firstToUpper(type)
+  --     table.insert(highlights, hl_name)
+  --   end
+  --
+  --   return highlights
 end
 
 M.diagnostic_config = {
