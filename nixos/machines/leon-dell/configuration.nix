@@ -64,8 +64,6 @@
       pkgs.usbutils
       pkgs.ifuse
       pkgs.crosspipe
-      # NOTE: Changed 25.11
-      pkgs.bitwarden-desktop
       pkgs.rustup
       pkgs.nixd
       (pkgs.discord-canary.override

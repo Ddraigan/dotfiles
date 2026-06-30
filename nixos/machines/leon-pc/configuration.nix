@@ -99,8 +99,6 @@ in {
     systemPackages = [
       wezterm-cwd
       pkgs.crosspipe
-      # NOTE: Changed 25.11
-      pkgs.bitwarden-desktop
       pkgs.qmk
       pkgs.via
       pkgs.libnotify

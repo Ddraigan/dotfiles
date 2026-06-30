@@ -26,10 +26,16 @@ in {
     lib.mkIf cfg.enable
     (let
       workspaces = lib.range 1 9;
-      wsBinds =
+      wsBindsSplit =
         lib.concatMap (i: [
           "$mod, ${toString i}, split:workspace, ${toString i}"
           "$mod SHIFT, ${toString i}, split:movetoworkspace, ${toString i}"
+        ])
+        workspaces;
+      wsBinds =
+        lib.concatMap (i: [
+          "$mod, ${toString i}, workspace, ${toString i}"
+          "$mod SHIFT, ${toString i}, movetoworkspace, ${toString i}"
         ])
         workspaces;
     in {
@@ -84,19 +90,19 @@ in {
           ];
         };
         plugins = [
-          inputs.hyprsplit.packages.${sys}.hyprsplit
+          # inputs.hyprsplit.packages.${sys}.hyprsplit
           # inputs.hypr-darkwindow.packages.${sys}.Hypr-DarkWindow
         ];
         settings = {
-          "plugin:hyprsplit" = {
-            num_workspaces = 9;
-            bind =
-              wsBinds
-              ++ [
-                "$mod SHIFT, n, split:swapactiveworkspaces, current +1"
-                "$mod SHIFT, W, split:movetoworkspace, special:magic"
-              ];
-          };
+          # "plugin:hyprsplit" = {
+          #   num_workspaces = 9;
+          #   bind =
+          #     wsBindsSplit
+          #     ++ [
+          #       "$mod SHIFT, n, split:swapactiveworkspaces, current +1"
+          #       "$mod SHIFT, W, split:movetoworkspace, special:magic"
+          #     ];
+          # };
           # "plugin:darkwindow:load_shaders" = "chromakey";
           # "plugin:darkwindow" = {
           #   windowrule = [
@@ -237,13 +243,15 @@ in {
             # ", XF86AudioPrev, exec, playerctl previous"
             # ", XF86AudioNext, exec, playerctl next"
           ];
-          binde = [
-            ##! Vim Style Window Resize
-            "$mod ALT, H, resizeactive, -10 0"
-            "$mod ALT, L, resizeactive, 10 0"
-            "$mod ALT, K, resizeactive, 0 -10"
-            "$mod ALT, J, resizeactive, 0 10"
-          ];
+          binde =
+            wsBinds
+            ++ [
+              ##! Vim Style Window Resize
+              "$mod ALT, H, resizeactive, -10 0"
+              "$mod ALT, L, resizeactive, 10 0"
+              "$mod ALT, K, resizeactive, 0 -10"
+              "$mod ALT, J, resizeactive, 0 10"
+            ];
           bindm = [
             "$mod SHIFT, $LMB, movewindow"
             "$mod ALT, $LMB, resizewindow"

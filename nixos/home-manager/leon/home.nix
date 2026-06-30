@@ -34,7 +34,6 @@
     desktop = {
       ashell.enable = false;
       dunst.enable = false;
-      dms.enable = false;
       noctalia.enable = true;
       lutris.enable = true;
       obs.enable = true;
@@ -57,7 +56,7 @@
           pkgs.nemo-preview
         ];
       };
-      rofi.enable = true;
+      rofi.enable = false;
       spicetify.enable = true;
       waybar.enable = false;
       wlogout.enable = true;
