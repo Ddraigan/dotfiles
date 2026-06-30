@@ -3,19 +3,16 @@ return {
     "saghen/blink.cmp",
     event = "InsertEnter",
     dependencies = {
-      "rafamadriz/friendly-snippets",
-      "moyiz/blink-emoji.nvim",
+      "saghen/blink.lib",
       "saghen/blink.pairs",
+      "rafamadriz/friendly-snippets",
+      -- "moyiz/blink-emoji.nvim",
       "Kaiser-Yang/blink-cmp-avante",
       { "L3MON4D3/LuaSnip", version = "v2.*" },
     },
-    -- use a release tag to download pre-built binaries
-    version = "1.*",
-    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
-    -- If you use nix, you can build from source using latest nightly rust with:
-    -- build = 'nix run .#build-plugin',
-
+    build = function()
+      require("blink.cmp").build():pwait()
+    end,
     ---@module "blink.cmp"
     ---@type blink.cmp.Config
     opts = {
@@ -66,19 +63,21 @@ return {
         enabled = true,
         -- use 'inherit' to inherit mappings from top level `keymap` config
         keymap = { preset = "cmdline" },
-        sources = { "buffer", "cmdline" },
+        sources = { default = { "buffer", "cmdline" } },
 
         completion = {
           menu = {
             auto_show = true,
           },
-          ghost_text = { enabled = true },
+          ghost_text = {
+            enabled = true,
+          },
         },
       },
       signature = { enabled = true },
       snippets = { preset = "luasnip" },
       sources = {
-        default = { "lazydev", "avante", "lsp", "path", "snippets", "buffer", "emoji" },
+        default = { "lazydev", "avante", "lsp", "path", "snippets", "buffer" },
         providers = {
           avante = {
             module = "blink-cmp-avante",
@@ -91,25 +90,25 @@ return {
             -- make lazydev completions top priority (see `:h blink.cmp`)
             score_offset = 100,
           },
-          emoji = {
-            module = "blink-emoji",
-            name = "Emoji",
-            score_offset = 15, -- Tune by preference
-            opts = {
-              insert = true, -- Insert emoji (default) or complete its name
-              ---@type string|table|fun():table
-              trigger = function()
-                return { ":" }
-              end,
-            },
-            should_show_items = function()
-              return vim.tbl_contains(
-                -- Enable emoji completion only for git commits and markdown.
-                { "gitcommit", "markdown" },
-                vim.o.filetype
-              )
-            end,
-          },
+          -- emoji = {
+          --   module = "blink-emoji",
+          --   name = "Emoji",
+          --   score_offset = 15, -- Tune by preference
+          --   opts = {
+          --     insert = true, -- Insert emoji (default) or complete its name
+          --     ---@type string|table|fun():table
+          --     trigger = function()
+          --       return { ":" }
+          --     end,
+          --   },
+            -- should_show_items = function()
+            --   return vim.tbl_contains(
+            --     -- Enable emoji completion only for git commits and markdown.
+            --     { "gitcommit", "markdown" },
+            --     vim.o.filetype
+            --   )
+            -- end,
+          -- },
         },
       },
       fuzzy = { implementation = "prefer_rust_with_warning" },
@@ -118,9 +117,10 @@ return {
   },
   {
     "saghen/blink.pairs",
-    version = "*", -- (recommended) only required with prebuilt binaries
-    -- download prebuilt binaries from github releases
-    dependencies = "saghen/blink.download",
+    dependencies = "saghen/blink.lib",
+    build = function()
+      require("blink.pairs").build():pwait(60000)
+    end,
     --- @module 'blink.pairs'
     --- @type blink.pairs.Config
     opts = {
