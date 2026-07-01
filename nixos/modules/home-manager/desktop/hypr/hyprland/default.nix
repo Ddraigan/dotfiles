@@ -28,8 +28,14 @@ in {
       workspaces = lib.range 0 9;
       wsBindsCustom =
         lib.concatMap (i: [
-          "$mod, ${toString i}, exec, split-workspaces ${toString i} focus"
-          "$mod SHIFT, ${toString i}, exec, split-workspaces ${toString i} move"
+          {
+            keys = "$mod + ${toString i}";
+            run = "hl.dsp.exec_cmd(\"split-workspaces ${toString i} focus\")";
+          }
+          {
+            keys = "$mod + SHIFT + ${toString i}";
+            run = "hl.dsp.exec_cmd(\"split-workspaces ${toString i} move\")";
+          }
         ])
         workspaces;
 
@@ -51,6 +57,8 @@ in {
             ${pkgs.hyprland}/bin/hyprctl dispatch movetoworkspace "$TARGET_WS"
         fi
       '';
+
+      mkBind = b: {_args = [b.keys (lib.generators.mkLuaInline b.run)];};
     in {
       xdg = {
         configFile = {
@@ -92,18 +100,13 @@ in {
       wayland.windowManager.hyprland = {
         enable = true;
         xwayland.enable = true;
-        # package = null;
+        configType = "lua";
         package = inputs.hyprland.packages.${sys}.hyprland;
         portalPackage = null;
         systemd = {
           enable = false; # Being enabled would conflict with UWSM
           variables = [
             "--all"
-            # "DISPLAY"
-            # "HYPRLAND_INSTANCE_SIGNATURE"
-            # "WAYLAND_DISPLAY"
-            # "XDG_CURRENT_DESKTOP"
-            # "QT_QPA_PLATFORM"
           ];
         };
         plugins = [
@@ -129,48 +132,66 @@ in {
           # };
 
           # Commands
-          "$exitCommand" = "${uwsmUtils.exit}";
-          "$copy" = "wl-copy";
-          "$paste" = "wl-paste";
+          # "$exitCommand" = "${uwsmUtils.exit}";
+          # "$copy" = "wl-copy";
+          # "$paste" = "wl-paste";
 
           # Programs
-          "$terminal" = "${uwsmUtils.wrap "wezterm"}";
-          "$fileManager" = "${uwsmUtils.wrap "nemo"}";
-          "$drun" = "${uwsmUtils.rofi}";
-          "$browser" = "${uwsmUtils.wrap "zen-beta"}";
+          # "$terminal" = "${uwsmUtils.wrap "wezterm"}";
+          # "$fileManager" = "${uwsmUtils.wrap "nemo"}";
+          # "$drun" = "${uwsmUtils.rofi}";
+          # "$browser" = "${uwsmUtils.wrap "zen-beta"}";
 
           # Utils
-          "$colourPicker" = "${uwsmUtils.wrap "hyprpicker -a"}";
-          "$lockScreen" = "${uwsmUtils.wrap "hyprlock"}";
-          "$sessionScreen" = "${uwsmUtils.wrap "wlogout"}";
-          "$screenshot" = "${uwsmUtils.wrap "hyprshot -m window"}";
-          "$screenshotRegion" = "${uwsmUtils.wrap "hyprshot -m region output --clipboard-only"}";
+          # "$colourPicker" = "${uwsmUtils.wrap "hyprpicker -a"}";
+          # "$lockScreen" = "${uwsmUtils.wrap "hyprlock"}";
+          # "$sessionScreen" = "${uwsmUtils.wrap "wlogout"}";
+          # "$screenshot" = "${uwsmUtils.wrap "hyprshot -m window"}";
+          # "$screenshotRegion" = "${uwsmUtils.wrap "hyprshot -m region output --clipboard-only"}";
 
-          # env =
-          # [
-          # "XDG_SCREENSHOTS_DIR,$HOME/Pictures/screenshots"
-          # "XDG_PICTURES_DIR,$HOME/Pictures"
-          # "HYPRSHOT_DIR,$HOME/Pictures/screenshots"
-          # ];
-          # ++ lib.optionals (lib.elem hyprQTPkg config.home.packages) [
-          #   # When using hyprqt6engine over qt6ct
-          #   "QT_QPA_PLATFORMTHEME=hyprqt6engine"
+          # --- VARIABLES USING THE '_var' PROPERTY ---
+          # Home Manager translates these into global Lua variables (e.g., mod = "SUPER")
+          mod = {_var = cfg.mod;};
+          LMB = {_var = "mouse:272";};
+          RMB = {_var = "mouse:273";};
 
-          exec-once = [
-            "systemctl --user enable --now hyprpolkitagent.service"
-            "systemctl --user enable --now hypridle.service"
-            "systemctl --user enable --now hyprpaper.service"
-            "nm-applet --indicator"
-            "wl-paste --watch cliphist store &"
-            "$terminal"
-          ];
+          exitCommand = {_var = "${uwsmUtils.exit}";};
+          copy = {_var = "wl-copy";};
+          paste = {_var = "wl-paste";};
+          terminal = {_var = "${uwsmUtils.wrap "wezterm"}";};
+          fileManager = {_var = "${uwsmUtils.wrap "nemo"}";};
+          drun = {_var = "${uwsmUtils.rofi}";};
+          browser = {_var = "${uwsmUtils.wrap "zen-beta"}";};
+          colourPicker = {_var = "${uwsmUtils.wrap "hyprpicker -a"}";};
+          lockScreen = {_var = "${uwsmUtils.wrap "hyprlock"}";};
+          sessionScreen = {_var = "${uwsmUtils.wrap "wlogout"}";};
+          screenshot = {_var = "${uwsmUtils.wrap "hyprshot -m window"}";};
+          screenshotRegion = {_var = "${uwsmUtils.wrap "hyprshot -m region output --clipboard-only"}";};
 
-          layerrule = [
+          # --- LUA STARTUP HOOKS ---
+          # Hyprland's Lua spec prefers event callbacks for startup execution
+          on = {
+            _args = [
+              "hyprland.start"
+              (lib.generators.mkLuaInline ''
+                function()
+                  hl.exec_cmd("systemctl --user enable --now hyprpolkitagent.service")
+                  hl.exec_cmd("systemctl --user enable --now hypridle.service")
+                  hl.exec_cmd("systemctl --user enable --now hyprpaper.service")
+                  hl.exec_cmd("nm-applet --indicator")
+                  hl.exec_cmd("wl-paste --watch cliphist store &")
+                  hl.exec_cmd(terminal) -- Uses the global variable declared above
+                end
+              '')
+            ];
+          };
+
+          layer_rule = [
             "blur on, match:namespace rofi"
             "no_anim on, match:namespace dms"
           ];
 
-          windowrule = [
+          window_rule = [
             "suppress_event maximize, match:class .*"
             "float on, match:class org.quickshell"
             "float on, match:class blueman-manager"
@@ -213,17 +234,70 @@ in {
             };
           };
 
-          animations = {
-            enabled = true;
-            bezier = "overshot,0.13,0.99,0.29,1.1";
-            animation = [
-              "windows         , 1,  4, overshot, slide"
-              "border          , 1, 10, default"
-              "fade            , 1, 10, default"
-              "workspaces      , 1,  6, default , fade"
-              "specialWorkspace, 1,  6, default , fade"
+          curve = {
+            _args = [
+              "overshoot"
+              {
+                type = "bezier";
+                points = [[0.13 0.99] [0.29 1.1]];
+              }
             ];
           };
+          animation = [
+            {
+              _args = [
+                {
+                  leaf = "windows";
+                  enabled = true;
+                  speed = 4;
+                  bezier = "overshoot";
+                  style = "slide";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  leaf = "border";
+                  enabled = true;
+                  speed = 10;
+                  bezier = "default";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  leaf = "fade";
+                  enabled = true;
+                  speed = 10;
+                  bezier = "default";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  leaf = "workspaces";
+                  enabled = true;
+                  speed = 6;
+                  bezier = "default";
+                  style = "fade";
+                }
+              ];
+            }
+            {
+              _args = [
+                {
+                  leaf = "specialWorkspace";
+                  enabled = true;
+                  speed = 6;
+                  bezier = "default";
+                  style = "fade";
+                }
+              ];
+            }
+          ];
 
           dwindle = {
             preserve_split = true;
@@ -242,87 +316,268 @@ in {
             sensitivity = 0;
           };
 
-          "$mod" = cfg.mod;
-          "$LMB" = "mouse:272";
-          "$RMB" = "mouse:273";
-
-          bindel = [
-            # ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%+"
-            # ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%-"
-
-            # Keyboard backlight
-            ", XF86KbdBrightnessUp, exec, brightnessctl -d *kbd* set +5%"
-            ", XF86KbdBrightnessDown, exec, brightnessctl -d *kbd* set 5%-"
-          ];
-          bindl = [
-            # ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-            # ", XF86AudioPlay, exec, playerctl play-pause"
-            # ", XF86AudioPrev, exec, playerctl previous"
-            # ", XF86AudioNext, exec, playerctl next"
-          ];
-          binde = [
-            ##! Vim Style Window Resize
-            "$mod ALT, H, resizeactive, -10 0"
-            "$mod ALT, L, resizeactive, 10 0"
-            "$mod ALT, K, resizeactive, 0 -10"
-            "$mod ALT, J, resizeactive, 0 10"
-          ];
-          bindm = [
-            "$mod SHIFT, $LMB, movewindow"
-            "$mod ALT, $LMB, resizewindow"
-          ];
-          bind =
-            wsBindsCustom
+          # 1. Standard Binds (hl.bind)
+          bind = map mkBind (wsBindsCustom
             ++ [
-              "$mod, p, exec, $colourPicker"
+              {
+                keys = "$mod + p";
+                run = "hl.dsp.exec_cmd(colourPicker)";
+              }
+              {
+                keys = "$mod + escape";
+                run = "hl.dsp.exec_cmd(sessionScreen)";
+              }
+              {
+                keys = "$mod + i";
+                run = "hl.dsp.exec_cmd(screenshotRegion)";
+              }
+              {
+                keys = "$mod + SHIFT + I";
+                run = "hl.dsp.exec_cmd(screenshot)";
+              }
+              {
+                keys = "PRINT";
+                run = "hl.dsp.exec_cmd(screenshot)";
+              }
+              {
+                keys = "$mod + C";
+                run = "hl.dsp.exec_cmd(copy)";
+              }
+              {
+                keys = "$mod + D";
+                run = "hl.dsp.exec_cmd(drun)";
+              }
+              {
+                keys = "$mod + B";
+                run = "hl.dsp.exec_cmd(browser)";
+              }
+              {
+                keys = "$mod + T";
+                run = "hl.dsp.exec_cmd(terminal)";
+              }
+              {
+                keys = "$mod + F";
+                run = "hl.dsp.exec_cmd(fileManager)";
+              }
 
-              "$mod, escape, exec, $sessionScreen"
+              {
+                keys = "$mod + SHIFT + X";
+                run = "hl.dsp.exec_cmd(exitCommand)";
+              }
+              {
+                keys = "$mod + SHIFT + Q";
+                run = "hl.dsp.killactive()";
+              }
+              {
+                keys = "$mod + SHIFT + F";
+                run = "hl.dsp.fullscreen()";
+              }
+              {
+                keys = "$mod + SHIFT + Z";
+                run = "hl.dsp.togglefloating()";
+              }
+              {
+                keys = "$mod + SHIFT + P";
+                run = "hl.dsp.pseudo()";
+              }
+              {
+                keys = "$mod + SHIFT + S";
+                run = "hl.dsp.layoutmsg(\"togglesplit\")";
+              }
 
-              ##! Clipboard
-              "$mod, i, exec, $screenshotRegion"
-              "$mod SHIFT, I, exec, $screenshot"
-              ", PRINT, exec, $screenshot"
-              # "$mod, V, exec, $paste"
-              "$mod, C, exec, $copy"
+              # Focus Directionals
+              {
+                keys = "$mod + left";
+                run = "hl.dsp.movefocus(\"l\")";
+              }
+              {
+                keys = "$mod + right";
+                run = "hl.dsp.movefocus(\"r\")";
+              }
+              {
+                keys = "$mod + up";
+                run = "hl.dsp.movefocus(\"u\")";
+              }
+              {
+                keys = "$mod + down";
+                run = "hl.dsp.movefocus(\"d\")";
+              }
+              {
+                keys = "$mod + h";
+                run = "hl.dsp.movefocus(\"l\")";
+              }
+              {
+                keys = "$mod + l";
+                run = "hl.dsp.movefocus(\"r\")";
+              }
+              {
+                keys = "$mod + k";
+                run = "hl.dsp.movefocus(\"u\")";
+              }
+              {
+                keys = "$mod + j";
+                run = "hl.dsp.movefocus(\"d\")";
+              }
 
-              "$mod, D, exec, $drun"
-              "$mod, B, exec, $browser"
-              "$mod, T, exec, $terminal"
-              "$mod, F, exec, $fileManager"
+              # Window Moving Directionals
+              {
+                keys = "$mod + SHIFT + H";
+                run = "hl.dsp.movewindow(\"l\")";
+              }
+              {
+                keys = "$mod + SHIFT + L";
+                run = "hl.dsp.movewindow(\"r\")";
+              }
+              {
+                keys = "$mod + SHIFT + K";
+                run = "hl.dsp.movewindow(\"u\")";
+              }
+              {
+                keys = "$mod + SHIFT + J";
+                run = "hl.dsp.movewindow(\"d\")";
+              }
 
-              # "$mod SHIFT, X, exit"
-              "$mod SHIFT, X, exec, $exitCommand"
-              "$mod SHIFT, Q, killactive"
-              "$mod SHIFT, F, fullscreen"
-              "$mod SHIFT, Z, togglefloating"
-              "$mod SHIFT, P, pseudo"
-              "$mod SHIFT, S, layoutmsg, togglesplit"
+              {
+                keys = "$mod + W";
+                run = "hl.dsp.togglespecialworkspace(\"magic\")";
+              }
 
-              # Window Focus
-              "$mod, left, movefocus, l"
-              "$mod, right, movefocus, r"
-              "$mod, up, movefocus, u"
-              "$mod, down, movefocus, d"
+              # Touchpad rules
+              {
+                keys = "XF86TouchpadToggle";
+                run = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled toggle\")";
+              }
+              {
+                keys = "XF86TouchpadOn";
+                run = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled true\")";
+              }
+              {
+                keys = "XF86TouchpadOff";
+                run = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled false\")";
+              }
 
-              # Vim Style Window Focus
-              "$mod, h, movefocus, l"
-              "$mod, l, movefocus, r"
-              "$mod, k, movefocus, u"
-              "$mod, j, movefocus, d"
+              # Noctipc Integrations
+              {
+                keys = "SUPER + D";
+                run = "hl.dsp.exec_cmd(\"$noctipc panel-toggle launcher\")";
+              }
+              {
+                keys = "SUPER + S";
+                run = "hl.dsp.exec_cmd(\"$noctipc panel-toggle control-center\")";
+              }
+              {
+                keys = "SUPER + comma";
+                run = "hl.dsp.exec_cmd(\"$noctipc settings-toggle\")";
+              }
+            ]);
 
-              # Vim Window Movement
-              "$mod SHIFT, H, movewindow, l"
-              "$mod SHIFT, L, movewindow, r"
-              "$mod SHIFT, K, movewindow, u"
-              "$mod SHIFT, J, movewindow, d"
+          # 2. Repeatable Binds (hl.binde)
+          binde = map mkBind [
+            {
+              keys = "$mod + ALT + H";
+              run = "hl.dsp.resizeactive(-10, 0)";
+            }
+            {
+              keys = "$mod + ALT + L";
+              run = "hl.dsp.resizeactive(10, 0)";
+            }
+            {
+              keys = "$mod + ALT + K";
+              run = "hl.dsp.resizeactive(0, -10)";
+            }
+            {
+              keys = "$mod + ALT + J";
+              run = "hl.dsp.resizeactive(0, 10)";
+            }
+          ];
 
-              "$mod, W, togglespecialworkspace, magic"
+          # 3. Locked/Repeatable Binds (hl.bindel)
+          bindel = map mkBind [
+            {
+              keys = "XF86KbdBrightnessUp";
+              run = "hl.dsp.exec_cmd(\"brightnessctl -d *kbd* set +5%\")";
+            }
+            {
+              keys = "XF86KbdBrightnessDown";
+              run = "hl.dsp.exec_cmd(\"brightnessctl -d *kbd* set 5%-\")";
+            }
+            {
+              keys = "XF86AudioRaiseVolume";
+              run = "hl.dsp.exec_cmd(\"$noctipc volume-up\")";
+            }
+            {
+              keys = "XF86AudioLowerVolume";
+              run = "hl.dsp.exec_cmd(\"$noctipc volume-down\")";
+            }
+            {
+              keys = "XF86AudioVolumeUp";
+              run = "hl.dsp.exec_cmd(\"$noctipc volume-up\")";
+            }
+            {
+              keys = "XF86AudioVolumeDown";
+              run = "hl.dsp.exec_cmd(\"$noctipc volume-down\")";
+            }
+            {
+              keys = "XF86MonBrightnessUp";
+              run = "hl.dsp.exec_cmd(\"$noctipc brightness-up\")";
+            }
+            {
+              keys = "XF86MonBrightnessDown";
+              run = "hl.dsp.exec_cmd(\"$noctipc brightness-down\")";
+            }
+            {
+              keys = "XF86BrightnessUp";
+              run = "hl.dsp.exec_cmd(\"$noctipc brightness-up\")";
+            }
+            {
+              keys = "XF86BrightnessDown";
+              run = "hl.dsp.exec_cmd(\"$noctipc brightness-down\")";
+            }
+          ];
 
-              # Touchpad
-              ", XF86TouchpadToggle, exec, hyprctl keyword device:*:enabled toggle"
-              ", XF86TouchpadOn, exec, hyprctl keyword device:*:enabled true"
-              ", XF86TouchpadOff, exec, hyprctl keyword device:*:enabled false"
-            ];
+          # 4. Locked Binds (hl.bindl)
+          bindl = map mkBind [
+            {
+              keys = "XF86AudioPlay";
+              run = "hl.dsp.exec_cmd(\"$noctipc media toggle\")";
+            }
+            {
+              keys = "XF86AudioPause";
+              run = "hl.dsp.exec_cmd(\"$noctipc media toggle\")";
+            }
+            {
+              keys = "XF86AudioPrev";
+              run = "hl.dsp.exec_cmd(\"$noctipc media previous\")";
+            }
+            {
+              keys = "XF86AudioNext";
+              run = "hl.dsp.exec_cmd(\"$noctipc media next\")";
+            }
+            {
+              keys = "XF86AudioStop";
+              run = "hl.dsp.exec_cmd(\"$noctipc media stop\")";
+            }
+            {
+              keys = "XF86AudioMute";
+              run = "hl.dsp.exec_cmd(\"$noctipc volume-mute\")";
+            }
+            {
+              keys = "XF86AudioMicMute";
+              run = "hl.dsp.exec_cmd(\"$noctipc mic-mute\")";
+            }
+          ];
+
+          # 5. Mouse Binds (hl.bindm)
+          bindm = map mkBind [
+            {
+              keys = "$mod + SHIFT + $LMB";
+              run = "hl.dsp.movewindow()";
+            }
+            {
+              keys = "$mod + ALT + $LMB";
+              run = "hl.dsp.resizewindow()";
+            }
+          ];
         };
       };
     });

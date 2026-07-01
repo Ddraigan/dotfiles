@@ -51,7 +51,7 @@ in {
       # };
     };
     wayland.windowManager.hyprland.settings = {
-      "$noctipc" = "noctalia msg";
+      noctipc = {_var = "noctalia msg";};
 
       bind = [
         "SUPER, D, exec, $noctipc panel-toggle launcher"
