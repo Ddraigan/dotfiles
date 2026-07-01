@@ -25,19 +25,32 @@ in {
   config =
     lib.mkIf cfg.enable
     (let
-      workspaces = lib.range 1 9;
-      wsBindsSplit =
+      workspaces = lib.range 0 9;
+      wsBindsCustom =
         lib.concatMap (i: [
-          "$mod, ${toString i}, split:workspace, ${toString i}"
-          "$mod SHIFT, ${toString i}, split:movetoworkspace, ${toString i}"
+          "$mod, ${toString i}, exec, split-workspaces ${toString i} focus"
+          "$mod SHIFT, ${toString i}, exec, split-workspaces ${toString i} move"
         ])
         workspaces;
-      wsBinds =
-        lib.concatMap (i: [
-          "$mod, ${toString i}, workspace, ${toString i}"
-          "$mod SHIFT, ${toString i}, movetoworkspace, ${toString i}"
-        ])
-        workspaces;
+
+      splitWorkspaces = pkgs.writeShellScriptBin "split-workspaces" ''
+        WS=$1
+        ACTION=$2
+
+        if [ "$WS" -eq 0 ]; then WS=10; fi
+
+        MONITOR=$(${pkgs.hyprland}/bin/hyprctl activeworkspace -j | ${pkgs.jq}/bin/jq -r '.monitor')
+
+        INDEX=$(${pkgs.hyprland}/bin/hyprctl monitors -j | ${pkgs.jq}/bin/jq -r 'sort_by(.id) | map(.name) | index("'"$MONITOR"'")')
+
+        TARGET_WS=$(( WS + (INDEX * 10) ))
+
+        if [ "$ACTION" == "focus" ]; then
+            ${pkgs.hyprland}/bin/hyprctl dispatch workspace "$TARGET_WS"
+        elif [ "$ACTION" == "move" ]; then
+            ${pkgs.hyprland}/bin/hyprctl dispatch movetoworkspace "$TARGET_WS"
+        fi
+      '';
     in {
       xdg = {
         configFile = {
@@ -45,26 +58,30 @@ in {
         };
       };
       home = {
-        packages = with pkgs; [
-          # Colour Picker
-          hyprpicker
-          # Clipboard
-          cliphist
-          wl-clipboard
+        packages = with pkgs;
+          [
+            # Colour Picker
+            hyprpicker
+            # Clipboard
+            cliphist
+            wl-clipboard
 
-          # For media keys
-          playerctl
+            # For media keys
+            playerctl
 
-          hyprsysteminfo
+            hyprsysteminfo
 
-          # QT
-          hyprland-qt-support
+            # QT
+            hyprland-qt-support
 
-          # Screenshot Utils
-          hyprshot
-          grim
-          slurp
-        ];
+            # Screenshot Utils
+            hyprshot
+            grim
+            slurp
+
+            splitWorkspaces
+            jq
+          ];
         sessionVariables = {
           NIXOS_XDG_OPEN_USE_PORTAL = "1";
           XDG_SCREENSHOTS_DIR = "$HOME/Pictures/screenshots";
@@ -243,20 +260,18 @@ in {
             # ", XF86AudioPrev, exec, playerctl previous"
             # ", XF86AudioNext, exec, playerctl next"
           ];
-          binde =
-            wsBinds
-            ++ [
-              ##! Vim Style Window Resize
-              "$mod ALT, H, resizeactive, -10 0"
-              "$mod ALT, L, resizeactive, 10 0"
-              "$mod ALT, K, resizeactive, 0 -10"
-              "$mod ALT, J, resizeactive, 0 10"
-            ];
+          binde = [
+            ##! Vim Style Window Resize
+            "$mod ALT, H, resizeactive, -10 0"
+            "$mod ALT, L, resizeactive, 10 0"
+            "$mod ALT, K, resizeactive, 0 -10"
+            "$mod ALT, J, resizeactive, 0 10"
+          ];
           bindm = [
             "$mod SHIFT, $LMB, movewindow"
             "$mod ALT, $LMB, resizewindow"
           ];
-          bind = [
+          bind = wsBindsCustom ++ [
             # "$mod, TAB, overview:toggle"
             # "$mod, Tab, hyprexpo:expo, toggle"
             "$mod, p, exec, $colourPicker"

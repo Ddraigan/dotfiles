@@ -93,7 +93,10 @@
   programs = {
     home-manager.enable = true;
     element-desktop.enable = true;
-    firefox.enable = true;
+    firefox = {
+      enable = true;
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
+    };
     git = {
       enable = true;
       settings = {

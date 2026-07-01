@@ -108,7 +108,6 @@
       pkgs.gimp
       pkgs.loupe
 
-      pkgs.firefox
       pkgs.unzip
       pkgs.zip
       pkgs.ripgrep
