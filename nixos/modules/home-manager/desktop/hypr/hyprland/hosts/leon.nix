@@ -17,6 +17,7 @@
         "8, monitor:DP-1"
         "9, monitor:DP-1"
         "10, monitor:DP-1"
+        "99, monitor:DP-1"
 
         # Monitor 2 (DP-2) workspaces 11-20
         "11, monitor:DP-2, default:true"

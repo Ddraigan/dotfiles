@@ -58,30 +58,30 @@ in {
         };
       };
       home = {
-        packages = with pkgs;
-          [
-            # Colour Picker
-            hyprpicker
-            # Clipboard
-            cliphist
-            wl-clipboard
+        packages = with pkgs; [
+          # Colour Picker
+          hyprpicker
+          # Clipboard
+          cliphist
+          wl-clipboard
 
-            # For media keys
-            playerctl
+          # For media keys
+          playerctl
 
-            hyprsysteminfo
+          hyprsysteminfo
 
-            # QT
-            hyprland-qt-support
+          # QT
+          hyprland-qt-support
 
-            # Screenshot Utils
-            hyprshot
-            grim
-            slurp
+          # Screenshot Utils
+          hyprshot
+          grim
+          slurp
 
-            splitWorkspaces
-            jq
-          ];
+          # Custom workspaces split
+          jq
+          splitWorkspaces
+        ];
         sessionVariables = {
           NIXOS_XDG_OPEN_USE_PORTAL = "1";
           XDG_SCREENSHOTS_DIR = "$HOME/Pictures/screenshots";
@@ -271,59 +271,58 @@ in {
             "$mod SHIFT, $LMB, movewindow"
             "$mod ALT, $LMB, resizewindow"
           ];
-          bind = wsBindsCustom ++ [
-            # "$mod, TAB, overview:toggle"
-            # "$mod, Tab, hyprexpo:expo, toggle"
-            "$mod, p, exec, $colourPicker"
+          bind =
+            wsBindsCustom
+            ++ [
+              "$mod, p, exec, $colourPicker"
 
-            "$mod, escape, exec, $sessionScreen"
-            # "$mod, l, exec, $locksCreen"
+              "$mod, escape, exec, $sessionScreen"
 
-            ##! Clipboard
-            "$mod, i, exec, $screenshotRegion"
-            "$mod SHIFT, I, exec, $screenshot"
-            ", PRINT, exec, $screenshot"
-            # "$mod, V, exec, $paste"
-            "$mod, C, exec, $copy"
+              ##! Clipboard
+              "$mod, i, exec, $screenshotRegion"
+              "$mod SHIFT, I, exec, $screenshot"
+              ", PRINT, exec, $screenshot"
+              # "$mod, V, exec, $paste"
+              "$mod, C, exec, $copy"
 
-            "$mod, D, exec, $drun"
-            "$mod, B, exec, $browser"
-            "$mod, T, exec, $terminal"
-            "$mod, F, exec, $fileManager"
+              "$mod, D, exec, $drun"
+              "$mod, B, exec, $browser"
+              "$mod, T, exec, $terminal"
+              "$mod, F, exec, $fileManager"
 
-            # "$mod SHIFT, X, exit"
-            "$mod SHIFT, X, exec, $exitCommand"
-            "$mod SHIFT, Q, killactive"
-            "$mod SHIFT, F, fullscreen"
-            "$mod SHIFT, Z, togglefloating"
-            "$mod SHIFT, P, pseudo"
-            "$mod SHIFT, S, layoutmsg, togglesplit"
+              # "$mod SHIFT, X, exit"
+              "$mod SHIFT, X, exec, $exitCommand"
+              "$mod SHIFT, Q, killactive"
+              "$mod SHIFT, F, fullscreen"
+              "$mod SHIFT, Z, togglefloating"
+              "$mod SHIFT, P, pseudo"
+              "$mod SHIFT, S, layoutmsg, togglesplit"
 
-            # Window Focus
-            "$mod, left, movefocus, l"
-            "$mod, right, movefocus, r"
-            "$mod, up, movefocus, u"
-            "$mod, down, movefocus, d"
+              # Window Focus
+              "$mod, left, movefocus, l"
+              "$mod, right, movefocus, r"
+              "$mod, up, movefocus, u"
+              "$mod, down, movefocus, d"
 
-            # Vim Style Window Focus
-            "$mod, h, movefocus, l"
-            "$mod, l, movefocus, r"
-            "$mod, k, movefocus, u"
-            "$mod, j, movefocus, d"
+              # Vim Style Window Focus
+              "$mod, h, movefocus, l"
+              "$mod, l, movefocus, r"
+              "$mod, k, movefocus, u"
+              "$mod, j, movefocus, d"
 
-            # Vim Window Movement
-            "$mod SHIFT, H, movewindow, l"
-            "$mod SHIFT, L, movewindow, r"
-            "$mod SHIFT, K, movewindow, u"
-            "$mod SHIFT, J, movewindow, d"
+              # Vim Window Movement
+              "$mod SHIFT, H, movewindow, l"
+              "$mod SHIFT, L, movewindow, r"
+              "$mod SHIFT, K, movewindow, u"
+              "$mod SHIFT, J, movewindow, d"
 
-            "$mod, W, togglespecialworkspace, magic"
+              "$mod, W, togglespecialworkspace, magic"
 
-            # Touchpad
-            ", XF86TouchpadToggle, exec, hyprctl keyword device:*:enabled toggle"
-            ", XF86TouchpadOn, exec, hyprctl keyword device:*:enabled true"
-            ", XF86TouchpadOff, exec, hyprctl keyword device:*:enabled false"
-          ];
+              # Touchpad
+              ", XF86TouchpadToggle, exec, hyprctl keyword device:*:enabled toggle"
+              ", XF86TouchpadOn, exec, hyprctl keyword device:*:enabled true"
+              ", XF86TouchpadOff, exec, hyprctl keyword device:*:enabled false"
+            ];
         };
       };
     });

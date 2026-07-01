@@ -18,9 +18,10 @@ end = [
     "session"
 ]
 margin_edge = 0
-margin_ends = 20
+margin_ends = 5
 padding = 8
 position = "bottom"
+radius = 6
 shadow = false
 start = [ "launcher", "wallpaper", "media" ]
 
