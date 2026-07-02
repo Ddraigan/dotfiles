@@ -23,7 +23,9 @@ in  {
       plugins = with pkgs; [
         {
           plugin = tmuxPlugins.catppuccin;
-          extraConfig = ''
+          extraConfig = 
+            #tmux
+            ''
             set -g @catppuccin_flavor "mocha"
             set -g @catppuccin_window_status_style "rounded"
 
@@ -34,14 +36,18 @@ in  {
         }
         {
           plugin = tmuxPlugins.vim-tmux-navigator;
-          extraConfig = ''
+          extraConfig = 
+            #tmux
+            ''
             # set vi-mode
             set-window-option -g mode-keys vi
           '';
         }
         {
           plugin = tmuxPlugins.yank;
-          extraConfig = ''
+          extraConfig = 
+            #tmux
+            ''
             # keybindings
             bind-key -T copy-mode-vi v send-keys -X begin-selection
             bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
@@ -51,7 +57,9 @@ in  {
         tmuxPlugins.sensible
       ];
 
-      extraConfig = ''
+      extraConfig = 
+        #tmux
+        ''
         # Colours
         set-option -ga terminal-overrides ",xterm-256color:Tc"
 

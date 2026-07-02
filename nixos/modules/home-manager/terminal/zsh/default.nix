@@ -17,7 +17,9 @@
         expireDuplicatesFirst = true;
         ignoreDups = true;
       };
-      initContent = ''
+      initContent = 
+        #zsh
+        ''
         tty=$(tty)
         if [[ $tty == "/dev/pts/0" ]]; then
           if ! { [ "$TERM" = "xterm-256color" ] && [ -n "$TMUX" ]; } then

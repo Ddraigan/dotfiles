@@ -10,7 +10,7 @@
       file = {
         ".config/nvim" = {
           source = ../../../../../nvim;
-	  recursive = true;
+          recursive = true;
         };
       };
     };
@@ -24,7 +24,7 @@
         fd
         ripgrep
         tree-sitter
-	git
+        git
         gcc
         gnumake
         nodejs_24

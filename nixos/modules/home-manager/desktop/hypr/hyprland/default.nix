@@ -138,26 +138,6 @@ in {
           #   ];
           # };
 
-          # Commands
-          # "$exitCommand" = "${uwsmUtils.exit}";
-          # "$copy" = "wl-copy";
-          # "$paste" = "wl-paste";
-
-          # Programs
-          # "$terminal" = "${uwsmUtils.wrap "wezterm"}";
-          # "$fileManager" = "${uwsmUtils.wrap "nemo"}";
-          # "$drun" = "${uwsmUtils.rofi}";
-          # "$browser" = "${uwsmUtils.wrap "zen-beta"}";
-
-          # Utils
-          # "$colourPicker" = "${uwsmUtils.wrap "hyprpicker -a"}";
-          # "$lockScreen" = "${uwsmUtils.wrap "hyprlock"}";
-          # "$sessionScreen" = "${uwsmUtils.wrap "wlogout"}";
-          # "$screenshot" = "${uwsmUtils.wrap "hyprshot -m window"}";
-          # "$screenshotRegion" = "${uwsmUtils.wrap "hyprshot -m region output --clipboard-only"}";
-
-          # --- VARIABLES USING THE '_var' PROPERTY ---
-          # Home Manager translates these into global Lua variables (e.g., mod = "SUPER")
           exitCommand = {_var = "${uwsmUtils.exit}";};
           copy = {_var = "wl-copy";};
           paste = {_var = "wl-paste";};
@@ -174,16 +154,18 @@ in {
           on = {
             _args = [
               "hyprland.start"
-              (lib.generators.mkLuaInline ''
-                function()
-                  hl.exec_cmd("systemctl --user enable --now hyprpolkitagent.service")
-                  hl.exec_cmd("systemctl --user enable --now hypridle.service")
-                  hl.exec_cmd("systemctl --user enable --now hyprpaper.service")
-                  hl.exec_cmd("nm-applet --indicator")
-                  hl.exec_cmd("wl-paste --watch cliphist store &")
-                  hl.exec_cmd(terminal) -- Uses the global variable declared above
-                end
-              '')
+              (lib.generators.mkLuaInline
+                #lua
+                ''
+                  function()
+                    hl.exec_cmd("systemctl --user enable --now hyprpolkitagent.service")
+                    hl.exec_cmd("systemctl --user enable --now hypridle.service")
+                    hl.exec_cmd("systemctl --user enable --now hyprpaper.service")
+                    hl.exec_cmd("nm-applet --indicator")
+                    hl.exec_cmd("wl-paste --watch cliphist store &")
+                    hl.exec_cmd(terminal) -- Uses the global variable declared above
+                  end
+                '')
             ];
           };
 

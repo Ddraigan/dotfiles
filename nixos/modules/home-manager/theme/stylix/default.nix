@@ -78,13 +78,15 @@
         wezterm.enable = false;
         gtk = {
           enable = true;
-          extraCss = with colours; ''
-            @define-color window_bg_color ${rgba rgb.crust 0.0};
-            @define-color view_bg_color ${rgba rgb.crust 0.0};
-            @define-color headerbar_bg_color ${rgba rgb.crust 0.0};
-            @define-color sidebar_bg_color ${rgba rgb.crust 0.0};
-            @define-color secondary_sidebar_bg_color ${rgba rgb.crust 0.0};
-          '';
+          extraCss = with colours;
+          #css
+            ''
+              @define-color window_bg_color ${rgba rgb.crust 0.0};
+              @define-color view_bg_color ${rgba rgb.crust 0.0};
+              @define-color headerbar_bg_color ${rgba rgb.crust 0.0};
+              @define-color sidebar_bg_color ${rgba rgb.crust 0.0};
+              @define-color secondary_sidebar_bg_color ${rgba rgb.crust 0.0};
+            '';
         };
       };
     };
