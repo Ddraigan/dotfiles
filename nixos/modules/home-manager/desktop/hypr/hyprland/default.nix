@@ -21,20 +21,22 @@ in {
       example = "SUPER";
     };
   };
-
   config =
     lib.mkIf cfg.enable
     (let
+      mod = cfg.mod;
+      lmb = "mouse:272";
+      rmb = "mouse:273";
       workspaces = lib.range 0 9;
       wsBindsCustom =
         lib.concatMap (i: [
           {
-            keys = "$mod + ${toString i}";
-            run = "hl.dsp.exec_cmd(\"split-workspaces ${toString i} focus\")";
+            keys = "${mod} + ${toString i}";
+            cmd = "hl.dsp.exec_cmd(\"split-workspaces ${toString i} focus\")";
           }
           {
-            keys = "$mod + SHIFT + ${toString i}";
-            run = "hl.dsp.exec_cmd(\"split-workspaces ${toString i} move\")";
+            keys = "${mod} + SHIFT + ${toString i}";
+            cmd = "hl.dsp.exec_cmd(\"split-workspaces ${toString i} move\")";
           }
         ])
         workspaces;
@@ -58,7 +60,12 @@ in {
         fi
       '';
 
-      mkBind = b: {_args = [b.keys (lib.generators.mkLuaInline b.run)];};
+      mkBind = b: {
+        _args = [
+          (lib.generators.mkLuaInline b.keys)
+          (lib.generators.mkLuaInline b.cmd)
+        ];
+      };
     in {
       xdg = {
         configFile = {
@@ -119,8 +126,8 @@ in {
           #   bind =
           #     wsBindsSplit
           #     ++ [
-          #       "$mod SHIFT, n, split:swapactiveworkspaces, current +1"
-          #       "$mod SHIFT, W, split:movetoworkspace, special:magic"
+          #       "${mod} SHIFT, n, split:swapactiveworkspaces, current +1"
+          #       "${mod} SHIFT, W, split:movetoworkspace, special:magic"
           #     ];
           # };
           # "plugin:darkwindow:load_shaders" = "chromakey";
@@ -151,16 +158,12 @@ in {
 
           # --- VARIABLES USING THE '_var' PROPERTY ---
           # Home Manager translates these into global Lua variables (e.g., mod = "SUPER")
-          mod = {_var = cfg.mod;};
-          LMB = {_var = "mouse:272";};
-          RMB = {_var = "mouse:273";};
-
           exitCommand = {_var = "${uwsmUtils.exit}";};
           copy = {_var = "wl-copy";};
           paste = {_var = "wl-paste";};
           terminal = {_var = "${uwsmUtils.wrap "wezterm"}";};
           fileManager = {_var = "${uwsmUtils.wrap "nemo"}";};
-          drun = {_var = "${uwsmUtils.rofi}";};
+          dcmd = {_var = "${uwsmUtils.rofi}";};
           browser = {_var = "${uwsmUtils.wrap "zen-beta"}";};
           colourPicker = {_var = "${uwsmUtils.wrap "hyprpicker -a"}";};
           lockScreen = {_var = "${uwsmUtils.wrap "hyprlock"}";};
@@ -168,8 +171,6 @@ in {
           screenshot = {_var = "${uwsmUtils.wrap "hyprshot -m window"}";};
           screenshotRegion = {_var = "${uwsmUtils.wrap "hyprshot -m region output --clipboard-only"}";};
 
-          # --- LUA STARTUP HOOKS ---
-          # Hyprland's Lua spec prefers event callbacks for startup execution
           on = {
             _args = [
               "hyprland.start"
@@ -188,7 +189,6 @@ in {
 
           layer_rule = [
             "blur on, match:namespace rofi"
-            "no_anim on, match:namespace dms"
           ];
 
           window_rule = [
@@ -243,6 +243,7 @@ in {
               }
             ];
           };
+
           animation = [
             {
               _args = [
@@ -316,266 +317,173 @@ in {
             sensitivity = 0;
           };
 
-          # 1. Standard Binds (hl.bind)
           bind = map mkBind (wsBindsCustom
             ++ [
               {
-                keys = "$mod + p";
-                run = "hl.dsp.exec_cmd(colourPicker)";
+                keys = "${mod} + p";
+                cmd = "hl.dsp.exec_cmd(colourPicker)";
               }
               {
-                keys = "$mod + escape";
-                run = "hl.dsp.exec_cmd(sessionScreen)";
+                keys = "${mod} + escape";
+                cmd = "hl.dsp.exec_cmd(sessionScreen)";
               }
               {
-                keys = "$mod + i";
-                run = "hl.dsp.exec_cmd(screenshotRegion)";
+                keys = "${mod} + i";
+                cmd = "hl.dsp.exec_cmd(screenshotRegion)";
               }
               {
-                keys = "$mod + SHIFT + I";
-                run = "hl.dsp.exec_cmd(screenshot)";
+                keys = "${mod} + SHIFT + I";
+                cmd = "hl.dsp.exec_cmd(screenshot)";
               }
               {
                 keys = "PRINT";
-                run = "hl.dsp.exec_cmd(screenshot)";
+                cmd = "hl.dsp.exec_cmd(screenshot)";
               }
               {
-                keys = "$mod + C";
-                run = "hl.dsp.exec_cmd(copy)";
+                keys = "${mod} + C";
+                cmd = "hl.dsp.exec_cmd(copy)";
               }
               {
-                keys = "$mod + D";
-                run = "hl.dsp.exec_cmd(drun)";
+                keys = "${mod} + D";
+                cmd = "hl.dsp.exec_cmd(drun)";
               }
               {
-                keys = "$mod + B";
-                run = "hl.dsp.exec_cmd(browser)";
+                keys = "${mod} + B";
+                cmd = "hl.dsp.exec_cmd(browser)";
               }
               {
-                keys = "$mod + T";
-                run = "hl.dsp.exec_cmd(terminal)";
+                keys = "${mod} + T";
+                cmd = "hl.dsp.exec_cmd(terminal)";
               }
               {
-                keys = "$mod + F";
-                run = "hl.dsp.exec_cmd(fileManager)";
+                keys = "${mod} + F";
+                cmd = "hl.dsp.exec_cmd(fileManager)";
               }
 
               {
-                keys = "$mod + SHIFT + X";
-                run = "hl.dsp.exec_cmd(exitCommand)";
+                keys = "${mod} + SHIFT + X";
+                cmd = "hl.dsp.exec_cmd(exitCommand)";
               }
               {
-                keys = "$mod + SHIFT + Q";
-                run = "hl.dsp.killactive()";
+                keys = "${mod} + SHIFT + Q";
+                cmd = "hl.dsp.killactive()";
               }
               {
-                keys = "$mod + SHIFT + F";
-                run = "hl.dsp.fullscreen()";
+                keys = "${mod} + SHIFT + F";
+                cmd = "hl.dsp.fullscreen()";
               }
               {
-                keys = "$mod + SHIFT + Z";
-                run = "hl.dsp.togglefloating()";
+                keys = "${mod} + SHIFT + Z";
+                cmd = "hl.dsp.togglefloating()";
               }
               {
-                keys = "$mod + SHIFT + P";
-                run = "hl.dsp.pseudo()";
+                keys = "${mod} + SHIFT + P";
+                cmd = "hl.dsp.pseudo()";
               }
               {
-                keys = "$mod + SHIFT + S";
-                run = "hl.dsp.layoutmsg(\"togglesplit\")";
+                keys = "${mod} + SHIFT + S";
+                cmd = "hl.dsp.layoutmsg(\"togglesplit\")";
               }
 
               # Focus Directionals
               {
-                keys = "$mod + left";
-                run = "hl.dsp.movefocus(\"l\")";
+                keys = "${mod} + left";
+                cmd = "hl.dsp.movefocus(\"l\")";
               }
               {
-                keys = "$mod + right";
-                run = "hl.dsp.movefocus(\"r\")";
+                keys = "${mod} + right";
+                cmd = "hl.dsp.movefocus(\"r\")";
               }
               {
-                keys = "$mod + up";
-                run = "hl.dsp.movefocus(\"u\")";
+                keys = "${mod} + up";
+                cmd = "hl.dsp.movefocus(\"u\")";
               }
               {
-                keys = "$mod + down";
-                run = "hl.dsp.movefocus(\"d\")";
+                keys = "${mod} + down";
+                cmd = "hl.dsp.movefocus(\"d\")";
               }
               {
-                keys = "$mod + h";
-                run = "hl.dsp.movefocus(\"l\")";
+                keys = "${mod} + h";
+                cmd = "hl.dsp.movefocus(\"l\")";
               }
               {
-                keys = "$mod + l";
-                run = "hl.dsp.movefocus(\"r\")";
+                keys = "${mod} + l";
+                cmd = "hl.dsp.movefocus(\"r\")";
               }
               {
-                keys = "$mod + k";
-                run = "hl.dsp.movefocus(\"u\")";
+                keys = "${mod} + k";
+                cmd = "hl.dsp.movefocus(\"u\")";
               }
               {
-                keys = "$mod + j";
-                run = "hl.dsp.movefocus(\"d\")";
+                keys = "${mod} + j";
+                cmd = "hl.dsp.movefocus(\"d\")";
               }
 
               # Window Moving Directionals
               {
-                keys = "$mod + SHIFT + H";
-                run = "hl.dsp.movewindow(\"l\")";
+                keys = "${mod} + SHIFT + H";
+                cmd = "hl.dsp.movewindow(\"l\")";
               }
               {
-                keys = "$mod + SHIFT + L";
-                run = "hl.dsp.movewindow(\"r\")";
+                keys = "${mod} + SHIFT + L";
+                cmd = "hl.dsp.movewindow(\"r\")";
               }
               {
-                keys = "$mod + SHIFT + K";
-                run = "hl.dsp.movewindow(\"u\")";
+                keys = "${mod} + SHIFT + K";
+                cmd = "hl.dsp.movewindow(\"u\")";
               }
               {
-                keys = "$mod + SHIFT + J";
-                run = "hl.dsp.movewindow(\"d\")";
+                keys = "${mod} + SHIFT + J";
+                cmd = "hl.dsp.movewindow(\"d\")";
               }
 
               {
-                keys = "$mod + W";
-                run = "hl.dsp.togglespecialworkspace(\"magic\")";
+                keys = "${mod} + W";
+                cmd = "hl.dsp.togglespecialworkspace(\"magic\")";
               }
 
               # Touchpad rules
               {
                 keys = "XF86TouchpadToggle";
-                run = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled toggle\")";
+                cmd = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled toggle\")";
               }
               {
                 keys = "XF86TouchpadOn";
-                run = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled true\")";
+                cmd = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled true\")";
               }
               {
                 keys = "XF86TouchpadOff";
-                run = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled false\")";
-              }
-
-              # Noctipc Integrations
-              {
-                keys = "SUPER + D";
-                run = "hl.dsp.exec_cmd(\"$noctipc panel-toggle launcher\")";
-              }
-              {
-                keys = "SUPER + S";
-                run = "hl.dsp.exec_cmd(\"$noctipc panel-toggle control-center\")";
-              }
-              {
-                keys = "SUPER + comma";
-                run = "hl.dsp.exec_cmd(\"$noctipc settings-toggle\")";
+                cmd = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled false\")";
               }
             ]);
 
-          # 2. Repeatable Binds (hl.binde)
           binde = map mkBind [
             {
-              keys = "$mod + ALT + H";
-              run = "hl.dsp.resizeactive(-10, 0)";
+              keys = "${mod} + ALT + H";
+              cmd = "hl.dsp.resizeactive(-10, 0)";
             }
             {
-              keys = "$mod + ALT + L";
-              run = "hl.dsp.resizeactive(10, 0)";
+              keys = "${mod} + ALT + L";
+              cmd = "hl.dsp.resizeactive(10, 0)";
             }
             {
-              keys = "$mod + ALT + K";
-              run = "hl.dsp.resizeactive(0, -10)";
+              keys = "${mod} + ALT + K";
+              cmd = "hl.dsp.resizeactive(0, -10)";
             }
             {
-              keys = "$mod + ALT + J";
-              run = "hl.dsp.resizeactive(0, 10)";
+              keys = "${mod} + ALT + J";
+              cmd = "hl.dsp.resizeactive(0, 10)";
             }
           ];
 
-          # 3. Locked/Repeatable Binds (hl.bindel)
-          bindel = map mkBind [
-            {
-              keys = "XF86KbdBrightnessUp";
-              run = "hl.dsp.exec_cmd(\"brightnessctl -d *kbd* set +5%\")";
-            }
-            {
-              keys = "XF86KbdBrightnessDown";
-              run = "hl.dsp.exec_cmd(\"brightnessctl -d *kbd* set 5%-\")";
-            }
-            {
-              keys = "XF86AudioRaiseVolume";
-              run = "hl.dsp.exec_cmd(\"$noctipc volume-up\")";
-            }
-            {
-              keys = "XF86AudioLowerVolume";
-              run = "hl.dsp.exec_cmd(\"$noctipc volume-down\")";
-            }
-            {
-              keys = "XF86AudioVolumeUp";
-              run = "hl.dsp.exec_cmd(\"$noctipc volume-up\")";
-            }
-            {
-              keys = "XF86AudioVolumeDown";
-              run = "hl.dsp.exec_cmd(\"$noctipc volume-down\")";
-            }
-            {
-              keys = "XF86MonBrightnessUp";
-              run = "hl.dsp.exec_cmd(\"$noctipc brightness-up\")";
-            }
-            {
-              keys = "XF86MonBrightnessDown";
-              run = "hl.dsp.exec_cmd(\"$noctipc brightness-down\")";
-            }
-            {
-              keys = "XF86BrightnessUp";
-              run = "hl.dsp.exec_cmd(\"$noctipc brightness-up\")";
-            }
-            {
-              keys = "XF86BrightnessDown";
-              run = "hl.dsp.exec_cmd(\"$noctipc brightness-down\")";
-            }
-          ];
-
-          # 4. Locked Binds (hl.bindl)
-          bindl = map mkBind [
-            {
-              keys = "XF86AudioPlay";
-              run = "hl.dsp.exec_cmd(\"$noctipc media toggle\")";
-            }
-            {
-              keys = "XF86AudioPause";
-              run = "hl.dsp.exec_cmd(\"$noctipc media toggle\")";
-            }
-            {
-              keys = "XF86AudioPrev";
-              run = "hl.dsp.exec_cmd(\"$noctipc media previous\")";
-            }
-            {
-              keys = "XF86AudioNext";
-              run = "hl.dsp.exec_cmd(\"$noctipc media next\")";
-            }
-            {
-              keys = "XF86AudioStop";
-              run = "hl.dsp.exec_cmd(\"$noctipc media stop\")";
-            }
-            {
-              keys = "XF86AudioMute";
-              run = "hl.dsp.exec_cmd(\"$noctipc volume-mute\")";
-            }
-            {
-              keys = "XF86AudioMicMute";
-              run = "hl.dsp.exec_cmd(\"$noctipc mic-mute\")";
-            }
-          ];
-
-          # 5. Mouse Binds (hl.bindm)
           bindm = map mkBind [
             {
-              keys = "$mod + SHIFT + $LMB";
-              run = "hl.dsp.movewindow()";
+              keys = "${mod} + SHIFT + ${lmb}";
+              cmd = "hl.dsp.movewindow()";
             }
             {
-              keys = "$mod + ALT + $LMB";
-              run = "hl.dsp.resizewindow()";
+              keys = "${mod} + ALT + ${lmb}";
+              cmd = "hl.dsp.resizewindow()";
             }
           ];
         };

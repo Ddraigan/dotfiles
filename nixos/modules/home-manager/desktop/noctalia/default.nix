@@ -50,40 +50,95 @@ in {
       #   mTertiary = pink;
       # };
     };
-    wayland.windowManager.hyprland.settings = {
-      noctipc = {_var = "noctalia msg";};
-
-      bind = [
-        "SUPER, D, exec, $noctipc panel-toggle launcher"
-        "SUPER, S, exec, $noctipc panel-toggle control-center"
-        "SUPER, comma, exec, $noctipc settings-toggle"
+    wayland.windowManager.hyprland.settings = let
+      mod = config.modules.desktop.hypr.hyprland.mod;
+      noctipc = "nactalia msg";
+      mkBind = b: {
+        _args = [
+          (lib.generators.mkLuaInline b.keys)
+          (lib.generators.mkLuaInline b.cmd)
+        ];
+      };
+    in {
+      bind = map mkBind [
+        {
+          keys = "${mod} + D";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} panel-toggle launcher\")";
+        }
+        {
+          keys = "${mod} + S";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} panel-toggle control-center\")";
+        }
+        {
+          keys = "${mod} + comma";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} settings-toggle\")";
+        }
       ];
 
-      bindel = [
-        # Audio
-        ", XF86AudioRaiseVolume, exec, $noctipc volume-up"
-        ", XF86AudioLowerVolume, exec, $noctipc volume-down"
-        ", XF86AudioVolumeUp, exec, $noctipc volume-up"
-        ", XF86AudioVolumeDown, exec, $noctipc volume-down"
-
-        # Brightness
-        ", XF86MonBrightnessUp, exec, $noctipc brightness-up"
-        ", XF86MonBrightnessDown, exec, $noctipc brightness-down"
-        ", XF86BrightnessUp, exec, $noctipc brightness-up"
-        ", XF86BrightnessDown, exec, $noctipc brightness-down"
+      bindel = map mkBind [
+        {
+          keys = "XF86AudioRaiseVolume";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} volume-up\")";
+        }
+        {
+          keys = "XF86AudioLowerVolume";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} volume-down\")";
+        }
+        {
+          keys = "XF86AudioVolumeUp";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} volume-up\")";
+        }
+        {
+          keys = "XF86AudioVolumeDown";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} volume-down\")";
+        }
+        {
+          keys = "XF86MonBrightnessUp";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} brightness-up\")";
+        }
+        {
+          keys = "XF86MonBrightnessDown";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} brightness-down\")";
+        }
+        {
+          keys = "XF86BrightnessUp";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} brightness-up\")";
+        }
+        {
+          keys = "XF86BrightnessDown";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} brightness-down\")";
+        }
       ];
 
-      bindl = [
-        # Media
-        ", XF86AudioPlay, exec, $noctipc media toggle"
-        ", XF86AudioPause, exec, $noctipc media toggle"
-        ", XF86AudioPrev, exec, $noctipc media previous"
-        ", XF86AudioNext, exec, $noctipc media next"
-        ", XF86AudioStop, exec, $noctipc media stop"
-
-        # Audio
-        ", XF86AudioMute, exec, $noctipc volume-mute"
-        ", XF86AudioMicMute, exec, $noctipc mic-mute"
+      bindl = map mkBind [
+        {
+          keys = "XF86AudioPlay";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} media toggle\")";
+        }
+        {
+          keys = "XF86AudioPause";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} media toggle\")";
+        }
+        {
+          keys = "XF86AudioPrev";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} media previous\")";
+        }
+        {
+          keys = "XF86AudioNext";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} media next\")";
+        }
+        {
+          keys = "XF86AudioStop";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} media stop\")";
+        }
+        {
+          keys = "XF86AudioMute";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} volume-mute\")";
+        }
+        {
+          keys = "XF86AudioMicMute";
+          cmd = "hl.dsp.exec_cmd(\"${noctipc} mic-mute\")";
+        }
       ];
     };
   };
