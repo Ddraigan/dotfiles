@@ -163,7 +163,7 @@ in {
                     hl.exec_cmd("systemctl --user enable --now hyprpaper.service")
                     hl.exec_cmd("nm-applet --indicator")
                     hl.exec_cmd("wl-paste --watch cliphist store &")
-                    hl.exec_cmd(terminal) -- Uses the global variable declared above
+                    hl.exec_cmd(terminal)
                   end
                 '')
             ];
