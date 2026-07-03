@@ -6,16 +6,6 @@
   config = {
     wayland.windowManager.hyprland.settings = {
       config = {
-        monitorv2 = [
-          {
-            output = "eDP-1";
-            mode = "preferred";
-            position = "0x0";
-            scale = 1;
-            bitdepth = 8;
-          }
-        ];
-
         input = {
           kb_layout = "us";
           kb_variant = "dvorak";
@@ -29,6 +19,15 @@
           workspace = true;
         };
       };
+      monitor = [
+        {
+          output = "eDP-1";
+          mode = "preferred";
+          position = "0x0";
+          scale = 1;
+          bitdepth = 8;
+        }
+      ];
     };
   };
 }
