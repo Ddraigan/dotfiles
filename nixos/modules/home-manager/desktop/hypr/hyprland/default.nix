@@ -60,10 +60,15 @@ in {
         fi
       '';
 
-      mkBind = b: {
+      mkBind = {
+        keys,
+        cmd,
+        flag ? {},
+      }: {
         _args = [
-          (lib.generators.mkLuaInline b.keys)
-          (lib.generators.mkLuaInline b.cmd)
+          "${keys}"
+          (lib.generators.mkLuaInline "${cmd}")
+          flag
         ];
       };
     in {
@@ -143,7 +148,7 @@ in {
           paste = {_var = "wl-paste";};
           terminal = {_var = "${uwsmUtils.wrap "wezterm"}";};
           fileManager = {_var = "${uwsmUtils.wrap "nemo"}";};
-          dcmd = {_var = "${uwsmUtils.rofi}";};
+          drun = {_var = "${uwsmUtils.rofi}";};
           browser = {_var = "${uwsmUtils.wrap "zen-beta"}";};
           colourPicker = {_var = "${uwsmUtils.wrap "hyprpicker -a"}";};
           lockScreen = {_var = "${uwsmUtils.wrap "hyprlock"}";};
@@ -169,134 +174,136 @@ in {
             ];
           };
 
-          layer_rule = [
-            "blur on, match:namespace rofi"
-          ];
+          config = {
+            layer_rule = [
+              "blur on, match:namespace rofi"
+            ];
 
-          window_rule = [
-            "suppress_event maximize, match:class .*"
-            "float on, match:class org.quickshell"
-            "float on, match:class blueman-manager"
-            "float on, match:class yad"
-            "float on, match:title Steam Settings"
-          ];
+            window_rule = [
+              "suppress_event maximize, match:class .*"
+              "float on, match:class org.quickshell"
+              "float on, match:class blueman-manager"
+              "float on, match:class yad"
+              "float on, match:title Steam Settings"
+            ];
 
-          general = {
-            border_size = 1;
-            gaps_in = 5;
-            gaps_out = 5;
+            general = {
+              border_size = 1;
+              gaps_in = 5;
+              gaps_out = 5;
 
-            resize_on_border = true;
-            allow_tearing = false;
-            layout = "dwindle";
+              resize_on_border = true;
+              allow_tearing = false;
+              layout = "dwindle";
 
-            "col.inactive_border" = colours.rgb.mantle;
-            "col.active_border" = colours.rgb.pink;
-          };
-
-          decoration = {
-            rounding = 0;
-            active_opacity = 1.0;
-            inactive_opacity = 1.0;
-            shadow = {
-              enabled = false;
-              range = 30;
-              render_power = 5;
-              offset = "0 5";
-              color = "rgba(00000070)";
+              "col.inactive_border" = colours.rgb.mantle;
+              "col.active_border" = colours.rgb.pink;
             };
-            blur = {
-              enabled = true;
-              size = 3;
-              passes = 2;
-              new_optimizations = true;
-              xray = true;
-              ignore_opacity = true;
-              brightness = 0.3;
-            };
-          };
 
-          curve = {
-            _args = [
-              "overshoot"
+            decoration = {
+              rounding = 0;
+              active_opacity = 1.0;
+              inactive_opacity = 1.0;
+              shadow = {
+                enabled = false;
+                range = 30;
+                render_power = 5;
+                offset = "0 5";
+                color = "rgba(00000070)";
+              };
+              blur = {
+                enabled = true;
+                size = 3;
+                passes = 2;
+                new_optimizations = true;
+                xray = true;
+                ignore_opacity = true;
+                brightness = 0.3;
+              };
+            };
+
+            curve = {
+              _args = [
+                "overshoot"
+                {
+                  type = "bezier";
+                  points = [[0.13 0.99] [0.29 1.1]];
+                }
+              ];
+            };
+
+            animation = [
               {
-                type = "bezier";
-                points = [[0.13 0.99] [0.29 1.1]];
+                _args = [
+                  {
+                    leaf = "windows";
+                    enabled = true;
+                    speed = 4;
+                    bezier = "overshoot";
+                    style = "slide";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "border";
+                    enabled = true;
+                    speed = 10;
+                    bezier = "default";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "fade";
+                    enabled = true;
+                    speed = 10;
+                    bezier = "default";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "workspaces";
+                    enabled = true;
+                    speed = 6;
+                    bezier = "default";
+                    style = "fade";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "specialWorkspace";
+                    enabled = true;
+                    speed = 6;
+                    bezier = "default";
+                    style = "fade";
+                  }
+                ];
               }
             ];
-          };
 
-          animation = [
-            {
-              _args = [
-                {
-                  leaf = "windows";
-                  enabled = true;
-                  speed = 4;
-                  bezier = "overshoot";
-                  style = "slide";
-                }
-              ];
-            }
-            {
-              _args = [
-                {
-                  leaf = "border";
-                  enabled = true;
-                  speed = 10;
-                  bezier = "default";
-                }
-              ];
-            }
-            {
-              _args = [
-                {
-                  leaf = "fade";
-                  enabled = true;
-                  speed = 10;
-                  bezier = "default";
-                }
-              ];
-            }
-            {
-              _args = [
-                {
-                  leaf = "workspaces";
-                  enabled = true;
-                  speed = 6;
-                  bezier = "default";
-                  style = "fade";
-                }
-              ];
-            }
-            {
-              _args = [
-                {
-                  leaf = "specialWorkspace";
-                  enabled = true;
-                  speed = 6;
-                  bezier = "default";
-                  style = "fade";
-                }
-              ];
-            }
-          ];
+            dwindle = {
+              preserve_split = true;
+              special_scale_factor = 0.8;
+            };
 
-          dwindle = {
-            preserve_split = true;
-            special_scale_factor = 0.8;
-          };
+            misc = {
+              force_default_wallpaper = 0;
+              disable_hyprland_logo = true;
+            };
 
-          misc = {
-            force_default_wallpaper = 0;
-            disable_hyprland_logo = true;
-          };
+            input = {
+              kb_layout = "us";
 
-          input = {
-            kb_layout = "us";
-
-            follow_mouse = 1;
-            sensitivity = 0;
+              follow_mouse = 1;
+              sensitivity = 0;
+            };
           };
 
           bind = map mkBind (wsBindsCustom
@@ -341,90 +348,106 @@ in {
                 keys = "${mod} + F";
                 cmd = "hl.dsp.exec_cmd(fileManager)";
               }
-
               {
                 keys = "${mod} + SHIFT + X";
                 cmd = "hl.dsp.exec_cmd(exitCommand)";
               }
               {
                 keys = "${mod} + SHIFT + Q";
-                cmd = "hl.dsp.killactive()";
+                cmd = "hl.dsp.window.close({window = \"activewindow\"})";
               }
               {
                 keys = "${mod} + SHIFT + F";
-                cmd = "hl.dsp.fullscreen()";
+                cmd = "hl.dsp.window.fullscreen()";
               }
               {
                 keys = "${mod} + SHIFT + Z";
-                cmd = "hl.dsp.togglefloating()";
+                cmd = "hl.dsp.window.float({action = \"toggle\", window = \"activewindow\"})";
               }
               {
                 keys = "${mod} + SHIFT + P";
-                cmd = "hl.dsp.pseudo()";
+                cmd = "hl.dsp.window.pseudo({action = \"toggle\", window = \"activewindow\"})";
               }
               {
                 keys = "${mod} + SHIFT + S";
-                cmd = "hl.dsp.layoutmsg(\"togglesplit\")";
+                cmd = "hl.dsp.layout(\"togglesplit\")";
               }
-
               # Focus Directionals
               {
                 keys = "${mod} + left";
-                cmd = "hl.dsp.movefocus(\"l\")";
+                cmd = "hl.dsp.focus({direction = \"l\"})";
               }
               {
                 keys = "${mod} + right";
-                cmd = "hl.dsp.movefocus(\"r\")";
+                cmd = "hl.dsp.focus({direction = \"r\"})";
               }
               {
                 keys = "${mod} + up";
-                cmd = "hl.dsp.movefocus(\"u\")";
+                cmd = "hl.dsp.focus({direction = \"u\"})";
               }
               {
                 keys = "${mod} + down";
-                cmd = "hl.dsp.movefocus(\"d\")";
+                cmd = "hl.dsp.focus({direction = \"d\"})";
               }
               {
                 keys = "${mod} + h";
-                cmd = "hl.dsp.movefocus(\"l\")";
+                cmd = "hl.dsp.focus({direction = \"l\"})";
               }
               {
                 keys = "${mod} + l";
-                cmd = "hl.dsp.movefocus(\"r\")";
+                cmd = "hl.dsp.focus({direction = \"r\"})";
               }
               {
                 keys = "${mod} + k";
-                cmd = "hl.dsp.movefocus(\"u\")";
+                cmd = "hl.dsp.focus({direction = \"u\"})";
               }
               {
                 keys = "${mod} + j";
-                cmd = "hl.dsp.movefocus(\"d\")";
+                cmd = "hl.dsp.focus({direction = \"d\"})";
               }
-
               # Window Moving Directionals
               {
                 keys = "${mod} + SHIFT + H";
-                cmd = "hl.dsp.movewindow(\"l\")";
+                cmd = "hl.dsp.window.move({direction = \"l\", window = \"activewindow\"})";
               }
               {
                 keys = "${mod} + SHIFT + L";
-                cmd = "hl.dsp.movewindow(\"r\")";
+                cmd = "hl.dsp.window.move({direction = \"r\", window = \"activewindow\"})";
               }
               {
                 keys = "${mod} + SHIFT + K";
-                cmd = "hl.dsp.movewindow(\"u\")";
+                cmd = "hl.dsp.window.move({direction = \"u\", window = \"activewindow\"})";
               }
               {
                 keys = "${mod} + SHIFT + J";
-                cmd = "hl.dsp.movewindow(\"d\")";
+                cmd = "hl.dsp.window.move({direction = \"d\", window = \"activewindow\"})";
               }
-
               {
                 keys = "${mod} + W";
-                cmd = "hl.dsp.togglespecialworkspace(\"magic\")";
+                cmd = "hl.dsp.workspace.toggle_special(\"magic\")";
               }
-
-              # Touchpad rules
+              # Window Resizing
+              {
+                keys = "${mod} + ALT + H";
+                cmd = "hl.dsp.window.resize({ x = -10, y = 0, window = \"activewindow\" })";
+                flag = {repeating = true;};
+              }
+              {
+                keys = "${mod} + ALT + L";
+                cmd = "hl.dsp.window.resize({ x = 10, y = 0, window = \"activewindow\" })";
+                flag = {repeating = true;};
+              }
+              {
+                keys = "${mod} + ALT + K";
+                cmd = "hl.dsp.window.resize({ x = 0, y = -10, window = \"activewindow\" })";
+                flag = {repeating = true;};
+              }
+              {
+                keys = "${mod} + ALT + J";
+                cmd = "hl.dsp.window.resize({ x = 0, y = 10, window = \"activewindow\" })";
+                flag = {repeating = true;};
+              }
+              # Touchpad
               {
                 keys = "XF86TouchpadToggle";
                 cmd = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled toggle\")";
@@ -437,37 +460,17 @@ in {
                 keys = "XF86TouchpadOff";
                 cmd = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled false\")";
               }
+              {
+                keys = "${mod} + SHIFT + ${lmb}";
+                cmd = "hl.dsp.window.drag()";
+                flag = {mouse = true;};
+              }
+              {
+                keys = "${mod} + ALT + ${lmb}";
+                cmd = "hl.dsp.window.resize()";
+                flag = {mouse = true;};
+              }
             ]);
-
-          binde = map mkBind [
-            {
-              keys = "${mod} + ALT + H";
-              cmd = "hl.dsp.resizeactive(-10, 0)";
-            }
-            {
-              keys = "${mod} + ALT + L";
-              cmd = "hl.dsp.resizeactive(10, 0)";
-            }
-            {
-              keys = "${mod} + ALT + K";
-              cmd = "hl.dsp.resizeactive(0, -10)";
-            }
-            {
-              keys = "${mod} + ALT + J";
-              cmd = "hl.dsp.resizeactive(0, 10)";
-            }
-          ];
-
-          bindm = map mkBind [
-            {
-              keys = "${mod} + SHIFT + ${lmb}";
-              cmd = "hl.dsp.movewindow()";
-            }
-            {
-              keys = "${mod} + ALT + ${lmb}";
-              cmd = "hl.dsp.resizewindow()";
-            }
-          ];
         };
       };
     });
