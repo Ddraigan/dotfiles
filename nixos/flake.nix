@@ -53,10 +53,10 @@
       url = "github:zjeffer/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
     };
-    # hyprsplit = {
-    #   url = "github:shezdy/hyprsplit";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
+    hyprsplit = {
+      url = "github:shezdy/hyprsplit";
+      inputs.hyprland.follows = "hyprland";
+    };
     hypr-darkwindow = {
       url = "github:micha4w/Hypr-DarkWindow"; # Make sure to change the tag to match your hyprland version
       inputs.hyprland.follows = "hyprland";

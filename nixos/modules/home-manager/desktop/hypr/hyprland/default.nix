@@ -28,21 +28,6 @@ in {
       lmb = "mouse:272";
       rmb = "mouse:273";
 
-      workspaces = lib.range 0 9;
-
-      # wsBindsCustom =
-      #   lib.concatMap (i: [
-      #     {
-      #       keys = "${mod} + ${toString i}";
-      #       cmd = makeSplitCallback i "focus";
-      #     }
-      #     {
-      #       keys = "${mod} + SHIFT + ${toString i}";
-      #       cmd = makeSplitCallback i "move";
-      #     }
-      #   ])
-      #   workspaces;
-
       mkBind = {
         keys,
         cmd,
@@ -80,10 +65,6 @@ in {
           hyprshot
           grim
           slurp
-
-          # Custom workspaces split
-          # jq
-          # splitWorkspaces
         ];
         sessionVariables = {
           NIXOS_XDG_OPEN_USE_PORTAL = "1";
@@ -105,21 +86,34 @@ in {
           ];
         };
         plugins = [
-          # inputs.hyprsplit.packages.${sys}.hyprsplit
-          # inputs.split-monitor-workspaces.packages.${sys}.split-monitor-workspaces
           # inputs.hypr-darkwindow.packages.${sys}.Hypr-DarkWindow
         ];
+        extraLuaFiles = {
+          # create a symlink to `.config/hypr/hyprsplit/init.lua`.
+          "hyprsplit/init" = {
+            autoLoad = false;
+            content = builtins.readFile "${inputs.hyprsplit.packages.${sys}.hyprsplitlua}/share/hyprsplit/init.lua";
+          };
+          # Finally, use it directly in Lua.
+          "hyprload" = {
+            autoLoad = true;
+            content =
+              #lua
+              ''
+                local hs = require("hyprsplit")
+                hs.config({ num_workspaces = 10 })
+                for i = 1, 10 do
+                    local key = i % 10 -- 10 maps to key 0
+                    hl.bind("${mod} + " .. key, hs.dsp.focus({ workspace = i }))
+                    hl.bind("${mod} + SHIFT + " .. key, hs.dsp.window.move({ workspace = i, follow = false }))
+                end
 
+                hl.bind("${mod} + " .. "g", hs.dsp.grab_rogue_windows())
+                hl.bind("${mod} + SHIFT + " .. "n", hs.dsp.workspace.swap_monitors({ monitor1 = "current", monitor2 = "+1" }))
+              '';
+          };
+        };
         settings = {
-          # "plugin:hyprsplit" = {
-          #   num_workspaces = 9;
-          #   bind =
-          #     wsBindsSplit
-          #     ++ [
-          #       "${mod} SHIFT, n, split:swapactiveworkspaces, current +1"
-          #       "${mod} SHIFT, W, split:movetoworkspace, special:magic"
-          #     ];
-          # };
           # "plugin:darkwindow:load_shaders" = "chromakey";
           # "plugin:darkwindow" = {
           #   windowrule = [
@@ -206,15 +200,44 @@ in {
               };
             };
 
-            curve = {
-              _args = [
-                "overshoot"
-                {
-                  type = "bezier";
-                  points = [[0.13 0.99] [0.29 1.1]];
-                }
-              ];
-            };
+            curve = [
+              {
+                _args = [
+                  "wind"
+                  {
+                    type = "bezier";
+                    points = [[0.05 0.9] [0.1 1.05]];
+                  }
+                ];
+              }
+              {
+                _args = [
+                  "winIn"
+                  {
+                    type = "bezier";
+                    points = [[0.1 1.1] [0.1 1.1]];
+                  }
+                ];
+              }
+              {
+                _args = [
+                  "winOut"
+                  {
+                    type = "bezier";
+                    points = [[0.3 0.3] [0 1]];
+                  }
+                ];
+              }
+              {
+                _args = [
+                  "liner"
+                  {
+                    type = "bezier";
+                    points = [[1 1] [1 1]];
+                  }
+                ];
+              }
+            ];
 
             animation = [
               {
@@ -222,8 +245,41 @@ in {
                   {
                     leaf = "windows";
                     enabled = true;
-                    speed = 4;
-                    bezier = "overshoot";
+                    speed = 6;
+                    bezier = "wind";
+                    style = "slide";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "windowsIn";
+                    enabled = true;
+                    speed = 6;
+                    bezier = "winIn";
+                    style = "slide";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "windowsOut";
+                    enabled = true;
+                    speed = 5;
+                    bezier = "winOut";
+                    style = "slide";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "windowsMove";
+                    enabled = true;
+                    speed = 5;
+                    bezier = "wind";
                     style = "slide";
                   }
                 ];
@@ -233,8 +289,19 @@ in {
                   {
                     leaf = "border";
                     enabled = true;
-                    speed = 10;
-                    bezier = "default";
+                    speed = 1;
+                    bezier = "liner";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "borderangle";
+                    enabled = true;
+                    speed = 30;
+                    bezier = "liner";
+                    style = "loop";
                   }
                 ];
               }
@@ -253,25 +320,79 @@ in {
                   {
                     leaf = "workspaces";
                     enabled = true;
-                    speed = 6;
-                    bezier = "default";
-                    style = "fade";
-                  }
-                ];
-              }
-              {
-                _args = [
-                  {
-                    leaf = "specialWorkspace";
-                    enabled = true;
-                    speed = 6;
-                    bezier = "default";
-                    style = "fade";
+                    speed = 5;
+                    bezier = "wind";
                   }
                 ];
               }
             ];
 
+            # curve = {
+            #   _args = [
+            #     "overshoot"
+            #     {
+            #       type = "bezier";
+            #       points = [[0.13 0.99] [0.29 1.1]];
+            #     }
+            #   ];
+            # };
+
+            # animation = [
+            #   {
+            #     _args = [
+            #       {
+            #         leaf = "windows";
+            #         enabled = true;
+            #         speed = 4;
+            #         bezier = "overshoot";
+            #         style = "slide";
+            #       }
+            #     ];
+            #   }
+            #   {
+            #     _args = [
+            #       {
+            #         leaf = "border";
+            #         enabled = true;
+            #         speed = 10;
+            #         bezier = "default";
+            #       }
+            #     ];
+            #   }
+            #   {
+            #     _args = [
+            #       {
+            #         leaf = "fade";
+            #         enabled = true;
+            #         speed = 10;
+            #         bezier = "default";
+            #       }
+            #     ];
+            #   }
+            #   {
+            #     _args = [
+            #       {
+            #         leaf = "workspaces";
+            #         enabled = true;
+            #         speed = 6;
+            #         bezier = "default";
+            #         style = "fade";
+            #       }
+            #     ];
+            #   }
+            #   {
+            #     _args = [
+            #       {
+            #         leaf = "specialWorkspace";
+            #         enabled = true;
+            #         speed = 6;
+            #         bezier = "default";
+            #         style = "fade";
+            #       }
+            #     ];
+            #   }
+            # ];
+            #
             dwindle = {
               preserve_split = true;
               special_scale_factor = 0.8;
