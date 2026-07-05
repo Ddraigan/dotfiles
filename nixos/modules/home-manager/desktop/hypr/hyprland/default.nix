@@ -110,6 +110,21 @@ in {
           # inputs.hyprsplit.packages.${sys}.hyprsplit
           # inputs.hypr-darkwindow.packages.${sys}.Hypr-DarkWindow
         ];
+        extraLuaFiles = {
+          # create a symlink to `.config/hypr/hyprsplit/init.lua`.
+          "hyprsplit/init" = {
+            autoLoad = false;
+            content = builtins.readFile "${inputs.hyprsplit.hyprsplitlua}/share/hyprsplit/init.lua";
+          };
+          # Finally, use it directly in Lua.
+          "hyprload" = {
+            autoLoad = true;
+            content = ''
+              local hs = require("hyprsplit")
+              -- your code
+            '';
+          };
+        };
         settings = {
           # "plugin:hyprsplit" = {
           #   num_workspaces = 9;
