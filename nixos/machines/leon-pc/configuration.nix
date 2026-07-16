@@ -69,6 +69,10 @@ in {
 
   services = {
     upower.enable = true;
+    factorio = {
+      enable = true;
+      openFirewall = true;
+    };
     udev.packages = with pkgs; [via android-tools];
     udisks2 = {
       enable = true;
@@ -97,6 +101,7 @@ in {
 
   environment = {
     systemPackages = [
+      pkgs.factorio-headless
       wezterm-cwd
       pkgs.crosspipe
       pkgs.qmk
