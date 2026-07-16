@@ -98,6 +98,7 @@
     defaultUserShell = pkgs.zsh;
     users.leon = {
       isNormalUser = true;
+      initialPassword = "";
       extraGroups = [
         "wheel"
         "networkmanager"
