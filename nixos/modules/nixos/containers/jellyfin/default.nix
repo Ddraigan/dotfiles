@@ -17,6 +17,7 @@ in {
       "d ${seerrPath} 0755 ${cfg.mainUser} users -"
       "Z ${seerrPath} - ${cfg.mainUser} users -"
     ];
+    # TODO: Add intro skipper plugin
     virtualisation.oci-containers.containers = {
       jellyfin = {
         image = "jellyfin/jellyfin";
