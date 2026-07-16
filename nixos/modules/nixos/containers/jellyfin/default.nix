@@ -17,6 +17,7 @@ in {
       "d ${seerrPath} 0755 ${cfg.mainUser} users -"
       "Z ${seerrPath} - ${cfg.mainUser} users -"
     ];
+    # TODO: Add intro skipper plugin
     virtualisation.oci-containers.containers = {
       jellyfin = {
         image = "jellyfin/jellyfin";
@@ -35,6 +36,13 @@ in {
           PUID = "99";
           PGID = "100";
         };
+        # extraOptions = [
+        # "--device=/dev/dri/renderD128:/dev/dri/renderD128"
+        # "--device=/dev/dri/card0:/dev/dri/card0"
+
+        # "--group-add=render"
+        # "--group-add=video"
+        # ];
         labels = containerUtils.mkTraefikLabels {
           name = "jellyfin";
           port = 8096;

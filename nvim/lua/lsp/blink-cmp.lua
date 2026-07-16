@@ -4,7 +4,7 @@ return {
     event = "InsertEnter",
     dependencies = {
       "saghen/blink.lib",
-      "saghen/blink.pairs",
+      -- "saghen/blink.pairs",
       "rafamadriz/friendly-snippets",
       -- "moyiz/blink-emoji.nvim",
       "Kaiser-Yang/blink-cmp-avante",
@@ -101,13 +101,13 @@ return {
           --       return { ":" }
           --     end,
           --   },
-            -- should_show_items = function()
-            --   return vim.tbl_contains(
-            --     -- Enable emoji completion only for git commits and markdown.
-            --     { "gitcommit", "markdown" },
-            --     vim.o.filetype
-            --   )
-            -- end,
+          -- should_show_items = function()
+          --   return vim.tbl_contains(
+          --     -- Enable emoji completion only for git commits and markdown.
+          --     { "gitcommit", "markdown" },
+          --     vim.o.filetype
+          --   )
+          -- end,
           -- },
         },
       },
@@ -115,49 +115,40 @@ return {
     },
     opts_extend = { "sources.default" },
   },
-  {
-    "saghen/blink.pairs",
-    dependencies = "saghen/blink.lib",
-    build = function()
-      require("blink.pairs").build():pwait(60000)
-    end,
-    --- @module 'blink.pairs'
-    --- @type blink.pairs.Config
-    opts = {
-      mappings = {
-        -- you can call require("blink.pairs.mappings").enable()
-        -- and require("blink.pairs.mappings").disable()
-        -- to enable/disable mappings at runtime
-        enabled = true,
-        cmdline = true,
-        -- or disable with `vim.g.pairs = false` (global) and `vim.b.pairs = false` (per-buffer)
-        -- and/or with `vim.g.blink_pairs = false` and `vim.b.blink_pairs = false`
-        disabled_filetypes = {},
-        pairs = {},
-      },
-      highlights = {
-        enabled = false,
-        -- requires require('vim._extui').enable({}), otherwise has no effect
-        cmdline = true,
-        groups = {
-          "BlinkPairsOrange",
-          "BlinkPairsPurple",
-          "BlinkPairsBlue",
-        },
-        unmatched_group = "BlinkPairsUnmatched",
-
-        -- highlights matching pairs under the cursor
-        matchparen = {
-          enabled = true,
-          -- known issue where typing won't update matchparen highlight, disabled by default
-          cmdline = false,
-          -- also include pairs not on top of the cursor, but surrounding the cursor
-          include_surrounding = false,
-          group = "BlinkPairsMatchParen",
-          priority = 250,
-        },
-      },
-      debug = false,
-    },
-  },
+  -- {
+  --   "saghen/blink.pairs",
+  --   dependencies = "saghen/blink.lib",
+  --   build = function()
+  --     require("blink.pairs").build():pwait(60000)
+  --   end,
+  --   --- @module 'blink.pairs'
+  --   --- @type blink.pairs.Config
+  --   opts = {
+  --     mappings = {
+  --       enabled = true,
+  --       cmdline = true,
+  --       disabled_filetypes = {},
+  --       pairs = {},
+  --     },
+  --     highlights = {
+  --       enabled = false,
+  --       cmdline = true,
+  --       groups = {
+  --         "BlinkPairsOrange",
+  --         "BlinkPairsPurple",
+  --         "BlinkPairsBlue",
+  --       },
+  --       unmatched_group = "BlinkPairsUnmatched",
+  --
+  --       matchparen = {
+  --         enabled = true,
+  --         cmdline = false,
+  --         include_surrounding = false,
+  --         group = "BlinkPairsMatchParen",
+  --         priority = 250,
+  --       },
+  --     },
+  --     debug = false,
+  --   },
+  -- },
 }
