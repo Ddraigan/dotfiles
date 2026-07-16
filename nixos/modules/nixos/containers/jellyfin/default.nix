@@ -35,6 +35,13 @@ in {
           PUID = "99";
           PGID = "100";
         };
+        # extraOptions = [
+        # "--device=/dev/dri/renderD128:/dev/dri/renderD128"
+        # "--device=/dev/dri/card0:/dev/dri/card0"
+
+        # "--group-add=render"
+        # "--group-add=video"
+        # ];
         labels = containerUtils.mkTraefikLabels {
           name = "jellyfin";
           port = 8096;
