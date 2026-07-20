@@ -14,6 +14,8 @@
       extraPackages = with pkgs; [
         intel-ocl
         intel-media-driver
+          # Might need this -
+        # intel-compute-runtime-legacy1
       ];
     };
   };

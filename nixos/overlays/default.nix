@@ -7,4 +7,10 @@
         config.allowUnfree = true;
       };
   };
+  stable-packages = final: _prev: {
+    stable = import inputs.nixpkgs {
+      system = prev.stdenv.hostPlatform.system;
+      config.allowUnfree = true;
+    };
+  };
 }
