@@ -160,7 +160,18 @@ in {
     };
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    vmVariant = {
+      memorySize = 4096;
+      cores = 4;
+    };
+    qemu.options = [
+      "-device virtio-vga-gl"
+      "-display sdl,gl=on,show-cursor=off"
+      "-audio pa,model=hda"
+    ];
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/London";
