@@ -46,6 +46,13 @@ in {
     };
   };
 
+  fileSystems = {
+    "/mnt/isa/media" = {
+      device = "192.168.1.150:/mnt/isa/media";
+      fsType = "nfs";
+    };
+  };
+
   nixpkgs = {
     overlays = [inputs.self.overlays.unstable-packages];
     config.allowUnfree = true;
@@ -166,14 +173,14 @@ in {
       memorySize = 4096;
       cores = 4;
     };
-    qemu.options = [
-      "-device virtio-vga-gl"
-      "-display sdl,gl=on,show-cursor=off"
-      "-audio pa,model=hda"
-      # "-vga virtio"
-      # "-device virtio-gpu-gl"
-      # "-display gtk,gl=on"
-    ];
+    # qemu.options = [
+    #   "-device virtio-vga-gl"
+    #   "-display sdl,gl=on,show-cursor=off"
+    #   "-audio pa,model=hda"
+    #   # "-vga virtio"
+    #   # "-device virtio-gpu-gl"
+    #   # "-display gtk,gl=on"
+    # ];
   };
 
   # Set your time zone.

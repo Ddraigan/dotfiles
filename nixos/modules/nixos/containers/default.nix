@@ -52,6 +52,7 @@ in {
     mkDataPath = name: "${cfg.dataPath}/${name}";
     storagePaths = rec {
       base = "/storage";
+      # base = "/mnt/isa/media";
       torrents = rec {
         dir = "${base}/torrents";
         subdirs = {

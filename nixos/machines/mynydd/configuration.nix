@@ -45,6 +45,13 @@
     desktopManager.gnome.enable = false;
   };
 
+  fileSystems = {
+    "/mnt/isa/media" = {
+      device = "192.168.1.150:/mnt/isa/media";
+      fsType = "nfs";
+    };
+  };
+
   virtualisation = {
     vmVariant = {
       virtualisation = {
