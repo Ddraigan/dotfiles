@@ -170,6 +170,9 @@ in {
       "-device virtio-vga-gl"
       "-display sdl,gl=on,show-cursor=off"
       "-audio pa,model=hda"
+      # "-vga virtio"
+      # "-device virtio-gpu-gl"
+      # "-display gtk,gl=on"
     ];
   };
 
