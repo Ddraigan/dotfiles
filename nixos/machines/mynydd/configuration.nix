@@ -9,15 +9,18 @@
     ./hardware-configuration.nix
   ];
 
-  modules.nix.containers = {
-    domain = "ddraigan.com";
-    mainUser = "leon";
-    traefik.enable = true;
-    homeass.enable = true;
-    cfddns.enable = true;
-    uptime-kuma.enable = true;
-    jellyfin.enable = true;
-    downloads.enable = true;
+  modules.nix = {
+    quicksync.enable = true;
+    containers = {
+      domain = "ddraigan.com";
+      mainUser = "leon";
+      traefik.enable = true;
+      homeass.enable = true;
+      cfddns.enable = true;
+      uptime-kuma.enable = true;
+      jellyfin.enable = true;
+      downloads.enable = true;
+    };
   };
 
   boot.loader = {
@@ -95,6 +98,7 @@
     defaultUserShell = pkgs.zsh;
     users.leon = {
       isNormalUser = true;
+      initialPassword = "";
       extraGroups = [
         "wheel"
         "networkmanager"

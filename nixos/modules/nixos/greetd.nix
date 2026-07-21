@@ -13,19 +13,22 @@
       else "dvorak";
 
     # exec-once = "${config.programs.regreet.package}/bin/regreet"; hyprctl dispatch exit
-    hyprGreetConf = pkgs.writeText "hypr-greet.conf" ''
-      exec-once = ${lib.getExe config.programs.regreet.package}; hyprctl dispatch exit
+    hyprGreetConf =
+      pkgs.writeText "hypr-greet.conf"
+      #hyprlang
+      ''
+        exec-once = ${lib.getExe config.programs.regreet.package}; hyprctl dispatch exit
 
-      misc {
-          disable_hyprland_logo = true
-          disable_splash_rendering = true
-          disable_hyprland_guiutils_check = true
-      }
-      input {
-          kb_layout = us
-          ${lib.optionalString (kbVariant != "") "kb_variant = ${kbVariant}"}
-      }
-    '';
+        misc {
+            disable_hyprland_logo = true
+            disable_splash_rendering = true
+            disable_hyprland_guiutils_check = true
+        }
+        input {
+            kb_layout = us
+            ${lib.optionalString (kbVariant != "") "kb_variant = ${kbVariant}"}
+        }
+      '';
   in {
     services.greetd = {
       enable = true;
@@ -67,8 +70,6 @@
         package = pkgs.papirus-icon-theme;
         name = "Papirus-Dark";
       };
-      # extraCss = ''
-      # '';
     };
   });
 }

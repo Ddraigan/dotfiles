@@ -84,7 +84,7 @@ in {
           ENABLE_PRIVOXY = "yes";
           WEBUI_PORT = "8120";
           LAN_NETWORK = "192.168.1.0/24";
-          NAME_SERVERS = "209.222.18.222,84.200.69.80,37.235.1.174,1.1.1.1,209.222.18.218,37.235.1.177,84.200.70.40,1.0.0.1";
+          NAME_SERVERS = "1.1.1.1,1.0.0.1";
           VPN_INPUT_PORTS = "9117,8989,7878,9696";
           VPN_OUTPUT_PORTS = "9117,8989,7878,9696";
           UMASK = "000";
@@ -101,7 +101,7 @@ in {
       };
 
       jackett = {
-        image = "linuxserver/jackett:0.24.957";
+        image = "linuxserver/jackett:0.24.2237";
         volumes = [
           "${dataPaths.jackett}:/config"
           "/etc/localtime:/etc/localtime:ro"
@@ -158,6 +158,33 @@ in {
         };
       };
 
+      trawl = {
+        image = "ghcr.io/germondai/trawl:latest";
+        dependsOn = ["qbittorrent" "redis-trawl"];
+        networks = ["container:qbittorrent"];
+
+        environment = {
+          BROWSER_POOL_SIZE = "3";
+          REDIS_URL = "redis://localhost:6379";
+        };
+
+        extraOptions = [
+          "--shm-size=1g"
+          "--memory=2g"
+        ];
+
+        labels = containerUtils.mkTraefikLabels {
+          name = "trawl";
+          port = 8191;
+        };
+      };
+
+      redis-trawl = {
+        image = "redis:7-alpine";
+        dependsOn = ["qbittorrent"];
+        networks = ["container:qbittorrent"];
+      };
+
       # byparr = {
       #   image = "ghcr.io/thephaseless/byparr:latest";
       #   dependsOn = ["qbittorrent"];
@@ -181,7 +208,6 @@ in {
       #     port = 9696;
       #   };
       # };
-
 
       # flaresolverr = {
       #   image = "ghcr.io/flaresolverr/flaresolverr:v3.4.6";

@@ -21,36 +21,24 @@ in {
       example = "SUPER";
     };
   };
-
   config =
     lib.mkIf cfg.enable
     (let
-      workspaces = lib.range 0 9;
-      wsBindsCustom =
-        lib.concatMap (i: [
-          "$mod, ${toString i}, exec, split-workspaces ${toString i} focus"
-          "$mod SHIFT, ${toString i}, exec, split-workspaces ${toString i} move"
-        ])
-        workspaces;
+      mod = cfg.mod;
+      lmb = "mouse:272";
+      rmb = "mouse:273";
 
-      splitWorkspaces = pkgs.writeShellScriptBin "split-workspaces" ''
-        WS=$1
-        ACTION=$2
-
-        if [ "$WS" -eq 0 ]; then WS=10; fi
-
-        MONITOR=$(${pkgs.hyprland}/bin/hyprctl activeworkspace -j | ${pkgs.jq}/bin/jq -r '.monitor')
-
-        INDEX=$(${pkgs.hyprland}/bin/hyprctl monitors -j | ${pkgs.jq}/bin/jq -r 'sort_by(.id) | map(.name) | index("'"$MONITOR"'")')
-
-        TARGET_WS=$(( WS + (INDEX * 10) ))
-
-        if [ "$ACTION" == "focus" ]; then
-            ${pkgs.hyprland}/bin/hyprctl dispatch workspace "$TARGET_WS"
-        elif [ "$ACTION" == "move" ]; then
-            ${pkgs.hyprland}/bin/hyprctl dispatch movetoworkspace "$TARGET_WS"
-        fi
-      '';
+      mkBind = {
+        keys,
+        cmd,
+        flag ? {},
+      }: {
+        _args = [
+          "${keys}"
+          (lib.generators.mkLuaInline "${cmd}")
+          flag
+        ];
+      };
     in {
       xdg = {
         configFile = {
@@ -77,10 +65,6 @@ in {
           hyprshot
           grim
           slurp
-
-          # Custom workspaces split
-          jq
-          splitWorkspaces
         ];
         sessionVariables = {
           NIXOS_XDG_OPEN_USE_PORTAL = "1";
@@ -92,49 +76,44 @@ in {
       wayland.windowManager.hyprland = {
         enable = true;
         xwayland.enable = true;
-        # package = null;
+        configType = "lua";
         package = inputs.hyprland.packages.${sys}.hyprland;
         portalPackage = null;
         systemd = {
           enable = false; # Being enabled would conflict with UWSM
           variables = [
             "--all"
-            # "DISPLAY"
-            # "HYPRLAND_INSTANCE_SIGNATURE"
-            # "WAYLAND_DISPLAY"
-            # "XDG_CURRENT_DESKTOP"
-            # "QT_QPA_PLATFORM"
           ];
         };
         plugins = [
-          # inputs.hyprsplit.packages.${sys}.hyprsplit
           # inputs.hypr-darkwindow.packages.${sys}.Hypr-DarkWindow
         ];
         extraLuaFiles = {
           # create a symlink to `.config/hypr/hyprsplit/init.lua`.
           "hyprsplit/init" = {
             autoLoad = false;
-            content = builtins.readFile "${inputs.hyprsplit.hyprsplitlua}/share/hyprsplit/init.lua";
+            content = builtins.readFile "${inputs.hyprsplit.packages.${sys}.hyprsplitlua}/share/hyprsplit/init.lua";
           };
           # Finally, use it directly in Lua.
           "hyprload" = {
             autoLoad = true;
-            content = ''
-              local hs = require("hyprsplit")
-              -- your code
-            '';
+            content =
+              #lua
+              ''
+                local hs = require("hyprsplit")
+                hs.config({ num_workspaces = 10 })
+                for i = 1, 10 do
+                    local key = i % 10 -- 10 maps to key 0
+                    hl.bind("${mod} + " .. key, hs.dsp.focus({ workspace = i }))
+                    hl.bind("${mod} + SHIFT + " .. key, hs.dsp.window.move({ workspace = i, follow = false }))
+                end
+
+                hl.bind("${mod} + " .. "g", hs.dsp.grab_rogue_windows())
+                hl.bind("${mod} + SHIFT + " .. "n", hs.dsp.workspace.swap_monitors({ monitor1 = "current", monitor2 = "+1" }))
+              '';
           };
         };
         settings = {
-          # "plugin:hyprsplit" = {
-          #   num_workspaces = 9;
-          #   bind =
-          #     wsBindsSplit
-          #     ++ [
-          #       "$mod SHIFT, n, split:swapactiveworkspaces, current +1"
-          #       "$mod SHIFT, W, split:movetoworkspace, special:magic"
-          #     ];
-          # };
           # "plugin:darkwindow:load_shaders" = "chromakey";
           # "plugin:darkwindow" = {
           #   windowrule = [
@@ -143,201 +122,459 @@ in {
           #   ];
           # };
 
-          # Commands
-          "$exitCommand" = "${uwsmUtils.exit}";
-          "$copy" = "wl-copy";
-          "$paste" = "wl-paste";
+          exitCommand = {_var = "${uwsmUtils.exit}";};
+          copy = {_var = "wl-copy";};
+          paste = {_var = "wl-paste";};
+          terminal = {_var = "${uwsmUtils.wrap "wezterm"}";};
+          fileManager = {_var = "${uwsmUtils.wrap "nemo"}";};
+          drun = {_var = "${uwsmUtils.rofi}";};
+          browser = {_var = "${uwsmUtils.wrap "zen-beta"}";};
+          colourPicker = {_var = "${uwsmUtils.wrap "hyprpicker -a"}";};
+          sessionScreen = {_var = "${uwsmUtils.wrap "wlogout"}";};
+          screenshot = {_var = "${uwsmUtils.wrap "hyprshot -m window"}";};
+          screenshotRegion = {_var = "${uwsmUtils.wrap "hyprshot -m region output --clipboard-only"}";};
 
-          # Programs
-          "$terminal" = "${uwsmUtils.wrap "wezterm"}";
-          "$fileManager" = "${uwsmUtils.wrap "nemo"}";
-          "$drun" = "${uwsmUtils.rofi}";
-          "$browser" = "${uwsmUtils.wrap "zen-beta"}";
-
-          # Utils
-          "$colourPicker" = "${uwsmUtils.wrap "hyprpicker -a"}";
-          "$lockScreen" = "${uwsmUtils.wrap "hyprlock"}";
-          "$sessionScreen" = "${uwsmUtils.wrap "wlogout"}";
-          "$screenshot" = "${uwsmUtils.wrap "hyprshot -m window"}";
-          "$screenshotRegion" = "${uwsmUtils.wrap "hyprshot -m region output --clipboard-only"}";
-
-          # env =
-          # [
-          # "XDG_SCREENSHOTS_DIR,$HOME/Pictures/screenshots"
-          # "XDG_PICTURES_DIR,$HOME/Pictures"
-          # "HYPRSHOT_DIR,$HOME/Pictures/screenshots"
-          # ];
-          # ++ lib.optionals (lib.elem hyprQTPkg config.home.packages) [
-          #   # When using hyprqt6engine over qt6ct
-          #   "QT_QPA_PLATFORMTHEME=hyprqt6engine"
-
-          exec-once = [
-            "systemctl --user enable --now hyprpolkitagent.service"
-            "systemctl --user enable --now hypridle.service"
-            "systemctl --user enable --now hyprpaper.service"
-            "nm-applet --indicator"
-            "wl-paste --watch cliphist store &"
-            "$terminal"
-          ];
-
-          layerrule = [
-            "blur on, match:namespace rofi"
-            "no_anim on, match:namespace dms"
-          ];
-
-          windowrule = [
-            "suppress_event maximize, match:class .*"
-            "float on, match:class org.quickshell"
-            "float on, match:class blueman-manager"
-            "float on, match:class yad"
-            "float on, match:title Steam Settings"
-          ];
-
-          general = {
-            border_size = 1;
-            gaps_in = 5;
-            gaps_out = 5;
-
-            resize_on_border = true;
-            allow_tearing = false;
-            layout = "dwindle";
-
-            "col.inactive_border" = colours.rgb.mantle;
-            "col.active_border" = colours.rgb.pink;
+          on = {
+            _args = [
+              "hyprland.start"
+              (lib.generators.mkLuaInline
+                #lua
+                ''
+                  function()
+                    hl.exec_cmd("systemctl --user enable --now hyprpolkitagent.service")
+                    hl.exec_cmd("systemctl --user enable --now hypridle.service")
+                    hl.exec_cmd("systemctl --user enable --now hyprpaper.service")
+                    hl.exec_cmd("nm-applet --indicator")
+                    hl.exec_cmd("wl-paste --watch cliphist store &")
+                    hl.exec_cmd(terminal)
+                  end
+                '')
+            ];
           };
 
-          decoration = {
-            rounding = 0;
-            active_opacity = 1.0;
-            inactive_opacity = 1.0;
-            shadow = {
-              enabled = false;
-              range = 30;
-              render_power = 5;
-              offset = "0 5";
-              color = "rgba(00000070)";
-            };
-            blur = {
-              enabled = true;
-              size = 3;
-              passes = 2;
-              new_optimizations = true;
-              xray = true;
-              ignore_opacity = true;
-              brightness = 0.3;
-            };
-          };
+          config = {
+            layer_rule = [
+              "blur on, match:namespace rofi"
+            ];
 
-          animations = {
-            enabled = true;
-            bezier = "overshot,0.13,0.99,0.29,1.1";
+            window_rule = [
+              "suppress_event maximize, match:class .*"
+              "float on, match:class org.quickshell"
+              "float on, match:class blueman-manager"
+              "float on, match:class yad"
+              "float on, match:title Steam Settings"
+            ];
+
+            general = {
+              border_size = 1;
+              gaps_in = 5;
+              gaps_out = 5;
+
+              resize_on_border = true;
+              allow_tearing = false;
+              layout = "dwindle";
+
+              "col.inactive_border" = colours.rgb.mantle;
+              "col.active_border" = colours.rgb.pink;
+            };
+
+            decoration = {
+              rounding = 0;
+              active_opacity = 1.0;
+              inactive_opacity = 1.0;
+              shadow = {
+                enabled = false;
+                range = 30;
+                render_power = 5;
+                offset = "0 5";
+                color = "rgba(00000070)";
+              };
+              blur = {
+                enabled = true;
+                size = 3;
+                passes = 2;
+                new_optimizations = true;
+                xray = true;
+                ignore_opacity = true;
+                brightness = 0.3;
+              };
+            };
+
+            curve = [
+              {
+                _args = [
+                  "wind"
+                  {
+                    type = "bezier";
+                    points = [[0.05 0.9] [0.1 1.05]];
+                  }
+                ];
+              }
+              {
+                _args = [
+                  "winIn"
+                  {
+                    type = "bezier";
+                    points = [[0.1 1.1] [0.1 1.1]];
+                  }
+                ];
+              }
+              {
+                _args = [
+                  "winOut"
+                  {
+                    type = "bezier";
+                    points = [[0.3 0.3] [0 1]];
+                  }
+                ];
+              }
+              {
+                _args = [
+                  "liner"
+                  {
+                    type = "bezier";
+                    points = [[1 1] [1 1]];
+                  }
+                ];
+              }
+            ];
+
             animation = [
-              "windows         , 1,  4, overshot, slide"
-              "border          , 1, 10, default"
-              "fade            , 1, 10, default"
-              "workspaces      , 1,  6, default , fade"
-              "specialWorkspace, 1,  6, default , fade"
+              {
+                _args = [
+                  {
+                    leaf = "windows";
+                    enabled = true;
+                    speed = 6;
+                    bezier = "wind";
+                    style = "slide";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "windowsIn";
+                    enabled = true;
+                    speed = 6;
+                    bezier = "winIn";
+                    style = "slide";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "windowsOut";
+                    enabled = true;
+                    speed = 5;
+                    bezier = "winOut";
+                    style = "slide";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "windowsMove";
+                    enabled = true;
+                    speed = 5;
+                    bezier = "wind";
+                    style = "slide";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "border";
+                    enabled = true;
+                    speed = 1;
+                    bezier = "liner";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "borderangle";
+                    enabled = true;
+                    speed = 30;
+                    bezier = "liner";
+                    style = "loop";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "fade";
+                    enabled = true;
+                    speed = 10;
+                    bezier = "default";
+                  }
+                ];
+              }
+              {
+                _args = [
+                  {
+                    leaf = "workspaces";
+                    enabled = true;
+                    speed = 5;
+                    bezier = "wind";
+                  }
+                ];
+              }
             ];
+
+            # curve = {
+            #   _args = [
+            #     "overshoot"
+            #     {
+            #       type = "bezier";
+            #       points = [[0.13 0.99] [0.29 1.1]];
+            #     }
+            #   ];
+            # };
+
+            # animation = [
+            #   {
+            #     _args = [
+            #       {
+            #         leaf = "windows";
+            #         enabled = true;
+            #         speed = 4;
+            #         bezier = "overshoot";
+            #         style = "slide";
+            #       }
+            #     ];
+            #   }
+            #   {
+            #     _args = [
+            #       {
+            #         leaf = "border";
+            #         enabled = true;
+            #         speed = 10;
+            #         bezier = "default";
+            #       }
+            #     ];
+            #   }
+            #   {
+            #     _args = [
+            #       {
+            #         leaf = "fade";
+            #         enabled = true;
+            #         speed = 10;
+            #         bezier = "default";
+            #       }
+            #     ];
+            #   }
+            #   {
+            #     _args = [
+            #       {
+            #         leaf = "workspaces";
+            #         enabled = true;
+            #         speed = 6;
+            #         bezier = "default";
+            #         style = "fade";
+            #       }
+            #     ];
+            #   }
+            #   {
+            #     _args = [
+            #       {
+            #         leaf = "specialWorkspace";
+            #         enabled = true;
+            #         speed = 6;
+            #         bezier = "default";
+            #         style = "fade";
+            #       }
+            #     ];
+            #   }
+            # ];
+            #
+            dwindle = {
+              preserve_split = true;
+              special_scale_factor = 0.8;
+            };
+
+            misc = {
+              force_default_wallpaper = 0;
+              disable_hyprland_logo = true;
+            };
+
+            input = {
+              kb_layout = "us";
+
+              follow_mouse = 1;
+              sensitivity = 0;
+            };
           };
 
-          dwindle = {
-            preserve_split = true;
-            special_scale_factor = 0.8;
-          };
-
-          misc = {
-            force_default_wallpaper = 0;
-            disable_hyprland_logo = true;
-          };
-
-          input = {
-            kb_layout = "us";
-
-            follow_mouse = 1;
-            sensitivity = 0;
-          };
-
-          "$mod" = cfg.mod;
-          "$LMB" = "mouse:272";
-          "$RMB" = "mouse:273";
-
-          bindel = [
-            # ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%+"
-            # ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 1%-"
-
-            # Keyboard backlight
-            ", XF86KbdBrightnessUp, exec, brightnessctl -d *kbd* set +5%"
-            ", XF86KbdBrightnessDown, exec, brightnessctl -d *kbd* set 5%-"
+          bind = map mkBind [
+            {
+              keys = "${mod} + p";
+              cmd = "hl.dsp.exec_cmd(colourPicker)";
+            }
+            {
+              keys = "${mod} + escape";
+              cmd = "hl.dsp.exec_cmd(sessionScreen)";
+            }
+            {
+              keys = "${mod} + i";
+              cmd = "hl.dsp.exec_cmd(screenshotRegion)";
+            }
+            {
+              keys = "${mod} + SHIFT + I";
+              cmd = "hl.dsp.exec_cmd(screenshot)";
+            }
+            {
+              keys = "PRINT";
+              cmd = "hl.dsp.exec_cmd(screenshot)";
+            }
+            {
+              keys = "${mod} + C";
+              cmd = "hl.dsp.exec_cmd(copy)";
+            }
+            {
+              keys = "${mod} + D";
+              cmd = "hl.dsp.exec_cmd(drun)";
+            }
+            {
+              keys = "${mod} + B";
+              cmd = "hl.dsp.exec_cmd(browser)";
+            }
+            {
+              keys = "${mod} + T";
+              cmd = "hl.dsp.exec_cmd(terminal)";
+            }
+            {
+              keys = "${mod} + F";
+              cmd = "hl.dsp.exec_cmd(fileManager)";
+            }
+            {
+              keys = "${mod} + SHIFT + X";
+              cmd = "hl.dsp.exec_cmd(exitCommand)";
+            }
+            {
+              keys = "${mod} + SHIFT + Q";
+              cmd = "hl.dsp.window.close({window = \"activewindow\"})";
+            }
+            {
+              keys = "${mod} + SHIFT + F";
+              cmd = "hl.dsp.window.fullscreen()";
+            }
+            {
+              keys = "${mod} + SHIFT + Z";
+              cmd = "hl.dsp.window.float({action = \"toggle\", window = \"activewindow\"})";
+            }
+            {
+              keys = "${mod} + SHIFT + P";
+              cmd = "hl.dsp.window.pseudo({action = \"toggle\", window = \"activewindow\"})";
+            }
+            {
+              keys = "${mod} + SHIFT + S";
+              cmd = "hl.dsp.layout(\"togglesplit\")";
+            }
+            # Focus Directionals
+            {
+              keys = "${mod} + left";
+              cmd = "hl.dsp.focus({direction = \"l\"})";
+            }
+            {
+              keys = "${mod} + right";
+              cmd = "hl.dsp.focus({direction = \"r\"})";
+            }
+            {
+              keys = "${mod} + up";
+              cmd = "hl.dsp.focus({direction = \"u\"})";
+            }
+            {
+              keys = "${mod} + down";
+              cmd = "hl.dsp.focus({direction = \"d\"})";
+            }
+            {
+              keys = "${mod} + h";
+              cmd = "hl.dsp.focus({direction = \"l\"})";
+            }
+            {
+              keys = "${mod} + l";
+              cmd = "hl.dsp.focus({direction = \"r\"})";
+            }
+            {
+              keys = "${mod} + k";
+              cmd = "hl.dsp.focus({direction = \"u\"})";
+            }
+            {
+              keys = "${mod} + j";
+              cmd = "hl.dsp.focus({direction = \"d\"})";
+            }
+            # Window Moving Directionals
+            {
+              keys = "${mod} + SHIFT + H";
+              cmd = "hl.dsp.window.move({direction = \"l\", window = \"activewindow\"})";
+            }
+            {
+              keys = "${mod} + SHIFT + L";
+              cmd = "hl.dsp.window.move({direction = \"r\", window = \"activewindow\"})";
+            }
+            {
+              keys = "${mod} + SHIFT + K";
+              cmd = "hl.dsp.window.move({direction = \"u\", window = \"activewindow\"})";
+            }
+            {
+              keys = "${mod} + SHIFT + J";
+              cmd = "hl.dsp.window.move({direction = \"d\", window = \"activewindow\"})";
+            }
+            {
+              keys = "${mod} + W";
+              cmd = "hl.dsp.workspace.toggle_special(\"magic\")";
+            }
+            # Window Resizing
+            {
+              keys = "${mod} + ALT + H";
+              cmd = "hl.dsp.window.resize({ x = -10, y = 0, window = \"activewindow\" })";
+              flag = {repeating = true;};
+            }
+            {
+              keys = "${mod} + ALT + L";
+              cmd = "hl.dsp.window.resize({ x = 10, y = 0, window = \"activewindow\" })";
+              flag = {repeating = true;};
+            }
+            {
+              keys = "${mod} + ALT + K";
+              cmd = "hl.dsp.window.resize({ x = 0, y = -10, window = \"activewindow\" })";
+              flag = {repeating = true;};
+            }
+            {
+              keys = "${mod} + ALT + J";
+              cmd = "hl.dsp.window.resize({ x = 0, y = 10, window = \"activewindow\" })";
+              flag = {repeating = true;};
+            }
+            # Touchpad
+            {
+              keys = "XF86TouchpadToggle";
+              cmd = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled toggle\")";
+            }
+            {
+              keys = "XF86TouchpadOn";
+              cmd = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled true\")";
+            }
+            {
+              keys = "XF86TouchpadOff";
+              cmd = "hl.dsp.exec_cmd(\"hyprctl keyword device:*:enabled false\")";
+            }
+            {
+              keys = "${mod} + SHIFT + ${lmb}";
+              cmd = "hl.dsp.window.drag()";
+              flag = {mouse = true;};
+            }
+            {
+              keys = "${mod} + ALT + ${lmb}";
+              cmd = "hl.dsp.window.resize()";
+              flag = {mouse = true;};
+            }
           ];
-          bindl = [
-            # ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-            # ", XF86AudioPlay, exec, playerctl play-pause"
-            # ", XF86AudioPrev, exec, playerctl previous"
-            # ", XF86AudioNext, exec, playerctl next"
-          ];
-          binde = [
-            ##! Vim Style Window Resize
-            "$mod ALT, H, resizeactive, -10 0"
-            "$mod ALT, L, resizeactive, 10 0"
-            "$mod ALT, K, resizeactive, 0 -10"
-            "$mod ALT, J, resizeactive, 0 10"
-          ];
-          bindm = [
-            "$mod SHIFT, $LMB, movewindow"
-            "$mod ALT, $LMB, resizewindow"
-          ];
-          bind =
-            wsBindsCustom
-            ++ [
-              "$mod, p, exec, $colourPicker"
-
-              "$mod, escape, exec, $sessionScreen"
-
-              ##! Clipboard
-              "$mod, i, exec, $screenshotRegion"
-              "$mod SHIFT, I, exec, $screenshot"
-              ", PRINT, exec, $screenshot"
-              # "$mod, V, exec, $paste"
-              "$mod, C, exec, $copy"
-
-              "$mod, D, exec, $drun"
-              "$mod, B, exec, $browser"
-              "$mod, T, exec, $terminal"
-              "$mod, F, exec, $fileManager"
-
-              # "$mod SHIFT, X, exit"
-              "$mod SHIFT, X, exec, $exitCommand"
-              "$mod SHIFT, Q, killactive"
-              "$mod SHIFT, F, fullscreen"
-              "$mod SHIFT, Z, togglefloating"
-              "$mod SHIFT, P, pseudo"
-              "$mod SHIFT, S, layoutmsg, togglesplit"
-
-              # Window Focus
-              "$mod, left, movefocus, l"
-              "$mod, right, movefocus, r"
-              "$mod, up, movefocus, u"
-              "$mod, down, movefocus, d"
-
-              # Vim Style Window Focus
-              "$mod, h, movefocus, l"
-              "$mod, l, movefocus, r"
-              "$mod, k, movefocus, u"
-              "$mod, j, movefocus, d"
-
-              # Vim Window Movement
-              "$mod SHIFT, H, movewindow, l"
-              "$mod SHIFT, L, movewindow, r"
-              "$mod SHIFT, K, movewindow, u"
-              "$mod SHIFT, J, movewindow, d"
-
-              "$mod, W, togglespecialworkspace, magic"
-
-              # Touchpad
-              ", XF86TouchpadToggle, exec, hyprctl keyword device:*:enabled toggle"
-              ", XF86TouchpadOn, exec, hyprctl keyword device:*:enabled true"
-              ", XF86TouchpadOff, exec, hyprctl keyword device:*:enabled false"
-            ];
         };
       };
     });

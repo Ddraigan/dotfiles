@@ -24,7 +24,12 @@ in
     };
     config = lib.mkIf cfg.enable {
       wayland.windowManager.hyprland.settings.bind = lib.mkIf hyprland-config.enable [
-        "${hyprland-config.mod}, TAB, exec, ${uwsmUtils.wrap "hyprlock"}"
+        {
+          _args = [
+            "${hyprland-config.mod} + TAB"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"${uwsmUtils.wrap "hyprlock"}\")")
+          ];
+        }
       ];
       programs.hyprlock = {
         enable = true;

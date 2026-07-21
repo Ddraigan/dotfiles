@@ -5,7 +5,21 @@
 }: {
   config = {
     wayland.windowManager.hyprland.settings = {
-      monitorv2 = [
+      config = {
+        input = {
+          kb_layout = "us";
+          kb_variant = "dvorak";
+
+          touchpad = {
+            natural_scroll = true;
+          };
+        };
+
+        gestures = {
+          workspace = true;
+        };
+      };
+      monitor = [
         {
           output = "eDP-1";
           mode = "preferred";
@@ -14,19 +28,6 @@
           bitdepth = 8;
         }
       ];
-
-      input = {
-        kb_layout = "us";
-        kb_variant = "dvorak";
-
-        touchpad = {
-          natural_scroll = true;
-        };
-      };
-
-      gestures = {
-        workspace = true;
-      };
     };
   };
 }

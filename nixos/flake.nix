@@ -2,10 +2,10 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-unstable = {
@@ -24,10 +24,6 @@
     nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     dgop = {
       url = "github:AvengeMedia/dgop";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    dankMaterialShell = {
-      url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     noctalia = {
@@ -54,7 +50,7 @@
       inputs.hyprland.follows = "hyprland";
     };
     hypr-darkwindow = {
-      url = "github:micha4w/Hypr-DarkWindow"; # Make sure to change the tag to match your hyprland version
+      url = "github:micha4w/Hypr-DarkWindow";
       inputs.hyprland.follows = "hyprland";
     };
     solaar = {
@@ -129,9 +125,9 @@
 
     nixosConfigurations = {
       leon-pc = mkMachine "leon-pc" "x86_64-linux" {stable = false;};
-      leon-laptop = mkMachine "leon-laptop" "x86_64-linux";
+      leon-laptop = mkMachine "leon-laptop" "x86_64-linux" {stable = true;};
       leon-dell = mkMachine "leon-dell" "x86_64-linux" {stable = false;};
-      mynydd = mkMachine "mynydd" "x86_64-linux";
+      mynydd = mkMachine "mynydd" "x86_64-linux" {stable = true;};
       iso = mkIso "iso" "x86_64-linux";
     };
 
