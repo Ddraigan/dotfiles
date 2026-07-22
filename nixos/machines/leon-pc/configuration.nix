@@ -162,7 +162,7 @@ in {
       wifi.powersave = false;
     };
     firewall = {
-      allowedTCPPorts = [57621 4321];
+      allowedTCPPorts = [57621 4321 5201];
       allowedUDPPorts = [5353];
     };
   };
