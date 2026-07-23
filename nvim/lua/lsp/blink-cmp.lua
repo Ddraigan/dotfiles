@@ -4,7 +4,7 @@ return {
     event = "InsertEnter",
     dependencies = {
       "saghen/blink.lib",
-      -- "saghen/blink.pairs",
+      "saghen/blink.pairs",
       "rafamadriz/friendly-snippets",
       -- "moyiz/blink-emoji.nvim",
       "Kaiser-Yang/blink-cmp-avante",
