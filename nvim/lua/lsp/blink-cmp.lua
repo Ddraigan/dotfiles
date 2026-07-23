@@ -115,40 +115,40 @@ return {
     },
     opts_extend = { "sources.default" },
   },
-  -- {
-  --   "saghen/blink.pairs",
-  --   dependencies = "saghen/blink.lib",
-  --   build = function()
-  --     require("blink.pairs").build():pwait(60000)
-  --   end,
-  --   --- @module 'blink.pairs'
-  --   --- @type blink.pairs.Config
-  --   opts = {
-  --     mappings = {
-  --       enabled = true,
-  --       cmdline = true,
-  --       disabled_filetypes = {},
-  --       pairs = {},
-  --     },
-  --     highlights = {
-  --       enabled = false,
-  --       cmdline = true,
-  --       groups = {
-  --         "BlinkPairsOrange",
-  --         "BlinkPairsPurple",
-  --         "BlinkPairsBlue",
-  --       },
-  --       unmatched_group = "BlinkPairsUnmatched",
-  --
-  --       matchparen = {
-  --         enabled = true,
-  --         cmdline = false,
-  --         include_surrounding = false,
-  --         group = "BlinkPairsMatchParen",
-  --         priority = 250,
-  --       },
-  --     },
-  --     debug = false,
-  --   },
-  -- },
+  {
+    "saghen/blink.pairs",
+    dependencies = "saghen/blink.lib",
+    build = function()
+      require("blink.pairs").build():pwait(60000)
+    end,
+    --- @module 'blink.pairs'
+    --- @type blink.pairs.Config
+    opts = {
+      mappings = {
+        enabled = true,
+        cmdline = true,
+        disabled_filetypes = {},
+        pairs = {},
+      },
+      highlights = {
+        enabled = false,
+        cmdline = true,
+        groups = {
+          "BlinkPairsOrange",
+          "BlinkPairsPurple",
+          "BlinkPairsBlue",
+        },
+        unmatched_group = "BlinkPairsUnmatched",
+
+        matchparen = {
+          enabled = true,
+          cmdline = false,
+          include_surrounding = false,
+          group = "BlinkPairsMatchParen",
+          priority = 250,
+        },
+      },
+      debug = false,
+    },
+  },
 }
