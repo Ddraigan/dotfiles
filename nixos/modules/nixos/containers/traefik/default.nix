@@ -7,6 +7,24 @@
 }: let
   cfg = config.modules.nix.containers;
   traefikPath = "${cfg.dataPath}/traefik";
+  traefikDynamicConfig = pkgs.writeText "traefik-dynamic.yml" 
+    #yaml
+    ''
+    http:
+      routers:
+        truenas:
+          rule: "Host(`nas.${cfg.domain}`)"
+          entryPoints:
+            - "websecure"
+          service: "truenas-service"
+          tls:
+            certResolver: "certresolver"
+      services:
+        truenas-service:
+          loadBalancer:
+            servers:
+              - url: "http://192.168.1.150:80"
+  '';
 in {
   options.modules.nix.containers.traefik.enable = lib.mkEnableOption "Enable Traefik";
   config = lib.mkIf cfg.traefik.enable {
@@ -27,6 +45,7 @@ in {
           volumes = [
             "/var/run/docker.sock:/var/run/docker.sock"
             "${traefikPath}:/data"
+            "${traefikDynamicConfig}:/dynamic.yml:ro"
             # "${import ./traefikconf.nix {inherit pkgs config containerUtils;}}:/etc/traefik/traefik.yaml:ro"
           ];
           environmentFiles = [
@@ -49,6 +68,11 @@ in {
           cmd = [
             "--api.dashboard=true"
             "--providers.docker=true"
+
+            # Dynamic config for TrueNAS
+            "--providers.file.filename=/dynamic.yml"
+            "--providers.file.watch=true"
+
             "--entrypoints.web.address=:80"
             "--entrypoints.web.http.redirections.entrypoint.to=websecure"
             "--entrypoints.web.http.redirections.entrypoint.scheme=https"
