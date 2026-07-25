@@ -119,7 +119,7 @@ in {
       };
 
       sonarr = {
-        image = "linuxserver/sonarr:4.0";
+        image = "linuxserver/sonarr:latest";
         volumes = [
           "${dataPaths.sonarr}:/config"
           "${storagePaths.base}:/storage"
