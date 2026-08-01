@@ -11,6 +11,8 @@ in {
     ./homeass
     ./cfddns
     ./uptime-kuma
+    ./portainer
+    ./headscale
     ./jellyfin
     ./downloads
   ];

@@ -50,11 +50,12 @@ in {
     boot.kernelModules = [
       "iptable_filter"
       "iptable_nat"
+      "iptable_mangle"
       "ip6table_filter"
     ];
     virtualisation.oci-containers.containers = {
       qbittorrent = {
-        image = "binhex/arch-qbittorrentvpn:5.1";
+        image = "binhex/arch-qbittorrentvpn:5.2";
         ports = [
           "6881:6881"
           "6881:6881/udp"
@@ -91,6 +92,9 @@ in {
           PUID = "99";
           PGID = "100";
         };
+        # extraOptions = [
+        #   "--cap-add=NET_ADMIN"
+        # ];
         capabilities = {
           net_admin = true;
         };

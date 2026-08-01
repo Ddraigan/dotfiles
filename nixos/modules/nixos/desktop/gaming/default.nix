@@ -41,7 +41,6 @@
       gamescope = {
         enable = true;
         capSysNice = true;
-        enableWsi = true;
       };
       gamemode = {
         enable = true;

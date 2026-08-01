@@ -17,6 +17,8 @@
       traefik.enable = true;
       homeass.enable = true;
       cfddns.enable = true;
+      portainer.enable = true;
+      headscale.enable = false;
       uptime-kuma.enable = true;
       jellyfin.enable = true;
       downloads.enable = true;

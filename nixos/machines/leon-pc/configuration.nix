@@ -9,7 +9,7 @@
 in {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/nixos/secureboot.nix
+    # ../../modules/nixos/secureboot.nix
   ];
 
   modules.nix = {
@@ -50,6 +50,12 @@ in {
     "/mnt/isa/media" = {
       device = "192.168.1.150:/mnt/isa/media";
       fsType = "nfs";
+    };
+  };
+
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
     };
   };
 
