@@ -7,93 +7,89 @@
 }: let
   cfg = config.modules.nix.containers;
   headscalePath = "${cfg.dataPath}/headscale";
-  headplanePath = "${cfg.dataPath}/headplane";
-  headscaleConfig = pkgs.writeText "headscale-config.yaml" ''
-    server_url: http://127.0.0.1:8080
-    listen_addr: 0.0.0.0:8080
-    metrics_addr: 127.0.0.1:9090
+  headscaleConfig =
+    pkgs.writeText "headscale-config.yaml"
+    #yaml
+    ''
+      server_url: http://${cfg.domain}:8080
 
-    noise:
-      private_key_path: /var/lib/headscale/noise_private.key
+      listen_addr: 0.0.0.0:8080
+      metrics_listen_addr: 127.0.0.1:9090
 
-    prefixes:
-      v4: 100.64.0.0/10
-      v6: fd7a:115c:a1e0::/48
+      ip_prefixes:
+        - 100.64.0.0/10
+        - fd7a:115c:a1e0::/48
 
-    database:
-      type: sqlite3
-      sqlite:
-        path: /var/lib/headscale/db.sqlite
+      db_type: sqlite3
+      db_path: /var/lib/headscale/db.sqlite
 
-    base_domain: tailnet.local
+      derp:
+        server:
+          enabled: true
+          region_id: 999
+          region_code: "headscale"
+          region_name: "Headscale Embedded DERP"
+          # This handles NAT traversal over UDP, similar to WireGuard
+          stun_listen_addr: "0.0.0.0:3478"
+        urls:
+          - https://tailscale.com
 
-    dns:
-      magic_dns: true
-      base_domain: tailnet.local
-      override_local_dns: true
-      nameservers:
-        global:
-          - 1.1.1.1
-          - 8.8.8.8
+      dns:
+        magic_dns: true
+        base_domain: ${cfg.domain}
+        nameservers:
+          - 192.168.1.22
+          # - 1.1.1.1
 
-    derp:
-      server:
-        enabled: false
-      urls:
-        - https://controlplane.tailscale.com/derpmap/default
-  '';
+      tls_letsencrypt_hostname: ""
+      tls_letsencrypt_cache_dir: ""
+      tls_letsencrypt_support_email: ""
+      tls_cert_path: ""
+      tls_key_path: ""
+
+      log:
+        level: info
+        format: text
+
+      policy:
+        mode: file
+        path: ""
+    '';
 in {
   options.modules.nix.containers.headscale.enable = lib.mkEnableOption "Enable Headscale and Headplane Containers";
 
   config = lib.mkIf cfg.headscale.enable {
     networking.firewall = {
-      allowedTCPPorts = [3543];
-      allowedUDPPorts = [3543];
+      allowedTCPPorts = [8080];
+      allowedUDPPorts = [3478];
     };
     systemd.tmpfiles.rules = [
       "d ${headscalePath}/config 0755 ${cfg.mainUser} ${cfg.mainUser} -"
       "d ${headscalePath}/lib 0755 ${cfg.mainUser} ${cfg.mainUser} -"
-      "d ${headplanePath}/config 0755 ${cfg.mainUser} ${cfg.mainUser} -"
-      "d ${headplanePath}/lib 0755 ${cfg.mainUser} ${cfg.mainUser} -"
     ];
     virtualisation.oci-containers.containers = {
       headscale = {
         image = "headscale/headscale:0.26.0";
         autoStart = true;
         cmd = ["serve"];
-        # ports = ["3543:3543"];
+        ports = [
+          "8080:8080"
+          "3478:3478/udp"
+        ];
         volumes = [
-          "${headscalePath}/config:/etc/headscale"
+          "${headscaleConfig}:/etc/headscale/config.yaml:ro"
           "${headscalePath}/lib:/var/lib/headscale"
         ];
         environment = {
           TZ = config.time.timeZone;
         };
-        labels = let
-          name = "headscale";
-        in {
-          "traefik.enable" = "true";
-          "traefik.http.routers.${name}.rule" = "PathPrefix(`/`) && Host(`${name}.${cfg.domain}`)";
-          "traefik.http.routers.${name}.entrypoints" = "websecure";
-          "traefik.http.routers.${name}.tls" = "true";
-
-          "traefik.http.services.${name}.loadbalancer.server.port" = "3543";
-        };
-      };
-      headscale-ui = {
-        image = "ghcr.io/gurucomputing/headscale-ui:latest";
-        autoStart = true;
-        # ports = ["3544:80"];
-        labels = let
-          name = "headscale";
-        in {
-          "traefik.enable" = "true";
-          "traefik.http.routers.${name}.rule" = "PathPrefix(`/web`) && Host(`${name}.${cfg.domain}`)";
-          "traefik.http.routers.${name}.entrypoints" = "websecure";
-          "traefik.http.routers.${name}.tls" = "true";
-
-          "traefik.http.services.${name}.loadbalancer.server.port" = "3544";
-        };
+        # labels = let
+        #   name = "headscale";
+        # in
+        #   containerUtils.mkTraefikLabels {
+        #     name = name;
+        #     port = 8080;
+        #   };
       };
     };
   };
