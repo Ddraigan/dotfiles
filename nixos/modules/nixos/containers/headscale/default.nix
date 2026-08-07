@@ -57,37 +57,11 @@ in {
       "d ${headplanePath}/lib 0755 ${cfg.mainUser} ${cfg.mainUser} -"
     ];
     virtualisation.oci-containers.containers = {
-      headplane = {
-        image = "ghcr.io/tale/headplane:latest";
-        autoStart = true;
-        volumes = [
-          "${headplanePath}/config:/etc/headplane"
-          "${headplanePath}/lib:/var/lib/headplane"
-          # "${headscalePath}:/etc/headscale/config.yaml"
-          # "${headscalePath}:/etc/headscale/dns_records.json"
-          "/var/run/docker.sock:/var/run/docker.sock:ro"
-        ];
-        environment = {
-          TZ = config.time.timeZone;
-        };
-        labels = let
-          name = "headplane";
-          port = 3000;
-        in {
-          "traefik.enable" = "true";
-          "traefik.http.routers.headplane.rule" = "Host(`headscale.${cfg.domain}`) && PathPrefix(`/admin`)";
-          "traefik.http.routers.${name}.entrypoints" = "websecure";
-          "traefik.http.routers.${name}.tls" = "true";
-
-          "traefik.http.services.${name}.loadbalancer.server.port" = toString port;
-        };
-      };
-
       headscale = {
         image = "headscale/headscale:0.26.0";
         autoStart = true;
         cmd = ["serve"];
-        ports = ["3543:3543"];
+        # ports = ["3543:3543"];
         volumes = [
           "${headscalePath}/config:/etc/headscale"
           "${headscalePath}/lib:/var/lib/headscale"
@@ -97,29 +71,29 @@ in {
         };
         labels = let
           name = "headscale";
-        in
-          containerUtils.mkTraefikLabels {
-            name = name;
-            port = 3543;
-            extraLabels = {
-              "me.tale.headplane.target" = "headscale";
-              "traefik.http.routers.headscale.rule" = "Host(`headscale.${cfg.domain}`)";
+        in {
+          "traefik.enable" = "true";
+          "traefik.http.routers.${name}.rule" = "PathPrefix(`/`) && Host(`${name}.${cfg.domain}`)";
+          "traefik.http.routers.${name}.entrypoints" = "websecure";
+          "traefik.http.routers.${name}.tls" = "true";
 
-              # CORS Middleware
-              "traefik.http.routers.headscale.middlewares" = "cors";
-              "traefik.http.middlewares.cors.headers.accesscontrolallowheaders" = "*";
-              "traefik.http.middlewares.cors.headers.accesscontrolallowmethods" = "GET,POST,PUT";
-              "traefik.http.middlewares.cors.headers.accesscontrolalloworiginlist" = "https://headscale.${cfg.domain}";
-              "traefik.http.middlewares.cors.headers.accesscontrolmaxage" = "100";
-              "traefik.http.middlewares.cors.headers.addvaryheader" = "true";
+          "traefik.http.services.${name}.loadbalancer.server.port" = "3543";
+        };
+      };
+      headscale-ui = {
+        image = "ghcr.io/gurucomputing/headscale-ui:latest";
+        autoStart = true;
+        # ports = ["3544:80"];
+        labels = let
+          name = "headscale";
+        in {
+          "traefik.enable" = "true";
+          "traefik.http.routers.${name}.rule" = "PathPrefix(`/web`) && Host(`${name}.${cfg.domain}`)";
+          "traefik.http.routers.${name}.entrypoints" = "websecure";
+          "traefik.http.routers.${name}.tls" = "true";
 
-              # Root to /admin redirect (rewrite)
-              "traefik.http.routers.rewrite.rule" = "Host(`headscale.${cfg.domain}`) && Path(`/`)";
-              "traefik.http.routers.rewrite.service" = "headscale";
-              "traefik.http.routers.rewrite.middlewares" = "rewrite";
-              "traefik.http.middlewares.rewrite.addprefix.prefix" = "/admin";
-            };
-          };
+          "traefik.http.services.${name}.loadbalancer.server.port" = "3544";
+        };
       };
     };
   };
