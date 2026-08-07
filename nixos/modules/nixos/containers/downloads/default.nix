@@ -84,7 +84,7 @@ in {
           STRICT_PORT_FORWARD = "no";
           ENABLE_PRIVOXY = "yes";
           WEBUI_PORT = "8120";
-          LAN_NETWORK = "192.168.1.0/24";
+          LAN_NETWORK = "10.69.1.0/24";
           NAME_SERVERS = "1.1.1.1,1.0.0.1";
           VPN_INPUT_PORTS = "9117,8989,7878,9696";
           VPN_OUTPUT_PORTS = "9117,8989,7878,9696";

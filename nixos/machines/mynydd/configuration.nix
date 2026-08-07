@@ -49,7 +49,7 @@
 
   fileSystems = {
     "/mnt/isa/media" = {
-      device = "192.168.1.150:/mnt/isa/media";
+      device = "10.69.1.21:/mnt/isa/media";
       fsType = "nfs";
     };
   };
@@ -78,7 +78,7 @@
       daemon.settings = {
         data-root = "/docker-data";
         userland-proxy = false;
-        dns = ["192.168.1.22"];
+        dns = ["10.69.1.11"];
       };
     };
     oci-containers = {

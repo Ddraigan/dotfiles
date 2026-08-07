@@ -48,7 +48,7 @@ in {
 
   fileSystems = {
     "/mnt/isa/media" = {
-      device = "192.168.1.150:/mnt/isa/media";
+      device = "isa.ddraigan.com:/mnt/isa/media";
       fsType = "nfs";
     };
   };

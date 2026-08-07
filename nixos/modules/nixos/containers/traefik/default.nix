@@ -13,7 +13,7 @@
     http:
       routers:
         truenas:
-          rule: "Host(`nas.${cfg.domain}`)"
+          rule: "Host(`isa.${cfg.domain}`)"
           entryPoints:
             - "websecure"
           service: "truenas-service"
@@ -23,7 +23,7 @@
         truenas-service:
           loadBalancer:
             servers:
-              - url: "http://192.168.1.150:80"
+              - url: "http://10.69.1.21:80"
   '';
 in {
   options.modules.nix.containers.traefik.enable = lib.mkEnableOption "Enable Traefik";

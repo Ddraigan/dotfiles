@@ -38,7 +38,7 @@
         magic_dns: true
         base_domain: ${cfg.domain}
         nameservers:
-          - 192.168.1.22
+          - 10.69.1.11
           # - 1.1.1.1
 
       tls_letsencrypt_hostname: ""
@@ -56,7 +56,7 @@
         path: ""
     '';
 in {
-  options.modules.nix.containers.headscale.enable = lib.mkEnableOption "Enable Headscale and Headplane Containers";
+  options.modules.nix.containers.headscale.enable = lib.mkEnableOption "Enable Headscale Container";
 
   config = lib.mkIf cfg.headscale.enable {
     networking.firewall = {
