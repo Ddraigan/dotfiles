@@ -12,6 +12,13 @@
     inputs.nixos-wsl.nixosModules.default
   ];
 
+  environment = {
+    systemPackages = [
+      pkgs.rustup
+      pkgs.nixd
+    ];
+  };
+
   wsl.enable = true;
   wsl.defaultUser = "leon";
 

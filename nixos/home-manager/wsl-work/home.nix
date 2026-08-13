@@ -84,5 +84,8 @@
       pkgs.ripgrep
       pkgs.fzf
     ];
+    shellAliases = {
+      byebyewindows = "export PATH=$(echo $PATH | tr ':' '\n' | grep -v '/mnt/c/' | tr '\n' ':')";
+    };
   };
 }
