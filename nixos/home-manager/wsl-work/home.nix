@@ -76,6 +76,7 @@
       pkgs.just
       inputs.diff-tool.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.dgop
+      inputs.opencode-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
 
       pkgs.unzip
       pkgs.zip
