@@ -14,7 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nix-test.url = "path:/home/leon/Downloads/test/test";
-    opencode-flake.url = "github:aodhanhayter/opencode-flake";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
