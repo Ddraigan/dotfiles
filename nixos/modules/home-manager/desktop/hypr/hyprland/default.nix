@@ -11,9 +11,10 @@
   cfg = config.modules.desktop.hypr.hyprland;
   sys = pkgs.stdenv.hostPlatform.system;
 in {
-  imports = [
-    ./hosts/${profileName}.nix
-  ];
+  imports = let
+    hostFile = ./hosts/${profileName}.nix;
+  in
+    lib.optional (builtins.pathExists hostFile) hostFile;
   options.modules.desktop.hypr.hyprland = {
     enable = lib.mkEnableOption "Enable Hyprland";
     mod = lib.mkOption {

@@ -3,31 +3,33 @@
   config,
   ...
 }: {
-  config = {
-    wayland.windowManager.hyprland.settings = {
-      config = {
-        input = {
-          kb_layout = "us";
-          kb_variant = "dvorak";
+  config =
+    lib.mkIf config.modules.desktop.hypr.hyprland.enable
+    {
+      wayland.windowManager.hyprland.settings = {
+        config = {
+          input = {
+            kb_layout = "us";
+            kb_variant = "dvorak";
 
-          touchpad = {
-            natural_scroll = true;
+            touchpad = {
+              natural_scroll = true;
+            };
+          };
+
+          gestures = {
+            workspace = true;
           };
         };
-
-        gestures = {
-          workspace = true;
-        };
+        monitor = [
+          {
+            output = "eDP-1";
+            mode = "preferred";
+            position = "0x0";
+            scale = 1;
+            bitdepth = 8;
+          }
+        ];
       };
-      monitor = [
-        {
-          output = "eDP-1";
-          mode = "preferred";
-          position = "0x0";
-          scale = 1;
-          bitdepth = 8;
-        }
-      ];
     };
-  };
 }
