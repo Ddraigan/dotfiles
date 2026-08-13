@@ -30,6 +30,9 @@
   };
   modules = {
     theme.stylix.enable = true;
+    desktop = {
+	zen.enable = false;
+    };
     terminal = {
       nvim.enable = true;
       fastfetch.enable = true;
@@ -62,6 +65,8 @@
       };
     };
   };
+
+  dconf.enable = false;
 
   home = {
     username = "leon";
