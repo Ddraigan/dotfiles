@@ -15,6 +15,7 @@ in {
     ./headscale
     ./jellyfin
     ./downloads
+    ./authentik
   ];
   options.modules.nix.containers = with lib; {
     domain = mkOption {
