@@ -143,7 +143,7 @@ in {
       };
 
       radarr = {
-        image = "binhex/arch-radarr:5.25";
+        image = "binhex/arch-radarr:latest";
         volumes = [
           "${dataPaths.radarr}:/config"
           "${storagePaths.base}:/storage"
