@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -129,12 +130,14 @@
       leon-dell = mkMachine "leon-dell" "x86_64-linux" {stable = false;};
       mynydd = mkMachine "mynydd" "x86_64-linux" {stable = true;};
       iso = mkIso "iso" "x86_64-linux";
+      wsl-work = mkMachine "wsl-work" "x86_64-linux" {stable = false;};
     };
 
     homeConfigurations = {
       leon = mkHome "leon" "x86_64-linux" {stable = false;};
       leon-dell = mkHome "leon-dell" "x86_64-linux" {stable = false;};
       keane = mkHome "keane" "x86_64-linux";
+      wsl-work = mkHome "wsl-work" "x86_64-linux" {stable = false;};
     };
   };
 }
