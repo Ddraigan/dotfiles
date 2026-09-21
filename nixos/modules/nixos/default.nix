@@ -11,7 +11,6 @@
     ./containers
     # ./secureboot.nix
     ./sunshine.nix
-    ./solaar.nix
     ./quicksync.nix
   ];
 }

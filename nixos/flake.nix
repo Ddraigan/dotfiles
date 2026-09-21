@@ -13,7 +13,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    nix-test.url = "path:/home/leon/Downloads/test/test";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -53,10 +52,6 @@
     hypr-darkwindow = {
       url = "github:micha4w/Hypr-DarkWindow";
       inputs.hyprland.follows = "hyprland";
-    };
-    solaar = {
-      url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     diff-tool.url = "github:ddraigan/diff-tool";
   };

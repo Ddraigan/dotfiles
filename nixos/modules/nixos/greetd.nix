@@ -42,7 +42,7 @@
       };
     };
     environment.etc."greetd/skyline.jpg".source = ./skyline.jpg;
-    programs.regreet = {
+    services.displayManager.regreet = {
       enable = true;
       settings = {
         env = {

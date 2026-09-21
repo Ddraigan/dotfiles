@@ -20,7 +20,6 @@ in {
       gaming.enable = true;
     };
     sunshine.enable = true;
-    solaar.enable = true;
   };
 
   users = {
@@ -132,7 +131,7 @@ in {
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
   in {
     settings = {
-      experimental-features = "nix-command flakes";
+      experimental-features = ["nix-command" "flakes"];
       nix-path = config.nix.nixPath;
       substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
@@ -142,6 +141,7 @@ in {
   programs = {
     gdk-pixbuf.modulePackages = [pkgs.librsvg];
     dconf.enable = true;
+    solaar.enable = true;
     zsh.enable = true;
     nix-ld.enable = true;
     localsend = {
