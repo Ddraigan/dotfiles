@@ -6,6 +6,9 @@
     ...
   }: {
     config = {
+      home.shellAliases = {
+        steamos = "uwsm app -- gamescope -W 2560 -H 1440 -- steam -steamos3 -gamepadui -steamdeck -steampal";
+      };
       programs.zsh = {
         enable = true;
         syntaxHighlighting.enable = true;
