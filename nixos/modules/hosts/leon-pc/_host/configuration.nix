@@ -157,8 +157,21 @@ in {
   virtualisation = {
     docker.enable = true;
     vmVariant = {
-      memorySize = 4096;
-      cores = 4;
+      virtualisation = {
+        memorySize = 4096;
+        cores = 4;
+        graphics = true;
+        forwardPorts = [
+          {
+            from = "host";
+            host.port = 2222;
+            guest.port = 22;
+          }
+        ];
+      };
+      users.users.leon = {
+        initialPassword = "changeme";
+      };
     };
     # qemu.options = [
     #   "-device virtio-vga-gl"
