@@ -26,11 +26,6 @@ in {
         in
           pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
       };
-      keane = {
-        isNormalUser = true;
-        description = "Keane";
-        extraGroups = ["audio" "sound" "video" "input" "pipewire"];
-      };
     };
   };
 
@@ -72,7 +67,7 @@ in {
     upower.enable = true;
     factorio = {
       enable = false;
-      openFirewall = true;
+      openFirewall = false;
     };
     udev.packages = with pkgs; [via android-tools];
     udisks2 = {
@@ -122,8 +117,6 @@ in {
     settings = {
       experimental-features = ["nix-command" "flakes"];
       nix-path = config.nix.nixPath;
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
   };
 
