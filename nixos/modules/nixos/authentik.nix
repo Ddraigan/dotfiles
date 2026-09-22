@@ -32,10 +32,17 @@
         volumes = [
           "${authentikPath}/postgres:/var/lib/postgresql/data"
         ];
+        extraOptions = [
+          "--health-cmd=pg_isready -U authentik -d authentik"
+          "--health-interval=10s"
+          "--health-timeout=5s"
+          "--health-retries=5"
+          "--health-start-period=20s"
+        ];
       };
 
       authentik-server = {
-        image = "ghcr.io/goauthentik/server:2026.8.2";
+        image = "ghcr.io/goauthentik/server:2026.8.3";
         cmd = ["server"];
         dependsOn = ["authentik-postgres"];
         networks = ["container:authentik-postgres"];
@@ -43,6 +50,7 @@
           AUTHENTIK_POSTGRESQL__HOST = "localhost";
           AUTHENTIK_POSTGRESQL__NAME = "authentik";
           AUTHENTIK_POSTGRESQL__USER = "authentik";
+          AUTHENTIK_WEB__BASE_URL = "https://authentik.${cfg.domain}";
           TZ = config.time.timeZone;
         };
         environmentFiles = [secretsFile];
@@ -64,7 +72,7 @@
       };
 
       authentik-worker = {
-        image = "ghcr.io/goauthentik/server:2026.8.2";
+        image = "ghcr.io/goauthentik/server:2026.8.3";
         cmd = ["worker"];
         dependsOn = ["authentik-postgres"];
         networks = ["container:authentik-postgres"];
@@ -72,6 +80,9 @@
           AUTHENTIK_POSTGRESQL__HOST = "localhost";
           AUTHENTIK_POSTGRESQL__NAME = "authentik";
           AUTHENTIK_POSTGRESQL__USER = "authentik";
+          AUTHENTIK_WEB__BASE_URL = "https://authentik.${cfg.domain}";
+          AUTHENTIK_LISTEN__HTTP = "0.0.0.0:9100";
+          AUTHENTIK_LISTEN__METRICS = "0.0.0.0:9301";
           TZ = config.time.timeZone;
         };
         environmentFiles = [secretsFile];
