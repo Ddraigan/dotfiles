@@ -7,14 +7,6 @@
       ...
     }:
     {
-      options.modules.terminal.wezterm = {
-        primaryTerminal = lib.mkOption {
-          type = lib.types.bool;
-          default = false;
-          description = "Set as primary terminal global value";
-        };
-      };
-
       config = {
         programs.wezterm = {
           enable = true;

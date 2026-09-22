@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.zoxide =
+  flake.modules.homeManager.cmdline =
     {
       pkgs,
       lib,
@@ -7,15 +7,14 @@
       ...
     }:
     {
-      options.modules.terminal.zoxide.primaryTerminal = lib.mkEnableOption "Set as primary terminal global value";
-
       config = {
         home.shellAliases = {
-          cd = "z";
+          ls = "eza";
         };
-        programs.zoxide = {
+        programs.eza = {
           enable = true;
           enableZshIntegration = true;
+          icons = "auto";
         };
       };
     };

@@ -20,15 +20,9 @@
         uwsm
         fonts
         stylix
-        terminal-core
         nvim
-        starship
-        tmux
         wezterm
-        zoxide
-        eza
-        zsh
-        fastfetch
+        cmdline
         noctalia
         gaming
         obs

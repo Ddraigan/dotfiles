@@ -29,9 +29,6 @@
         pkgs.nemo-preview
       ];
     };
-    terminal = {
-      wezterm.primaryTerminal = true;
-    };
   };
 
   nixpkgs = {

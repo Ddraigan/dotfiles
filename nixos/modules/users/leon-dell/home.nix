@@ -17,15 +17,9 @@
       config.flake.modules.homeManager.uwsm
       config.flake.modules.homeManager.fonts
       config.flake.modules.homeManager.stylix
-      config.flake.modules.homeManager.terminal-core
       config.flake.modules.homeManager.nvim
-      config.flake.modules.homeManager.starship
-      config.flake.modules.homeManager.tmux
+      config.flake.modules.homeManager.cmdline
       config.flake.modules.homeManager.wezterm
-      config.flake.modules.homeManager.zoxide
-      config.flake.modules.homeManager.eza
-      config.flake.modules.homeManager.zsh
-      config.flake.modules.homeManager.fastfetch
       config.flake.modules.homeManager.noctalia
       config.flake.modules.homeManager.hyprland
       config.flake.modules.homeManager.hyprlock
