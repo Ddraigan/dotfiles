@@ -11,13 +11,16 @@
     extraSpecialArgs = {
       inherit inputs;
     };
-    modules = [
-      ./_host/home.nix
-      config.flake.modules.homeManager.shared
-      config.flake.modules.homeManager.fonts
-      config.flake.modules.homeManager.stylix
-      config.flake.modules.homeManager.nvim
-      config.flake.modules.homeManager.cmdline
-    ];
+    modules =
+      [
+        ./_host/home.nix
+      ]
+      ++ (with config.flake.modules.homeManager; [
+        shared
+        fonts
+        stylix
+        nvim
+        cmdline
+      ]);
   };
 }
