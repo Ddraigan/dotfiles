@@ -1,11 +1,13 @@
-{
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
-  options.modules.nix.quicksync.enable = lib.mkEnableOption "Enable Intel QucikSync";
-  config = lib.mkIf config.modules.nix.quicksync.enable {
+{...}: {
+  flake.modules.nixos.quicksync =
+    {
+      lib,
+      pkgs,
+      config,
+      ...
+    }:
+    {
+      config = {
     boot = {
       kernelParams = ["i915.enable_guc=2"];
     };
@@ -18,4 +20,5 @@
       ];
     };
   };
+};
 }

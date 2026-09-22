@@ -1,13 +1,13 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: let
-  cfg = config.modules.nix.sunshine;
-in {
-  options = {modules.nix.sunshine.enable = lib.mkEnableOption "Enable Sunshine";};
-  config = lib.mkIf cfg.enable {
+{...}: {
+  flake.modules.nixos.sunshine =
+    {
+      lib,
+      pkgs,
+      config,
+      ...
+    }:
+    {
+      config = {
     services.sunshine = {
       enable = true;
       autoStart = true;
@@ -27,4 +27,5 @@ in {
       ];
     };
   };
+};
 }

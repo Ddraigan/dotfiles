@@ -1,10 +1,18 @@
+# DO-NOT-EDIT. This file was auto-generated using github:denful/flake-file.
+# Use `nix run .#write-flake` to regenerate it.
 {
   description = "Nixos config flake";
 
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
+
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    dgop = {
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    diff-tool.url = "github:ddraigan/diff-tool";
+    flake-file.url = "github:denful/flake-file";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,126 +21,37 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.1.0";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    stylix = {
-      url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
-    dgop = {
-      url = "github:AvengeMedia/dgop";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake/beta";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.home-manager.follows = "home-manager";
-    };
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-    hyprlock = {
-      url = "github:hyprwm/hyprlock";
-    };
-    hyprsplit = {
-      url = "github:shezdy/hyprsplit";
-      inputs.hyprland.follows = "hyprland";
-    };
     hypr-darkwindow = {
       url = "github:micha4w/Hypr-DarkWindow";
       inputs.hyprland.follows = "hyprland";
     };
-    diff-tool.url = "github:ddraigan/diff-tool";
-  };
-
-  outputs = {nixpkgs, ...} @ inputs: let
-    mkMachine = name: system: {stable ? true}: let
-      pkgsSource =
-        if stable
-        then nixpkgs.lib
-        else inputs.nixpkgs-unstable.lib;
-    in
-      pkgsSource.nixosSystem {
-        system = system;
-        specialArgs = {
-          hostName = name;
-          inherit inputs;
-        };
-        modules = [
-          ./machines/${name}/configuration.nix
-          ./modules/shared
-          ./modules/nixos
-        ];
-      };
-
-    mkIso = name: system:
-      nixpkgs.lib.nixosSystem
-      {
-        system = system;
-        specialArgs = {
-          hostName = name;
-          inherit inputs;
-        };
-        modules = [
-          ./machines/${name}/configuration.nix
-        ];
-      };
-
-    mkHome = name: system: {stable ? true}: let
-      hmLib =
-        if stable
-        then inputs.home-manager.lib
-        else inputs.home-manager-unstable.lib;
-      pkgsSource =
-        if stable
-        then nixpkgs
-        else inputs.nixpkgs-unstable;
-    in
-      hmLib.homeManagerConfiguration {
-        pkgs = import pkgsSource {
-          inherit system;
-          config.allowUnfree = true;
-        };
-
-        extraSpecialArgs = {
-          profileName = name;
-          inherit inputs;
-        };
-
-        modules = [
-          ./home-manager/${name}/home.nix
-          ./modules/shared
-          ./modules/home-manager
-        ];
-      };
-  in {
-    overlays = import ./overlays {inherit inputs;};
-
-    nixosConfigurations = {
-      leon-pc = mkMachine "leon-pc" "x86_64-linux" {stable = false;};
-      leon-laptop = mkMachine "leon-laptop" "x86_64-linux" {stable = true;};
-      leon-dell = mkMachine "leon-dell" "x86_64-linux" {stable = false;};
-      mynydd = mkMachine "mynydd" "x86_64-linux" {stable = true;};
-      iso = mkIso "iso" "x86_64-linux";
-      wsl-work = mkMachine "wsl-work" "x86_64-linux" {stable = false;};
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprlock.url = "github:hyprwm/hyprlock";
+    hyprsplit = {
+      url = "github:shezdy/hyprsplit";
+      inputs.hyprland.follows = "hyprland";
     };
-
-    homeConfigurations = {
-      leon = mkHome "leon" "x86_64-linux" {stable = false;};
-      leon-dell = mkHome "leon-dell" "x86_64-linux" {stable = false;};
-      keane = mkHome "keane" "x86_64-linux";
-      wsl-work = mkHome "wsl-work" "x86_64-linux" {stable = false;};
+    import-tree.url = "github:denful/import-tree";
+    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake/beta";
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs-unstable";
+      };
     };
   };
 }

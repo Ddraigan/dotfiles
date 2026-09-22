@@ -1,0 +1,46 @@
+{...}: {
+  flake.modules.homeManager.wezterm =
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
+    {
+      options.modules.terminal.wezterm = {
+        primaryTerminal = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+          description = "Set as primary terminal global value";
+        };
+      };
+
+      config = {
+        programs.wezterm = {
+          enable = true;
+          package = pkgs.wezterm;
+          settings = {
+            enable_wayland = true;
+            color_scheme = "Catppuccin Mocha";
+            colors = {
+              background = "transparent";
+            };
+            enable_tab_bar = false;
+            automatically_reload_config = true;
+            window_background_opacity = 0;
+            window_background_image_hsb = {
+              hue = 1.0;
+              saturation = 1.0;
+              brightness = 0.25;
+            };
+            use_dead_keys = false;
+            font =
+              lib.generators.mkLuaInline
+              #lua
+              ''wezterm.font("Hack Nerd Font")'';
+            font_size = 16.0;
+          };
+        };
+      };
+    };
+}
