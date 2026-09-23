@@ -37,7 +37,7 @@
         cmdline
         base
         hyprland-de
-        shared
+        colours
         fonts
         stylix
         nvim

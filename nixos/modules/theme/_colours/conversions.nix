@@ -1,7 +1,7 @@
 {
-  nixpkgs-lib,
+  lib,
 }: let
-  math = import ./math.nix {inherit nixpkgs-lib;};
+  math = import ./math.nix {inherit lib;};
   hexToDecMap = {
     "0" = 0;
     "1" = 1;
@@ -61,7 +61,7 @@
     => 10
   */
   hexCharToDec = hex: let
-    inherit (nixpkgs-lib) toLower;
+    inherit (lib) toLower;
     lowerHex = toLower hex;
   in
     if builtins.stringLength hex != 1
@@ -87,7 +87,7 @@ in rec {
     => 11259375
   */
   hexToDec = hex: let
-    inherit (nixpkgs-lib) stringToCharacters reverseList imap0 foldl;
+    inherit (lib) stringToCharacters reverseList imap0 foldl;
     decimals = builtins.map hexCharToDec (stringToCharacters hex);
     decimalsAscending = reverseList decimals;
     decimalsPowered = imap0 base16To10 decimalsAscending;
@@ -135,7 +135,7 @@ in rec {
   */
   hexToRGBString = sep: hex: let
     inherit (builtins) map toString;
-    inherit (nixpkgs-lib) concatStringsSep;
+    inherit (lib) concatStringsSep;
     hexInRGB = hexToRGB hex;
     hexInRGBString = map toString hexInRGB;
   in

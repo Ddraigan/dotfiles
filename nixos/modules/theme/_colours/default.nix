@@ -1,11 +1,9 @@
 {
   lib,
-  pkgs,
-  inputs,
   ...
 }: let
   stripHash = hexColour: lib.strings.removePrefix "#" hexColour;
-  conversions = import ./conversions.nix {nixpkgs-lib = inputs.nixpkgs-lib.lib;};
+  conversions = import ./conversions.nix {inherit lib;};
 in {
   config._module.args.colours = rec {
     hex = {

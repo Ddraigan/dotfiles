@@ -1,4 +1,4 @@
-{nixpkgs-lib}: rec {
+{lib}: rec {
   /*
   Base raised to the power of the exponent.
 
@@ -21,7 +21,7 @@
     => -125
   */
   pow = base: exponent: let
-    inherit (nixpkgs-lib) mod;
+    inherit (lib) mod;
   in
     if exponent > 1
     then let

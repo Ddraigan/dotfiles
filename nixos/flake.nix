@@ -35,7 +35,6 @@
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
-    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";

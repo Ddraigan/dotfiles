@@ -27,7 +27,7 @@
       ]
       ++ (with config.homeManager; [
         base
-        shared
+        colours
         fonts
         stylix
         nvim
