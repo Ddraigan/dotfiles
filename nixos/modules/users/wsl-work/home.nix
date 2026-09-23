@@ -15,7 +15,7 @@
       [
         ./_host/home.nix
       ]
-      ++ (with config.flake.modules.homeManager; [
+      ++ (with config.homeManager; [
         shared
         fonts
         stylix

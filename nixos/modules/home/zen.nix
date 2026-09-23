@@ -5,7 +5,7 @@
     inputs.home-manager.follows = "home-manager";
   };
 
-  flake.modules.homeManager.zen =
+  homeManager.zen =
     {
       pkgs,
       lib,

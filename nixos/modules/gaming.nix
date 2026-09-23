@@ -1,7 +1,7 @@
 {...}: {
   flake-file.inputs.millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
 
-  flake.modules.nixos.gaming = {
+  nixos.gaming = {
     lib,
     pkgs,
     config,
@@ -58,7 +58,7 @@
     };
   };
 
-  flake.modules.homeManager.gaming =
+  homeManager.gaming =
     {
       pkgs,
       lib,

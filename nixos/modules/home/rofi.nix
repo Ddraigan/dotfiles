@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.rofi =
+  homeManager.rofi =
     {
       pkgs,
       lib,

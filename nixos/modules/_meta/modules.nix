@@ -8,5 +8,15 @@
     inputs.home-manager-unstable.flakeModules.default
   ];
 
-  flake.modules = {};
+  options.nixos = lib.mkOption {
+    type = lib.types.lazyAttrsOf (lib.types.deferredModule);
+    default = {};
+    description = "NixOS feature leaves.";
+  };
+
+  options.homeManager = lib.mkOption {
+    type = lib.types.lazyAttrsOf (lib.types.deferredModule);
+    default = {};
+    description = "Home-manager feature leaves.";
+  };
 }

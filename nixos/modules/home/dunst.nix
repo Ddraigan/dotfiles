@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.dunst =
+  homeManager.dunst =
     {
       pkgs,
       lib,

@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.nixos.headscale =
+  nixos.headscale =
     {
       lib,
       pkgs,

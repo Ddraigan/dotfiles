@@ -4,7 +4,7 @@
     inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
-  flake.modules.homeManager.stylix =
+  homeManager.stylix =
     {
       lib,
       config,

@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.nixos.downloads =
+  nixos.downloads =
     {
       lib,
       pkgs,

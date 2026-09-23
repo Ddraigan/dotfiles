@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.cmdline =
+  homeManager.eza =
     {
       pkgs,
       lib,

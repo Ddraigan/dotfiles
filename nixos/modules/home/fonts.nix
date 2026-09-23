@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.fonts =
+  homeManager.fonts =
     {
       lib,
       config,

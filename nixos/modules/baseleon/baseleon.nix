@@ -1,21 +1,17 @@
 {
   config,
+  lib,
   ...
-}: let
-  locale = config.flake.modules.nixos.locale;
-in {
-  flake.modules.nixos.baseleon = {
-    pkgs,
-    config,
-    lib,
-    inputs,
-    ...
-  }: {
-    imports = [
-      locale
-    ];
-
-    config = {
+}: {
+  nixos.baseleon = lib.mkMerge [
+    config.nixos.locale
+    ({
+      lib,
+      pkgs,
+      config,
+      inputs,
+      ...
+    }: {
       users = {
         defaultUserShell = pkgs.zsh;
         users = {
@@ -47,8 +43,8 @@ in {
           nix-path = config.nix.nixPath;
         };
       };
-    };
-  };
+    })
+  ];
 
-  flake.modules.homeManager.baseleon = {};
+  homeManager.baseleon = {};
 }

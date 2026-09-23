@@ -1,6 +1,5 @@
-{...}:
-{
-  flake.modules.nixos.thunar =
+{...}: {
+  nixos.thunar =
     {
       lib,
       pkgs,

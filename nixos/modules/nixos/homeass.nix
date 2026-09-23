@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.nixos.homeass =
+  nixos.homeass =
     {
       lib,
       pkgs,

@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.hyprpaper =
+  homeManager.hyprpaper =
     {
       pkgs,
       lib,

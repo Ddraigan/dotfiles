@@ -11,7 +11,7 @@
     };
   };
 
-  flake.modules.nixos.hyprland = {
+  nixos.hyprland = {
     lib,
     pkgs,
     config,
@@ -79,7 +79,7 @@
     };
   };
 
-  flake.modules.homeManager.hyprland = {
+  homeManager.hyprland = {
     pkgs,
     inputs,
     lib,

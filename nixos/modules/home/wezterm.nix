@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.wezterm =
+  homeManager.wezterm =
     {
       pkgs,
       lib,

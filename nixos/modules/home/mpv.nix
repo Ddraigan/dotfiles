@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.mpv =
+  homeManager.mpv =
     {
       pkgs,
       lib,

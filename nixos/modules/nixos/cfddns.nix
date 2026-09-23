@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.nixos.cfddns =
+  nixos.cfddns =
     {
       lib,
       pkgs,

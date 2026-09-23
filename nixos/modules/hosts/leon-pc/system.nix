@@ -10,7 +10,7 @@
       [
         ./_host/configuration.nix
       ]
-      ++ (with config.flake.modules.nixos; [
+      ++ (with config.nixos; [
         cmdline
         baseleon
         greetd

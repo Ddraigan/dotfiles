@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.nemo =
+  homeManager.nemo =
     {
       pkgs,
       lib,

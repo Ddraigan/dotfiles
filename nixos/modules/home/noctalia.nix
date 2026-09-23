@@ -4,7 +4,7 @@
     inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
-  flake.modules.homeManager.noctalia =
+  homeManager.noctalia =
     {
       inputs,
       pkgs,

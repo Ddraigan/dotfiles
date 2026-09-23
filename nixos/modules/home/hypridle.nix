@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.hypridle =
+  homeManager.hypridle =
     {
       config,
       lib,

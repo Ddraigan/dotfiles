@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.obs =
+  homeManager.obs =
     {
       config,
       pkgs,

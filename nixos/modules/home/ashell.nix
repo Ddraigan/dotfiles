@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.ashell =
+  homeManager.ashell =
     {
       config,
       lib,

@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.cmdline = {
+  homeManager.fastfetch = {
     lib,
     pkgs,
     config,

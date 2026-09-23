@@ -1,7 +1,7 @@
 {...}: {
   flake-file.inputs.hyprlock.url = "github:hyprwm/hyprlock";
 
-  flake.modules.nixos.hyprlock = {
+  nixos.hyprlock = {
     pkgs,
     lib,
     config,
@@ -15,7 +15,7 @@
     };
   };
 
-  flake.modules.homeManager.hyprlock = {
+  homeManager.hyprlock = {
     pkgs,
     lib,
     config,

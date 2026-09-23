@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.nixos.jellyfin =
+  nixos.jellyfin =
     {
       lib,
       pkgs,

@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.nixos.quicksync =
+  nixos.quicksync =
     {
       lib,
       pkgs,

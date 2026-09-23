@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.nixos.traefik =
+  nixos.traefik =
     {
       lib,
       pkgs,

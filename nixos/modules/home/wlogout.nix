@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.wlogout =
+  homeManager.wlogout =
     {
       lib,
       config,

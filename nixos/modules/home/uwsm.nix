@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.homeManager.uwsm =
+  homeManager.uwsm =
     {
       lib,
       config,
