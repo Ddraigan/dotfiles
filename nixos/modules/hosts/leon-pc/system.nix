@@ -11,9 +11,12 @@
         ./_host/configuration.nix
       ]
       ++ (with config.flake.modules.nixos; [
+        cmdline
+        baseleon
         greetd
         nvidia
         hyprland
+        hyprlock
         gaming
         sunshine
       ]);

@@ -1,33 +1,7 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: let
-  wezterm-cwd = import ./scripts/wezterm-cwd.nix {inherit pkgs;};
-in {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
   ];
-
-  users = {
-    defaultUserShell = pkgs.zsh;
-    users = {
-      leon = {
-        isNormalUser = true;
-        description = "Leon Jones";
-        extraGroups = ["networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire" "docker" "gamemode" "kvm" "adbusers"];
-        openssh.authorizedKeys.keys = let
-          authorizedKeys = pkgs.fetchurl {
-            url = "https://github.com/Ddraigan.keys";
-            hash = "SHA256:rhL8wfj3Cr48CbD+J+pgLcYqIegVdZPx9F+U/VnuG6M";
-          };
-        in
-          pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
-      };
-    };
-  };
 
   fileSystems = {
     "/mnt/isa/media" = {
@@ -40,11 +14,6 @@ in {
     loader = {
       systemd-boot.enable = true;
     };
-  };
-
-  nixpkgs = {
-    overlays = [inputs.self.overlays.unstable-packages];
-    config.allowUnfree = true;
   };
 
   hardware = {
@@ -65,10 +34,6 @@ in {
 
   services = {
     upower.enable = true;
-    factorio = {
-      enable = false;
-      openFirewall = false;
-    };
     udev.packages = with pkgs; [via android-tools];
     udisks2 = {
       enable = true;
@@ -97,7 +62,6 @@ in {
 
   environment = {
     systemPackages = [
-      wezterm-cwd
       pkgs.crosspipe
       pkgs.qmk
       pkgs.via
@@ -111,31 +75,15 @@ in {
     ];
   };
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      experimental-features = ["nix-command" "flakes"];
-      nix-path = config.nix.nixPath;
-    };
-  };
-
   programs = {
     gdk-pixbuf.modulePackages = [pkgs.librsvg];
     dconf.enable = true;
     solaar.enable = true;
-    zsh.enable = true;
     nix-ld.enable = true;
     localsend = {
       enable = true;
       openFirewall = true;
     };
-  };
-
-  security = {
-    rtkit.enable = true;
-    pam.services.hyprlock = {}; # Can't unlock without this
-    polkit.enable = true;
   };
 
   fonts = {
@@ -181,25 +129,6 @@ in {
     #   # "-device virtio-gpu-gl"
     #   # "-display gtk,gl=on"
     # ];
-  };
-
-  # Set your time zone.
-  time.timeZone = "Europe/London";
-
-  # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_GB.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "en_GB.UTF-8";
-      LC_IDENTIFICATION = "en_GB.UTF-8";
-      LC_MEASUREMENT = "en_GB.UTF-8";
-      LC_MONETARY = "en_GB.UTF-8";
-      LC_NAME = "en_GB.UTF-8";
-      LC_NUMERIC = "en_GB.UTF-8";
-      LC_PAPER = "en_GB.UTF-8";
-      LC_TELEPHONE = "en_GB.UTF-8";
-      LC_TIME = "en_GB.UTF-8";
-    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are

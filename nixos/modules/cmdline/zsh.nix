@@ -1,4 +1,9 @@
 {...}: {
+  flake.modules.nixos.cmdline = {...}: {
+    programs = {
+      zsh.enable = true;
+    };
+  };
   flake.modules.homeManager.cmdline = {
     pkgs,
     lib,

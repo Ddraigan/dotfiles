@@ -12,6 +12,7 @@
       ]
       ++ (with config.flake.modules.nixos; [
         hyprland
+        hyprlock
       ]);
   };
 }

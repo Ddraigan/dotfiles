@@ -11,8 +11,11 @@
         ./_host/configuration.nix
       ]
       ++ (with config.flake.modules.nixos; [
+        cmdline
+        baseleon
         greetd
         hyprland
+        hyprlock
         sunshine
       ]);
   };

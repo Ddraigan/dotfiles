@@ -29,12 +29,12 @@
         systemPackages = [
           pkgs.hyprpolkitagent
         ];
-        variables = {
-          # UWSM manages these
-          # XDG_CURRENT_DESKTOP = "Hyprland";
-          # XDG_SESSION_TYPE = "wayland";
-          # XDG_SESSION_DESKTOP = "Hyprland";
-        };
+        # variables = {
+        # UWSM manages these
+        # XDG_CURRENT_DESKTOP = "Hyprland";
+        # XDG_SESSION_TYPE = "wayland";
+        # XDG_SESSION_DESKTOP = "Hyprland";
+        # };
         sessionVariables = {
           STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/leon/.steam/root/compatibilitytools.d";
           NIXOS_OZONE_WL = "1";

@@ -1,21 +1,33 @@
 {...}: {
   flake-file.inputs.hyprlock.url = "github:hyprwm/hyprlock";
 
-  flake.modules.homeManager.hyprlock =
-    {
-      pkgs,
-      lib,
-      config,
-      inputs,
-      uwsmUtils,
-      colours,
-      ...
-    }:
-    let
-      cfg = config.modules.desktop.hypr.hyprlock;
-      hyprlock-package = inputs.hyprlock.packages.${pkgs.stdenv.hostPlatform.system}.hyprlock;
-      hyprland-config = config.modules.desktop.hypr.hyprland;
-    in
+  flake.modules.nixos.hyprlock = {
+    pkgs,
+    lib,
+    config,
+    inputs,
+    ...
+  }: {
+    security = {
+      rtkit.enable = true;
+      pam.services.hyprlock = {};
+      polkit.enable = true;
+    };
+  };
+
+  flake.modules.homeManager.hyprlock = {
+    pkgs,
+    lib,
+    config,
+    inputs,
+    uwsmUtils,
+    colours,
+    ...
+  }: let
+    cfg = config.modules.desktop.hypr.hyprlock;
+    hyprlock-package = inputs.hyprlock.packages.${pkgs.stdenv.hostPlatform.system}.hyprlock;
+    hyprland-config = config.modules.desktop.hypr.hyprland;
+  in
     with lib; {
       options.modules.desktop.hypr.hyprlock.mainMonitor = mkOption {
         type = types.str;

@@ -1,24 +1,10 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  pkgs,
-  inputs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
   ];
 
   modules.nix = {
     greetd.keyboardVariant = "dvorak";
-  };
-
-  nixpkgs = {
-    overlays = [inputs.self.overlays.unstable-packages];
-    config.allowUnfree = true;
   };
 
   services = {
@@ -45,7 +31,6 @@
 
   programs = {
     dconf.enable = true;
-    zsh.enable = true;
     localsend = {
       enable = true;
       openFirewall = true;
@@ -68,12 +53,6 @@
     ];
   };
 
-  security = {
-    rtkit.enable = true;
-    pam.services.hyprlock = {}; # Can't unlock without this}
-    polkit.enable = true;
-  };
-
   # Bootloader.
   boot = {
     loader = {
@@ -93,60 +72,11 @@
     networkmanager.enable = true;
   };
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      experimental-features = ["nix-command" "flakes"];
-      nix-path = config.nix.nixPath;
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-    };
-  };
-
   fonts = {
     fontDir.enable = true;
   };
 
-  # Set your time zone.
-  time.timeZone = "Europe/London";
-
-  # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_GB.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "en_GB.UTF-8";
-      LC_IDENTIFICATION = "en_GB.UTF-8";
-      LC_MEASUREMENT = "en_GB.UTF-8";
-      LC_MONETARY = "en_GB.UTF-8";
-      LC_NAME = "en_GB.UTF-8";
-      LC_NUMERIC = "en_GB.UTF-8";
-      LC_PAPER = "en_GB.UTF-8";
-      LC_TELEPHONE = "en_GB.UTF-8";
-      LC_TIME = "en_GB.UTF-8";
-    };
-  };
-
-  # Configure console keymap
   console.keyMap = "dvorak";
-
-  users = {
-    defaultUserShell = pkgs.zsh;
-    users = {
-      leon = {
-        isNormalUser = true;
-        description = "Leon Jones";
-        extraGroups = ["networkmanager" "wheel" "audio" "sound" "video" "input" "pipewire" "docker" "usbmux" "adbusers"];
-        openssh.authorizedKeys.keys = let
-          authorizedKeys = pkgs.fetchurl {
-            url = "https://github.com/Ddraigan.keys";
-            hash = "SHA256:4jrMrA5pQkilb2VJwJb4oYZwaTinCSFUOhOjPimqtmQ";
-          };
-        in
-          pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
-      };
-    };
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
