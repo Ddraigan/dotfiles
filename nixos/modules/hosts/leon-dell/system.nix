@@ -14,8 +14,6 @@
         cmdline
         base
         greetd
-        hyprland
-        hyprlock
         sunshine
       ]);
   };
@@ -33,21 +31,16 @@
         ./_host/home.nix
       ]
       ++ (with config.homeManager; [
+        cmdline
         base
+        hyprland-de
         shared
-        uwsm
         fonts
         stylix
         nvim
-        cmdline
         wezterm
-        noctalia
-        hyprland
-        hyprlock
-        hypridle
         nemo
         spicetify
-        wlogout
         zen
       ]);
   };

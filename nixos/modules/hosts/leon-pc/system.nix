@@ -13,10 +13,9 @@
       ++ (with config.nixos; [
         cmdline
         base
+        hyprland-de
         greetd
         nvidia
-        hyprland
-        hyprlock
         gaming
         sunshine
       ]);
@@ -35,23 +34,18 @@
         ./_host/home.nix
       ]
       ++ (with config.homeManager; [
+        cmdline
         base
+        hyprland-de
         shared
-        uwsm
         fonts
         stylix
         nvim
         wezterm
-        cmdline
-        noctalia
         gaming
         obs
-        hyprland
-        hyprlock
-        hypridle
         nemo
         spicetify
-        wlogout
         zen
       ]);
   };
