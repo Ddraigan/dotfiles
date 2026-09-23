@@ -11,11 +11,11 @@
         home.packages = [
           pkgs.librsvg
         ];
-        xdg.configFile."wlogout/icons".source = ./wlogout/icons;
+        xdg.configFile."wlogout/icons".source = ./icons;
         programs.wlogout = {
           enable = true;
           style = ''
-            ${builtins.readFile ./wlogout/style.css}
+            ${builtins.readFile ./style.css}
           '';
           layout = [
             {

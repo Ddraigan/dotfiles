@@ -48,7 +48,7 @@
         };
       };
 
-      environment.etc."greetd/skyline.jpg".source = ../skyline.jpg;
+      environment.etc."greetd/skyline.jpg".source = ../../skyline.jpg;
 
       services.displayManager.regreet = {
         enable = true;

@@ -20,7 +20,7 @@
           enable = true;
           systemd.enable = false;
           style = ''
-            ${builtins.readFile ./waybar/style_new.css}
+            ${builtins.readFile ./style_new.css}
           '';
           settings = [
             {
