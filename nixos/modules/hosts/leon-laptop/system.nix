@@ -11,6 +11,7 @@
         ./_host/configuration.nix
       ]
       ++ (with config.flake.modules.nixos; [
+        locale
         hyprland
         hyprlock
       ]);
