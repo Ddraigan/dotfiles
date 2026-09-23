@@ -29,7 +29,6 @@
         hyprland
         hyprlock
         hypridle
-        mpv
         nemo
         spicetify
         wlogout
