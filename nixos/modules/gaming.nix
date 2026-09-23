@@ -58,28 +58,29 @@
     };
   };
 
-  homeManager.gaming =
-    {
-      pkgs,
-      lib,
-      config,
-      ...
-    }:
-    {
-      config = {
-        programs.lutris = {
-          enable = true;
-          extraPackages = with pkgs; [
-            mangohud
-            winetricks
-            gamescope
-            gamemode
-            umu-launcher
-          ];
-          protonPackages = [
-            pkgs.proton-ge-bin
-          ];
-        };
+  homeManager.gaming = {
+    pkgs,
+    lib,
+    config,
+    ...
+  }: {
+    config = {
+      home.shellAliases = {
+        steamos = "uwsm app -- gamescope -W 2560 -H 1440 -- steam -steamos3 -gamepadui -steamdeck -steampal";
+      };
+      programs.lutris = {
+        enable = true;
+        extraPackages = with pkgs; [
+          mangohud
+          winetricks
+          gamescope
+          gamemode
+          umu-launcher
+        ];
+        protonPackages = [
+          pkgs.proton-ge-bin
+        ];
       };
     };
+  };
 }
