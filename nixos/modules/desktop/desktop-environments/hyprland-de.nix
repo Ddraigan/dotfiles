@@ -8,7 +8,7 @@
     hyprlock
   ]);
 
-  homeManager.hyrpland-de = lib.mkMerge (with config.homeManager; [
+  homeManager.hyprland-de = lib.mkMerge (with config.homeManager; [
     uwsm
     hyprland
     hyprlock
