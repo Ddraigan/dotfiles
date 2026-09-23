@@ -18,15 +18,6 @@
     ];
 
     config = {
-      xdg = {
-        mimeApps = {
-          defaultApplications = {
-            "text/html" = ["zen-beta.desktop"];
-            "x-scheme-handler/http" = ["zen-beta.desktop"];
-            "x-scheme-handler/https" = ["zen-beta.desktop"];
-          };
-        };
-      };
       programs.zen-browser = {
         enable = true;
         # nativeMessagingHosts = [pkgs.firefoxpwa];
@@ -147,8 +138,7 @@
             inherit name;
             value = let
               zen-browser = config.programs.zen-browser.package;
-              # Use the desktopFileName if it exists, otherwise fallback to "zen.desktop"
-              desktopFile = zen-browser.meta.desktopFileName or "zen.desktop";
+              desktopFile = zen-browser.meta.desktopFileName or "zen-beta.desktop";
             in
               desktopFile;
           }) [
@@ -169,7 +159,7 @@
             "text/html"
           ]);
       in {
-        enable = true; # Ensure mimeApps is enabled
+        enable = true;
         associations.added = associations;
         defaultApplications = associations;
       };

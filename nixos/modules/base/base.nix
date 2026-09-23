@@ -14,7 +14,7 @@
     nixpkgs
     git
     leon
-    ({...}: {
+    ({pkgs, ...}: {
       programs.home-manager.enable = true;
       global.home.fonts = {
         mono = {
