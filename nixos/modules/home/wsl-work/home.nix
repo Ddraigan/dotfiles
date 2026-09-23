@@ -16,6 +16,7 @@
         ./_host/home.nix
       ]
       ++ (with config.homeManager; [
+        base
         shared
         fonts
         stylix

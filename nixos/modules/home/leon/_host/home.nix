@@ -4,30 +4,6 @@
   pkgs,
   ...
 }: {
-  global.home.fonts = {
-    mono = {
-      name = "Hack Nerd Font, Hack NF";
-      package = pkgs.nerd-fonts.hack;
-    };
-    sans = {
-      name = "DejaVu Sans";
-      package = pkgs.dejavu_fonts;
-    };
-    serif = {
-      name = "DejaVu Serif";
-      package = pkgs.dejavu_fonts;
-    };
-    icons = {
-      enable = true;
-      name = "Papirus-Dark";
-      package = pkgs.catppuccin-papirus-folders.override {
-        flavor = "mocha";
-        accent = "mauve";
-      };
-      size = "32x32";
-    };
-  };
-
   modules = {
     desktop = {
       hypr = {
@@ -40,38 +16,14 @@
     };
   };
 
-  nixpkgs = {
-    overlays = [inputs.self.overlays.unstable-packages];
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = _: true;
-    };
-  };
-
-  services.easyeffects = {
-    enable = false;
-    package = pkgs.unstable.easyeffects;
-  };
-
   programs = {
     mpv = {
       enable = true;
     };
-    home-manager.enable = true;
     element-desktop.enable = true;
     firefox = {
       enable = true;
       configPath = "${config.xdg.configHome}/mozilla/firefox";
-    };
-    git = {
-      enable = true;
-      settings = {
-        user = {
-          email = "lkjjones1999@gmail.com";
-          name = "Ddraigan";
-        };
-        init.defaultBranch = "main";
-      };
     };
   };
 
@@ -113,9 +65,7 @@
   };
 
   home = {
-    username = "leon";
-    homeDirectory = "/home/leon";
-    stateVersion = "24.05"; # Don't change this I'm pretty sure
+    stateVersion = "24.05";
     packages = [
       pkgs.just
       inputs.diff-tool.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -132,14 +82,5 @@
     ];
   };
 
-  xdg = {
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "text/html" = ["zen-beta.desktop"];
-        "x-scheme-handler/http" = ["zen-beta.desktop"];
-        "x-scheme-handler/https" = ["zen-beta.desktop"];
-      };
-    };
-  };
+  xdg.mimeApps.enable = true;
 }

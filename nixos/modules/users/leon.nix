@@ -22,4 +22,11 @@
       };
     };
   };
+
+  homeManager.leon = {...}: {
+    home = {
+      username = "leon";
+      homeDirectory = "/home/leon";
+    };
+  };
 }

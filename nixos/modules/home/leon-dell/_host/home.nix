@@ -4,21 +4,6 @@
   pkgs,
   ...
 }: {
-  global.home.fonts = {
-    mono = {
-      name = "Hack Nerd Font, Hack NF";
-      package = pkgs.nerd-fonts.hack;
-    };
-    sans = {
-      name = "DejaVu Sans";
-      package = pkgs.dejavu_fonts;
-    };
-    serif = {
-      name = "DejaVu Serif";
-      package = pkgs.dejavu_fonts;
-    };
-  };
-
   modules = {
     desktop = {
       hypr = {
@@ -31,14 +16,6 @@
     };
   };
 
-  nixpkgs = {
-    overlays = [inputs.self.overlays.unstable-packages];
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = _: true;
-    };
-  };
-
   services.easyeffects = {
     enable = true;
     package = pkgs.unstable.easyeffects;
@@ -48,18 +25,7 @@
     mpv = {
       enable = true;
     };
-    home-manager.enable = true;
     element-desktop.enable = true;
-    git = {
-      enable = true;
-      settings = {
-        user = {
-          email = "lkjjones1999@gmail.com";
-          name = "Ddraigan";
-        };
-        init.defaultBranch = "main";
-      };
-    };
   };
 
   wayland.windowManager.hyprland.settings = {
@@ -89,8 +55,6 @@
   };
 
   home = {
-    username = "leon";
-    homeDirectory = "/home/leon";
     stateVersion = "24.05";
     packages = [
       pkgs.just
@@ -105,9 +69,5 @@
       pkgs.ripgrep
       pkgs.fzf
     ];
-  };
-
-  xdg = {
-    configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
   };
 }
