@@ -22,7 +22,7 @@
         programs.noctalia = {
           enable = true;
           systemd.enable = true;
-          settings = builtins.fromTOML (builtins.readFile ./noctalia/noctalia-config.toml);
+          settings = builtins.fromTOML (builtins.readFile ./noctalia-config.toml);
           # plugins = {
           #   sources = [
           #     {

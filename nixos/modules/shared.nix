@@ -10,7 +10,7 @@
       ...
     }: {
       imports = [
-        ../_shared
+        ./_shared
       ];
     };
 }

@@ -54,6 +54,9 @@
   };
 
   programs = {
+    mpv = {
+      enable = true;
+    };
     home-manager.enable = true;
     element-desktop.enable = true;
     firefox = {

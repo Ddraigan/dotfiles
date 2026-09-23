@@ -12,7 +12,7 @@
       ]
       ++ (with config.nixos; [
         cmdline
-        baseleon
+        base
         greetd
         hyprland
         hyprlock

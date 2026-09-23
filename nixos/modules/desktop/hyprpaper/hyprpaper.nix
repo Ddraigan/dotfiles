@@ -16,12 +16,12 @@
           settings = {
             # ipc = "off";
             preload = [
-              # "~/dotfiles/nixos/modules/home/hyprpaper/skyline.jpg"
-              "~/dotfiles/nixos/modules/home/hyprpaper/wp_1.jpg"
+              # "~/dotfiles/nixos/modules/hyprpaper/skyline.jpg"
+              "~/dotfiles/nixos/modules/hyprpaper/wp_1.jpg"
             ];
             wallpaper = [
-              # ",~/dotfiles/nixos/modules/home/hyprpaper/skyline.jpg"
-              ",~/dotfiles/nixos/modules/home/hyprpaper/wp_1.jpg"
+              # ",~/dotfiles/nixos/modules/hyprpaper/skyline.jpg"
+              ",~/dotfiles/nixos/modules/hyprpaper/wp_1.jpg"
             ];
           };
         };

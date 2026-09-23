@@ -3,7 +3,7 @@
   lib,
   ...
 }: {
-  nixos.cmdline = lib.mkMergea (with config.nixos; [
+  nixos.cmdline = lib.mkMerge (with config.nixos; [
     zsh
   ]);
 
