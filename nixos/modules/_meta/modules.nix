@@ -11,12 +11,12 @@
   options.nixos = lib.mkOption {
     type = lib.types.lazyAttrsOf (lib.types.deferredModule);
     default = {};
-    description = "NixOS feature leaves.";
+    description = "NixOS features.";
   };
 
   options.homeManager = lib.mkOption {
     type = lib.types.lazyAttrsOf (lib.types.deferredModule);
     default = {};
-    description = "Home-manager feature leaves.";
+    description = "Home-manager features.";
   };
 }
