@@ -2,7 +2,7 @@
   flake-file.inputs.zen-browser = {
     url = "github:0xc000022070/zen-browser-flake/beta";
     inputs.nixpkgs.follows = "nixpkgs-unstable";
-    inputs.home-manager.follows = "home-manager";
+    inputs.home-manager.follows = "home-manager-unstable";
   };
 
   homeManager.zen = {

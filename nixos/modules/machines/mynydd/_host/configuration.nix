@@ -33,8 +33,6 @@
       enable = true;
       settings.PasswordAuthentication = false;
     };
-    displayManager.gdm.enable = false;
-    desktopManager.gnome.enable = false;
   };
 
   fileSystems = {
