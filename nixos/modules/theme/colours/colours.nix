@@ -1,11 +1,7 @@
-{
-  lib,
-  ...
-}: let
+{lib, ...}: let
   stripHash = hexColour: lib.strings.removePrefix "#" hexColour;
-  conversions = import ./conversions.nix {inherit lib;};
-in {
-  config._module.args.colours = rec {
+  conversions = import ./_colours/conversions.nix {inherit lib;};
+  colours = rec {
     hex = {
       crust = "#11111b";
       mantle = "#181825";
@@ -43,5 +39,31 @@ in {
     rgba = rgbColour: alpha: let
       rgbValues = builtins.substring 4 (builtins.stringLength rgbColour - 5) rgbColour;
     in "rgba(${rgbValues},${toString alpha})";
+  };
+in {
+  nixos.colours = {
+    config,
+    lib,
+    ...
+  }: {
+    config._module.args.colours = {
+      hex = colours.hex;
+      stripped = colours.stripped;
+      rgb = colours.rgb;
+      rgba = colours.rgba;
+    };
+  };
+
+  homeManager.colours = {
+    config,
+    lib,
+    ...
+  }: {
+    config._module.args.colours = {
+      hex = colours.hex;
+      stripped = colours.stripped;
+      rgb = colours.rgb;
+      rgba = colours.rgba;
+    };
   };
 }
