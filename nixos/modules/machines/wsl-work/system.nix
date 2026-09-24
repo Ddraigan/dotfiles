@@ -26,6 +26,7 @@
         ./_host/home.nix
       ]
       ++ (with config.homeManager; [
+        leon
         base
         colours
         fonts
