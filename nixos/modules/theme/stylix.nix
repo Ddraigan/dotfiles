@@ -11,6 +11,7 @@
       pkgs,
       inputs,
       colours,
+      fonts,
       ...
     }:
     {
@@ -19,7 +20,7 @@
       ];
 
       config = let
-        font = config.global.home.fonts;
+        font = fonts;
         icons = font.icons;
       in
         with colours.stripped; {

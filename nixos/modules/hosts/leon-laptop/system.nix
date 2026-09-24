@@ -12,6 +12,7 @@
       ]
       ++ (with config.nixos; [
         locale
+        fonts
         hyprland
         hyprlock
       ]);

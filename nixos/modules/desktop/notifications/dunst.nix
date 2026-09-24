@@ -4,6 +4,7 @@
       pkgs,
       lib,
       config,
+      fonts,
       ...
     }:
     {
@@ -12,7 +13,7 @@
           pkgs.libnotify
         ];
         services.dunst = let
-          icons = config.global.home.fonts.icons;
+          icons = fonts.icons;
         in {
           enable = true;
           iconTheme = {

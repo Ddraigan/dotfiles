@@ -5,6 +5,7 @@
       lib,
       inputs,
       pkgs,
+      fonts,
       ...
     }:
     {
@@ -45,7 +46,7 @@
             #   }
             # ];
             appearance = let
-              font = config.global.home.fonts.mono;
+              font = fonts.mono;
               col = config.global.theme.colours.catppuccin.mocha;
             in {
               font_name = font.name;

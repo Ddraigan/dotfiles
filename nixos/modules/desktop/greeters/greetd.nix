@@ -1,42 +1,41 @@
 {...}: {
-  nixos.greetd =
-    {
-      lib,
-      pkgs,
-      config,
-      ...
-    }:
-    let
-      hyprGreetConf =
-        pkgs.writeText "hypr-greet.lua"
-        #lua
-        ''
-          -- Greetd greeter: run regreet, then end the Hyprland session once the user is logged in.
-          hl.on("hyprland.start", function()
-            hl.exec_cmd("${lib.getExe config.programs.regreet.package}; hyprctl dispatch 'hl.dsp.exit()'")
-          end)
+  nixos.greetd = {
+    lib,
+    pkgs,
+    config,
+    fonts,
+    ...
+  }: let
+    hyprGreetConf =
+      pkgs.writeText "hypr-greet.lua"
+      #lua
+      ''
+        -- Greetd greeter: run regreet, then end the Hyprland session once the user is logged in.
+        hl.on("hyprland.start", function()
+          hl.exec_cmd("${lib.getExe config.programs.regreet.package}; hyprctl dispatch 'hl.dsp.exit()'")
+        end)
 
-          hl.config({
-            misc = {
-              disable_hyprland_logo = true,
-              disable_splash_rendering = true,
-              disable_hyprland_guiutils_check = true,
-            },
-            input = {
-              kb_layout = "us",
-              kb_variant = "${config.modules.nix.greetd.keyboardVariant}",
-            },
-          })
-        '';
-    in {
-      options.modules.nix.greetd.keyboardVariant = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-        description = "Keyboard variant for the greeter session.";
-      };
+        hl.config({
+          misc = {
+            disable_hyprland_logo = true,
+            disable_splash_rendering = true,
+            disable_hyprland_guiutils_check = true,
+          },
+          input = {
+            kb_layout = "us",
+            kb_variant = "${config.modules.nix.greetd.keyboardVariant}",
+          },
+        })
+      '';
+  in {
+    options.modules.nix.greetd.keyboardVariant = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "Keyboard variant for the greeter session.";
+    };
 
-      config = {
-        services.greetd = {
+    config = {
+      services.greetd = {
         enable = true;
         restart = false;
         settings = {
@@ -71,14 +70,14 @@
           name = "Catppuccin-Mocha-Standard-Lavender-Dark";
         };
         font = {
-          package = pkgs.nerd-fonts.hack;
-          name = "Hack Nerd Font";
+          package = fonts.mono.package;
+          name = fonts.mono.name_short;
         };
         iconTheme = {
           package = pkgs.papirus-icon-theme;
           name = "Papirus-Dark";
         };
       };
-      };
     };
+  };
 }

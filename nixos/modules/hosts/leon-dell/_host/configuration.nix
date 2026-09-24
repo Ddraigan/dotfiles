@@ -72,10 +72,6 @@
     networkmanager.enable = true;
   };
 
-  fonts = {
-    fontDir.enable = true;
-  };
-
   console.keyMap = "dvorak";
 
   # Some programs need SUID wrappers, can be configured further or are

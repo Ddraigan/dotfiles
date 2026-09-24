@@ -86,10 +86,6 @@
     };
   };
 
-  fonts = {
-    fontDir.enable = true;
-  };
-
   networking = {
     hostName = "leon-pc";
     networkmanager = {

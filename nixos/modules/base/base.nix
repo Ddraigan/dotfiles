@@ -14,31 +14,8 @@
     nixpkgs
     git
     leon
-    ({pkgs, ...}: {
+    ({...}: {
       programs.home-manager.enable = true;
-      global.home.fonts = {
-        mono = {
-          name = "Hack Nerd Font, Hack NF";
-          package = pkgs.nerd-fonts.hack;
-        };
-        sans = {
-          name = "DejaVu Sans";
-          package = pkgs.dejavu_fonts;
-        };
-        serif = {
-          name = "DejaVu Serif";
-          package = pkgs.dejavu_fonts;
-        };
-        icons = {
-          enable = true;
-          name = "Papirus-Dark";
-          package = pkgs.catppuccin-papirus-folders.override {
-            flavor = "mocha";
-            accent = "mauve";
-          };
-          size = "32x32";
-        };
-      };
     })
   ]);
 }

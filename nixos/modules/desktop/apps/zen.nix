@@ -11,6 +11,7 @@
     config,
     inputs,
     colours,
+    fonts,
     ...
   }: {
     imports = [
@@ -43,7 +44,7 @@
           # userChrome = import ./userChrome.nix {inherit colours;};
           # userContent = import ./userContent.nix {inherit colours;};
           settings = let
-            font = config.global.home.fonts;
+            font = fonts;
           in {
             "font.name.monospace.x-western" = font.mono.name;
             "font.name.sans-serif.x-western" = font.sans.name;

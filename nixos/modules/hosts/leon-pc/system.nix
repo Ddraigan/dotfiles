@@ -13,6 +13,7 @@
       ++ (with config.nixos; [
         cmdline
         base
+        fonts
         hyprland-de
         greetd
         nvidia

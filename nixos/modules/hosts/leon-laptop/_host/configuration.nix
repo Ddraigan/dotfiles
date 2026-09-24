@@ -54,8 +54,6 @@
     zsh.enable = true;
   };
 
-  fonts.fontDir.enable = true;
-
   # Bootloader.
   boot.loader.grub = {
     enable = true;
