@@ -12,7 +12,7 @@
       ''
         -- Greetd greeter: run regreet, then end the Hyprland session once the user is logged in.
         hl.on("hyprland.start", function()
-          hl.exec_cmd("${lib.getExe config.programs.regreet.package}; hyprctl dispatch 'hl.dsp.exit()'")
+          hl.exec_cmd("${lib.getExe config.services.displayManager.regreet.package}; hyprctl dispatch 'hl.dsp.exit()'")
         end)
 
         hl.config({
