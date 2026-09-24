@@ -8,7 +8,7 @@
     specialArgs = {inherit inputs;};
     modules =
       [
-        ./_host/configuration.nix
+        ./_settings/system.nix
       ]
       ++ (with config.nixos; [
         leon
@@ -30,7 +30,7 @@
     };
     modules =
       [
-        ./_host/home.nix
+        ./_settings/home-leon.nix
       ]
       ++ (with config.homeManager; [
         leon

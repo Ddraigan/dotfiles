@@ -8,7 +8,7 @@
     specialArgs = {inherit inputs;};
     modules =
       [
-        ./_host/configuration.nix
+        ./_settings/system.nix
       ]
       ++ (with config.nixos; [
         locale

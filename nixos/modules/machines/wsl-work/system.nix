@@ -9,7 +9,7 @@
     system = "x86_64-linux";
     specialArgs = {inherit inputs;};
     modules = [
-      ./_host/configuration.nix
+      ./_settings/system.nix
     ];
   };
 
@@ -23,7 +23,7 @@
     };
     modules =
       [
-        ./_host/home.nix
+        ./_settings/home-leon.nix
       ]
       ++ (with config.homeManager; [
         leon

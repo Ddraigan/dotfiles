@@ -7,7 +7,7 @@
     system = "x86_64-linux";
     specialArgs = {inherit inputs;};
     modules = [
-      ./_host/configuration.nix
+      ./_settings/system.nix
     ];
   };
 }
