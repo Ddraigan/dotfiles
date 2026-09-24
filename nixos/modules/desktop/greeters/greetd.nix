@@ -74,8 +74,8 @@
           name = fonts.mono.name_short;
         };
         iconTheme = {
-          package = pkgs.papirus-icon-theme;
-          name = "Papirus-Dark";
+          package = fonts.icons.package;
+          name = fonts.icons.name;
         };
       };
     };
