@@ -1,6 +1,6 @@
 {lib, ...}: let
   stripHash = hexColour: lib.strings.removePrefix "#" hexColour;
-  conversions = import ./_colours/conversions.nix {inherit lib;};
+  conversions = import ./_math/conversions.nix {inherit lib;};
   colours = rec {
     hex = {
       crust = "#11111b";
