@@ -11,7 +11,6 @@
         ./_settings/system.nix
       ]
       ++ (with config.nixos; [
-        leon-pc
         leon
         cmdline
         base
@@ -37,7 +36,6 @@
         ./_settings/home-leon.nix
       ]
       ++ (with config.homeManager; [
-        leon-pc-home-leon
         leon
         cmdline
         base
