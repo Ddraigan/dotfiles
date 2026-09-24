@@ -11,6 +11,7 @@
         ./_host/configuration.nix
       ]
       ++ (with config.nixos; [
+        leon
         cmdline
         base
         fonts
@@ -32,6 +33,7 @@
         ./_host/home.nix
       ]
       ++ (with config.homeManager; [
+        leon
         cmdline
         base
         hyprland-de

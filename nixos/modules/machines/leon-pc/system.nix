@@ -8,6 +8,7 @@
     specialArgs = {inherit inputs;};
     modules = with config.nixos; [
       leon-pc
+      leon
       cmdline
       base
       fonts
@@ -29,6 +30,7 @@
     };
     modules = with config.homeManager; [
       leon-pc-leon
+      leon
       cmdline
       base
       hyprland-de

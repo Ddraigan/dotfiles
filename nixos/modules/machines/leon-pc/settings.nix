@@ -1,7 +1,7 @@
 {...}: {
   nixos.leon-pc = {pkgs, ...}: {
     imports = [
-      ./_host/hardware-configuration.nix
+      ./_hardware/hardware-configuration.nix
     ];
 
     fileSystems = {
