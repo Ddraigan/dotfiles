@@ -1,5 +1,5 @@
 {...}: {
-  homeManager.home-settings.leon-pc.leon = {
+  homeManager.leon-pc-home-leon = {
     inputs,
     config,
     pkgs,

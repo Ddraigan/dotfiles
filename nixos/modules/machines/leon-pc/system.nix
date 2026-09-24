@@ -1,49 +1,116 @@
-{
-  inputs,
-  config,
-  ...
-}: {
-  flake.nixosConfigurations.leon-pc = inputs.nixpkgs-unstable.lib.nixosSystem {
-    system = "x86_64-linux";
-    specialArgs = {inherit inputs;};
-    modules = with config.nixos; [
-      system-settings.leon-pc
-      users.leon
-      cmdline
-      base
-      fonts
-      hyprland-de
-      greetd
-      nvidia
-      gaming
-      sunshine
+{...}: {
+  nixos.leon-pc = {pkgs, ...}: {
+    imports = [
+      ./_hardware/hardware-configuration.nix
     ];
-  };
 
-  flake.homeConfigurations.leon = inputs.home-manager-unstable.lib.homeManagerConfiguration {
-    pkgs = import inputs.nixpkgs-unstable {
-      system = "x86_64-linux";
-      config.allowUnfree = true;
+    fileSystems = {
+      "/mnt/isa/media" = {
+        device = "10.69.1.21:/mnt/isa/media";
+        fsType = "nfs";
+      };
     };
-    extraSpecialArgs = {
-      inherit inputs;
+
+    boot = {
+      loader = {
+        systemd-boot.enable = true;
+      };
     };
-    modules = with config.homeManager; [
-      home-settings.leon-pc.leon
-      users.leon
-      cmdline
-      base
-      hyprland-de
-      colours
-      fonts
-      stylix
-      nvim
-      wezterm
-      gaming
-      obs
-      nemo
-      spicetify
-      zen
-    ];
+
+    hardware = {
+      bluetooth = {
+        enable = false;
+        powerOnBoot = false;
+      };
+      keyboard.qmk.enable = true;
+    };
+
+    services = {
+      upower.enable = true;
+      udev.packages = with pkgs; [via android-tools];
+      udisks2 = {
+        enable = true;
+        mountOnMedia = true;
+      };
+      pipewire = {
+        enable = true;
+        audio.enable = true;
+        alsa.enable = true;
+        pulse.enable = true;
+        jack.enable = true;
+        wireplumber.enable = true;
+        extraConfig.pipewire."10-stable-usb.conf" = {
+          "context.properties" = {
+            "default.clock.rate" = 48000;
+            "default.clock.quantum" = 512;
+            "default.clock.min-quantum" = 256;
+            "default.clock.max-quantum" = 1024;
+          };
+        };
+      };
+    };
+
+    console.keyMap = "us";
+
+    environment = {
+      systemPackages = [
+        pkgs.crosspipe
+        pkgs.qmk
+        pkgs.via
+        pkgs.libnotify
+        pkgs.rustup
+        pkgs.nixd
+        (pkgs.discord-canary.override
+          {
+            withVencord = true;
+          })
+      ];
+    };
+
+    programs = {
+      gdk-pixbuf.modulePackages = [pkgs.librsvg];
+      dconf.enable = true;
+      solaar.enable = true;
+      nix-ld.enable = true;
+      localsend = {
+        enable = true;
+        openFirewall = true;
+      };
+    };
+
+    networking = {
+      hostName = "leon-pc";
+      networkmanager = {
+        enable = true;
+        wifi.powersave = false;
+      };
+      firewall = {
+        allowedTCPPorts = [57621 4321 5201];
+        allowedUDPPorts = [5353];
+      };
+    };
+
+    virtualisation = {
+      docker.enable = true;
+      vmVariant = {
+        virtualisation = {
+          memorySize = 4096;
+          cores = 4;
+          graphics = true;
+          forwardPorts = [
+            {
+              from = "host";
+              host.port = 2222;
+              guest.port = 22;
+            }
+          ];
+        };
+        users.users.leon = {
+          initialPassword = "changeme";
+        };
+      };
+    };
+
+    system.stateVersion = "24.05";
   };
 }
