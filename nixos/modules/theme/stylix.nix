@@ -34,9 +34,9 @@
               size = 24;
             };
             fonts = {
-              monospace = font.mono;
-              sansSerif = font.sans;
-              serif = font.serif;
+              monospace = {inherit (font.mono) name package;};
+              sansSerif = {inherit (font.sans) name package;};
+              serif = {inherit (font.serif) name package;};
             };
             icons = {
               enable = true;
