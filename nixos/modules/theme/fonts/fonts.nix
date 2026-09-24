@@ -14,7 +14,6 @@
       package = pkgs.dejavu_fonts;
     };
     icons = {
-      enable = true;
       name = "Papirus-Dark";
       size = "32x32";
       package = pkgs.catppuccin-papirus-folders.override {
