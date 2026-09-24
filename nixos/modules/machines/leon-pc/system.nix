@@ -6,20 +6,17 @@
   flake.nixosConfigurations.leon-pc = inputs.nixpkgs-unstable.lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = {inherit inputs;};
-    modules =
-      [
-        ./_host/configuration.nix
-      ]
-      ++ (with config.nixos; [
-        cmdline
-        base
-        fonts
-        hyprland-de
-        greetd
-        nvidia
-        gaming
-        sunshine
-      ]);
+    modules = with config.nixos; [
+      leon-pc
+      cmdline
+      base
+      fonts
+      hyprland-de
+      greetd
+      nvidia
+      gaming
+      sunshine
+    ];
   };
 
   flake.homeConfigurations.leon = inputs.home-manager-unstable.lib.homeManagerConfiguration {
@@ -30,24 +27,21 @@
     extraSpecialArgs = {
       inherit inputs;
     };
-    modules =
-      [
-        ./_host/home.nix
-      ]
-      ++ (with config.homeManager; [
-        cmdline
-        base
-        hyprland-de
-        colours
-        fonts
-        stylix
-        nvim
-        wezterm
-        gaming
-        obs
-        nemo
-        spicetify
-        zen
-      ]);
+    modules = with config.homeManager; [
+      leon-pc-leon
+      cmdline
+      base
+      hyprland-de
+      colours
+      fonts
+      stylix
+      nvim
+      wezterm
+      gaming
+      obs
+      nemo
+      spicetify
+      zen
+    ];
   };
 }
