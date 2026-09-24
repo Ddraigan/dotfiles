@@ -1,5 +1,5 @@
 {...}: {
-  nixos.leon = {
+  nixos.users.leon = {
     pkgs,
     lib,
     ...
@@ -23,7 +23,7 @@
     };
   };
 
-  homeManager.leon = {...}: {
+  homeManager.users.leon = {...}: {
     home = {
       username = "leon";
       homeDirectory = "/home/leon";

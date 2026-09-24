@@ -7,8 +7,8 @@
     system = "x86_64-linux";
     specialArgs = {inherit inputs;};
     modules = with config.nixos; [
-      leon-pc
-      leon
+      system-settings.leon-pc
+      users.leon
       cmdline
       base
       fonts
@@ -29,8 +29,8 @@
       inherit inputs;
     };
     modules = with config.homeManager; [
-      leon-pc-leon
-      leon
+      home-settings.leon-pc.leon
+      users.leon
       cmdline
       base
       hyprland-de
