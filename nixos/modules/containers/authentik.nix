@@ -63,12 +63,6 @@
             name = "authentik";
             port = 9000;
             extraLabels = {
-              "traefik.enable" = "true";
-              "traefik.http.routers.${name}.rule" = "Host(`${name}.${cfg.domain}`)";
-              "traefik.http.routers.${name}.entrypoints" = "websecure";
-              "traefik.http.routers.${name}.tls" = "true";
-
-              "traefik.http.services.${name}.loadbalancer.server.port" = toString port;
               "traefik.http.middlewares.authentik-forward-auth.forwardauth.address" = "http://authentik-server:9000/outpost.goauthentik.io/auth/traefik";
               "traefik.http.middlewares.authentik-forward-auth.forwardauth.trustForwardHeader" = "true";
               "traefik.http.middlewares.authentik-forward-auth.forwardauth.authResponseHeaders" = "X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid,X-authentik-jwt,X-authentik-meta-jwks,X-authentik-meta-outpost,X-authentik-meta-provider,X-authentik-meta-app,X-authentik-meta-version";
