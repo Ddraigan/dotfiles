@@ -45,7 +45,7 @@
         # "--group-add=render"
         # "--group-add=video"
         ];
-        labels = containerUtils.mkTraefikLabels {
+        labels = containerUtils.mkTraefikLabelsWithAuth {
           name = "jellyfin";
           port = 8096;
         };
@@ -62,7 +62,7 @@
           # PUID = "99";
           # PGID = "100";
         };
-        labels = containerUtils.mkTraefikLabels {
+        labels = containerUtils.mkTraefikLabelsWithAuth {
           name = "seerr";
           port = 5055;
         };
