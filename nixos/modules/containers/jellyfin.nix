@@ -22,7 +22,7 @@
     # TODO: Add intro skipper plugin
     virtualisation.oci-containers.containers = {
       jellyfin = {
-        image = "jellyfin/jellyfin";
+        image = "jellyfin/jellyfin:12.1";
         autoStart = true;
         volumes = [
           "${jellyPath}/config:/config"
@@ -51,7 +51,7 @@
         };
       };
       seerr = {
-        image = "ghcr.io/seerr-team/seerr:latest";
+        image = "ghcr.io/seerr-team/seerr:v3.4.1";
         autoStart = true;
         volumes = [
           "${seerrPath}:/app/config"
