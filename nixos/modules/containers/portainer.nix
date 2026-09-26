@@ -17,6 +17,9 @@
       virtualisation.oci-containers.containers.portainer = {
         image = "portainer/portainer-ce:2.39.6";
         autoStart = true;
+        ports = [
+          "9443:9000"
+        ];
         volumes = [
           "/var/run/docker.sock:/var/run/docker.sock"
           "${portainerPath}:/data"
@@ -26,7 +29,7 @@
         };
         labels = containerUtils.mkTraefikLabelsWithAuth {
           name = "portainer";
-          port = 9000;
+          port = 9443;
         };
       };
     };

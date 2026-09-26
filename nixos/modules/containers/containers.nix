@@ -50,13 +50,18 @@
         lib.mkMerge [
           {
             "traefik.enable" = "true";
-            "traefik.http.routers.${name}.rule" = "Host(`${name}.${cfg.domain}`) && PathPrefix(`/outpost.goauthentik.io/`)";
+
+            "traefik.http.routers.${name}.rule" = "Host(`${name}.${cfg.domain}`)";
             "traefik.http.routers.${name}.entrypoints" = "websecure";
             "traefik.http.routers.${name}.tls" = "true";
+            "traefik.http.routers.${name}.middlewares" = "authentik-forward-auth@docker";
+            "traefik.http.routers.${name}.service" = "${name}";
 
+            "traefik.http.routers.${name}-outpost.rule" = "Host(`${name}.${cfg.domain}`) && PathPrefix(`/outpost.goauthentik.io/`)";
+            "traefik.http.routers.${name}-outpost.entrypoints" = "websecure";
+            "traefik.http.routers.${name}-outpost.tls" = "true";
             "traefik.http.routers.${name}-outpost.priority" = "15";
             "traefik.http.routers.${name}-outpost.service" = "authentik@docker";
-            "traefik.http.routers.${name}.middlewares" = "authentik-forward-auth@docker";
 
             "traefik.http.services.${name}.loadbalancer.server.port" = toString port;
           }
