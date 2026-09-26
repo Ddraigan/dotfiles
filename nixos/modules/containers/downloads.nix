@@ -100,7 +100,7 @@
         capabilities = {
           net_admin = true;
         };
-        labels = containerUtils.mkTraefikLabels {
+        labels = containerUtils.mkTraefikLabelsWithAuth {
           name = "qbittorrent";
           port = 8120;
         };
@@ -118,7 +118,7 @@
         };
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
-        labels = containerUtils.mkTraefikLabels {
+        labels = containerUtils.mkTraefikLabelsWithAuth {
           name = "jackett";
           port = 9117;
         };
@@ -138,7 +138,7 @@
         };
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
-        labels = containerUtils.mkTraefikLabels {
+        labels = containerUtils.mkTraefikLabelsWithAuth {
           name = "sonarr";
           port = 8989;
         };
@@ -158,7 +158,7 @@
         };
         dependsOn = ["qbittorrent"];
         networks = ["container:qbittorrent"];
-        labels = containerUtils.mkTraefikLabels {
+        labels = containerUtils.mkTraefikLabelsWithAuth {
           name = "radarr";
           port = 7878;
         };
@@ -179,7 +179,7 @@
           "--memory=2g"
         ];
 
-        labels = containerUtils.mkTraefikLabels {
+        labels = containerUtils.mkTraefikLabelsWithAuth {
           name = "trawl";
           port = 8191;
         };
