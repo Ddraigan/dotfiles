@@ -27,10 +27,6 @@
         labels = containerUtils.mkTraefikLabelsWithAuth {
           name = "portainer";
           port = 9000;
-          # extraMiddlewares = ["portainer-headers@docker"];
-          # extraLabels = {
-          #   "traefik.http.middlewares.portainer-headers.headers.customrequestheaders.X-Forwarded-Proto" = "https";
-          # };
         };
       };
     };
