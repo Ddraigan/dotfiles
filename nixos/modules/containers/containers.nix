@@ -45,6 +45,7 @@
       mkTraefikLabelsWithAuth = {
         name,
         port,
+        extraMiddlewares ? [],
         extraLabels ? {},
       }:
         lib.mkMerge [
@@ -54,8 +55,11 @@
             "traefik.http.routers.${name}.rule" = "Host(`${name}.${cfg.domain}`)";
             "traefik.http.routers.${name}.entrypoints" = "websecure";
             "traefik.http.routers.${name}.tls" = "true";
-            "traefik.http.routers.${name}.middlewares" = "authentik-forward-auth@docker";
-            "traefik.http.routers.${name}.service" = "${name}";
+            "traefik.http.routers.${name}.priority" = "10";
+            "traefik.http.routers.${name}.middlewares" = lib.concatStringsSep "," (
+              ["authentik-forward-auth@docker"] ++ extraMiddlewares
+            );
+            "traefik.http.routers.${name}.service" = "${name}@docker";
 
             "traefik.http.routers.${name}-outpost.rule" = "Host(`${name}.${cfg.domain}`) && PathPrefix(`/outpost.goauthentik.io/`)";
             "traefik.http.routers.${name}-outpost.entrypoints" = "websecure";

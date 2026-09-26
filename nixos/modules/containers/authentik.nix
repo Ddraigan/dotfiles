@@ -22,6 +22,7 @@
       virtualisation.oci-containers.containers = {
         authentik-postgres = {
           image = "docker.io/library/postgres:16-alpine";
+          networks = ["proxy"];
           environment = {
             POSTGRES_DB = "authentik";
             POSTGRES_USER = "authentik";
@@ -43,9 +44,9 @@
           image = "ghcr.io/goauthentik/server:2026.8.3";
           cmd = ["server"];
           dependsOn = ["authentik-postgres"];
-          networks = ["container:authentik-postgres"];
+          networks = ["proxy"];
           environment = {
-            AUTHENTIK_POSTGRESQL__HOST = "localhost";
+            AUTHENTIK_POSTGRESQL__HOST = "authentik-postgres";
             AUTHENTIK_POSTGRESQL__NAME = "authentik";
             AUTHENTIK_POSTGRESQL__USER = "authentik";
             AUTHENTIK_WEB__BASE_URL = "https://authentik.${cfg.domain}";
@@ -74,9 +75,9 @@
           image = "ghcr.io/goauthentik/server:2026.8.3";
           cmd = ["worker"];
           dependsOn = ["authentik-postgres"];
-          networks = ["container:authentik-postgres"];
+          networks = ["proxy"];
           environment = {
-            AUTHENTIK_POSTGRESQL__HOST = "localhost";
+            AUTHENTIK_POSTGRESQL__HOST = "authentik-postgres";
             AUTHENTIK_POSTGRESQL__NAME = "authentik";
             AUTHENTIK_POSTGRESQL__USER = "authentik";
             AUTHENTIK_WEB__BASE_URL = "https://authentik.${cfg.domain}";

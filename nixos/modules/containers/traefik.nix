@@ -47,10 +47,49 @@
       "Z ${traefikPath} - ${cfg.mainUser} users -"
       "f ${traefikPath}/acme.json 0600 ${cfg.mainUser} users -"
     ];
+
+    systemd.services."docker-network-proxy" = {
+      description = "Create the proxy docker network";
+      wantedBy = ["multi-user.target"];
+      after = ["docker.service"];
+      before = [
+        "docker-traefik.service"
+        "docker-authentik-postgres.service"
+        "docker-authentik-server.service"
+        "docker-authentik-worker.service"
+      ];
+      path = [config.virtualisation.docker.package];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      script = ''
+        docker network inspect proxy >/dev/null 2>&1 \
+          || docker network create --driver bridge proxy
+      '';
+    };
+
+    systemd.services."docker-traefik" = {
+      after = [ "docker-network-proxy.service" ];
+      requires = [ "docker-network-proxy.service" ];
+      postStart = ''
+        for _ in $(seq 1 60); do
+          if ${config.virtualisation.docker.package}/bin/docker container inspect traefik >/dev/null 2>&1; then
+            ${config.virtualisation.docker.package}/bin/docker network connect bridge traefik
+            exit 0
+          fi
+          sleep 0.5
+        done
+        echo "docker-traefik: container never appeared, cannot attach bridge network" >&2
+        exit 1
+      '';
+    };
+
     virtualisation.oci-containers = {
       containers = {
         traefik = {
           image = "traefik:v3.6";
+          networks = ["proxy"];
           ports = [
             "80:80"
             "443:443"
@@ -81,8 +120,10 @@
           cmd = [
             "--api.dashboard=true"
             "--providers.docker=true"
+            # only pick up containers that opt in with traefik.enable=true
+            "--providers.docker.exposedByDefault=false"
 
-            # Dynamic config for TrueNAS
+            # Dynamic configs
             "--providers.file.filename=/dynamic.yml"
             "--providers.file.watch=true"
 

@@ -17,9 +17,6 @@
       virtualisation.oci-containers.containers.portainer = {
         image = "portainer/portainer-ce:2.39.6";
         autoStart = true;
-        ports = [
-          "9443:9000"
-        ];
         volumes = [
           "/var/run/docker.sock:/var/run/docker.sock"
           "${portainerPath}:/data"
@@ -29,7 +26,11 @@
         };
         labels = containerUtils.mkTraefikLabelsWithAuth {
           name = "portainer";
-          port = 9443;
+          port = 9000;
+          extraMiddlewares = ["portainer-headers@docker"];
+          extraLabels = {
+            "traefik.http.middlewares.portainer-headers.headers.customrequestheaders.X-Forwarded-Proto" = "https";
+          };
         };
       };
     };
