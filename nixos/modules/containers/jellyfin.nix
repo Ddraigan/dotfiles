@@ -64,6 +64,7 @@
           labels = containerUtils.mkTraefikLabelsWithAuth {
             name = "seerr";
             port = 5055;
+            authBypassRoutes = ["/api/"];
           };
         };
       };

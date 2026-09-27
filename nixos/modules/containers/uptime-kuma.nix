@@ -25,6 +25,7 @@
               name = "uptime-kuma";
               port = 3001;
               extraMiddlewares = ["uptime-kuma-headers@docker"];
+              authBypassRoutes = ["/api/" "/metrics"];
               extraLabels = {
                 # WebSocket support
                 "traefik.http.middlewares.uptime-kuma-headers.headers.customrequestheaders.X-Forwarded-Proto" = "https";
