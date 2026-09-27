@@ -15,9 +15,9 @@
           };
         };
 
-        gestures = {
-          workspace = true;
-        };
+        # gestures = {
+        #   workspace = true;
+        # };
       };
       monitor = [
         {

@@ -59,6 +59,8 @@
 
   environment = {
     systemPackages = [
+      pkgs.android-tools
+      pkgs.scrcpy
       pkgs.libimobiledevice
       pkgs.idevicerestore
       pkgs.usbutils
