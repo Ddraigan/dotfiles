@@ -35,6 +35,8 @@
         labels = containerUtils.mkTraefikLabelsWithAuth {
           name = "homeass";
           port = 8123;
+          forwardAuth = false;
+          # authBypassRoutes = ["/api/"];
         };
       };
     };
