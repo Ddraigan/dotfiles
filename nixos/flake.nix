@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -12,7 +13,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    nix-test.url = "path:/home/leon/Downloads/test/test";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -52,10 +52,6 @@
     hypr-darkwindow = {
       url = "github:micha4w/Hypr-DarkWindow";
       inputs.hyprland.follows = "hyprland";
-    };
-    solaar = {
-      url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     diff-tool.url = "github:ddraigan/diff-tool";
   };
@@ -129,12 +125,14 @@
       leon-dell = mkMachine "leon-dell" "x86_64-linux" {stable = false;};
       mynydd = mkMachine "mynydd" "x86_64-linux" {stable = true;};
       iso = mkIso "iso" "x86_64-linux";
+      wsl-work = mkMachine "wsl-work" "x86_64-linux" {stable = false;};
     };
 
     homeConfigurations = {
       leon = mkHome "leon" "x86_64-linux" {stable = false;};
       leon-dell = mkHome "leon-dell" "x86_64-linux" {stable = false;};
       keane = mkHome "keane" "x86_64-linux";
+      wsl-work = mkHome "wsl-work" "x86_64-linux" {stable = false;};
     };
   };
 }

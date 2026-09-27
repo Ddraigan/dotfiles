@@ -13,17 +13,28 @@
     http:
       routers:
         truenas:
-          rule: "Host(`nas.${cfg.domain}`)"
+          rule: "Host(`isa.${cfg.domain}`)"
           entryPoints:
             - "websecure"
           service: "truenas-service"
+          tls:
+            certResolver: "certresolver"
+        wireguard:
+          rule: "Host(`wg.${cfg.domain}`)"
+          entryPoints:
+            - "websecure"
+          service: "wireguard-service"
           tls:
             certResolver: "certresolver"
       services:
         truenas-service:
           loadBalancer:
             servers:
-              - url: "http://192.168.1.150:80"
+              - url: "http://10.69.1.21:80"
+        wireguard-service:
+          loadBalancer:
+            servers:
+              - url: "http://10.69.1.11:51821"
   '';
 in {
   options.modules.nix.containers.traefik.enable = lib.mkEnableOption "Enable Traefik";

@@ -9,7 +9,7 @@
 in {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/nixos/secureboot.nix
+    # ../../modules/nixos/secureboot.nix
   ];
 
   modules.nix = {
@@ -20,7 +20,6 @@ in {
       gaming.enable = true;
     };
     sunshine.enable = true;
-    solaar.enable = true;
   };
 
   users = {
@@ -48,8 +47,14 @@ in {
 
   fileSystems = {
     "/mnt/isa/media" = {
-      device = "192.168.1.150:/mnt/isa/media";
+      device = "10.69.1.21:/mnt/isa/media";
       fsType = "nfs";
+    };
+  };
+
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
     };
   };
 
@@ -77,7 +82,7 @@ in {
   services = {
     upower.enable = true;
     factorio = {
-      enable = true;
+      enable = false;
       openFirewall = true;
     };
     udev.packages = with pkgs; [via android-tools];
@@ -108,7 +113,6 @@ in {
 
   environment = {
     systemPackages = [
-      pkgs.factorio-headless
       wezterm-cwd
       pkgs.crosspipe
       pkgs.qmk
@@ -127,7 +131,7 @@ in {
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
   in {
     settings = {
-      experimental-features = "nix-command flakes";
+      experimental-features = ["nix-command" "flakes"];
       nix-path = config.nix.nixPath;
       substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
@@ -137,6 +141,7 @@ in {
   programs = {
     gdk-pixbuf.modulePackages = [pkgs.librsvg];
     dconf.enable = true;
+    solaar.enable = true;
     zsh.enable = true;
     nix-ld.enable = true;
     localsend = {

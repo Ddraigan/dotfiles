@@ -50,11 +50,12 @@ in {
     boot.kernelModules = [
       "iptable_filter"
       "iptable_nat"
+      "iptable_mangle"
       "ip6table_filter"
     ];
     virtualisation.oci-containers.containers = {
       qbittorrent = {
-        image = "binhex/arch-qbittorrentvpn:5.1";
+        image = "binhex/arch-qbittorrentvpn:5.2";
         ports = [
           "6881:6881"
           "6881:6881/udp"
@@ -83,7 +84,7 @@ in {
           STRICT_PORT_FORWARD = "no";
           ENABLE_PRIVOXY = "yes";
           WEBUI_PORT = "8120";
-          LAN_NETWORK = "192.168.1.0/24";
+          LAN_NETWORK = "10.69.1.0/24";
           NAME_SERVERS = "1.1.1.1,1.0.0.1";
           VPN_INPUT_PORTS = "9117,8989,7878,9696";
           VPN_OUTPUT_PORTS = "9117,8989,7878,9696";
@@ -91,6 +92,9 @@ in {
           PUID = "99";
           PGID = "100";
         };
+        # extraOptions = [
+        #   "--cap-add=NET_ADMIN"
+        # ];
         capabilities = {
           net_admin = true;
         };
@@ -139,7 +143,7 @@ in {
       };
 
       radarr = {
-        image = "binhex/arch-radarr:5.25";
+        image = "binhex/arch-radarr:latest";
         volumes = [
           "${dataPaths.radarr}:/config"
           "${storagePaths.base}:/storage"

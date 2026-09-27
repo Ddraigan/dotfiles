@@ -16,7 +16,7 @@ in {
     virtualisation.oci-containers = {
       containers = {
         uptime-kuma = {
-          image = "louislam/uptime-kuma:2.1.1";
+          image = "louislam/uptime-kuma:2.5.0";
           volumes = [
             "${kumaPath}:/app/data"
             "/var/run/docker.sock:/var/run/docker.sock"

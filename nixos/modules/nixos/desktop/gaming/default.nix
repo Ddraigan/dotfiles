@@ -25,7 +25,7 @@
     programs = {
       steam = {
         enable = true;
-        package = pkgs.millennium-steam;
+        # package = pkgs.millennium-steam;
         gamescopeSession.enable = true;
         localNetworkGameTransfers.openFirewall = true;
         remotePlay.openFirewall = true;
@@ -40,7 +40,8 @@
       };
       gamescope = {
         enable = true;
-        capSysNice = true;
+        enableWsi = true;
+        capSysNice = false;
       };
       gamemode = {
         enable = true;
