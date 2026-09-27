@@ -48,8 +48,11 @@
         extraMiddlewares ? [],
         extraLabels ? {},
         authBypassRoutes ? [],
+        forwardAuth ? true,
       }: let
         bypassName = route: lib.replaceStrings ["/"] ["-"] (lib.removeSuffix "/" (lib.removePrefix "/" route));
+        routerMiddlewares =
+          lib.optionals forwardAuth ["authentik-forward-auth@docker"] ++ extraMiddlewares;
       in
         lib.mkMerge ([
             {
@@ -59,9 +62,6 @@
               "traefik.http.routers.${name}.entrypoints" = "websecure";
               "traefik.http.routers.${name}.tls" = "true";
               "traefik.http.routers.${name}.priority" = "10";
-              "traefik.http.routers.${name}.middlewares" = lib.concatStringsSep "," (
-                ["authentik-forward-auth@docker"] ++ extraMiddlewares
-              );
               "traefik.http.routers.${name}.service" = "${name}@docker";
 
               "traefik.http.routers.${name}-outpost.rule" = "Host(`${name}.${cfg.domain}`) && PathPrefix(`/outpost.goauthentik.io/`)";
@@ -72,6 +72,9 @@
 
               "traefik.http.services.${name}.loadbalancer.server.port" = toString port;
             }
+            (lib.optionalAttrs (routerMiddlewares != []) {
+              "traefik.http.routers.${name}.middlewares" = lib.concatStringsSep "," routerMiddlewares;
+            })
             extraLabels
           ]
           ++ lib.imap0 (i: route: {
