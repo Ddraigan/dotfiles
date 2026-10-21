@@ -10,7 +10,7 @@
     in {
       settings = {
         experimental-features = ["nix-command" "flakes"];
-        nix-path = config.nix.nixPath;
+        # nix-path = config.nix.nixPath;
       };
     };
   };

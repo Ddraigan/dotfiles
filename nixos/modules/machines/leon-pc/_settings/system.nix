@@ -11,6 +11,7 @@
   };
 
   boot = {
+    kernelModules = ["sg"];
     loader = {
       systemd-boot.enable = true;
     };
@@ -25,6 +26,7 @@
   };
 
   services = {
+    flatpak.enable = true;
     upower.enable = true;
     udev.packages = with pkgs; [via android-tools];
     udisks2 = {
@@ -51,8 +53,34 @@
 
   console.keyMap = "us";
 
-  environment = {
+  nixpkgs.overlays = [
+    (final: prev: {
+      video2x = prev.video2x.overrideAttrs (oldAttrs: {
+        postPatch =
+          (oldAttrs.postPatch or "")
+          + ''
+            find . -type f -name "*.cpp" -exec sed -i 's/\.u8string()/\.string()/g' {} +
+          '';
+      });
+    })
+  ];
+
+  environment = let
+    handbrakeNvidia = pkgs.writeShellApplication {
+      name = "handbrake";
+      runtimeInputs = [pkgs.handbrake];
+      text = ''
+        export LD_LIBRARY_PATH="/run/opengl-driver/lib:''${LD_LIBRARY_PATH:-}"
+        exec ${pkgs.handbrake}/bin/ghb "$@"
+      '';
+    };
+  in {
     systemPackages = [
+      handbrakeNvidia
+      pkgs.video2x
+      pkgs.makemkv
+      pkgs.mkvtoolnix
+      pkgs.upscayl
       pkgs.crosspipe
       pkgs.qmk
       pkgs.via
