@@ -53,6 +53,7 @@
         obs
         nemo
         spicetify
+        nvidia
         zen
       ]);
   };

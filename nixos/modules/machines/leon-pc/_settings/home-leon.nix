@@ -25,6 +25,7 @@
       enable = true;
       configPath = "${config.xdg.configHome}/mozilla/firefox";
     };
+    qalculate.enable = true;
   };
 
   wayland.windowManager.hyprland.settings = {

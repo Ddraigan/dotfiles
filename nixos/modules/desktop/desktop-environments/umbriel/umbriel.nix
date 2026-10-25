@@ -44,25 +44,30 @@
             mode = "dwindle";
             gap = 5;
           };
+          input = {
+            focus = {
+              follows_mouse = true;
+            };
+          };
           colors = {
             background = colours.hex.base;
             text_primary = colours.hex.text;
-            text_muted = colours.hex.subtext0;
-            shadow = "${colours.hex.mantle}7F"; # 50% opacity shadow
+            text_muted = colours.hex.surface2;
+            shadow = "${colours.hex.mantle}7F";
             border = {
-              focused = "${colours.hex.blue}FF";
-              unfocused = "${colours.hex.surface0}FF";
-              outer = "${colours.hex.mantle}FF";
+              focused = "${colours.hex.pink}FF";
+              unfocused = "${colours.hex.mantle}FF";
+              outer = "${colours.hex.crust}FF";
             };
             overview = {
               background_tint = "${colours.hex.base}80";
               workspace_background = "${colours.hex.mantle}B3";
-              badge = colours.hex.blue;
+              badge = colours.hex.pink;
             };
             tab_bar = {
               background = colours.hex.mantle;
-              text = colours.hex.subtext0;
-              active = colours.hex.blue;
+              text = colours.hex.surface2;
+              active = colours.hex.pink;
             };
           };
           appearance = {
@@ -83,6 +88,19 @@
               blur_optimized = true;
             }
           ];
+          layer_rule = [
+            {
+              blur = true;
+              blur_ignore_alpha = 0.5;
+              blur_optimized = true;
+            }
+            # {
+            #   match.namespace = "^noctalia-bar-";
+            #   blur = true;
+            #   blur_ignore_alpha = 0.5;
+            #   blur_popups = true;
+            # }
+          ];
           output = {
             "DP-1" = {
               position = [0 0];
@@ -94,7 +112,7 @@
             };
             "DP-2" = {
               scale = 1.0;
-              position = [(-2560) 0];
+              position = [(-1920) 0];
               hdr = "off";
             };
           };
