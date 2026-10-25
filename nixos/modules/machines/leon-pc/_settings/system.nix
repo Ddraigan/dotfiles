@@ -53,31 +53,8 @@
 
   console.keyMap = "us";
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      video2x = prev.video2x.overrideAttrs (oldAttrs: {
-        postPatch =
-          (oldAttrs.postPatch or "")
-          + ''
-            find . -type f -name "*.cpp" -exec sed -i 's/\.u8string()/\.string()/g' {} +
-          '';
-      });
-    })
-  ];
-
-  environment = let
-    handbrakeNvidia = pkgs.writeShellApplication {
-      name = "handbrake";
-      runtimeInputs = [pkgs.handbrake];
-      text = ''
-        export LD_LIBRARY_PATH="/run/opengl-driver/lib:''${LD_LIBRARY_PATH:-}"
-        exec ${pkgs.handbrake}/bin/ghb "$@"
-      '';
-    };
-  in {
+  environment = {
     systemPackages = [
-      handbrakeNvidia
-      pkgs.video2x
       pkgs.makemkv
       pkgs.mkvtoolnix
       pkgs.upscayl
