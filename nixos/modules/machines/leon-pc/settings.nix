@@ -16,7 +16,7 @@
         base
         fonts
         hyprland-de
-        greetd
+        noctalia-greeter
         nvidia
         gaming
         sunshine

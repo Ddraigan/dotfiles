@@ -15,7 +15,7 @@
         cmdline
         base
         fonts
-        greetd
+        hyprgreet
         sunshine
       ]);
   };

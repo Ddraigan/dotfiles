@@ -20,7 +20,7 @@
       # TODO: Add intro skipper plugin
       virtualisation.oci-containers.containers = {
         jellyfin = {
-          image = "jellyfin/jellyfin:12.1";
+          image = "jellyfin/jellyfin:12.3";
           autoStart = true;
           volumes = [
             "${jellyPath}/config:/config"
@@ -38,7 +38,7 @@
           };
           extraOptions = [
             "--device=/dev/dri/renderD128:/dev/dri/renderD128"
-            "--device=/dev/dri/card1:/dev/dri/card0"
+            "--device=/dev/dri/card0:/dev/dri/card0"
             #
             # "--group-add=render"
             # "--group-add=video"

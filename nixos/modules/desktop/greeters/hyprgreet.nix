@@ -1,5 +1,5 @@
 {...}: {
-  nixos.greetd = {
+  nixos.hyprgreet = {
     lib,
     pkgs,
     config,
