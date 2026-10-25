@@ -15,7 +15,8 @@
         cmdline
         base
         fonts
-        hyprland-de
+        hyprland
+        umbriel
         noctalia-greeter
         nvidia
         gaming
@@ -39,7 +40,10 @@
         leon
         cmdline
         base
-        hyprland-de
+        uwsm
+        hyprland
+        umbriel
+        noctalia
         colours
         fonts
         stylix

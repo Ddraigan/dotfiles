@@ -8,7 +8,7 @@
     desktop = {
       hypr = {
         hyprland.mod = "SUPER";
-        hyprlock.mainMonitor = "DP-1";
+        # hyprlock.mainMonitor = "DP-1";
       };
       nemo.extensions = [
         pkgs.nemo-preview

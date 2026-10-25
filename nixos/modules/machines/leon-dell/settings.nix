@@ -15,7 +15,8 @@
         cmdline
         base
         fonts
-        hyprgreet
+        hyprland
+        noctalia-greeter
         sunshine
       ]);
   };
@@ -36,7 +37,9 @@
         leon
         cmdline
         base
-        hyprland-de
+        uwsm
+        hyprland
+        noctalia
         colours
         fonts
         stylix
