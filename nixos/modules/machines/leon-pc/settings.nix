@@ -19,6 +19,7 @@
         umbriel
         noctalia-greeter
         nvidia
+        favnyr
         gaming
         sunshine
       ]);
@@ -51,7 +52,6 @@
         wezterm
         gaming
         obs
-        nemo
         spicetify
         nvidia
         zen

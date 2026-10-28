@@ -10,9 +10,9 @@
         hyprland.mod = "SUPER";
         hyprlock.mainMonitor = "eDP-1";
       };
-      nemo.extensions = [
-        pkgs.nemo-preview
-      ];
+      # nemo.extensions = [
+      #   pkgs.nemo-preview
+      # ];
     };
   };
 

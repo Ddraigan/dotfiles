@@ -16,6 +16,7 @@
         base
         fonts
         hyprland
+        favnyr
         noctalia-greeter
         sunshine
       ]);
@@ -45,7 +46,6 @@
         stylix
         nvim
         wezterm
-        nemo
         spicetify
         zen
       ]);

@@ -199,7 +199,7 @@
           copy = {_var = "wl-copy";};
           paste = {_var = "wl-paste";};
           terminal = {_var = "${uwsmUtils.wrap "wezterm"}";};
-          fileManager = {_var = "${uwsmUtils.wrap "nemo"}";};
+          fileManager = {_var = "${uwsmUtils.wrap "favnyr"}";};
           drun = {_var = "${uwsmUtils.rofi}";};
           browser = {_var = "${uwsmUtils.wrap "zen-beta"}";};
           colourPicker = {_var = "${uwsmUtils.wrap "hyprpicker -a"}";};

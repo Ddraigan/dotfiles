@@ -11,6 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     diff-tool.url = "github:ddraigan/diff-tool";
+    favnyr.url = "github:GlitchAwakened/Favnyr?dir=packaging/nix";
     flake-file.url = "github:denful/flake-file";
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
