@@ -148,6 +148,7 @@
           volumes = [
             "${dataPaths.radarr}:/config"
             "${storagePaths.base}:/storage"
+            "/home/leon/rips:/rips"
             "/etc/localtime:/etc/localtime:ro"
           ];
           environment = {
