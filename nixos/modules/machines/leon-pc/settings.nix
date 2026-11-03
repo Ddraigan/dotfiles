@@ -21,6 +21,7 @@
         nvidia
         favnyr
         gaming
+        amethyst
         sunshine
       ]);
   };
