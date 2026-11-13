@@ -76,6 +76,15 @@
     dconf.enable = true;
     solaar.enable = true;
     nix-ld.enable = true;
+    nix-ld.libraries = with pkgs; [
+      wayland
+      libxkbcommon
+      libGL
+      libx11
+      libxcursor
+      libxrandr
+      libxi
+    ];
     localsend = {
       enable = true;
       openFirewall = true;
