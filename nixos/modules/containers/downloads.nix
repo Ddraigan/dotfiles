@@ -105,7 +105,7 @@
         };
 
         jackett = {
-          image = "linuxserver/jackett:0.24.2237";
+          image = "linuxserver/jackett:0.24.3030";
           volumes = [
             "${dataPaths.jackett}:/config"
             "/etc/localtime:/etc/localtime:ro"
@@ -123,7 +123,7 @@
         };
 
         sonarr = {
-          image = "linuxserver/sonarr:latest";
+          image = "linuxserver/sonarr:4.0.20";
           volumes = [
             "${dataPaths.sonarr}:/config"
             "${storagePaths.base}:/storage"
@@ -144,7 +144,7 @@
         };
 
         radarr = {
-          image = "binhex/arch-radarr:latest";
+          image = "binhex/arch-radarr:6.4";
           volumes = [
             "${dataPaths.radarr}:/config"
             "${storagePaths.base}:/storage"
@@ -198,7 +198,7 @@
         # };
 
         prowlarr = {
-          image = "linuxserver/prowlarr:2.6.5";
+          image = "linuxserver/prowlarr:2.7.0";
           volumes = [
             "${dataPaths.prowlarr}:/config"
             "/etc/localtime:/etc/localtime:ro"
