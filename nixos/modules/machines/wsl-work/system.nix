@@ -8,9 +8,13 @@
   flake.nixosConfigurations.wsl-work = inputs.nixpkgs-unstable.lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = {inherit inputs;};
-    modules = [
-      ./_settings/system.nix
-    ];
+    modules =
+      [
+        ./_settings/system.nix
+      ]
+      ++ (with config.nixos; [
+        leon
+      ]);
   };
 
   flake.homeConfigurations.wsl-work = inputs.home-manager-unstable.lib.homeManagerConfiguration {

@@ -23,7 +23,6 @@
   wsl.defaultUser = "leon";
 
   programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
 
   nix.settings.experimental-features = [
     "nix-command"
