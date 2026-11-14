@@ -17,6 +17,8 @@
         quicksync
         traefik
         homeass
+        mealie
+        tandoor
         cfddns
         portainer
         uptime-kuma
