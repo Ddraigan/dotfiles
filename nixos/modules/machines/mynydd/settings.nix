@@ -17,7 +17,6 @@
         quicksync
         traefik
         homeass
-        mealie
         tandoor
         cfddns
         portainer

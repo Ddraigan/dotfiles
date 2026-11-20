@@ -14,7 +14,7 @@
         "d ${homeassPath} 0755 ${cfg.mainUser} ${cfg.mainUser} -"
       ];
       virtualisation.oci-containers.containers.homeass = {
-        image = "ghcr.io/home-assistant/home-assistant:stable";
+        image = "ghcr.io/home-assistant/home-assistant:2026.11";
         autoStart = true;
         volumes = [
           "/etc/localtime:/etc/localtime:ro"
